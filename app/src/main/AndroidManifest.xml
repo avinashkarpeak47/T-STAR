@@ -12,10 +12,13 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.TSTAR"
         tools:targetApi="31">
-<!--        <activity-->
-<!--            android:name=".Splash_Screen"-->
-<!--            android:exported="false" />-->
-        <!--            android:exported="false" />-->
+        <activity
+            android:name=".TEACHERACTIVITIES.THomeActivity"
+            android:exported="false" />
+        <!-- <activity -->
+        <!-- android:name=".Splash_Screen" -->
+        <!-- android:exported="false" /> -->
+        <!-- android:exported="false" /> -->
         <activity
             android:name=".Splash_Screen"
             android:exported="true">
@@ -28,4 +31,3 @@
     </application>
 
 </manifest>
-    <!--        <activity-->

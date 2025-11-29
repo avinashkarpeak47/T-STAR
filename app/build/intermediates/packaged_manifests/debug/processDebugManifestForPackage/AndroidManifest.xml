@@ -28,10 +28,37 @@
         android:testOnly="true"
         android:theme="@style/Theme.TSTAR" >
         <activity
-            android:name="com.example.t_star.Splash_Screen"
+            android:name="com.example.t_star.TEACHERACTIVITIES.TChatActivity"
             android:exported="false" />
         <activity
-            android:name="com.example.t_star.MainActivity"
+            android:name="com.example.t_star.TEACHERACTIVITIES.TNotificationActivity"
+            android:exported="false" />
+        <activity
+            android:name="com.example.t_star.TEACHERACTIVITIES.TEventActivity"
+            android:exported="false" />
+        <activity
+            android:name="com.example.t_star.TEACHERACTIVITIES.TAttendanceActivity"
+            android:exported="false" />
+        <activity
+            android:name="com.example.t_star.TEACHERACTIVITIES.TProfileActivity"
+            android:exported="false" />
+        <activity
+            android:name="com.example.t_star.TEACHERACTIVITIES.TCreateNewAssignActivity"
+            android:exported="false" />
+        <activity
+            android:name="com.example.t_star.TEACHERACTIVITIES.TAsssignmentActivity"
+            android:exported="false" />
+        <activity
+            android:name="com.example.t_star.TEACHERACTIVITIES.TAssignment_Activity"
+            android:exported="false" />
+        <activity
+            android:name="com.example.t_star.TEACHERACTIVITIES.THomeActivity"
+            android:exported="false" /> <!-- <activity -->
+        <!-- android:name=".Splash_Screen" -->
+        <!-- android:exported="false" /> -->
+        <!-- android:exported="false" /> -->
+        <activity
+            android:name="com.example.t_star.Splash_Screen"
             android:exported="true" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

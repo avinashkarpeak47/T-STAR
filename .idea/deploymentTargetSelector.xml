@@ -4,20 +4,6 @@
     <selectionStates>
       <SelectionState runConfigName="app">
         <option name="selectionMode" value="DROPDOWN" />
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-        <DropdownSelection timestamp="2025-11-29T05:01:43.061270700Z">
-          <Target type="DEFAULT_BOOT">
-            <handle>
-              <DeviceId pluginId="LocalEmulator" identifier="path=C:\Users\hp\.android\avd\New_Phone.avd" />
-            </handle>
-          </Target>
-        </DropdownSelection>
-        <DialogSelection />
-=======
->>>>>>> dd60c801b4f0778f81f18bbb8424e3028e0c4fa8
->>>>>>> ff29965c4635bd9fb8d9a7eff83702de47005aec
       </SelectionState>
     </selectionStates>
   </component>

@@ -12,11 +12,19 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.TSTAR"
         tools:targetApi="31">
+<<<<<<< HEAD
 <!--        <activity-->
 <!--            android:name=".Splash_Screen"-->
 <!--            android:exported="false" />-->
         <activity
             android:name=".Splash_Screen"
+=======
+        <activity
+            android:name=".Splash_Screen"
+            android:exported="false" />
+        <activity
+            android:name=".MainActivity"
+>>>>>>> dd60c801b4f0778f81f18bbb8424e3028e0c4fa8
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

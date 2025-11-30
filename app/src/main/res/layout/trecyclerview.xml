@@ -5,6 +5,7 @@
     android:layout_height="wrap_content"
     android:layout_marginBottom="12dp"
     app:cardCornerRadius="12dp"
+    app:cardBackgroundColor="@color/maroon_variant"
     app:cardElevation="4dp">
 
     <LinearLayout
@@ -20,6 +21,7 @@
             android:text="Assignment Title"
             android:maxLines="1"
             android:ellipsize="end"
+            android:textColor="@color/white"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
 
@@ -30,6 +32,7 @@
             android:text="Assignment Description"
             android:ellipsize="end"
             android:alpha="0.85"
+            android:textColor="@color/black"
             android:layout_marginTop="6dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>

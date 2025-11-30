@@ -6,6 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
+    android:background="@color/white"
     tools:context=".TEACHERACTIVITIES.THomeActivity">
 
     <!-- Toolbar -->
@@ -19,6 +20,8 @@
         app:titleCentered="false"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        android:background="@drawable/header_gradient"
+        app:titleTextColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent">
 
         <ImageView
@@ -27,7 +30,8 @@
             android:layout_height="36dp"
             android:layout_gravity="end|center_vertical"
             android:src="@drawable/tprofile"
-            android:contentDescription="profile" />
+            android:contentDescription="profile"
+            app:tint="@color/white" />
 
     </com.google.android.material.appbar.MaterialToolbar>
 
@@ -66,6 +70,7 @@
                     app:layout_columnWeight="1"
                     app:cardCornerRadius="14dp"
                     app:cardElevation="6dp"
+                    android:backgroundTint="@color/maroon_variant"
                     android:foreground="?attr/selectableItemBackground">
 
                     <LinearLayout
@@ -82,6 +87,7 @@
                         <TextView
                             android:text="Assignment"
                             android:textSize="15sp"
+                            android:textColor="@color/white"
                             android:layout_marginTop="8dp"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"/>
@@ -96,6 +102,7 @@
                     app:layout_columnWeight="1"
                     app:cardCornerRadius="14dp"
                     app:cardElevation="6dp"
+                    android:backgroundTint="@color/maroon_variant"
                     android:foreground="?attr/selectableItemBackground">
 
                     <LinearLayout
@@ -112,6 +119,7 @@
                         <TextView
                             android:text="Attendance"
                             android:textSize="15sp"
+                            android:textColor="@color/white"
                             android:layout_marginTop="8dp"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"/>
@@ -126,6 +134,7 @@
                     app:layout_columnWeight="1"
                     app:cardCornerRadius="14dp"
                     app:cardElevation="6dp"
+                    android:backgroundTint="@color/maroon_variant"
                     android:foreground="?attr/selectableItemBackground">
 
                     <LinearLayout
@@ -142,6 +151,7 @@
                         <TextView
                             android:text="Event"
                             android:textSize="15sp"
+                            android:textColor="@color/white"
                             android:layout_marginTop="8dp"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"/>
@@ -156,6 +166,7 @@
                     app:layout_columnWeight="1"
                     app:cardCornerRadius="14dp"
                     app:cardElevation="6dp"
+                    android:backgroundTint="@color/maroon_variant"
                     android:foreground="?attr/selectableItemBackground">
 
                     <LinearLayout
@@ -173,6 +184,7 @@
                             android:text="Chat with Student"
                             android:layout_marginTop="8dp"
                             android:textSize="15sp"
+                            android:textColor="@color/white"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"/>
                     </LinearLayout>
@@ -186,6 +198,7 @@
                     app:layout_columnSpan="2"
                     app:cardCornerRadius="14dp"
                     app:cardElevation="6dp"
+                    android:backgroundTint="@color/maroon_variant"
                     android:foreground="?attr/selectableItemBackground">
 
                     <LinearLayout
@@ -212,6 +225,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:textSize="15sp"
+                                android:textColor="@color/white"
                                 />
 
 
@@ -228,9 +242,12 @@
         android:id="@+id/bottomNav"
         android:layout_width="0dp"
         android:layout_height="60dp"
-        app:menu="@menu/tbottom_nav_file"
+        app:itemIconTint="@color/maroon_dark"
+        app:itemTextColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:menu="@menu/tbottom_nav_file" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

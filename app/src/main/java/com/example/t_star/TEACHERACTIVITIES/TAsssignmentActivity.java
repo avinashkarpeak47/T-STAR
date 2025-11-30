@@ -27,33 +27,28 @@ public class TAsssignmentActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tasssignment);
 
-        // Toolbar
-        MaterialToolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-
         btnCreateTop = findViewById(R.id.btnCreateTop);
         btnBack = findViewById(R.id.btnBack);
 
         btnBack.setOnClickListener(v -> finish());
 
-        btnCreateTop.setOnClickListener(v -> {
-            startActivity(new Intent(this, TCreateNewAssignActivity.class));
-        });
+        btnCreateTop.setOnClickListener(v ->
+                startActivity(new Intent(this, TCreateNewAssignActivity.class)));
 
-        // RecyclerView
         rvAssignments = findViewById(R.id.rvAssignments);
         rvAssignments.setLayoutManager(new LinearLayoutManager(this));
 
-        // Data List
+        // Dummy Data
         dataList = new ArrayList<>();
         dataList.add(new TAssignmentModel("1","Math Homework","Solve problems 1–10 from chapter 5"));
-        dataList.add(new TAssignmentModel("2","Science Project","Prepare volcano model and report"));
-        dataList.add(new TAssignmentModel("3","English Essay","Write an essay on climate change"));
-        dataList.add(new TAssignmentModel("4","History Worksheet","Read pages 34–48 and answer questions"));
+        dataList.add(new TAssignmentModel("2","Science Project","Prepare a volcano model & report"));
+        dataList.add(new TAssignmentModel("3","English Essay","Write an essay on environment"));
+        dataList.add(new TAssignmentModel("4","History Worksheet","Answer questions from page 48"));
 
-        // Adapter
-        adapter = new TAssignmentAdapter(this, dataList, item ->
-                Toast.makeText(this, "Clicked: " + item.getTitle(), Toast.LENGTH_SHORT).show());
+        adapter = new TAssignmentAdapter(dataList,
+                item -> Toast.makeText(this,
+                        "Clicked: " + item.getTitle(),
+                        Toast.LENGTH_SHORT).show());
 
         rvAssignments.setAdapter(adapter);
     }

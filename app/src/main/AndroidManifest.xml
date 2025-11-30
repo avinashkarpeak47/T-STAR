@@ -13,9 +13,30 @@
         android:theme="@style/Theme.TSTAR"
         tools:targetApi="31">
         <activity
-            android:name=".TEACHERACTIVITIES.THomeActivity"
+            android:name=".TEACHERACTIVITIES.TChatActivity"
             android:exported="false" />
-        <!-- <activity -->
+        <activity
+            android:name=".TEACHERACTIVITIES.TNotificationActivity"
+            android:exported="false" />
+        <activity
+            android:name=".TEACHERACTIVITIES.TEventActivity"
+            android:exported="false" />
+        <activity
+            android:name=".TEACHERACTIVITIES.TAttendanceActivity"
+            android:exported="false" />
+        <activity
+            android:name=".TEACHERACTIVITIES.TProfileActivity"
+            android:exported="false" />
+        <activity
+            android:name=".TEACHERACTIVITIES.TCreateNewAssignActivity"
+            android:exported="false" />
+        <activity
+            android:name=".TEACHERACTIVITIES.TAsssignmentActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".TEACHERACTIVITIES.THomeActivity"
+            android:exported="false" /> <!-- <activity -->
         <!-- android:name=".Splash_Screen" -->
         <!-- android:exported="false" /> -->
         <!-- android:exported="false" /> -->

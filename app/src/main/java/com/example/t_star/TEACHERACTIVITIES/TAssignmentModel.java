@@ -6,6 +6,8 @@ public class TAssignmentModel {
     private String title;
     private String description;
 
+    public TAssignmentModel() {}
+
     public TAssignmentModel(String id, String title, String description){
         this.id = id;
         this.title = title;
@@ -16,6 +18,7 @@ public class TAssignmentModel {
     public String getTitle(){ return title; }
     public String getDescription(){ return description; }
 
+    public void setId(String id) { this.id = id; }
     public void setTitle(String t){ this.title = t; }
     public void setDescription(String d){ this.description = d; }
 }

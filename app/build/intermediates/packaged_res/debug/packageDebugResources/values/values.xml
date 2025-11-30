@@ -1,8 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <color name="bg_light">#F3EFF6</color>
     <color name="black">#FF000000</color>
+    <color name="icon_circle">#F7EAF0</color>
+    <color name="maroon">#6E1B4B</color>
+    <color name="maroon_dark">#4A1030</color>
+    <color name="maroon_light">#B86B8D</color>
+    <color name="maroon_variant">#7E2D5F</color>
+    <color name="promo_yellow">#FFC24D</color>
     <color name="white">#FFFFFFFF</color>
     <string name="app_name">T-STAR</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
     <style name="Base.Theme.TSTAR" parent="Theme.Material3.DayNight.NoActionBar">
         
         

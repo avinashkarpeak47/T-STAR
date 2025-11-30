@@ -50,7 +50,7 @@ public class THomeActivity extends AppCompatActivity {
         cardChat = findViewById(R.id.cardChat);
         cardNotifications = findViewById(R.id.cardNotifications);
 
-        cardCreateAssignment.setOnClickListener(v -> openCreateAssignment());
+        cardCreateAssignment.setOnClickListener(v -> openAssignment());
         cardAttendance.setOnClickListener(v -> openAttendance());
         cardCreateEvent.setOnClickListener(v -> openCreateEvent());
         cardChat.setOnClickListener(v -> openChat());
@@ -78,9 +78,9 @@ public class THomeActivity extends AppCompatActivity {
 //        });
     }
 
-    private void openCreateAssignment(){
-        // Launch CreateAssignmentActivity
-        startActivity(new Intent(this, TCreateNewAssignActivity.class));
+    private void openAssignment(){
+        // Launch AssignmentActivity
+        startActivity(new Intent(this, TAsssignmentActivity.class));
     }
 
     private void openAttendance(){

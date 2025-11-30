@@ -49,9 +49,6 @@
             android:name="com.example.t_star.TEACHERACTIVITIES.TAsssignmentActivity"
             android:exported="false" />
         <activity
-            android:name="com.example.t_star.TEACHERACTIVITIES.TAssignment_Activity"
-            android:exported="false" />
-        <activity
             android:name="com.example.t_star.TEACHERACTIVITIES.THomeActivity"
             android:exported="false" /> <!-- <activity -->
         <!-- android:name=".Splash_Screen" -->

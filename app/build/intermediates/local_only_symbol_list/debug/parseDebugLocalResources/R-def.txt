@@ -32,6 +32,7 @@ drawable tprofile
 id bottomNav
 id btnBack
 id btnCreateTop
+id btnSave
 id cardAttendance
 id cardChat
 id cardCreateAssignment
@@ -39,6 +40,9 @@ id cardCreateEvent
 id cardNotifications
 id contentContainer
 id content_card
+id etDescription
+id etDueDate
+id etTitle
 id et_search
 id gridActions
 id header_bg

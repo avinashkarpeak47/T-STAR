@@ -3803,6 +3803,7 @@ id bounceEnd
 id bounceStart
 id btnBack
 id btnCreateTop
+id btnSave
 id buttonPanel
 id cache_measures
 id callMeasure
@@ -3893,6 +3894,9 @@ id enterAlways
 id enterAlwaysCollapsed
 id entireSpace
 id escape
+id etDescription
+id etDueDate
+id etTitle
 id et_search
 id exitUntilCollapsed
 id expand_activities_button

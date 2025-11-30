@@ -9,6 +9,7 @@ color maroon_light
 color maroon_variant
 color promo_yellow
 color white
+drawable arrow_back
 drawable baseline_person_24
 drawable baseline_person_outline_24
 drawable header_gradient
@@ -31,6 +32,7 @@ drawable tprofile
 id bottomNav
 id btnBack
 id btnCreateTop
+id btnSave
 id cardAttendance
 id cardChat
 id cardCreateAssignment
@@ -38,6 +40,9 @@ id cardCreateEvent
 id cardNotifications
 id contentContainer
 id content_card
+id etDescription
+id etDueDate
+id etTitle
 id et_search
 id gridActions
 id header_bg

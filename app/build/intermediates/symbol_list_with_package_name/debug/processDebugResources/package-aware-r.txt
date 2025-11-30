@@ -3561,6 +3561,7 @@ drawable abc_textfield_search_activated_mtrl_alpha
 drawable abc_textfield_search_default_mtrl_alpha
 drawable abc_textfield_search_material
 drawable abc_vector_test
+drawable arrow_back
 drawable avd_hide_password
 drawable avd_show_password
 drawable baseline_person_24
@@ -3802,6 +3803,7 @@ id bounceEnd
 id bounceStart
 id btnBack
 id btnCreateTop
+id btnSave
 id buttonPanel
 id cache_measures
 id callMeasure
@@ -3892,6 +3894,9 @@ id enterAlways
 id enterAlwaysCollapsed
 id entireSpace
 id escape
+id etDescription
+id etDueDate
+id etTitle
 id et_search
 id exitUntilCollapsed
 id expand_activities_button

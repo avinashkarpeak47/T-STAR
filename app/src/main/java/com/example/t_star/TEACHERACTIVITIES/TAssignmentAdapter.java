@@ -20,11 +20,9 @@ public class TAssignmentAdapter extends RecyclerView.Adapter<TAssignmentAdapter.
     }
 
     private final List<TAssignmentModel> items;
-    private final Context ctx;
     private final OnItemClick listener;
 
-    public TAssignmentAdapter(Context ctx, List<TAssignmentModel> items, OnItemClick listener){
-        this.ctx = ctx;
+    public TAssignmentAdapter(List<TAssignmentModel> items, OnItemClick listener){
         this.items = items;
         this.listener = listener;
     }
@@ -32,7 +30,7 @@ public class TAssignmentAdapter extends RecyclerView.Adapter<TAssignmentAdapter.
     @NonNull
     @Override
     public VH onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(ctx)
+        View v = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.trecyclerview, parent, false);
         return new VH(v);
     }

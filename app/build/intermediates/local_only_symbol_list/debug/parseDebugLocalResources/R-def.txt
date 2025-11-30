@@ -29,6 +29,8 @@ drawable thome
 drawable tnewassign
 drawable tnotification
 drawable tprofile
+drawable tresources
+drawable tstudent
 id bottomNav
 id btnBack
 id btnCreateTop
@@ -41,6 +43,8 @@ id cardChat
 id cardCreateAssignment
 id cardCreateEvent
 id cardNotifications
+id cardResources
+id cardStudents
 id contentContainer
 id content_card
 id etDescription

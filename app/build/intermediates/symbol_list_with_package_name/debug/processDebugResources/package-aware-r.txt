@@ -3693,6 +3693,8 @@ drawable tnotification
 drawable tooltip_frame_dark
 drawable tooltip_frame_light
 drawable tprofile
+drawable tresources
+drawable tstudent
 id ALT
 id BOTTOM_END
 id BOTTOM_START
@@ -3816,6 +3818,8 @@ id cardChat
 id cardCreateAssignment
 id cardCreateEvent
 id cardNotifications
+id cardResources
+id cardStudents
 id carryVelocity
 id center
 id centerCrop

@@ -10,11 +10,6 @@
           <theme>@style/Theme.TSTAR</theme>
         </config>
       </layout>
-      <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/activity_tasssignment.xml">
-        <config>
-          <theme>@style/Theme.TSTAR</theme>
-        </config>
-      </layout>
     </layouts>
   </component>
   <component name="AutoImportSettings">
@@ -23,8 +18,10 @@
   <component name="ChangeListManager">
     <list default="true" id="68f55fa5-e357-4619-9e9e-b24458d6d83c" name="Changes" comment="This is my First Commit (Uploading T-STAR).">
       <changelist_data name="Rutuja Nage" email="rutujanage979@gmail.com" automatic="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/drawable/tnewassign.png" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/drawable/tnewassign.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/local.properties" beforeDir="false" afterPath="$PROJECT_DIR$/local.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/8.11.1/checksums/checksums.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.11.1/checksums/checksums.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/caches/deviceStreaming.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/caches/deviceStreaming.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -34,7 +31,7 @@
   <component name="ClangdSettings">
     <option name="formatViaClangd" value="false" />
   </component>
-  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[DeviceId(pluginId=PhysicalDevice, isTemplate=false, identifier=serial=RZ8R90648PY)]" />
+  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[DeviceId(pluginId=LocalEmulator, isTemplate=false, identifier=path=/Users/architkulkarni/.android/avd/Pixel_9_Pro.avd)]" />
   <component name="ExternalProjectsData">
     <projectState path="$PROJECT_DIR$">
       <ProjectState />
@@ -46,12 +43,6 @@
         <option value="sawantankita23 &lt;sawantashok7558&gt;" />
         <option value="Rutuja Nage &lt;rutujanage979@gmail.com&gt;" />
       </list>
-    </option>
-    <option name="PUSH_TAGS">
-      <GitPushTagMode>
-        <option name="argument" value="--tags" />
-        <option name="title" value="All" />
-      </GitPushTagMode>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
@@ -91,7 +82,7 @@
     "RunOnceActivity.readMode.enableVisualFormatting": "true",
     "cf.first.check.clang-format": "false",
     "cidr.known.project.marker": "true",
-    "git-widget-placeholder": "master",
+    "git-widget-placeholder": "Merging master",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "C:/Users/Hp/AndroidStudioProjects/T-STAR",
     "project.structure.last.edited": "SDK Location",
@@ -100,11 +91,6 @@
     "settings.editor.selected.configurable": "AndroidSdkUpdater"
   }
 }]]></component>
-  <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\Users\hp\StudioProjects\T-STAR\app\src\main\res\drawable" />
-    </key>
-  </component>
   <component name="RunManager">
     <configuration name="app" type="AndroidRunConfigurationType" factoryName="Android App" activateToolWindowBeforeRun="false">
       <module name="T-STAR.app" />
@@ -212,15 +198,7 @@
       <option name="project" value="LOCAL" />
       <updated>1764500340414</updated>
     </task>
-    <task id="LOCAL-00004" summary="Assignment Activity Create">
-      <option name="closed" value="true" />
-      <created>1764503219412</created>
-      <option name="number" value="00004" />
-      <option name="presentableId" value="LOCAL-00004" />
-      <option name="project" value="LOCAL" />
-      <updated>1764503219412</updated>
-    </task>
-    <option name="localTasksCounter" value="5" />
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -238,22 +216,19 @@
     <MESSAGE value="This is my First Commit (Uploading T-STAR)." />
     <MESSAGE value="Create DashBoard" />
     <MESSAGE value="made fragment folder in student activity &#10;&#10;add some vector assect&#10;&#10;and create a home_page design" />
-    <MESSAGE value="assignment Activity Create" />
-    <MESSAGE value="made fragment folder in student activity&#10;&#10;add some vector assect&#10;&#10;and create a home_page design" />
-    <MESSAGE value="Assignment Activity Create" />
-    <option name="LAST_COMMIT_MESSAGE" value="Assignment Activity Create" />
+    <option name="LAST_COMMIT_MESSAGE" value="made fragment folder in student activity &#10;&#10;add some vector assect&#10;&#10;and create a home_page design" />
   </component>
   <component name="play_dynamic_filters_status">
     <option name="appIdToCheckInfo">
       <map>
         <entry key="com.example.t_star">
           <value>
-            <CheckInfo lastCheckTimestamp="1764503334646" />
+            <CheckInfo lastCheckTimestamp="1764393453935" />
           </value>
         </entry>
         <entry key="com.example.t_star.test">
           <value>
-            <CheckInfo lastCheckTimestamp="1764503334650" />
+            <CheckInfo lastCheckTimestamp="1764393453935" />
           </value>
         </entry>
       </map>

@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="he"
+    android:background="#FFFFFF"
     tools:context=".TEACHERACTIVITIES.TCreateNewAssignActivity">
 
   <!-- ================= TOOLBAR WITH BACK ================= -->
@@ -18,8 +19,7 @@
       app:navigationIcon="@drawable/arrow_back"
       app:layout_constraintTop_toTopOf="parent"
       app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintEnd_toEndOf="parent"/>
-
+      app:layout_constraintEnd_toEndOf="parent" />
 
   <!-- ================= CONTENT SCROLLVIEW ================= -->
   <ScrollView
@@ -43,8 +43,8 @@
       <LinearLayout
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
-          android:padding="50sp"
-          android:orientation="vertical">
+          android:orientation="vertical"
+          android:padding="8dp">
 
         <!-- Assignment Title -->
         <com.google.android.material.textfield.TextInputLayout
@@ -56,7 +56,8 @@
           <com.google.android.material.textfield.TextInputEditText
               android:id="@+id/etTitle"
               android:layout_width="match_parent"
-              android:layout_height="wrap_content"/>
+              android:layout_height="wrap_content"
+              android:textColor="#ffffff" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <!-- Description -->
@@ -71,7 +72,8 @@
               android:id="@+id/etDescription"
               android:layout_width="match_parent"
               android:layout_height="wrap_content"
-              android:minLines="3"/>
+              android:minLines="3"
+              android:textColor="#ffffff" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <!-- Due Date -->
@@ -86,7 +88,9 @@
               android:id="@+id/etDueDate"
               android:layout_width="match_parent"
               android:layout_height="wrap_content"
-              android:focusable="false"/>
+              android:focusable="false"
+              android:clickable="true"
+              android:textColor="#ffffff" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <!-- Create Button -->
@@ -96,13 +100,12 @@
             android:layout_height="wrap_content"
             android:text="Create Assignment"
             android:layout_marginTop="24dp"
-           android:background="@color/material_dynamic_tertiary0"
-            android:textColor="@color/white"/>
+            android:background="@color/material_dynamic_tertiary0"
+            android:textColor="@color/white" />
 
       </LinearLayout>
 
     </androidx.cardview.widget.CardView>
-
   </ScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

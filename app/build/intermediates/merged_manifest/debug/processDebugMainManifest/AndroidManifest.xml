@@ -49,7 +49,7 @@
             android:name="com.example.t_star.TEACHERACTIVITIES.TAsssignmentActivity"
             android:exported="false" />
         <activity
-            android:name="com.example.t_star.TEACHERACTIVITIES.TAssignment_Activity"
+            android:name="com.example.t_star.STUDENTACTIVITIES.SHome_Page"
             android:exported="false" />
         <activity
             android:name="com.example.t_star.TEACHERACTIVITIES.THomeActivity"

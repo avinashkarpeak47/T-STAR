@@ -35,6 +35,10 @@
             android:exported="false" />
 
         <activity
+            android:name=".STUDENTACTIVITIES.SHome_Page"
+            android:exported="false" />
+
+        <activity
             android:name=".TEACHERACTIVITIES.THomeActivity"
             android:exported="false" /> <!-- <activity -->
         <!-- android:name=".Splash_Screen" -->

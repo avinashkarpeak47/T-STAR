@@ -51,13 +51,16 @@
         <!-- Right-side Create Assignment button -->
         <ImageButton
             android:id="@+id/btnCreateTop"
-            android:layout_width="40sp"
-            android:layout_height="40sp"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
             android:layout_gravity="end|center_vertical"
-            android:layout_marginEnd="8dp"
-            android:background="?attr/selectableItemBackgroundBorderless"
+            android:layout_marginEnd="12dp"
+            android:background="@android:color/transparent"
+            android:scaleType="centerInside"
             android:contentDescription="Create Assignment"
-            android:src="@drawable/tnewassign" />
+            android:src="@drawable/tnewassign"
+            />
+
     </com.google.android.material.appbar.MaterialToolbar>
 
 

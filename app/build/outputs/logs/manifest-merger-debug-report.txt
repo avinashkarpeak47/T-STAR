@@ -1,9 +1,10 @@
 -- Merging decision tree log ---
 manifest
-ADDED from C:\Users\Hp\AndroidStudioProjects\T-STAR\app\src\main\AndroidManifest.xml:2:1-58:12
-INJECTED from C:\Users\Hp\AndroidStudioProjects\T-STAR\app\src\main\AndroidManifest.xml:2:1-58:12
-INJECTED from C:\Users\Hp\AndroidStudioProjects\T-STAR\app\src\main\AndroidManifest.xml:2:1-58:12
-INJECTED from C:\Users\Hp\AndroidStudioProjects\T-STAR\app\src\main\AndroidManifest.xml:2:1-58:12
+ADDED from C:\Users\Hp\AndroidStudioProjects\T-STAR\app\src\main\AndroidManifest.xml:2:1-71:12
+INJECTED from C:\Users\Hp\AndroidStudioProjects\T-STAR\app\src\main\AndroidManifest.xml:2:1-71:12
+INJECTED from C:\Users\Hp\AndroidStudioProjects\T-STAR\app\src\main\AndroidManifest.xml:2:1-71:12
+INJECTED from C:\Users\Hp\AndroidStudioProjects\T-STAR\app\src\main\AndroidManifest.xml:2:1-71:12
+MERGED from [androidx.databinding:viewbinding:8.10.1] C:\Users\Hp\.gradle\caches\8.11.1\transforms\5594bc2580899d298d079eb012cfefe5\transformed\viewbinding-8.10.1\AndroidManifest.xml:2:1-7:12
 MERGED from [com.google.android.material:material:1.13.0] C:\Users\Hp\.gradle\caches\8.11.1\transforms\321fd356c705b4a665306fb3d480671b\transformed\material-1.13.0\AndroidManifest.xml:17:1-24:12
 MERGED from [androidx.constraintlayout:constraintlayout:2.2.1] C:\Users\Hp\.gradle\caches\8.11.1\transforms\4fa2b43ae41aa3566558b6dab0024173\transformed\constraintlayout-2.2.1\AndroidManifest.xml:2:1-9:12
 MERGED from [androidx.appcompat:appcompat-resources:1.7.1] C:\Users\Hp\.gradle\caches\8.11.1\transforms\8b3a1dd1268f9b36f539a4f13decb42f\transformed\appcompat-resources-1.7.1\AndroidManifest.xml:2:1-7:12
@@ -57,8 +58,8 @@ MERGED from [androidx.compose.runtime:runtime-annotation-android:1.9.0] C:\Users
 	xmlns:android
 		ADDED from C:\Users\Hp\AndroidStudioProjects\T-STAR\app\src\main\AndroidManifest.xml:2:11-69
 application
-ADDED from C:\Users\Hp\AndroidStudioProjects\T-STAR\app\src\main\AndroidManifest.xml:5:5-56:19
-INJECTED from C:\Users\Hp\AndroidStudioProjects\T-STAR\app\src\main\AndroidManifest.xml:5:5-56:19
+ADDED from C:\Users\Hp\AndroidStudioProjects\T-STAR\app\src\main\AndroidManifest.xml:5:5-69:19
+INJECTED from C:\Users\Hp\AndroidStudioProjects\T-STAR\app\src\main\AndroidManifest.xml:5:5-69:19
 MERGED from [com.google.android.material:material:1.13.0] C:\Users\Hp\.gradle\caches\8.11.1\transforms\321fd356c705b4a665306fb3d480671b\transformed\material-1.13.0\AndroidManifest.xml:22:5-20
 MERGED from [com.google.android.material:material:1.13.0] C:\Users\Hp\.gradle\caches\8.11.1\transforms\321fd356c705b4a665306fb3d480671b\transformed\material-1.13.0\AndroidManifest.xml:22:5-20
 MERGED from [androidx.constraintlayout:constraintlayout:2.2.1] C:\Users\Hp\.gradle\caches\8.11.1\transforms\4fa2b43ae41aa3566558b6dab0024173\transformed\constraintlayout-2.2.1\AndroidManifest.xml:7:5-20
@@ -97,80 +98,112 @@ MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] C:\Users\Hp
 		ADDED from C:\Users\Hp\AndroidStudioProjects\T-STAR\app\src\main\AndroidManifest.xml:13:9-43
 	android:dataExtractionRules
 		ADDED from C:\Users\Hp\AndroidStudioProjects\T-STAR\app\src\main\AndroidManifest.xml:7:9-65
-activity#com.example.t_star.TEACHERACTIVITIES.TChatActivity
+activity#com.example.t_star.TEACHERACTIVITIES.TResourcesActivity
 ADDED from C:\Users\Hp\AndroidStudioProjects\T-STAR\app\src\main\AndroidManifest.xml:15:9-17:40
 	android:exported
 		ADDED from C:\Users\Hp\AndroidStudioProjects\T-STAR\app\src\main\AndroidManifest.xml:17:13-37
 	android:name
-		ADDED from C:\Users\Hp\AndroidStudioProjects\T-STAR\app\src\main\AndroidManifest.xml:16:13-60
-activity#com.example.t_star.TEACHERACTIVITIES.TNotificationActivity
+		ADDED from C:\Users\Hp\AndroidStudioProjects\T-STAR\app\src\main\AndroidManifest.xml:16:13-65
+activity#com.example.t_star.TEACHERACTIVITIES.TStudentActivity
 ADDED from C:\Users\Hp\AndroidStudioProjects\T-STAR\app\src\main\AndroidManifest.xml:18:9-20:40
 	android:exported
 		ADDED from C:\Users\Hp\AndroidStudioProjects\T-STAR\app\src\main\AndroidManifest.xml:20:13-37
 	android:name
-		ADDED from C:\Users\Hp\AndroidStudioProjects\T-STAR\app\src\main\AndroidManifest.xml:19:13-68
-activity#com.example.t_star.TEACHERACTIVITIES.TEventActivity
+		ADDED from C:\Users\Hp\AndroidStudioProjects\T-STAR\app\src\main\AndroidManifest.xml:19:13-63
+activity#com.example.t_star.TEACHERACTIVITIES.TCreateNewEventActivity
 ADDED from C:\Users\Hp\AndroidStudioProjects\T-STAR\app\src\main\AndroidManifest.xml:21:9-23:40
 	android:exported
 		ADDED from C:\Users\Hp\AndroidStudioProjects\T-STAR\app\src\main\AndroidManifest.xml:23:13-37
 	android:name
-		ADDED from C:\Users\Hp\AndroidStudioProjects\T-STAR\app\src\main\AndroidManifest.xml:22:13-61
-activity#com.example.t_star.TEACHERACTIVITIES.TAttendanceActivity
+		ADDED from C:\Users\Hp\AndroidStudioProjects\T-STAR\app\src\main\AndroidManifest.xml:22:13-70
+activity#com.example.t_star.STUDENTACTIVITIES.S_Mainpage
 ADDED from C:\Users\Hp\AndroidStudioProjects\T-STAR\app\src\main\AndroidManifest.xml:24:9-26:40
 	android:exported
 		ADDED from C:\Users\Hp\AndroidStudioProjects\T-STAR\app\src\main\AndroidManifest.xml:26:13-37
 	android:name
-		ADDED from C:\Users\Hp\AndroidStudioProjects\T-STAR\app\src\main\AndroidManifest.xml:25:13-66
-activity#com.example.t_star.TEACHERACTIVITIES.TProfileActivity
+		ADDED from C:\Users\Hp\AndroidStudioProjects\T-STAR\app\src\main\AndroidManifest.xml:25:13-57
+activity#com.example.t_star.STUDENTACTIVITIES.S_HomePagee
 ADDED from C:\Users\Hp\AndroidStudioProjects\T-STAR\app\src\main\AndroidManifest.xml:27:9-29:40
 	android:exported
 		ADDED from C:\Users\Hp\AndroidStudioProjects\T-STAR\app\src\main\AndroidManifest.xml:29:13-37
 	android:name
-		ADDED from C:\Users\Hp\AndroidStudioProjects\T-STAR\app\src\main\AndroidManifest.xml:28:13-63
-activity#com.example.t_star.TEACHERACTIVITIES.TCreateNewAssignActivity
+		ADDED from C:\Users\Hp\AndroidStudioProjects\T-STAR\app\src\main\AndroidManifest.xml:28:13-58
+activity#com.example.t_star.TEACHERACTIVITIES.TChatActivity
 ADDED from C:\Users\Hp\AndroidStudioProjects\T-STAR\app\src\main\AndroidManifest.xml:30:9-32:40
 	android:exported
 		ADDED from C:\Users\Hp\AndroidStudioProjects\T-STAR\app\src\main\AndroidManifest.xml:32:13-37
 	android:name
-		ADDED from C:\Users\Hp\AndroidStudioProjects\T-STAR\app\src\main\AndroidManifest.xml:31:13-71
-activity#com.example.t_star.TEACHERACTIVITIES.TAsssignmentActivity
+		ADDED from C:\Users\Hp\AndroidStudioProjects\T-STAR\app\src\main\AndroidManifest.xml:31:13-60
+activity#com.example.t_star.TEACHERACTIVITIES.TNotificationActivity
 ADDED from C:\Users\Hp\AndroidStudioProjects\T-STAR\app\src\main\AndroidManifest.xml:33:9-35:40
 	android:exported
 		ADDED from C:\Users\Hp\AndroidStudioProjects\T-STAR\app\src\main\AndroidManifest.xml:35:13-37
 	android:name
-		ADDED from C:\Users\Hp\AndroidStudioProjects\T-STAR\app\src\main\AndroidManifest.xml:34:13-67
+		ADDED from C:\Users\Hp\AndroidStudioProjects\T-STAR\app\src\main\AndroidManifest.xml:34:13-68
+activity#com.example.t_star.TEACHERACTIVITIES.TEventActivity
+ADDED from C:\Users\Hp\AndroidStudioProjects\T-STAR\app\src\main\AndroidManifest.xml:36:9-38:40
+	android:exported
+		ADDED from C:\Users\Hp\AndroidStudioProjects\T-STAR\app\src\main\AndroidManifest.xml:38:13-37
+	android:name
+		ADDED from C:\Users\Hp\AndroidStudioProjects\T-STAR\app\src\main\AndroidManifest.xml:37:13-61
+activity#com.example.t_star.TEACHERACTIVITIES.TAttendanceActivity
+ADDED from C:\Users\Hp\AndroidStudioProjects\T-STAR\app\src\main\AndroidManifest.xml:39:9-41:40
+	android:exported
+		ADDED from C:\Users\Hp\AndroidStudioProjects\T-STAR\app\src\main\AndroidManifest.xml:41:13-37
+	android:name
+		ADDED from C:\Users\Hp\AndroidStudioProjects\T-STAR\app\src\main\AndroidManifest.xml:40:13-66
+activity#com.example.t_star.TEACHERACTIVITIES.TProfileActivity
+ADDED from C:\Users\Hp\AndroidStudioProjects\T-STAR\app\src\main\AndroidManifest.xml:42:9-44:40
+	android:exported
+		ADDED from C:\Users\Hp\AndroidStudioProjects\T-STAR\app\src\main\AndroidManifest.xml:44:13-37
+	android:name
+		ADDED from C:\Users\Hp\AndroidStudioProjects\T-STAR\app\src\main\AndroidManifest.xml:43:13-63
+activity#com.example.t_star.TEACHERACTIVITIES.TCreateNewAssignActivity
+ADDED from C:\Users\Hp\AndroidStudioProjects\T-STAR\app\src\main\AndroidManifest.xml:45:9-47:40
+	android:exported
+		ADDED from C:\Users\Hp\AndroidStudioProjects\T-STAR\app\src\main\AndroidManifest.xml:47:13-37
+	android:name
+		ADDED from C:\Users\Hp\AndroidStudioProjects\T-STAR\app\src\main\AndroidManifest.xml:46:13-71
+activity#com.example.t_star.TEACHERACTIVITIES.TAsssignmentActivity
+ADDED from C:\Users\Hp\AndroidStudioProjects\T-STAR\app\src\main\AndroidManifest.xml:48:9-50:40
+	android:exported
+		ADDED from C:\Users\Hp\AndroidStudioProjects\T-STAR\app\src\main\AndroidManifest.xml:50:13-37
+	android:name
+		ADDED from C:\Users\Hp\AndroidStudioProjects\T-STAR\app\src\main\AndroidManifest.xml:49:13-67
 activity#com.example.t_star.STUDENTACTIVITIES.SHome_Page
-ADDED from C:\Users\Hp\AndroidStudioProjects\T-STAR\app\src\main\AndroidManifest.xml:37:9-39:40
+ADDED from C:\Users\Hp\AndroidStudioProjects\T-STAR\app\src\main\AndroidManifest.xml:51:9-53:40
 	android:exported
-		ADDED from C:\Users\Hp\AndroidStudioProjects\T-STAR\app\src\main\AndroidManifest.xml:39:13-37
+		ADDED from C:\Users\Hp\AndroidStudioProjects\T-STAR\app\src\main\AndroidManifest.xml:53:13-37
 	android:name
-		ADDED from C:\Users\Hp\AndroidStudioProjects\T-STAR\app\src\main\AndroidManifest.xml:38:13-57
+		ADDED from C:\Users\Hp\AndroidStudioProjects\T-STAR\app\src\main\AndroidManifest.xml:52:13-57
 activity#com.example.t_star.TEACHERACTIVITIES.THomeActivity
-ADDED from C:\Users\Hp\AndroidStudioProjects\T-STAR\app\src\main\AndroidManifest.xml:41:9-43:40
+ADDED from C:\Users\Hp\AndroidStudioProjects\T-STAR\app\src\main\AndroidManifest.xml:54:9-56:40
 	android:exported
-		ADDED from C:\Users\Hp\AndroidStudioProjects\T-STAR\app\src\main\AndroidManifest.xml:43:13-37
+		ADDED from C:\Users\Hp\AndroidStudioProjects\T-STAR\app\src\main\AndroidManifest.xml:56:13-37
 	android:name
-		ADDED from C:\Users\Hp\AndroidStudioProjects\T-STAR\app\src\main\AndroidManifest.xml:42:13-60
+		ADDED from C:\Users\Hp\AndroidStudioProjects\T-STAR\app\src\main\AndroidManifest.xml:55:13-60
 activity#com.example.t_star.Splash_Screen
-ADDED from C:\Users\Hp\AndroidStudioProjects\T-STAR\app\src\main\AndroidManifest.xml:47:9-55:20
+ADDED from C:\Users\Hp\AndroidStudioProjects\T-STAR\app\src\main\AndroidManifest.xml:60:9-68:20
 	android:exported
-		ADDED from C:\Users\Hp\AndroidStudioProjects\T-STAR\app\src\main\AndroidManifest.xml:49:13-36
+		ADDED from C:\Users\Hp\AndroidStudioProjects\T-STAR\app\src\main\AndroidManifest.xml:62:13-36
 	android:name
-		ADDED from C:\Users\Hp\AndroidStudioProjects\T-STAR\app\src\main\AndroidManifest.xml:48:13-42
+		ADDED from C:\Users\Hp\AndroidStudioProjects\T-STAR\app\src\main\AndroidManifest.xml:61:13-42
 intent-filter#action:name:android.intent.action.MAIN+category:name:android.intent.category.LAUNCHER
-ADDED from C:\Users\Hp\AndroidStudioProjects\T-STAR\app\src\main\AndroidManifest.xml:50:13-54:29
+ADDED from C:\Users\Hp\AndroidStudioProjects\T-STAR\app\src\main\AndroidManifest.xml:63:13-67:29
 action#android.intent.action.MAIN
-ADDED from C:\Users\Hp\AndroidStudioProjects\T-STAR\app\src\main\AndroidManifest.xml:51:17-69
+ADDED from C:\Users\Hp\AndroidStudioProjects\T-STAR\app\src\main\AndroidManifest.xml:64:17-69
 	android:name
-		ADDED from C:\Users\Hp\AndroidStudioProjects\T-STAR\app\src\main\AndroidManifest.xml:51:25-66
+		ADDED from C:\Users\Hp\AndroidStudioProjects\T-STAR\app\src\main\AndroidManifest.xml:64:25-66
 category#android.intent.category.LAUNCHER
-ADDED from C:\Users\Hp\AndroidStudioProjects\T-STAR\app\src\main\AndroidManifest.xml:53:17-77
+ADDED from C:\Users\Hp\AndroidStudioProjects\T-STAR\app\src\main\AndroidManifest.xml:66:17-77
 	android:name
-		ADDED from C:\Users\Hp\AndroidStudioProjects\T-STAR\app\src\main\AndroidManifest.xml:53:27-74
+		ADDED from C:\Users\Hp\AndroidStudioProjects\T-STAR\app\src\main\AndroidManifest.xml:66:27-74
 uses-sdk
 INJECTED from C:\Users\Hp\AndroidStudioProjects\T-STAR\app\src\main\AndroidManifest.xml reason: use-sdk injection requested
 INJECTED from C:\Users\Hp\AndroidStudioProjects\T-STAR\app\src\main\AndroidManifest.xml
 INJECTED from C:\Users\Hp\AndroidStudioProjects\T-STAR\app\src\main\AndroidManifest.xml
+MERGED from [androidx.databinding:viewbinding:8.10.1] C:\Users\Hp\.gradle\caches\8.11.1\transforms\5594bc2580899d298d079eb012cfefe5\transformed\viewbinding-8.10.1\AndroidManifest.xml:5:5-44
+MERGED from [androidx.databinding:viewbinding:8.10.1] C:\Users\Hp\.gradle\caches\8.11.1\transforms\5594bc2580899d298d079eb012cfefe5\transformed\viewbinding-8.10.1\AndroidManifest.xml:5:5-44
 MERGED from [com.google.android.material:material:1.13.0] C:\Users\Hp\.gradle\caches\8.11.1\transforms\321fd356c705b4a665306fb3d480671b\transformed\material-1.13.0\AndroidManifest.xml:20:5-44
 MERGED from [com.google.android.material:material:1.13.0] C:\Users\Hp\.gradle\caches\8.11.1\transforms\321fd356c705b4a665306fb3d480671b\transformed\material-1.13.0\AndroidManifest.xml:20:5-44
 MERGED from [androidx.constraintlayout:constraintlayout:2.2.1] C:\Users\Hp\.gradle\caches\8.11.1\transforms\4fa2b43ae41aa3566558b6dab0024173\transformed\constraintlayout-2.2.1\AndroidManifest.xml:5:5-44

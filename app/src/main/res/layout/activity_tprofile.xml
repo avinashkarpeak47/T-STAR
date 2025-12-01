@@ -16,65 +16,83 @@
         <com.google.android.material.appbar.MaterialToolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:title="Profile"
-            app:titleTextColor="#ffffff"
+            android:layout_height="?attr/actionBarSize"
             android:background="@drawable/header_gradient"
-            app:navigationIcon="@drawable/arrow_back"/>
+            app:navigationIcon="@drawable/arrow_back"
+            app:title="Profile"
+            app:titleTextColor="@color/white"
+            tools:menu="@menu/tprofile_menu"
+            app:menu="@menu/tprofile_menu"
+            />
 
-        <ScrollView
+
+        <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@color/maroon_variant"
-            android:padding="20dp">
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="50dp"
+            android:layout_marginEnd="16dp"
+            android:padding="20dp"
+            app:cardBackgroundColor="@color/maroon_dark"
+            app:cardCornerRadius="28dp"
+            app:cardElevation="6dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
                 android:orientation="vertical"
-                android:gravity="center_horizontal">
+
+                android:padding="10dp">
 
                 <!-- Profile Image -->
+
+
+                <!-- CARDVIEW START -->
+
+
                 <ImageView
                     android:id="@+id/imgProfile"
                     android:layout_width="120dp"
                     android:layout_height="120dp"
-                    android:src="@drawable/tprofile"
-                    android:layout_marginTop="10dp"
-                    android:contentDescription="profile" />
+                    android:layout_gravity="center"
+                    android:background="@drawable/profile_circle"
+                    android:baselineAligned="false"
+                    android:clipToOutline="true"
+                    android:contentDescription="profile"
+                    android:src="@drawable/tprofile" />
 
-                <!-- CARDVIEW START -->
                 <androidx.cardview.widget.CardView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
-                    app:cardElevation="8dp"
-                    app:cardCornerRadius="16dp"
-                    android:backgroundTint="#1A2A2F">
+                    android:layout_marginTop="50dp"
+                    app:cardCornerRadius="36dp"
+                    app:cardElevation="8dp">
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:background="#ECDBC7"
                         android:orientation="vertical"
-                        android:padding="16dp">
+                        android:padding="10dp">
 
                         <!-- NAME -->
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:paddingStart="15dp"
                             android:text="Name"
                             android:textColor="@color/white"
-                            android:textSize="16sp"/>
+                            android:textSize="16sp" />
 
                         <com.google.android.material.textfield.TextInputLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             app:boxBackgroundMode="outline"
-                            app:boxStrokeColor="#E08A1E"
-                            app:boxCornerRadiusTopStart="12dp"
-                            app:boxCornerRadiusTopEnd="12dp"
+                            app:boxCornerRadiusBottomEnd="12dp"
                             app:boxCornerRadiusBottomStart="12dp"
-                            app:boxCornerRadiusBottomEnd="12dp">
+                            app:boxCornerRadiusTopEnd="12dp"
+                            app:boxCornerRadiusTopStart="12dp">
 
                             <com.google.android.material.textfield.TextInputEditText
                                 android:id="@+id/etName"
@@ -87,20 +105,20 @@
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:layout_marginTop="16dp"
+                            android:paddingStart="15dp"
                             android:text="Email"
                             android:textColor="@color/white"
-                            android:layout_marginTop="16dp"
-                            android:textSize="16sp"/>
+                            android:textSize="16sp" />
 
                         <com.google.android.material.textfield.TextInputLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             app:boxBackgroundMode="outline"
-                            app:boxStrokeColor="#E08A1E"
-                            app:boxCornerRadiusTopStart="12dp"
-                            app:boxCornerRadiusTopEnd="12dp"
+                            app:boxCornerRadiusBottomEnd="12dp"
                             app:boxCornerRadiusBottomStart="12dp"
-                            app:boxCornerRadiusBottomEnd="12dp">
+                            app:boxCornerRadiusTopEnd="12dp"
+                            app:boxCornerRadiusTopStart="12dp">
 
                             <com.google.android.material.textfield.TextInputEditText
                                 android:id="@+id/etEmail"
@@ -113,20 +131,20 @@
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:layout_marginTop="16dp"
+                            android:paddingStart="15dp"
                             android:text="Phone"
                             android:textColor="@color/white"
-                            android:layout_marginTop="16dp"
-                            android:textSize="16sp"/>
+                            android:textSize="16sp" />
 
                         <com.google.android.material.textfield.TextInputLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             app:boxBackgroundMode="outline"
-                            app:boxStrokeColor="#E08A1E"
-                            app:boxCornerRadiusTopStart="12dp"
-                            app:boxCornerRadiusTopEnd="12dp"
+                            app:boxCornerRadiusBottomEnd="12dp"
                             app:boxCornerRadiusBottomStart="12dp"
-                            app:boxCornerRadiusBottomEnd="12dp">
+                            app:boxCornerRadiusTopEnd="12dp"
+                            app:boxCornerRadiusTopStart="12dp">
 
                             <com.google.android.material.textfield.TextInputEditText
                                 android:id="@+id/etPhone"
@@ -143,47 +161,51 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:gravity="center"
                     android:layout_marginTop="20dp"
+                    android:gravity="center"
                     android:orientation="horizontal">
 
                     <androidx.appcompat.widget.AppCompatButton
                         android:id="@+id/btprofileSave"
                         android:layout_width="150sp"
                         android:layout_height="wrap_content"
+                        android:backgroundTint="@color/maroon_dark"
                         android:text="Save"
                         android:textColor="#15E636"
-                        android:textStyle="bold"
                         android:textSize="15sp"
-                        android:backgroundTint="@color/maroon_dark"
-                        android:visibility="gone"/>
+                        android:textStyle="bold"
+                        android:visibility="gone" />
 
                     <androidx.appcompat.widget.AppCompatButton
                         android:id="@+id/btprofileEDP"
                         android:layout_width="150sp"
                         android:layout_height="wrap_content"
+                        android:layout_marginRight="4dp"
+                        android:backgroundTint="@color/maroon_dark"
                         android:text="Edit profile"
                         android:textColor="@color/white"
-                        android:backgroundTint="@color/maroon_dark"
                         android:textSize="15sp"
-                        android:textStyle="bold"
-                        android:layout_marginRight="4dp"/>
+                        android:textStyle="bold" />
 
                     <androidx.appcompat.widget.AppCompatButton
                         android:id="@+id/btprofileDEP"
                         android:layout_width="150sp"
                         android:layout_height="wrap_content"
+                        android:layout_marginLeft="4dp"
+                        android:backgroundTint="@color/maroon_dark"
                         android:text="Delete profile"
                         android:textColor="#FF5555"
-                        android:backgroundTint="@color/maroon_dark"
                         android:textSize="15sp"
-                        android:textStyle="bold"
-                        android:layout_marginLeft="4dp"/>
+                        android:textStyle="bold" />
 
                 </LinearLayout>
 
             </LinearLayout>
-        </ScrollView>
+        </androidx.cardview.widget.CardView>
+
+
+
+
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

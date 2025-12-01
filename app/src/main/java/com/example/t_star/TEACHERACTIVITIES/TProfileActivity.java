@@ -1,26 +1,59 @@
 package com.example.t_star.TEACHERACTIVITIES;
 
+import android.content.Intent;
 import android.os.Bundle;
-
-import androidx.activity.EdgeToEdge;
+import android.view.MenuItem;
+import android.widget.ImageView;
+import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
+import androidx.appcompat.widget.AppCompatButton;
 
 import com.example.t_star.R;
+import com.google.android.material.appbar.MaterialToolbar;
+import com.google.android.material.textfield.TextInputEditText;
 
 public class TProfileActivity extends AppCompatActivity {
+
+    ImageView imgProfile;
+    TextInputEditText etName, etEmail, etPhone;
+    AppCompatButton btprofileSave, btprofileEDP, btprofileDEP;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this);
         setContentView(R.layout.activity_tprofile);
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
-            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
-            return insets;
+
+        imgProfile = findViewById(R.id.imgProfile);
+        etName = findViewById(R.id.etName);
+        etEmail = findViewById(R.id.etEmail);
+        etPhone = findViewById(R.id.etPhone);
+
+        btprofileSave = findViewById(R.id.btprofileSave);
+        btprofileEDP = findViewById(R.id.btprofileEDP);
+        btprofileDEP = findViewById(R.id.btprofileDEP);
+
+
+
+        MaterialToolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
+        // Back Press
+        toolbar.setNavigationOnClickListener(v -> finish());
+
+        // Menu Click Listener
+        toolbar.setOnMenuItemClickListener(item -> {
+            if(item.getItemId() == R.id.action_logout){
+                Toast.makeText(this, "Logout clicked!", Toast.LENGTH_SHORT).show();
+                // Open Login / Logout Code
+//                startActivity(new Intent(this, LoginActivity.class));
+                finish();
+                return true;
+            }
+            return false;
         });
+
+
     }
 }

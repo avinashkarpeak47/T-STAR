@@ -28,6 +28,12 @@
         android:testOnly="true"
         android:theme="@style/Theme.TSTAR" >
         <activity
+            android:name="com.example.t_star.STUDENTACTIVITIES.S_Mainpage"
+            android:exported="false" />
+        <activity
+            android:name="com.example.t_star.STUDENTACTIVITIES.S_HomePagee"
+            android:exported="false" />
+        <activity
             android:name="com.example.t_star.TEACHERACTIVITIES.TChatActivity"
             android:exported="false" />
         <activity
@@ -47,9 +53,6 @@
             android:exported="false" />
         <activity
             android:name="com.example.t_star.TEACHERACTIVITIES.TAsssignmentActivity"
-            android:exported="false" />
-        <activity
-            android:name="com.example.t_star.TEACHERACTIVITIES.TAssignment_Activity"
             android:exported="false" />
         <activity
             android:name="com.example.t_star.TEACHERACTIVITIES.THomeActivity"

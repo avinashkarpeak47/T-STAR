@@ -13,14 +13,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 
 import com.example.t_star.R;
-import com.example.t_star.STUDENTACTIVITIES.SHome_Page;
 import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.button.MaterialButton;
 
 public class THomeActivity extends AppCompatActivity {
 
-    private CardView cardCreateAssignment, cardAttendance, cardCreateEvent, cardChat, cardNotifications;
+    private CardView cardCreateAssignment, cardAttendance, cardCreateEvent, cardChat, cardNotifications, cardStudents, cardResources;
 
     private ImageView imgProfile;
     private MaterialToolbar toolbar;
@@ -50,12 +49,18 @@ public class THomeActivity extends AppCompatActivity {
         cardCreateEvent = findViewById(R.id.cardCreateEvent);
         cardChat = findViewById(R.id.cardChat);
         cardNotifications = findViewById(R.id.cardNotifications);
+        cardStudents = findViewById(R.id.cardStudents);
+        cardResources = findViewById(R.id.cardResources);
 
-        cardCreateAssignment.setOnClickListener(v -> openAssignment());
-        cardAttendance.setOnClickListener(v -> openAttendance());
-        cardCreateEvent.setOnClickListener(v -> openCreateEvent());
-        cardChat.setOnClickListener(v -> openChat());
-        cardNotifications.setOnClickListener(v -> openNotifications());
+
+        cardCreateAssignment.setOnClickListener(v -> startActivity(new Intent(this, TAsssignmentActivity.class)));
+        cardAttendance.setOnClickListener(v ->  startActivity(new Intent(this, TAttendanceActivity.class)));
+        cardCreateEvent.setOnClickListener(v -> startActivity(new Intent(this, TEventActivity.class)));
+        cardChat.setOnClickListener(v -> startActivity(new Intent(this, TChatActivity.class)));
+        cardNotifications.setOnClickListener(v -> startActivity(new Intent(this, TNotificationActivity.class)));
+        cardStudents.setOnClickListener(v -> startActivity(new Intent(this, TStudentsActivity.class)));
+        cardResources.setOnClickListener(v -> startActivity(new Intent(this, TResourcesActivity.class)));
+
 
 
         // Bottom navigation
@@ -79,26 +84,6 @@ public class THomeActivity extends AppCompatActivity {
 //        });
     }
 
-    private void openAssignment(){
-        // Launch AssignmentActivity
-        startActivity(new Intent(this, TAsssignmentActivity.class));
-    }
 
-    private void openAttendance(){
-        startActivity(new Intent(this, TAttendanceActivity.class));
-    }
-
-    private void openCreateEvent(){
-        startActivity(new Intent(this, TEventActivity.class));
-    }
-
-    private void openChat(){
-        startActivity(new Intent(this, TChatActivity.class));
-    }
-
-    private void openNotifications(){
-        startActivity(new Intent(this, TNotificationActivity.class));
-    }
-
-    }
+}
 

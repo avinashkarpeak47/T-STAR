@@ -9,4 +9,11 @@
     <color name="maroon_dark">#4A1030</color>
     <color name="promo_yellow">#FFC24D</color>
     <color name="icon_circle">#F7EAF0</color>
+
+    <color name="light_greay">#F5F5F5</color>
+    <color name="soft_greay">#E0E0E0</color>
+    <color name="medium_greay">#9E9E9E</color>
+    <color name="dark_greay">#616161</color>
+    <color name="almost_black_greay">#212121</color>
+
 </resources>

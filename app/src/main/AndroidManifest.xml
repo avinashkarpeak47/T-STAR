@@ -13,6 +13,18 @@
         android:theme="@style/Theme.TSTAR"
         tools:targetApi="31">
         <activity
+            android:name=".TEACHERACTIVITIES.TResourcesActivity"
+            android:exported="false" />
+        <activity
+            android:name=".TEACHERACTIVITIES.TStudentsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".STUDENTACTIVITIES.S_Mainpage"
+            android:exported="false" />
+        <activity
+            android:name=".STUDENTACTIVITIES.S_HomePagee"
+            android:exported="false" />
+        <activity
             android:name=".TEACHERACTIVITIES.TChatActivity"
             android:exported="false" />
         <activity
@@ -33,11 +45,9 @@
         <activity
             android:name=".TEACHERACTIVITIES.TAsssignmentActivity"
             android:exported="false" />
-
         <activity
             android:name=".STUDENTACTIVITIES.SHome_Page"
             android:exported="false" />
-
         <activity
             android:name=".TEACHERACTIVITIES.THomeActivity"
             android:exported="false" /> <!-- <activity -->

@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="1dp"
+
+    app:cardElevation="1dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:padding="1dp">
+
+        <ImageView
+            android:id="@+id/imgStudent"
+            android:layout_width="52dp"
+            android:layout_height="52dp"
+            android:src="@drawable/taklogo"
+            android:scaleType="centerCrop"
+            android:background="@drawable/tcircle_shape"
+            android:clipToOutline="true"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent" />
+
+        <TextView
+            android:id="@+id/tvStudentName"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Student Name"
+            android:textStyle="bold"
+            android:textSize="16sp"
+            android:textColor="@color/black"
+            app:layout_constraintTop_toTopOf="@id/imgStudent"
+            app:layout_constraintStart_toEndOf="@id/imgStudent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginStart="12dp" />
+
+        <TextView
+            android:id="@+id/tvStudentRoll"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Roll No: 01"
+            android:textSize="14sp"
+            android:textColor="@color/medium_greay"
+            app:layout_constraintTop_toBottomOf="@id/tvStudentName"
+            app:layout_constraintStart_toStartOf="@id/tvStudentName"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="4dp" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.cardview.widget.CardView>

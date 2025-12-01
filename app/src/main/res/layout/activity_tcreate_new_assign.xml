@@ -13,7 +13,7 @@
   <com.google.android.material.appbar.MaterialToolbar
       android:id="@+id/toolbar"
       android:layout_width="0dp"
-      android:layout_height="?attr/actionBarSize"
+      android:layout_height="52dp"
       app:title="Create Assignment"
       app:titleTextColor="#ffffff"
       android:background="@drawable/header_gradient"
@@ -58,6 +58,7 @@
               android:id="@+id/etTitle"
               android:layout_width="match_parent"
               android:layout_height="wrap_content"
+              android:maxLines="1"
               android:textColor="#ffffff" />
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -66,6 +67,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
+
             android:textColorHint="#ffffff"
             android:hint="Description">
 
@@ -73,6 +75,7 @@
               android:id="@+id/etDescription"
               android:layout_width="match_parent"
               android:layout_height="wrap_content"
+              android:maxLines="3"
               android:minLines="3"
               android:textColor="#ffffff" />
         </com.google.android.material.textfield.TextInputLayout>
@@ -89,6 +92,7 @@
               android:id="@+id/etDueDate"
               android:layout_width="match_parent"
               android:layout_height="wrap_content"
+              android:maxLines="1"
               android:focusable="false"
               android:clickable="true"
               android:textColor="#ffffff" />
@@ -101,7 +105,6 @@
             android:layout_height="wrap_content"
             android:text="Create Assignment"
             android:layout_marginTop="24dp"
-            android:background="@color/material_dynamic_tertiary0"
             android:textColor="@color/white" />
 
       </LinearLayout>

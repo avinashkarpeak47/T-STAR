@@ -51,7 +51,7 @@
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="16dp">
+            android:padding="20dp">
 
             <!-- Grid -->
             <androidx.gridlayout.widget.GridLayout
@@ -66,7 +66,7 @@
                 <androidx.cardview.widget.CardView
                     android:id="@+id/cardCreateAssignment"
                     android:layout_width="0dp"
-                    android:layout_height="140dp"
+                    android:layout_height="150dp"
                     app:layout_columnWeight="1"
                     app:cardCornerRadius="14dp"
                     app:cardElevation="6dp"
@@ -98,7 +98,7 @@
                 <androidx.cardview.widget.CardView
                     android:id="@+id/cardAttendance"
                     android:layout_width="0dp"
-                    android:layout_height="140dp"
+                    android:layout_height="150dp"
                     app:layout_columnWeight="1"
                     app:cardCornerRadius="14dp"
                     app:cardElevation="6dp"
@@ -130,7 +130,7 @@
                 <androidx.cardview.widget.CardView
                     android:id="@+id/cardCreateEvent"
                     android:layout_width="0dp"
-                    android:layout_height="140dp"
+                    android:layout_height="150dp"
                     app:layout_columnWeight="1"
                     app:cardCornerRadius="14dp"
                     app:cardElevation="6dp"
@@ -162,7 +162,7 @@
                 <androidx.cardview.widget.CardView
                     android:id="@+id/cardChat"
                     android:layout_width="0dp"
-                    android:layout_height="140dp"
+                    android:layout_height="150dp"
                     app:layout_columnWeight="1"
                     app:cardCornerRadius="14dp"
                     app:cardElevation="6dp"
@@ -189,6 +189,69 @@
                             android:layout_height="wrap_content"/>
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cardStudents"
+                    android:layout_width="0dp"
+                    android:layout_height="150dp"
+                    app:layout_columnWeight="1"
+                    app:cardCornerRadius="14dp"
+                    app:cardElevation="6dp"
+                    android:backgroundTint="@color/maroon_variant"
+                    android:foreground="?attr/selectableItemBackground">
+
+                    <LinearLayout
+                        android:orientation="vertical"
+                        android:gravity="center"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <ImageView
+                            android:layout_width="48dp"
+                            android:layout_height="48dp"
+                            android:src="@drawable/tstudent" />
+
+                        <TextView
+                            android:text="Students"
+                            android:textSize="15sp"
+                            android:textColor="@color/white"
+                            android:layout_marginTop="8dp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"/>
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cardResources"
+                    android:layout_width="0dp"
+                    android:layout_height="150dp"
+                    app:layout_columnWeight="1"
+                    app:cardCornerRadius="14dp"
+                    app:cardElevation="6dp"
+                    android:backgroundTint="@color/maroon_variant"
+                    android:foreground="?attr/selectableItemBackground">
+
+                    <LinearLayout
+                        android:orientation="vertical"
+                        android:gravity="center"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <ImageView
+                            android:layout_width="48dp"
+                            android:layout_height="48dp"
+                            android:src="@drawable/tresources" />
+
+                        <TextView
+                            android:text="Resources"
+                            android:textSize="15sp"
+                            android:textColor="@color/white"
+                            android:layout_marginTop="8dp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"/>
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
+
 
                 <!-- Notifications -->
                 <androidx.cardview.widget.CardView

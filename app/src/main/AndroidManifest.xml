@@ -15,9 +15,7 @@
         <activity
             android:name=".STUDENTACTIVITIES.S_Mainpage"
             android:exported="false" />
-        <activity
-            android:name=".STUDENTACTIVITIES.S_HomePagee"
-            android:exported="false" />
+
         <activity
             android:name=".TEACHERACTIVITIES.TChatActivity"
             android:exported="false" />
@@ -38,9 +36,6 @@
             android:exported="false" />
         <activity
             android:name=".TEACHERACTIVITIES.TAsssignmentActivity"
-            android:exported="false" />
-        <activity
-            android:name=".STUDENTACTIVITIES.SHome_Page"
             android:exported="false" />
 
         <activity

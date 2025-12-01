@@ -5,6 +5,185 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
     tools:context=".TEACHERACTIVITIES.TProfileActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:title="Profile"
+            app:titleTextColor="#ffffff"
+            android:background="@drawable/header_gradient"
+            app:navigationIcon="@drawable/arrow_back"/>
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/maroon_variant"
+            android:padding="20dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:gravity="center_horizontal">
+
+                <!-- Profile Image -->
+                <ImageView
+                    android:id="@+id/imgProfile"
+                    android:layout_width="120dp"
+                    android:layout_height="120dp"
+                    android:src="@drawable/tprofile"
+                    android:layout_marginTop="10dp"
+                    android:contentDescription="profile" />
+
+                <!-- CARDVIEW START -->
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    app:cardElevation="8dp"
+                    app:cardCornerRadius="16dp"
+                    android:backgroundTint="#1A2A2F">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:padding="16dp">
+
+                        <!-- NAME -->
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Name"
+                            android:textColor="@color/white"
+                            android:textSize="16sp"/>
+
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            app:boxBackgroundMode="outline"
+                            app:boxStrokeColor="#E08A1E"
+                            app:boxCornerRadiusTopStart="12dp"
+                            app:boxCornerRadiusTopEnd="12dp"
+                            app:boxCornerRadiusBottomStart="12dp"
+                            app:boxCornerRadiusBottomEnd="12dp">
+
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/etName"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:textColor="#ffffff" />
+                        </com.google.android.material.textfield.TextInputLayout>
+
+                        <!-- EMAIL -->
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Email"
+                            android:textColor="@color/white"
+                            android:layout_marginTop="16dp"
+                            android:textSize="16sp"/>
+
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            app:boxBackgroundMode="outline"
+                            app:boxStrokeColor="#E08A1E"
+                            app:boxCornerRadiusTopStart="12dp"
+                            app:boxCornerRadiusTopEnd="12dp"
+                            app:boxCornerRadiusBottomStart="12dp"
+                            app:boxCornerRadiusBottomEnd="12dp">
+
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/etEmail"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:textColor="#ffffff" />
+                        </com.google.android.material.textfield.TextInputLayout>
+
+                        <!-- PHONE -->
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Phone"
+                            android:textColor="@color/white"
+                            android:layout_marginTop="16dp"
+                            android:textSize="16sp"/>
+
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            app:boxBackgroundMode="outline"
+                            app:boxStrokeColor="#E08A1E"
+                            app:boxCornerRadiusTopStart="12dp"
+                            app:boxCornerRadiusTopEnd="12dp"
+                            app:boxCornerRadiusBottomStart="12dp"
+                            app:boxCornerRadiusBottomEnd="12dp">
+
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/etPhone"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:textColor="#ffffff" />
+                        </com.google.android.material.textfield.TextInputLayout>
+
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
+                <!-- CARDVIEW END -->
+
+                <!-- Buttons -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:layout_marginTop="20dp"
+                    android:orientation="horizontal">
+
+                    <androidx.appcompat.widget.AppCompatButton
+                        android:id="@+id/btprofileSave"
+                        android:layout_width="150sp"
+                        android:layout_height="wrap_content"
+                        android:text="Save"
+                        android:textColor="#15E636"
+                        android:textStyle="bold"
+                        android:textSize="15sp"
+                        android:backgroundTint="@color/maroon_dark"
+                        android:visibility="gone"/>
+
+                    <androidx.appcompat.widget.AppCompatButton
+                        android:id="@+id/btprofileEDP"
+                        android:layout_width="150sp"
+                        android:layout_height="wrap_content"
+                        android:text="Edit profile"
+                        android:textColor="@color/white"
+                        android:backgroundTint="@color/maroon_dark"
+                        android:textSize="15sp"
+                        android:textStyle="bold"
+                        android:layout_marginRight="4dp"/>
+
+                    <androidx.appcompat.widget.AppCompatButton
+                        android:id="@+id/btprofileDEP"
+                        android:layout_width="150sp"
+                        android:layout_height="wrap_content"
+                        android:text="Delete profile"
+                        android:textColor="#FF5555"
+                        android:backgroundTint="@color/maroon_dark"
+                        android:textSize="15sp"
+                        android:textStyle="bold"
+                        android:layout_marginLeft="4dp"/>
+
+                </LinearLayout>
+
+            </LinearLayout>
+        </ScrollView>
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,19 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
         android:id="@+id/nav_home"
         android:icon="@drawable/thome"
-        android:title="Home" />
+        android:title="Home"
+        app:tint="@color/maroon_dark"
+        />
     <item
         android:id="@+id/nav_chat"
         android:icon="@drawable/tgroupchat"
-        android:title="Chat" />
+        android:title="Chat"
+        app:tint="@color/maroon_dark" />
     <item
         android:id="@+id/nav_notifications"
         android:icon="@drawable/tnotification"
-        android:title="Notifications" />
+        android:title="Notifications"
+        app:tint="@color/maroon_dark" />
     <item
         android:id="@+id/nav_profile"
         android:icon="@drawable/tprofile"
-        android:title="Profile" />
+        android:title="Profile"
+        app:tint="@color/maroon_dark" />
 </menu>

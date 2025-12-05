@@ -3,9 +3,7 @@ package com.example.t_star.TEACHERACTIVITIES;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.MenuItem;
 import android.widget.ImageView;
-import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
 
@@ -15,11 +13,9 @@ import com.google.android.material.textfield.TextInputEditText;
 
 public class TProfileActivity extends AppCompatActivity {
 
-    ImageView imgProfile, btlogout;
+    ImageView imgProfile;
     TextInputEditText etName, etEmail, etPhone;
     AppCompatButton btprofileSave, btprofileEDP, btprofileDEP;
-
-
 
     @SuppressLint({"WrongViewCast", "MissingInflatedId"})
     @Override
@@ -35,26 +31,22 @@ public class TProfileActivity extends AppCompatActivity {
         btprofileSave = findViewById(R.id.btprofileSave);
         btprofileEDP = findViewById(R.id.btprofileEDP);
         btprofileDEP = findViewById(R.id.btprofileDEP);
-        btlogout = findViewById(R.id.btnlogout);
-
-
-
-
 
         MaterialToolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        // Back Press
+        // Back button
         toolbar.setNavigationOnClickListener(v -> finish());
-        btlogout.setOnClickListener(v -> {
-            Intent intent = new Intent(TProfileActivity.this, THomeActivity.class);
-            startActivity(intent);
-            finish();
 
+        // Menu handling (logout)
+        toolbar.setOnMenuItemClickListener(item -> {
+            if (item.getItemId() == R.id.action_logout) {
+                Intent intent = new Intent(TProfileActivity.this, THomeActivity.class);
+                startActivity(intent);
+                finish();
+                return true;
+            }
+            return false;
         });
-
-
-
-
     }
 }

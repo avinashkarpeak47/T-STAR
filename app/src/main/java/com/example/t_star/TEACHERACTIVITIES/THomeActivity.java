@@ -1,89 +1,58 @@
 package com.example.t_star.TEACHERACTIVITIES;
 
-import android.annotation.SuppressLint;
-import android.content.Intent;
 import android.os.Bundle;
-import android.view.MenuItem;
-import android.view.View;
-import android.widget.ImageView;
-import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.cardview.widget.CardView;
+import androidx.fragment.app.Fragment;
 
 import com.example.t_star.R;
-import com.google.android.material.appbar.MaterialToolbar;
+import com.example.t_star.TEACHERACTIVITIES.TFragment.THomeFragment;
+import com.example.t_star.TEACHERACTIVITIES.TFragment.TChatFragment;
+import com.example.t_star.TEACHERACTIVITIES.TFragment.TNotificationFragment;
+import com.example.t_star.TEACHERACTIVITIES.TFragment.TProfileFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.google.android.material.button.MaterialButton;
 
 public class THomeActivity extends AppCompatActivity {
 
-    private CardView cardCreateAssignment, cardAttendance, cardCreateEvent, cardChat, cardNotifications, cardStudents, cardResources;
+    BottomNavigationView bottomNav;
 
-    private ImageView imgProfile;
-    private MaterialToolbar toolbar;
-    private BottomNavigationView bottomNav;
-
-    @SuppressLint("NonConstantResourceId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_thome);
 
-        // Toolbar
-        toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        // Optional: set navigation click
-        toolbar.setNavigationOnClickListener(v -> finish());
+        bottomNav = findViewById(R.id.bottomNav);
 
-        imgProfile = findViewById(R.id.imgProfile);
-        imgProfile.setOnClickListener(v -> {
-            // open profile activity
-            startActivity(new Intent(this, TProfileActivity.class));
+        // Load Home Fragment by default
+        loadFragment(new THomeFragment());
+
+        bottomNav.setOnItemSelectedListener(item -> {
+
+            Fragment selectedFragment = null;
+            int id = item.getItemId();
+
+            if (id == R.id.nav_home) {
+                selectedFragment = new THomeFragment();
+            }
+            else if (id == R.id.nav_chat) {
+                selectedFragment = new TChatFragment();
+            }
+            else if (id == R.id.nav_notifications) {
+                selectedFragment = new TNotificationFragment();
+            }
+            else if (id == R.id.nav_profile) {
+                selectedFragment = new TProfileFragment();
+            }
+
+            loadFragment(selectedFragment);
+            return true;
         });
-
-        // Cards
-        cardCreateAssignment = findViewById(R.id.cardCreateAssignment);
-        cardAttendance = findViewById(R.id.cardAttendance);
-        cardCreateEvent = findViewById(R.id.cardCreateEvent);
-        cardChat = findViewById(R.id.cardChat);
-        cardNotifications = findViewById(R.id.cardNotifications);
-        cardStudents = findViewById(R.id.cardStudents);
-        cardResources = findViewById(R.id.cardResources);
-
-
-        cardCreateAssignment.setOnClickListener(v -> startActivity(new Intent(this, TAsssignmentActivity.class)));
-        cardAttendance.setOnClickListener(v ->  startActivity(new Intent(this, TAttendanceActivity.class)));
-        cardCreateEvent.setOnClickListener(v -> startActivity(new Intent(this, TEventActivity.class)));
-        cardChat.setOnClickListener(v -> startActivity(new Intent(this, TChatActivity.class)));
-        cardNotifications.setOnClickListener(v -> startActivity(new Intent(this, TNotificationActivity.class)));
-        cardStudents.setOnClickListener(v -> startActivity(new Intent(this, TStudentsActivity.class)));
-        cardResources.setOnClickListener(v -> startActivity(new Intent(this, TResourcesActivity.class)));
-
-
-
-        // Bottom navigation
-//        bottomNav = findViewById(R.id.bottomNav);
-//        bottomNav.setOnNavigationItemSelectedListener(item -> {
-//            switch (item.getItemId()){
-//                case R.id.nav_home:
-//                    startActivity(new Intent(THomeActivity.this, TProfileActivity.class));
-//                    return true;
-//                case R.id.nav_chat:
-//                    startActivity(new Intent(THomeActivity.this, TProfileActivity.class));
-//                    return true;
-//                case R.id.nav_notifications:
-//                    startActivity(new Intent(THomeActivity.this, TProfileActivity.class));
-//                    return true;
-//                case R.id.nav_profile:
-//                    startActivity(new Intent(THomeActivity.this, TProfileActivity.class));
-//                    return true;
-//            }
-//            return false;
-//        });
     }
 
-
+    private void loadFragment(Fragment fragment) {
+        getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.fragmentContainer, fragment)
+                .commit();
+    }
 }
-

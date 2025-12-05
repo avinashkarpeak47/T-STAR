@@ -16,7 +16,10 @@
             android:name=".TEACHERACTIVITIES.TResourcesActivity"
             android:exported="false" />
         <activity
-            android:name=".TEACHERACTIVITIES.TStudentsActivity"
+            android:name=".TEACHERACTIVITIES.TStudentActivity"
+            android:exported="false" />
+        <activity
+            android:name=".TEACHERACTIVITIES.TCreateNewEventActivity"
             android:exported="false" />
         <activity
             android:name=".STUDENTACTIVITIES.S_Mainpage"

@@ -22,9 +22,7 @@
             app:title="Profile"
             app:titleTextColor="@color/white"
             tools:menu="@menu/tprofile_menu"
-            app:menu="@menu/tprofile_menu"
-            />
-
+            app:menu="@menu/tprofile_menu"/>
 
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
@@ -42,26 +40,20 @@
                 android:layout_height="wrap_content"
                 android:gravity="center_horizontal"
                 android:orientation="vertical"
-
                 android:padding="10dp">
 
-                <!-- Profile Image -->
-
-
-                <!-- CARDVIEW START -->
-
-
+                <!-- PROFILE IMAGE -->
                 <ImageView
                     android:id="@+id/imgProfile"
                     android:layout_width="120dp"
                     android:layout_height="120dp"
                     android:layout_gravity="center"
                     android:background="@drawable/profile_circle"
-                    android:baselineAligned="false"
                     android:clipToOutline="true"
                     android:contentDescription="profile"
                     android:src="@drawable/tprofile" />
 
+                <!-- CARDVIEW FIELD AREA -->
                 <androidx.cardview.widget.CardView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -89,6 +81,8 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             app:boxBackgroundMode="outline"
+                            app:startIconDrawable="@drawable/tperson_logo"
+                            app:startIconTint="@color/maroon_dark"
                             app:boxCornerRadiusBottomEnd="12dp"
                             app:boxCornerRadiusBottomStart="12dp"
                             app:boxCornerRadiusTopEnd="12dp"
@@ -115,6 +109,8 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             app:boxBackgroundMode="outline"
+                            app:startIconDrawable="@drawable/temail_logo"
+                            app:startIconTint="@color/maroon_dark"
                             app:boxCornerRadiusBottomEnd="12dp"
                             app:boxCornerRadiusBottomStart="12dp"
                             app:boxCornerRadiusTopEnd="12dp"
@@ -141,6 +137,8 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             app:boxBackgroundMode="outline"
+                            app:startIconDrawable="@drawable/tcall_logo"
+                            app:startIconTint="@color/maroon_dark"
                             app:boxCornerRadiusBottomEnd="12dp"
                             app:boxCornerRadiusBottomStart="12dp"
                             app:boxCornerRadiusTopEnd="12dp"
@@ -155,9 +153,8 @@
 
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
-                <!-- CARDVIEW END -->
 
-                <!-- Buttons -->
+                <!-- BUTTONS -->
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -202,9 +199,6 @@
 
             </LinearLayout>
         </androidx.cardview.widget.CardView>
-
-
-
 
     </LinearLayout>
 

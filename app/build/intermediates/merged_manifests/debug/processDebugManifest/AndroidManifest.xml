@@ -34,22 +34,22 @@
             android:name="com.example.t_star.TEACHERACTIVITIES.TClassesAssignActivity"
             android:exported="false" />
         <activity
-            android:name="com.example.t_star.TEACHERACTIVITIES.TClassesNotiActivity"
-            android:exported="false" />
-        <activity
-            android:name="com.example.t_star.TEACHERACTIVITIES.TClassesResourcesActivity"
-            android:exported="false" />
-        <activity
             android:name="com.example.t_star.TEACHERACTIVITIES.TClassesAttendActivity"
-            android:exported="false" />
-        <activity
-            android:name="com.example.t_star.TEACHERACTIVITIES.TClassesStudentsActivity"
             android:exported="false" />
         <activity
             android:name="com.example.t_star.TEACHERACTIVITIES.TClassesChatStudActivity"
             android:exported="false" />
         <activity
             android:name="com.example.t_star.TEACHERACTIVITIES.TClassesEventActivity"
+            android:exported="false" />
+        <activity
+            android:name="com.example.t_star.TEACHERACTIVITIES.TClassesStudentsActivity"
+            android:exported="false" />
+        <activity
+            android:name="com.example.t_star.TEACHERACTIVITIES.TClassesNotiActivity"
+            android:exported="false" />
+        <activity
+            android:name="com.example.t_star.TEACHERACTIVITIES.TClassesResourcesActivity"
             android:exported="false" />
         <activity
             android:name="com.example.t_star.TEACHERACTIVITIES.TResourcesActivity"
@@ -63,6 +63,9 @@
         <activity
             android:name="com.example.t_star.STUDENTACTIVITIES.S_Mainpage"
             android:exported="false" />
+        <!-- <activity -->
+        <!-- android:name=".STUDENTACTIVITIES.S_HomePagee" -->
+        <!-- android:exported="false" /> -->
         <activity
             android:name="com.example.t_star.TEACHERACTIVITIES.TChatActivity"
             android:exported="false" />

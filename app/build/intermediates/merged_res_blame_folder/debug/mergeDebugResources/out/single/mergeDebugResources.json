@@ -128,6 +128,10 @@
         "source": "C:\\Users\\Hp\\.gradle\\daemon\\8.11.1\\com.example.t_star.app-main-50:\\mipmap-xhdpi\\ic_launcher_round.webp"
     },
     {
+        "merged": "com.example.t_star.app-debug-48:/layout_activity_tclasses_resources.xml.flat",
+        "source": "com.example.t_star.app-main-50:/layout/activity_tclasses_resources.xml"
+    },
+    {
         "merged": "C:\\Users\\Hp\\.gradle\\daemon\\8.11.1\\com.example.t_star.app-debug-48:\\drawable_tperson_logo.xml.flat",
         "source": "C:\\Users\\Hp\\.gradle\\daemon\\8.11.1\\com.example.t_star.app-main-50:\\drawable\\tperson_logo.xml"
     },
@@ -226,10 +230,6 @@
     {
         "merged": "C:\\Users\\Hp\\.gradle\\daemon\\8.11.1\\com.example.t_star.app-debug-48:\\drawable_s_search.png.flat",
         "source": "C:\\Users\\Hp\\.gradle\\daemon\\8.11.1\\com.example.t_star.app-main-50:\\drawable\\s_search.png"
-    },
-    {
-        "merged": "com.example.t_star.app-debug-48:/layout_activity_tclasses_event.xml.flat",
-        "source": "com.example.t_star.app-main-50:/layout/activity_tclasses_event.xml"
     },
     {
         "merged": "C:\\Users\\Hp\\.gradle\\daemon\\8.11.1\\com.example.t_star.app-debug-48:\\mipmap-mdpi_ic_launcher.webp.flat",
@@ -384,12 +384,12 @@
         "source": "C:\\Users\\Hp\\.gradle\\daemon\\8.11.1\\com.example.t_star.app-main-50:\\drawable\\tcircle_shape.xml"
     },
     {
-        "merged": "C:\\Users\\Hp\\.gradle\\daemon\\8.11.1\\com.example.t_star.app-debug-48:\\layout_activity_tclasses_event.xml.flat",
-        "source": "C:\\Users\\Hp\\.gradle\\daemon\\8.11.1\\com.example.t_star.app-main-50:\\layout\\activity_tclasses_event.xml"
-    },
-    {
         "merged": "C:\\Users\\Hp\\.gradle\\daemon\\8.11.1\\com.example.t_star.app-debug-48:\\xml_data_extraction_rules.xml.flat",
         "source": "C:\\Users\\Hp\\.gradle\\daemon\\8.11.1\\com.example.t_star.app-main-50:\\xml\\data_extraction_rules.xml"
+    },
+    {
+        "merged": "C:\\Users\\Hp\\.gradle\\daemon\\8.11.1\\com.example.t_star.app-debug-48:\\layout_activity_tclasses_event.xml.flat",
+        "source": "C:\\Users\\Hp\\.gradle\\daemon\\8.11.1\\com.example.t_star.app-main-50:\\layout\\activity_tclasses_event.xml"
     },
     {
         "merged": "C:\\Users\\Hp\\.gradle\\daemon\\8.11.1\\com.example.t_star.app-debug-48:\\drawable_s_chat.png.flat",

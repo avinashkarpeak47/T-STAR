@@ -11,6 +11,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.t_star.R;
+import com.google.android.material.appbar.MaterialToolbar;
 
 import java.util.Calendar;
 
@@ -32,10 +33,10 @@ public class TCreateNewEventActivity extends AppCompatActivity {
         etEventDate = findViewById(R.id.etEventDate);
         etEventDescription = findViewById(R.id.etEventDescription);
         btnSaveEvent = findViewById(R.id.btnSaveEvent);
-        btnBackNewEvent = findViewById(R.id.btnBackNewEvent);
-
-        // ----- Back Button -----
-        btnBackNewEvent.setOnClickListener(v -> finish());
+        // Toolbar
+        MaterialToolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        toolbar.setNavigationOnClickListener(v -> finish());
 
         // ----- Date Picker -----
         etEventDate.setOnClickListener(v -> showDatePicker());

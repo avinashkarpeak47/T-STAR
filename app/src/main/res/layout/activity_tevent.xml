@@ -9,54 +9,28 @@
     android:background="@color/white"
     tools:context=".TEACHERACTIVITIES.TEventActivity">
 
-    <!-- HEADER -->
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
+    <com.google.android.material.appbar.MaterialToolbar
+        android:id="@+id/toolbar"
+        android:layout_width="0dp"
+        android:layout_height="52dp"
         android:background="@drawable/header_gradient"
-        android:padding="6dp"
-        tools:ignore="MissingConstraints">
+        app:navigationIcon="@drawable/arrow_back"
+        app:title="Event"
+        app:titleTextColor="@color/white"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
 
-        <!-- BACK BUTTON -->
         <ImageButton
-            android:id="@+id/btnBackEvent"
-            android:layout_width="45dp"
-            android:layout_height="45dp"
-            android:layout_gravity="center_vertical"
-            android:background="?attr/selectableItemBackgroundBorderless"
-            android:src="@drawable/arrow_back"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.0"
-            tools:ignore="MissingConstraints"
-
-            tools:layout_editor_absoluteX="0dp" />
-        <!-- TOOLBAR TITLE -->
-        <com.google.android.material.appbar.MaterialToolbar
-            android:id="@+id/toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:elevation="2dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="1.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:title="Events"
-            app:titleTextColor="@color/white">
-
-            <!-- ADD EVENT BUTTON (TOP RIGHT) -->
-            <ImageButton
-                android:id="@+id/btnAddEventTop"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:background="@android:color/transparent"
-                android:src="@drawable/tnewassign"
-                android:scaleType="centerInside"
-                android:layout_gravity="end|center_vertical"/>
-        </com.google.android.material.appbar.MaterialToolbar>
-    </LinearLayout>
-
+            android:id="@+id/btnCreate"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:scaleType="centerInside"
+            android:layout_gravity="end|center_vertical"
+            android:background="@android:color/transparent"
+            android:src="@drawable/tnewassign"
+            android:padding="8dp"/>
+    </com.google.android.material.appbar.MaterialToolbar>
     <!-- CONTENT -->
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"

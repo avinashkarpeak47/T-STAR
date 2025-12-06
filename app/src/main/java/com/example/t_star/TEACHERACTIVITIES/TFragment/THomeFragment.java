@@ -12,13 +12,14 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.example.t_star.R;
-import com.example.t_star.TEACHERACTIVITIES.TClassesAssignActivity;
-import com.example.t_star.TEACHERACTIVITIES.TClassesAttendActivity;
-import com.example.t_star.TEACHERACTIVITIES.TClassesChatStudActivity;
-import com.example.t_star.TEACHERACTIVITIES.TClassesEventActivity;
-import com.example.t_star.TEACHERACTIVITIES.TClassesNotiActivity;
-import com.example.t_star.TEACHERACTIVITIES.TClassesStudentsActivity;
+import com.example.t_star.TEACHERACTIVITIES.TAsssignmentActivity;
+import com.example.t_star.TEACHERACTIVITIES.TAttendanceActivity;
+import com.example.t_star.TEACHERACTIVITIES.TChatActivity;
+import com.example.t_star.TEACHERACTIVITIES.TEventActivity;
+import com.example.t_star.TEACHERACTIVITIES.TNotificationActivity;
 import com.example.t_star.TEACHERACTIVITIES.TProfileActivity;
+import com.example.t_star.TEACHERACTIVITIES.TResourcesActivity;
+import com.example.t_star.TEACHERACTIVITIES.TStudentsActivity;
 
 public class THomeFragment extends Fragment {
 
@@ -48,25 +49,25 @@ public class THomeFragment extends Fragment {
         cardNotifications = view.findViewById(R.id.cardNotifications);
 
         cardCreateAssignment.setOnClickListener(v ->
-                startActivity(new Intent(getActivity(), TClassesAssignActivity.class)));
+                startActivity(new Intent(getActivity(), TAsssignmentActivity.class)));
 
         cardAttendance.setOnClickListener(v ->
-                startActivity(new Intent(getActivity(), TClassesAttendActivity.class)));
+                startActivity(new Intent(getActivity(), TAttendanceActivity.class)));
 
         cardCreateEvent.setOnClickListener(v ->
-                startActivity(new Intent(getActivity(), TClassesEventActivity.class)));
+                startActivity(new Intent(getActivity(), TEventActivity.class)));
 
         cardChat.setOnClickListener(v ->
-                startActivity(new Intent(getActivity(), TClassesChatStudActivity.class)));
+                startActivity(new Intent(getActivity(), TChatActivity.class)));
 
         cardStudents.setOnClickListener(v ->
-                startActivity(new Intent(getActivity(), TClassesStudentsActivity.class)));
+                startActivity(new Intent(getActivity(), TStudentsActivity.class)));
 
         cardResources.setOnClickListener(v ->
-                startActivity(new Intent(getActivity(), TClassesNotiActivity.class)));
+                startActivity(new Intent(getActivity(), TResourcesActivity.class)));
 
         cardNotifications.setOnClickListener(v ->
-                startActivity(new Intent(getActivity(), TClassesNotiActivity.class)));
+                startActivity(new Intent(getActivity(), TNotificationActivity.class)));
 
         return view;
     }

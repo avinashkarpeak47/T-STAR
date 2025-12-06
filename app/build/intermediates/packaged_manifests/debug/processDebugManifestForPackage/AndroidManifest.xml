@@ -28,40 +28,19 @@
         android:testOnly="true"
         android:theme="@style/Theme.TSTAR" >
         <activity
-            android:name="com.example.t_star.TEACHERACTIVITIES.TCreateClassActivity"
-            android:exported="false" />
-        <activity
-            android:name="com.example.t_star.TEACHERACTIVITIES.TClassesAssignActivity"
-            android:exported="false" />
-        <activity
-            android:name="com.example.t_star.TEACHERACTIVITIES.TClassesNotiActivity"
-            android:exported="false" />
-        <activity
-            android:name="com.example.t_star.TEACHERACTIVITIES.TClassesResourcesActivity"
-            android:exported="false" />
-        <activity
-            android:name="com.example.t_star.TEACHERACTIVITIES.TClassesAttendActivity"
-            android:exported="false" />
-        <activity
-            android:name="com.example.t_star.TEACHERACTIVITIES.TClassesStudentsActivity"
-            android:exported="false" />
-        <activity
-            android:name="com.example.t_star.TEACHERACTIVITIES.TClassesChatStudActivity"
-            android:exported="false" />
-        <activity
-            android:name="com.example.t_star.TEACHERACTIVITIES.TClassesEventActivity"
-            android:exported="false" />
-        <activity
             android:name="com.example.t_star.TEACHERACTIVITIES.TResourcesActivity"
             android:exported="false" />
         <activity
-            android:name="com.example.t_star.TEACHERACTIVITIES.TStudentsActivity"
+            android:name="com.example.t_star.TEACHERACTIVITIES.TStudentActivity"
             android:exported="false" />
         <activity
             android:name="com.example.t_star.TEACHERACTIVITIES.TCreateNewEventActivity"
             android:exported="false" />
         <activity
             android:name="com.example.t_star.STUDENTACTIVITIES.S_Mainpage"
+            android:exported="false" />
+        <activity
+            android:name="com.example.t_star.STUDENTACTIVITIES.S_HomePagee"
             android:exported="false" />
         <activity
             android:name="com.example.t_star.TEACHERACTIVITIES.TChatActivity"
@@ -83,6 +62,9 @@
             android:exported="false" />
         <activity
             android:name="com.example.t_star.TEACHERACTIVITIES.TAsssignmentActivity"
+            android:exported="false" />
+        <activity
+            android:name="com.example.t_star.STUDENTACTIVITIES.SHome_Page"
             android:exported="false" />
         <activity
             android:name="com.example.t_star.TEACHERACTIVITIES.THomeActivity"
@@ -114,13 +96,6 @@
                 android:name="androidx.profileinstaller.ProfileInstallerInitializer"
                 android:value="androidx.startup" />
         </provider>
-
-        <uses-library
-            android:name="androidx.window.extensions"
-            android:required="false" />
-        <uses-library
-            android:name="androidx.window.sidecar"
-            android:required="false" />
 
         <receiver
             android:name="androidx.profileinstaller.ProfileInstallReceiver"

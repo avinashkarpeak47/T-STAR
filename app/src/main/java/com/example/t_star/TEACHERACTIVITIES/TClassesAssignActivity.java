@@ -41,6 +41,7 @@ public class TClassesAssignActivity extends AppCompatActivity {
         rvClasses = findViewById(R.id.rvClasses);
         rvClasses.setLayoutManager(new LinearLayoutManager(this));
 
+
         // Demo Data
         classList = new ArrayList<>();
         classList.add(new TClassesModel("Class 5", "501", 40));

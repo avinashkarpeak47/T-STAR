@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.t_star.R;
 import com.example.t_star.TEACHERACTIVITIES.ASSIGNMENTS.TAssignmentAdapter;
 import com.example.t_star.TEACHERACTIVITIES.ASSIGNMENTS.TAssignmentModel;
+import com.google.android.material.appbar.MaterialToolbar;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,20 +22,23 @@ public class TAsssignmentActivity extends AppCompatActivity {
     private RecyclerView rvAssignments;
     private TAssignmentAdapter adapter;
     private List<TAssignmentModel> dataList;
-    private ImageButton btnCreateTop, btnBack;
+    private ImageButton btnCreateTop;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tasssignment);
 
-        btnCreateTop = findViewById(R.id.btnCreateTop);
-        btnBack = findViewById(R.id.btnBack);
+        btnCreateTop = findViewById(R.id.btnCreate);
 
-        btnBack.setOnClickListener(v -> finish());
+
 
         btnCreateTop.setOnClickListener(v ->
                 startActivity(new Intent(this, TCreateNewAssignActivity.class)));
+        // Toolbar
+        MaterialToolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        toolbar.setNavigationOnClickListener(v -> finish());
 
         rvAssignments = findViewById(R.id.rvAssignments);
         rvAssignments.setLayoutManager(new LinearLayoutManager(this));

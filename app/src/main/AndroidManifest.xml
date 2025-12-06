@@ -16,6 +16,16 @@
             android:name=".TEACHERACTIVITIES.TCreateClassActivity"
             android:exported="false" />
         <activity
+            android:name=".TEACHERACTIVITIES.TResourcesActivity"
+            android:exported="false" />
+        <activity
+            android:name=".TEACHERACTIVITIES.TStudentsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".TEACHERACTIVITIES.TCreateNewEventActivity"
+            android:exported="false" />
+
+        <activity
             android:name=".TEACHERACTIVITIES.TClassesAssignActivity"
             android:exported="false" />
         <activity
@@ -25,28 +35,20 @@
             android:name=".TEACHERACTIVITIES.TClassesChatStudActivity"
             android:exported="false" />
         <activity
-            android:name=".TEACHERACTIVITIES.TClassesEventActivity"
-            android:exported="false" />
-        <activity
-            android:name=".TEACHERACTIVITIES.TClassesStudentsActivity"
-            android:exported="false" />
+        android:name=".TEACHERACTIVITIES.TClassesEventActivity"
+        android:exported="false" />
 
         <activity
-        android:name=".TEACHERACTIVITIES.TClassesNotiActivity"
-        android:exported="false" />
+            android:name=".TEACHERACTIVITIES.TClassesNotiActivity"
+            android:exported="false" />
         <activity
             android:name=".TEACHERACTIVITIES.TClassesResourcesActivity"
             android:exported="false" />
 
         <activity
-            android:name=".TEACHERACTIVITIES.TResourcesActivity"
+            android:name=".TEACHERACTIVITIES.TClassesStudentsActivity"
             android:exported="false" />
-        <activity
-            android:name=".TEACHERACTIVITIES.TStudentsActivity"
-            android:exported="false" />
-        <activity
-            android:name=".TEACHERACTIVITIES.TCreateNewEventActivity"
-            android:exported="false" />
+
         <activity
             android:name=".STUDENTACTIVITIES.S_Mainpage"
             android:exported="false" />

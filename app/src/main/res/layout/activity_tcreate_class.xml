@@ -7,4 +7,17 @@
     android:layout_height="match_parent"
     tools:context=".TEACHERACTIVITIES.TCreateClassActivity">
 
+    <com.google.android.material.appbar.MaterialToolbar
+        android:id="@+id/toolbar"
+        android:layout_width="0dp"
+        android:layout_height="52dp"
+        android:background="@drawable/header_gradient"
+        app:navigationIcon="@drawable/arrow_back"
+        app:title="Create Class"
+        app:titleTextColor="@color/white"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>

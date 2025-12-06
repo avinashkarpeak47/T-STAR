@@ -31,6 +31,15 @@
             android:name="com.example.t_star.TEACHERACTIVITIES.TCreateClassActivity"
             android:exported="false" />
         <activity
+            android:name="com.example.t_star.TEACHERACTIVITIES.TResourcesActivity"
+            android:exported="false" />
+        <activity
+            android:name="com.example.t_star.TEACHERACTIVITIES.TStudentsActivity"
+            android:exported="false" />
+        <activity
+            android:name="com.example.t_star.TEACHERACTIVITIES.TCreateNewEventActivity"
+            android:exported="false" />
+        <activity
             android:name="com.example.t_star.TEACHERACTIVITIES.TClassesAssignActivity"
             android:exported="false" />
         <activity
@@ -43,22 +52,13 @@
             android:name="com.example.t_star.TEACHERACTIVITIES.TClassesEventActivity"
             android:exported="false" />
         <activity
-            android:name="com.example.t_star.TEACHERACTIVITIES.TClassesStudentsActivity"
-            android:exported="false" />
-        <activity
             android:name="com.example.t_star.TEACHERACTIVITIES.TClassesNotiActivity"
             android:exported="false" />
         <activity
             android:name="com.example.t_star.TEACHERACTIVITIES.TClassesResourcesActivity"
             android:exported="false" />
         <activity
-            android:name="com.example.t_star.TEACHERACTIVITIES.TResourcesActivity"
-            android:exported="false" />
-        <activity
-            android:name="com.example.t_star.TEACHERACTIVITIES.TStudentsActivity"
-            android:exported="false" />
-        <activity
-            android:name="com.example.t_star.TEACHERACTIVITIES.TCreateNewEventActivity"
+            android:name="com.example.t_star.TEACHERACTIVITIES.TClassesStudentsActivity"
             android:exported="false" />
         <activity
             android:name="com.example.t_star.STUDENTACTIVITIES.S_Mainpage"

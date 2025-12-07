@@ -6,54 +6,61 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.t_star.R;
 
 import java.util.List;
 
-public class TAssignmentAdapter extends RecyclerView.Adapter<TAssignmentAdapter.VH> {
+public class TAssignmentAdapter extends RecyclerView.Adapter<TAssignmentAdapter.AssignmentVH> {
 
-    public interface OnItemClick {
-        void onItemClick(TAssignmentModel item);
+    public interface OnAssignmentClick {
+        void onAssignmentSelect(TAssignmentModel model, int position);
     }
 
-    private final List<TAssignmentModel> items;
-    private final OnItemClick listener;
+    private final List<TAssignmentModel> list;
+    private final OnAssignmentClick listener;
 
-    public TAssignmentAdapter(List<TAssignmentModel> items, OnItemClick listener){
-        this.items = items;
+    public TAssignmentAdapter(List<TAssignmentModel> list, OnAssignmentClick listener) {
+        this.list = list;
         this.listener = listener;
     }
 
     @NonNull
     @Override
-    public VH onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public AssignmentVH onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.tassignmentsview, parent, false);
-        return new VH(v);
+        return new AssignmentVH(v);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull VH holder, int position) {
-        TAssignmentModel m = items.get(position);
-        holder.title.setText(m.getTitle());
-        holder.desc.setText(m.getDescription());
+    public void onBindViewHolder(@NonNull AssignmentVH holder, int position) {
+        TAssignmentModel model = list.get(position);
 
-        holder.itemView.setOnClickListener(v -> listener.onItemClick(m));
+        holder.tvTitle.setText(model.getTitle());
+        holder.tvDesc.setText(model.getDescription());
+
+        holder.card.setOnClickListener(v ->
+                listener.onAssignmentSelect(model, holder.getAdapterPosition()));
     }
 
     @Override
     public int getItemCount() {
-        return items.size();
+        return list.size();
     }
 
-    static class VH extends RecyclerView.ViewHolder {
-        TextView title, desc;
-        VH(@NonNull View itemView) {
+    static class AssignmentVH extends RecyclerView.ViewHolder {
+
+        CardView card;
+        TextView tvTitle, tvDesc;
+
+        public AssignmentVH(@NonNull View itemView) {
             super(itemView);
-            title = itemView.findViewById(R.id.tvAssignmentTitle);
-            desc = itemView.findViewById(R.id.tvAssignmentDesc);
+            card = (CardView) itemView;
+            tvTitle = itemView.findViewById(R.id.tvAssignmentTitle);
+            tvDesc = itemView.findViewById(R.id.tvAssignmentDesc);
         }
     }
 }

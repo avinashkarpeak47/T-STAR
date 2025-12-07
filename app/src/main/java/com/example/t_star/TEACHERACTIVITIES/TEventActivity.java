@@ -10,6 +10,9 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.t_star.R;
+import com.example.t_star.TEACHERACTIVITIES.EVENT.TEventAdapter;
+import com.example.t_star.TEACHERACTIVITIES.EVENT.TEventModel;
+import com.google.android.material.appbar.MaterialToolbar;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,20 +23,18 @@ public class TEventActivity extends AppCompatActivity {
     private TEventAdapter adapter;
     private List<TEventModel> eventList;
 
-    private ImageButton btnAddEventTop, btnBackEvent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tevent);
 
-        btnAddEventTop = findViewById(R.id.btnAddEventTop);
-        btnBackEvent = findViewById(R.id.btnBackEvent);
-
-        btnBackEvent.setOnClickListener(v -> finish());
-
-        btnAddEventTop.setOnClickListener(v ->
-                startActivity(new Intent(this, TCreateNewEventActivity.class)));
+        // Toolbar
+        MaterialToolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        toolbar.setNavigationOnClickListener(v -> finish());
+        ImageButton btnCreate = toolbar.findViewById(R.id.btnCreate);
+        btnCreate.setOnClickListener(v -> startActivity(new Intent(this, TCreateNewEventActivity.class)));
 
         rvEvents = findViewById(R.id.rvEvents);
         rvEvents.setLayoutManager(new LinearLayoutManager(this));

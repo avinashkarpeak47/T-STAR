@@ -13,6 +13,12 @@
         android:theme="@style/Theme.TSTAR"
         tools:targetApi="31">
         <activity
+            android:name=".STUDENTACTIVITIES.S_Class_Dashboard"
+            android:exported="false" />
+        <activity
+            android:name=".STUDENTACTIVITIES.S_Enroll_in_Class"
+            android:exported="false" />
+        <activity
             android:name=".TEACHERACTIVITIES.TResourcesActivity"
             android:exported="false" />
         <activity

@@ -7,10 +7,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
 import com.example.t_star.R;
-import com.example.t_star.STUDENTACTIVITIES.SFragment.S_Assignment_Fragment;
-import com.example.t_star.STUDENTACTIVITIES.SFragment.S_Chat_Fragment;
+import com.example.t_star.STUDENTACTIVITIES.SFragment.S_Ai_Assistance_Fragment;
+import com.example.t_star.STUDENTACTIVITIES.SFragment.S_Offline_Download_Fragment;
 import com.example.t_star.STUDENTACTIVITIES.SFragment.S_Event_Fragment;
-import com.example.t_star.STUDENTACTIVITIES.SFragment.S_Home_Fragment;
 import com.example.t_star.STUDENTACTIVITIES.SFragment.S_Profile_Fragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -28,21 +27,21 @@ public class S_Mainpage extends AppCompatActivity {
         // Default fragment
         getSupportFragmentManager()
                 .beginTransaction()
-                .replace(R.id.s_framelayout_homepage, new S_Home_Fragment())
+                .replace(R.id.s_framelayout_mainpage, new com.example.t_star.STUDENTACTIVITIES.S_Classes_Fragment())
                 .commit();
 
         bottomNavigationView.setOnItemSelectedListener(item -> {
 
             Fragment selected = null;
 
-            if (item.getItemId() == R.id.nav_s_home) {
-                selected = new S_Home_Fragment();
-            } else if (item.getItemId() == R.id.nav_s_assignment) {
-                selected = new S_Assignment_Fragment();
+            if (item.getItemId() == R.id.nav_s_classes) {
+                selected = new com.example.t_star.STUDENTACTIVITIES.S_Classes_Fragment();
+            } else if (item.getItemId() == R.id.nav_s_ai_assistant) {
+                selected = new S_Ai_Assistance_Fragment();
             } else if (item.getItemId() == R.id.nav_s_event) {
                 selected = new S_Event_Fragment();
-            } else if (item.getItemId() == R.id.nav_s_chat) {
-                selected = new S_Chat_Fragment();
+            } else if (item.getItemId() == R.id.nav_s_offline_download) {
+                selected = new S_Offline_Download_Fragment();
             } else if (item.getItemId() == R.id.nav_s_profile) {
                 selected = new S_Profile_Fragment();
             }
@@ -50,7 +49,7 @@ public class S_Mainpage extends AppCompatActivity {
             if (selected != null) {
                 getSupportFragmentManager()
                         .beginTransaction()
-                        .replace(R.id.s_framelayout_homepage, selected)
+                        .replace(R.id.s_framelayout_mainpage, selected)
                         .commit();
             }
 

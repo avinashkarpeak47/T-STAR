@@ -41,7 +41,7 @@ public class S_Fragment_Classes_RC_Adapter
     @Override
     public ClassViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(context)
-                .inflate(R.layout.s_classes_card, parent, false);
+                .inflate(R.layout.s_item_classes_card, parent, false);
 
         return new ClassViewHolder(view);
     }

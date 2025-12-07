@@ -13,6 +13,33 @@
         android:theme="@style/Theme.TSTAR"
         tools:targetApi="31">
         <activity
+            android:name=".STUDENTACTIVITIES.S_class_dashboard_notifications"
+            android:exported="false" />
+        <activity
+            android:name=".STUDENTACTIVITIES.S_class_dashboard_assignment"
+            android:exported="false" />
+        <activity
+            android:name=".STUDENTACTIVITIES.S_class_dashboard_events"
+            android:exported="false" />
+        <activity
+            android:name=".STUDENTACTIVITIES.S_class_dashboard_chat"
+            android:exported="false" />
+        <activity
+            android:name=".STUDENTACTIVITIES.S_class_dashboard_quiz"
+            android:exported="false" />
+        <activity
+            android:name=".STUDENTACTIVITIES.S_class_dashboard_notes"
+            android:exported="false" />
+        <activity
+            android:name=".STUDENTACTIVITIES.S_class_dashboard_studymaterial"
+            android:exported="false" />
+        <activity
+            android:name=".STUDENTACTIVITIES.S_class_dashboard_translator"
+            android:exported="false" />
+        <activity
+            android:name=".STUDENTACTIVITIES.S_class_dashboard_attendance"
+            android:exported="false" />
+        <activity
             android:name=".STUDENTACTIVITIES.S_Class_Dashboard"
             android:exported="false" />
         <activity

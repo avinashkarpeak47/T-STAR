@@ -5,17 +5,23 @@
     android:layout_height="match_parent">
 
     <!-- Toolbar -->
+
+
     <com.google.android.material.appbar.MaterialToolbar
         android:id="@+id/topToolbar"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:background="?attr/colorPrimary"
-        android:titleTextColor="@android:color/white"
-        android:elevation="6dp"
-        app:title="Class Name"
-        app:navigationIcon="@drawable/ic_arrow_back"
-        app:menu="@menu/menu_delete"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:background="@color/Lavender"
+        app:title="Welcome to Class"
+        app:titleTextAppearance="@style/TextAppearance.MaterialComponents.Headline6"
+        app:titleTextColor="@color/white"
+        app:navigationIconTint="@color/white"
+        app:navigationIcon="@drawable/s_arrowback"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:menu="@menu/s_class_dashboard_delete_menu"/>
+
 
     <!-- Scrollable page -->
     <ScrollView
@@ -175,6 +181,7 @@
 
                 <!-- Attendance -->
                 <androidx.cardview.widget.CardView
+                    android:id="@+id/class_dashboard_attendance"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     app:cardElevation="6dp"
@@ -213,7 +220,8 @@
                     android:layout_margin="8dp"
                     app:cardElevation="6dp"
                     app:cardCornerRadius="20dp"
-                    android:layout_columnWeight="1">
+                    android:layout_columnWeight="1"
+                    android:id="@+id/class_dashboard_studymaterial">
 
                     <LinearLayout
                         android:orientation="vertical"
@@ -245,7 +253,8 @@
                     android:layout_margin="8dp"
                     app:cardElevation="6dp"
                     app:cardCornerRadius="20dp"
-                    android:layout_columnWeight="1">
+                    android:layout_columnWeight="1"
+                    android:id="@+id/class_dashboard_translator">
 
                     <LinearLayout
                         android:orientation="vertical"
@@ -277,7 +286,8 @@
                     android:layout_margin="8dp"
                     app:cardElevation="6dp"
                     app:cardCornerRadius="20dp"
-                    android:layout_columnWeight="1">
+                    android:layout_columnWeight="1"
+                    android:id="@+id/class_dashboard_notes">
 
                     <LinearLayout
                         android:orientation="vertical"
@@ -309,7 +319,8 @@
                     android:layout_margin="8dp"
                     app:cardElevation="6dp"
                     app:cardCornerRadius="20dp"
-                    android:layout_columnWeight="1">
+                    android:layout_columnWeight="1"
+                    android:id="@+id/class_dashboard_quiz">
 
                     <LinearLayout
                         android:orientation="vertical"
@@ -343,7 +354,8 @@
                     android:layout_margin="8dp"
                     app:cardElevation="6dp"
                     app:cardCornerRadius="20dp"
-                    android:layout_columnWeight="1">
+                    android:layout_columnWeight="1"
+                    android:id="@+id/class_dashboard_chat">
 
                     <LinearLayout
                         android:orientation="vertical"
@@ -375,7 +387,8 @@
                     android:layout_margin="8dp"
                     app:cardElevation="6dp"
                     app:cardCornerRadius="20dp"
-                    android:layout_columnWeight="1">
+                    android:layout_columnWeight="1"
+                    android:id="@+id/class_dashboard_events">
 
                     <LinearLayout
                         android:orientation="vertical"
@@ -407,7 +420,8 @@
                     android:layout_margin="8dp"
                     app:cardElevation="6dp"
                     app:cardCornerRadius="21dp"
-                    android:layout_columnWeight="1">
+                    android:layout_columnWeight="1"
+                    android:id="@+id/class_dashboard_assignment">
 
                     <LinearLayout
                         android:orientation="vertical"
@@ -439,7 +453,8 @@
                     android:layout_margin="8dp"
                     app:cardElevation="6dp"
                     app:cardCornerRadius="20dp"
-                    android:layout_columnWeight="1">
+                    android:layout_columnWeight="1"
+                    android:id="@+id/class_dashboard_notification">
 
                     <LinearLayout
                         android:orientation="vertical"

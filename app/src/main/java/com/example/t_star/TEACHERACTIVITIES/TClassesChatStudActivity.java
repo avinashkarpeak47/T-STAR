@@ -32,13 +32,6 @@ public class TClassesChatStudActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         toolbar.setNavigationOnClickListener(v -> finish());
 
-        // 🔹 TOP CREATE BUTTON
-        ImageButton btnCreateTop = findViewById(R.id.btnCreate);
-        btnCreateTop.setOnClickListener(v -> {
-            // OPEN CREATE CHAT GROUP PAGE (Use your correct Activity)
-            Intent i = new Intent(TClassesChatStudActivity.this, TCreateClassActivity.class);
-            startActivity(i);
-        });
 
         // RecyclerView Setup
         rvClasses = findViewById(R.id.rvClasses);

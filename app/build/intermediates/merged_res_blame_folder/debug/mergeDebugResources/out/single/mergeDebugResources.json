@@ -16,6 +16,10 @@
         "source": "C:\\Users\\Hp\\.gradle\\daemon\\8.11.1\\com.example.t_star.app-main-51:\\mipmap-xxxhdpi\\ic_launcher.webp"
     },
     {
+        "merged": "C:\\Users\\Hp\\.gradle\\daemon\\8.11.1\\com.example.t_star.app-debug-49:\\menu_drawer_menu.xml.flat",
+        "source": "C:\\Users\\Hp\\.gradle\\daemon\\8.11.1\\com.example.t_star.app-main-51:\\menu\\drawer_menu.xml"
+    },
+    {
         "merged": "C:\\Users\\Hp\\.gradle\\daemon\\8.11.1\\com.example.t_star.app-debug-49:\\mipmap-hdpi_ic_launcher_round.webp.flat",
         "source": "C:\\Users\\Hp\\.gradle\\daemon\\8.11.1\\com.example.t_star.app-main-51:\\mipmap-hdpi\\ic_launcher_round.webp"
     },
@@ -56,20 +60,28 @@
         "source": "C:\\Users\\Hp\\.gradle\\daemon\\8.11.1\\com.example.t_star.app-main-51:\\drawable\\ic_launcher_foreground.xml"
     },
     {
-        "merged": "C:\\Users\\Hp\\.gradle\\daemon\\8.11.1\\com.example.t_star.app-debug-49:\\layout_activity_tchat.xml.flat",
-        "source": "C:\\Users\\Hp\\.gradle\\daemon\\8.11.1\\com.example.t_star.app-main-51:\\layout\\activity_tchat.xml"
+        "merged": "com.example.t_star.app-debug-49:/layout_activity_tcreate_class.xml.flat",
+        "source": "com.example.t_star.app-main-51:/layout/activity_tcreate_class.xml"
     },
     {
-        "merged": "C:\\Users\\Hp\\.gradle\\daemon\\8.11.1\\com.example.t_star.app-debug-49:\\drawable_s_notes.png.flat",
-        "source": "C:\\Users\\Hp\\.gradle\\daemon\\8.11.1\\com.example.t_star.app-main-51:\\drawable\\s_notes.png"
+        "merged": "C:\\Users\\Hp\\.gradle\\daemon\\8.11.1\\com.example.t_star.app-debug-49:\\layout_activity_tchat.xml.flat",
+        "source": "C:\\Users\\Hp\\.gradle\\daemon\\8.11.1\\com.example.t_star.app-main-51:\\layout\\activity_tchat.xml"
     },
     {
         "merged": "C:\\Users\\Hp\\.gradle\\daemon\\8.11.1\\com.example.t_star.app-debug-49:\\layout_fragment_t_profile.xml.flat",
         "source": "C:\\Users\\Hp\\.gradle\\daemon\\8.11.1\\com.example.t_star.app-main-51:\\layout\\fragment_t_profile.xml"
     },
     {
+        "merged": "C:\\Users\\Hp\\.gradle\\daemon\\8.11.1\\com.example.t_star.app-debug-49:\\drawable_s_notes.png.flat",
+        "source": "C:\\Users\\Hp\\.gradle\\daemon\\8.11.1\\com.example.t_star.app-main-51:\\drawable\\s_notes.png"
+    },
+    {
         "merged": "C:\\Users\\Hp\\.gradle\\daemon\\8.11.1\\com.example.t_star.app-debug-49:\\layout_fragment_t_chat.xml.flat",
         "source": "C:\\Users\\Hp\\.gradle\\daemon\\8.11.1\\com.example.t_star.app-main-51:\\layout\\fragment_t_chat.xml"
+    },
+    {
+        "merged": "C:\\Users\\Hp\\.gradle\\daemon\\8.11.1\\com.example.t_star.app-debug-49:\\drawable_tsend.xml.flat",
+        "source": "C:\\Users\\Hp\\.gradle\\daemon\\8.11.1\\com.example.t_star.app-main-51:\\drawable\\tsend.xml"
     },
     {
         "merged": "C:\\Users\\Hp\\.gradle\\daemon\\8.11.1\\com.example.t_star.app-debug-49:\\drawable_s_delete.png.flat",
@@ -84,16 +96,20 @@
         "source": "C:\\Users\\Hp\\.gradle\\daemon\\8.11.1\\com.example.t_star.app-main-51:\\drawable\\tgroupchat.png"
     },
     {
-        "merged": "C:\\Users\\Hp\\.gradle\\daemon\\8.11.1\\com.example.t_star.app-debug-49:\\menu_tbottom_nav_file.xml.flat",
-        "source": "C:\\Users\\Hp\\.gradle\\daemon\\8.11.1\\com.example.t_star.app-main-51:\\menu\\tbottom_nav_file.xml"
-    },
-    {
         "merged": "C:\\Users\\Hp\\.gradle\\daemon\\8.11.1\\com.example.t_star.app-debug-49:\\drawable_taklogo.jpg.flat",
         "source": "C:\\Users\\Hp\\.gradle\\daemon\\8.11.1\\com.example.t_star.app-main-51:\\drawable\\taklogo.jpg"
     },
     {
+        "merged": "C:\\Users\\Hp\\.gradle\\daemon\\8.11.1\\com.example.t_star.app-debug-49:\\menu_tbottom_nav_file.xml.flat",
+        "source": "C:\\Users\\Hp\\.gradle\\daemon\\8.11.1\\com.example.t_star.app-main-51:\\menu\\tbottom_nav_file.xml"
+    },
+    {
         "merged": "C:\\Users\\Hp\\.gradle\\daemon\\8.11.1\\com.example.t_star.app-debug-49:\\layout_fragment_s__profile_.xml.flat",
         "source": "C:\\Users\\Hp\\.gradle\\daemon\\8.11.1\\com.example.t_star.app-main-51:\\layout\\fragment_s__profile_.xml"
+    },
+    {
+        "merged": "C:\\Users\\Hp\\.gradle\\daemon\\8.11.1\\com.example.t_star.app-debug-49:\\drawable_tfeedback.xml.flat",
+        "source": "C:\\Users\\Hp\\.gradle\\daemon\\8.11.1\\com.example.t_star.app-main-51:\\drawable\\tfeedback.xml"
     },
     {
         "merged": "C:\\Users\\Hp\\.gradle\\daemon\\8.11.1\\com.example.t_star.app-debug-49:\\drawable_promo_bg.xml.flat",
@@ -204,8 +220,16 @@
         "source": "C:\\Users\\Hp\\.gradle\\daemon\\8.11.1\\com.example.t_star.app-main-51:\\layout\\activity_tevent.xml"
     },
     {
+        "merged": "C:\\Users\\Hp\\.gradle\\daemon\\8.11.1\\com.example.t_star.app-debug-49:\\drawable_tdownload.xml.flat",
+        "source": "C:\\Users\\Hp\\.gradle\\daemon\\8.11.1\\com.example.t_star.app-main-51:\\drawable\\tdownload.xml"
+    },
+    {
         "merged": "C:\\Users\\Hp\\.gradle\\daemon\\8.11.1\\com.example.t_star.app-debug-49:\\drawable_tnewassign.png.flat",
         "source": "C:\\Users\\Hp\\.gradle\\daemon\\8.11.1\\com.example.t_star.app-main-51:\\drawable\\tnewassign.png"
+    },
+    {
+        "merged": "C:\\Users\\Hp\\.gradle\\daemon\\8.11.1\\com.example.t_star.app-debug-49:\\drawable_t_toolbar_gradient.xml.flat",
+        "source": "C:\\Users\\Hp\\.gradle\\daemon\\8.11.1\\com.example.t_star.app-main-51:\\drawable\\t_toolbar_gradient.xml"
     },
     {
         "merged": "C:\\Users\\Hp\\.gradle\\daemon\\8.11.1\\com.example.t_star.app-debug-49:\\drawable_temail_logo.xml.flat",
@@ -234,6 +258,10 @@
     {
         "merged": "C:\\Users\\Hp\\.gradle\\daemon\\8.11.1\\com.example.t_star.app-debug-49:\\layout_activity_s_class_dashboard_events.xml.flat",
         "source": "C:\\Users\\Hp\\.gradle\\daemon\\8.11.1\\com.example.t_star.app-main-51:\\layout\\activity_s_class_dashboard_events.xml"
+    },
+    {
+        "merged": "C:\\Users\\Hp\\.gradle\\daemon\\8.11.1\\com.example.t_star.app-debug-49:\\drawable_download.xml.flat",
+        "source": "C:\\Users\\Hp\\.gradle\\daemon\\8.11.1\\com.example.t_star.app-main-51:\\drawable\\download.xml"
     },
     {
         "merged": "C:\\Users\\Hp\\.gradle\\daemon\\8.11.1\\com.example.t_star.app-debug-49:\\drawable_ic_launcher_background.xml.flat",
@@ -300,8 +328,16 @@
         "source": "C:\\Users\\Hp\\.gradle\\daemon\\8.11.1\\com.example.t_star.app-main-51:\\layout\\activity_s_class_dashboard_assignment.xml"
     },
     {
+        "merged": "C:\\Users\\Hp\\.gradle\\daemon\\8.11.1\\com.example.t_star.app-debug-49:\\drawable_drawer_menu.xml.flat",
+        "source": "C:\\Users\\Hp\\.gradle\\daemon\\8.11.1\\com.example.t_star.app-main-51:\\drawable\\drawer_menu.xml"
+    },
+    {
         "merged": "C:\\Users\\Hp\\.gradle\\daemon\\8.11.1\\com.example.t_star.app-debug-49:\\mipmap-xhdpi_ic_launcher.webp.flat",
         "source": "C:\\Users\\Hp\\.gradle\\daemon\\8.11.1\\com.example.t_star.app-main-51:\\mipmap-xhdpi\\ic_launcher.webp"
+    },
+    {
+        "merged": "C:\\Users\\Hp\\.gradle\\daemon\\8.11.1\\com.example.t_star.app-debug-49:\\layout_drawer_header.xml.flat",
+        "source": "C:\\Users\\Hp\\.gradle\\daemon\\8.11.1\\com.example.t_star.app-main-51:\\layout\\drawer_header.xml"
     },
     {
         "merged": "C:\\Users\\Hp\\.gradle\\daemon\\8.11.1\\com.example.t_star.app-debug-49:\\drawable_s_back_arrow.png.flat",
@@ -322,6 +358,10 @@
     {
         "merged": "C:\\Users\\Hp\\.gradle\\daemon\\8.11.1\\com.example.t_star.app-debug-49:\\drawable_profile_circle.xml.flat",
         "source": "C:\\Users\\Hp\\.gradle\\daemon\\8.11.1\\com.example.t_star.app-main-51:\\drawable\\profile_circle.xml"
+    },
+    {
+        "merged": "C:\\Users\\Hp\\.gradle\\daemon\\8.11.1\\com.example.t_star.app-debug-49:\\drawable_tshare.xml.flat",
+        "source": "C:\\Users\\Hp\\.gradle\\daemon\\8.11.1\\com.example.t_star.app-main-51:\\drawable\\tshare.xml"
     },
     {
         "merged": "C:\\Users\\Hp\\.gradle\\daemon\\8.11.1\\com.example.t_star.app-debug-49:\\layout_s_mainpage.xml.flat",
@@ -420,10 +460,6 @@
         "source": "C:\\Users\\Hp\\.gradle\\daemon\\8.11.1\\com.example.t_star.app-main-51:\\layout\\teventview.xml"
     },
     {
-        "merged": "com.example.t_star.app-debug-49:/layout_activity_tassign_detail.xml.flat",
-        "source": "com.example.t_star.app-main-51:/layout/activity_tassign_detail.xml"
-    },
-    {
         "merged": "C:\\Users\\Hp\\.gradle\\daemon\\8.11.1\\com.example.t_star.app-debug-49:\\layout_activity_splash_screen.xml.flat",
         "source": "C:\\Users\\Hp\\.gradle\\daemon\\8.11.1\\com.example.t_star.app-main-51:\\layout\\activity_splash_screen.xml"
     },
@@ -448,8 +484,16 @@
         "source": "C:\\Users\\Hp\\.gradle\\daemon\\8.11.1\\com.example.t_star.app-main-51:\\drawable\\tcall_logo.xml"
     },
     {
+        "merged": "C:\\Users\\Hp\\.gradle\\daemon\\8.11.1\\com.example.t_star.app-debug-49:\\layout_activity_drawer.xml.flat",
+        "source": "C:\\Users\\Hp\\.gradle\\daemon\\8.11.1\\com.example.t_star.app-main-51:\\layout\\activity_drawer.xml"
+    },
+    {
         "merged": "C:\\Users\\Hp\\.gradle\\daemon\\8.11.1\\com.example.t_star.app-debug-49:\\layout_activity_s_class_dashboard_quiz.xml.flat",
         "source": "C:\\Users\\Hp\\.gradle\\daemon\\8.11.1\\com.example.t_star.app-main-51:\\layout\\activity_s_class_dashboard_quiz.xml"
+    },
+    {
+        "merged": "C:\\Users\\Hp\\.gradle\\daemon\\8.11.1\\com.example.t_star.app-debug-49:\\drawable_tsetting.xml.flat",
+        "source": "C:\\Users\\Hp\\.gradle\\daemon\\8.11.1\\com.example.t_star.app-main-51:\\drawable\\tsetting.xml"
     },
     {
         "merged": "C:\\Users\\Hp\\.gradle\\daemon\\8.11.1\\com.example.t_star.app-debug-49:\\layout_activity_s_class_dashboard_studymaterial.xml.flat",

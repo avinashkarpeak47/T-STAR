@@ -95,8 +95,7 @@
             android:exported="false" />
         <activity
             android:name="com.example.t_star.STUDENTACTIVITIES.S_Mainpage"
-            android:exported="false" />
-        <!-- <activity -->
+            android:exported="false" /> <!-- <activity -->
         <!-- android:name=".STUDENTACTIVITIES.S_HomePagee" -->
         <!-- android:exported="false" /> -->
         <activity
@@ -123,6 +122,10 @@
         <activity
             android:name="com.example.t_star.TEACHERACTIVITIES.TAssignDetailActivity"
             android:exported="false" />
+        <activity
+            android:name="com.example.t_star.TEACHERACTIVITIES.DrawerActivity"
+            android:exported="false" />
+
         <!-- <activity -->
         <!-- android:name=".STUDENTACTIVITIES.SHome_Page" -->
         <!-- android:exported="false" /> -->

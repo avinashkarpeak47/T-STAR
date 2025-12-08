@@ -34,13 +34,7 @@ public class TClassesResourcesActivity extends AppCompatActivity {
         // Back button
         toolbar.setNavigationOnClickListener(v -> finish());
 
-        // ⭐ TOP CREATE BUTTON
-        ImageButton btnCreateTop = findViewById(R.id.btnCreate);
-        btnCreateTop.setOnClickListener(v -> {
-            // OPEN CREATE RESOURCE PAGE
-            Intent i = new Intent(TClassesResourcesActivity.this, TCreateClassActivity.class);
-            startActivity(i);
-        });
+
 
         rvClasses = findViewById(R.id.rvClasses);
         rvClasses.setLayoutManager(new LinearLayoutManager(this));

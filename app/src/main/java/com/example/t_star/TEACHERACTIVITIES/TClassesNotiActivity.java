@@ -33,13 +33,7 @@ public class TClassesNotiActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         toolbar.setNavigationOnClickListener(v -> finish());
 
-        // ------------------ Create Button ------------------
-        ImageButton btnCreateTop = findViewById(R.id.btnCreate);
-        btnCreateTop.setOnClickListener(v -> {
-            // OPEN SEND NOTIFICATION PAGE (Teacher Create Notification)
-            Intent i = new Intent(TClassesNotiActivity.this, TCreateClassActivity.class);
-            startActivity(i);
-        });
+
 
         // ------------------ RecyclerView ------------------
         rvClasses = findViewById(R.id.rvClasses);

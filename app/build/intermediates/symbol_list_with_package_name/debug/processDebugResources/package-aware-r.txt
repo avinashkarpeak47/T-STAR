@@ -3633,6 +3633,8 @@ drawable design_ic_visibility
 drawable design_ic_visibility_off
 drawable design_password_eye
 drawable design_snackbar_background
+drawable download
+drawable drawer_menu
 drawable header_gradient
 drawable ic_arrow_back_black_24
 drawable ic_call_answer
@@ -3761,6 +3763,7 @@ drawable s_settings
 drawable s_studymaterial
 drawable s_translator
 drawable t_attachment
+drawable t_toolbar_gradient
 drawable taklogo
 drawable tassignment
 drawable tattendance
@@ -3768,9 +3771,11 @@ drawable tattendance1
 drawable tcall_logo
 drawable tchatstudent
 drawable tcircle_shape
+drawable tdownload
 drawable temail_logo
 drawable test_level_drawable
 drawable tevent
+drawable tfeedback
 drawable tgroupchat
 drawable thome
 drawable tlogout
@@ -3782,13 +3787,15 @@ drawable tperson_logo
 drawable tprofile
 drawable tresources
 drawable tsearchbar_shape
+drawable tsend
+drawable tsetting
+drawable tshare
 drawable tstudent
 id ALT
 id BOTTOM_END
 id BOTTOM_START
 id CTRL
 id FUNCTION
-id FirstFragment
 id META
 id NO_DEBUG
 id SHIFT
@@ -3796,7 +3803,6 @@ id SHOW_ALL
 id SHOW_PATH
 id SHOW_PROGRESS
 id SYM
-id SecondFragment
 id TOP_END
 id TOP_START
 id above
@@ -3837,8 +3843,6 @@ id accessibility_custom_action_9
 id actionDown
 id actionDownUp
 id actionUp
-id action_FirstFragment_to_SecondFragment
-id action_SecondFragment_to_FirstFragment
 id action_bar
 id action_bar_activity_content
 id action_bar_container
@@ -3933,6 +3937,7 @@ id checkbox
 id checked
 id chronometer
 id circle_center
+id classCard
 id class_dashboard_assignment
 id class_dashboard_attendance
 id class_dashboard_chat
@@ -3994,6 +3999,7 @@ id dragLeft
 id dragRight
 id dragStart
 id dragUp
+id drawerLayout
 id dropdown_menu
 id easeIn
 id easeInOut
@@ -4002,6 +4008,7 @@ id east
 id edge
 id edit_query
 id edit_text_id
+id edtClassId
 id elastic
 id embed
 id end
@@ -4158,11 +4165,16 @@ id mtrl_picker_text_input_range_start
 id mtrl_picker_title_text
 id mtrl_view_tag_bottom_padding
 id multiply
+id nav_aboutus
 id nav_chat
+id nav_contactus
 id nav_controller_view_tag
-id nav_graph
+id nav_download
+id nav_editprofile
+id nav_feedback
 id nav_home
 id nav_host_fragment_container
+id nav_logout
 id nav_notifications
 id nav_profile
 id nav_s_ai_assistant
@@ -4170,6 +4182,9 @@ id nav_s_classes
 id nav_s_event
 id nav_s_offline_download
 id nav_s_profile
+id nav_setting
+id nav_share
+id navigationView
 id navigation_bar_item_active_indicator_view
 id navigation_bar_item_content_container
 id navigation_bar_item_icon_container
@@ -4281,8 +4296,11 @@ id selection_type
 id sharedValueSet
 id sharedValueUnset
 id shortcut
+id showClassName
 id showCustom
+id showDescription
 id showHome
+id showTeacherName
 id showTitle
 id sin
 id skipCollapsed
@@ -4336,6 +4354,7 @@ id tag_transition_group
 id tag_unhandled_key_event_manager
 id tag_unhandled_key_listeners
 id tag_window_insets_animation_callback
+id teacherToolbar
 id text
 id text2
 id textEnd
@@ -4400,12 +4419,15 @@ id tvSubject
 id tvSubjectName
 id tvSubmitted
 id tvTeacher
+id tvTeacherEmail
+id tvTeacherName
 id tvTitle
 id tvTitleDetail
 id tvTotalStudents
 id tvUnsubmitted
 id tvUserName
 id tvtotal
+id txtCheck
 id unchecked
 id unenroll_from_class
 id uniform
@@ -4599,6 +4621,7 @@ layout design_navigation_menu
 layout design_navigation_menu_item
 layout design_text_input_end_icon
 layout design_text_input_start_icon
+layout drawer_header
 layout fragment_s__ai_assistant_
 layout fragment_s__classes_
 layout fragment_s__event_
@@ -4679,13 +4702,13 @@ layout tassignmentsview
 layout tclassesview
 layout teventview
 layout tstudentsview
+menu drawer_menu
 menu s_bottom_navigation_bar
 menu s_class_dashboard_delete_menu
 menu tbottom_nav_file
 menu tprofile_menu
 mipmap ic_launcher
 mipmap ic_launcher_round
-navigation nav_graph
 plurals mtrl_badge_content_description
 string abc_action_bar_home_description
 string abc_action_bar_up_description
@@ -4733,6 +4756,7 @@ string character_counter_content_description
 string character_counter_overflowed_content_description
 string character_counter_pattern
 string clear_text_end_icon_content_description
+string close_drawer
 string dest_title
 string error_a11y_label
 string error_icon_content_description
@@ -4744,7 +4768,6 @@ string hello_blank_fragment
 string hide_bottom_view_on_scroll_behavior
 string icon_content_description
 string item_view_role_description
-string lorem_ipsum
 string m3_exceed_max_badge_text_suffix
 string m3_loading_indicator_content_description
 string m3_ref_typeface_brand_medium
@@ -4855,6 +4878,7 @@ string nav_app_bar_open_drawer_description
 string nav_rail_collapsed_a11y_label
 string nav_rail_expanded_a11y_label
 string next
+string open_drawer
 string password_toggle_content_description
 string path_password_eye
 string path_password_eye_mask_strike_through

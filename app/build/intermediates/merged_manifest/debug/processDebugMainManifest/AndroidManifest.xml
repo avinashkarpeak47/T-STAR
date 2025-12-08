@@ -28,7 +28,37 @@
         android:testOnly="true"
         android:theme="@style/Theme.TSTAR" >
         <activity
-            android:name="com.example.t_star.TEACHERACTIVITIES.TCreateClassActivity"
+            android:name="com.example.t_star.STUDENTACTIVITIES.S_class_dashboard_notifications"
+            android:exported="false" />
+        <activity
+            android:name="com.example.t_star.STUDENTACTIVITIES.S_class_dashboard_assignment"
+            android:exported="false" />
+        <activity
+            android:name="com.example.t_star.STUDENTACTIVITIES.S_class_dashboard_events"
+            android:exported="false" />
+        <activity
+            android:name="com.example.t_star.STUDENTACTIVITIES.S_class_dashboard_chat"
+            android:exported="false" />
+        <activity
+            android:name="com.example.t_star.STUDENTACTIVITIES.S_class_dashboard_quiz"
+            android:exported="false" />
+        <activity
+            android:name="com.example.t_star.STUDENTACTIVITIES.S_class_dashboard_notes"
+            android:exported="false" />
+        <activity
+            android:name="com.example.t_star.STUDENTACTIVITIES.S_class_dashboard_studymaterial"
+            android:exported="false" />
+        <activity
+            android:name="com.example.t_star.STUDENTACTIVITIES.S_class_dashboard_translator"
+            android:exported="false" />
+        <activity
+            android:name="com.example.t_star.STUDENTACTIVITIES.S_class_dashboard_attendance"
+            android:exported="false" />
+        <activity
+            android:name="com.example.t_star.STUDENTACTIVITIES.S_Class_Dashboard"
+            android:exported="false" />
+        <activity
+            android:name="com.example.t_star.STUDENTACTIVITIES.S_Enroll_in_Class"
             android:exported="false" />
         <activity
             android:name="com.example.t_star.TEACHERACTIVITIES.TClassesAssignActivity"
@@ -37,19 +67,22 @@
             android:name="com.example.t_star.TEACHERACTIVITIES.TClassesAttendActivity"
             android:exported="false" />
         <activity
-            android:name="com.example.t_star.TEACHERACTIVITIES.TClassesChatStudActivity"
+            android:name="com.example.t_star.TEACHERACTIVITIES.TClassesEventActivity"
             android:exported="false" />
         <activity
-            android:name="com.example.t_star.TEACHERACTIVITIES.TClassesEventActivity"
+            android:name="com.example.t_star.TEACHERACTIVITIES.TClassesChatStudActivity"
             android:exported="false" />
         <activity
             android:name="com.example.t_star.TEACHERACTIVITIES.TClassesStudentsActivity"
             android:exported="false" />
         <activity
+            android:name="com.example.t_star.TEACHERACTIVITIES.TClassesResourcesActivity"
+            android:exported="false" />
+        <activity
             android:name="com.example.t_star.TEACHERACTIVITIES.TClassesNotiActivity"
             android:exported="false" />
         <activity
-            android:name="com.example.t_star.TEACHERACTIVITIES.TClassesResourcesActivity"
+            android:name="com.example.t_star.TEACHERACTIVITIES.TCreateClassActivity"
             android:exported="false" />
         <activity
             android:name="com.example.t_star.TEACHERACTIVITIES.TResourcesActivity"
@@ -87,6 +120,12 @@
         <activity
             android:name="com.example.t_star.TEACHERACTIVITIES.TAsssignmentActivity"
             android:exported="false" />
+        <activity
+            android:name="com.example.t_star.TEACHERACTIVITIES.TAssignDetailActivity"
+            android:exported="false" />
+        <!-- <activity -->
+        <!-- android:name=".STUDENTACTIVITIES.SHome_Page" -->
+        <!-- android:exported="false" /> -->
         <activity
             android:name="com.example.t_star.TEACHERACTIVITIES.THomeActivity"
             android:exported="false" /> <!-- <activity -->

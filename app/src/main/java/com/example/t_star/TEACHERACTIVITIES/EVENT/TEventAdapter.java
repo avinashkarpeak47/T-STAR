@@ -1,4 +1,4 @@
-package com.example.t_star.TEACHERACTIVITIES;
+package com.example.t_star.TEACHERACTIVITIES.EVENT;
 
 import android.view.LayoutInflater;
 import android.view.View;

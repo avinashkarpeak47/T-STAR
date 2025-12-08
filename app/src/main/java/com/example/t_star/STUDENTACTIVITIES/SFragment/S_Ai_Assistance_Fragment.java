@@ -12,10 +12,10 @@ import com.example.t_star.R;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link S_Assignment_Fragment#newInstance} factory method to
+ * Use the {@link S_Ai_Assistance_Fragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class S_Assignment_Fragment extends Fragment {
+public class S_Ai_Assistance_Fragment extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -26,7 +26,7 @@ public class S_Assignment_Fragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    public S_Assignment_Fragment() {
+    public S_Ai_Assistance_Fragment() {
         // Required empty public constructor
     }
 
@@ -39,8 +39,8 @@ public class S_Assignment_Fragment extends Fragment {
      * @return A new instance of fragment S_Assignment_Fragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static S_Assignment_Fragment newInstance(String param1, String param2) {
-        S_Assignment_Fragment fragment = new S_Assignment_Fragment();
+    public static S_Ai_Assistance_Fragment newInstance(String param1, String param2) {
+        S_Ai_Assistance_Fragment fragment = new S_Ai_Assistance_Fragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -61,6 +61,6 @@ public class S_Assignment_Fragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_s__assignment_, container, false);
+        return inflater.inflate(R.layout.fragment_s__ai_assistant_, container, false);
     }
 }

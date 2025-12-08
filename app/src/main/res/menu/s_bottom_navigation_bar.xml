@@ -2,14 +2,14 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/nav_s_home"
-        android:icon="@drawable/s_home"
-        android:title="Home" />
+        android:id="@+id/nav_s_classes"
+        android:icon="@drawable/s_classes"
+        android:title="Classes" />
 
     <item
-        android:id="@+id/nav_s_assignment"
-        android:icon="@drawable/s_assignment"
-        android:title="Assignment" />
+        android:id="@+id/nav_s_ai_assistant"
+        android:icon="@drawable/s_ai"
+        android:title="Ai Assistant" />
 
     <item
         android:id="@+id/nav_s_event"
@@ -17,9 +17,9 @@
         android:title="Event" />
 
     <item
-        android:id="@+id/nav_s_chat"
-        android:icon="@drawable/s_chat"
-        android:title="Chat" />
+        android:id="@+id/nav_s_offline_download"
+        android:icon="@drawable/s_offline_download"
+        android:title="Offline Download" />
 
     <item
         android:id="@+id/nav_s_profile"

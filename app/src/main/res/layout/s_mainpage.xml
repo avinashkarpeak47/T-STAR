@@ -9,7 +9,7 @@
 
     <!-- Fragment Container -->
     <FrameLayout
-        android:id="@+id/s_framelayout_homepage"
+        android:id="@+id/s_framelayout_mainpage"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginBottom="70dp"/>
@@ -20,10 +20,10 @@
         android:layout_width="0dp"
         android:layout_height="77dp"
         app:menu="@menu/s_bottom_navigation_bar"
-        android:background="@color/maroon"
+        android:background="@color/Lavender"
         app:itemIconTint="@color/white"
         app:itemTextColor="@color/white"
-        app:itemBackground="@color/maroon"
+        app:itemBackground="@color/Lavender"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />

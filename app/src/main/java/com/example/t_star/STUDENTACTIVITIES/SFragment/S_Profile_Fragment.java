@@ -1,66 +1,128 @@
 package com.example.t_star.STUDENTACTIVITIES.SFragment;
 
+import android.os.Build;
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewTreeObserver;
 import android.view.ViewGroup;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.core.widget.NestedScrollView;
+import androidx.fragment.app.Fragment;
 
 import com.example.t_star.R;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link S_Profile_Fragment#newInstance} factory method to
- * create an instance of this fragment.
- */
+import de.hdodenhof.circleimageview.CircleImageView;
+
 public class S_Profile_Fragment extends Fragment {
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
+    private CircleImageView ivProfilePic;
+    private View headerBg;
+    private NestedScrollView profileScroll;
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+    // For animation calculations
+    private float startX, startY;
+    private float deltaX, deltaY;
+    private boolean positionsReady = false;
 
     public S_Profile_Fragment() {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment S_Profile_Fragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static S_Profile_Fragment newInstance(String param1, String param2) {
-        S_Profile_Fragment fragment = new S_Profile_Fragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
+    @Override
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        return inflater.inflate(R.layout.fragment_s__profile_, container, false); // use your layout name
     }
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        ivProfilePic = view.findViewById(R.id.ivProfilePic);
+        headerBg = view.findViewById(R.id.header_bg);
+        profileScroll = view.findViewById(R.id.profileScroll);
+
+        // 1) Wait until layout is done so we know start position of profile image
+        view.getViewTreeObserver().addOnGlobalLayoutListener(
+                new ViewTreeObserver.OnGlobalLayoutListener() {
+                    @Override
+                    public void onGlobalLayout() {
+                        view.getViewTreeObserver().removeOnGlobalLayoutListener(this);
+                        prepareAnimationPositions(view);
+                    }
+                }
+        );
+
+        // 2) Listen for scroll and animate according to scrollY
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            profileScroll.setOnScrollChangeListener(new View.OnScrollChangeListener() {
+                @Override
+                public void onScrollChange(View v, int scrollX, int scrollY,
+                                           int oldScrollX, int oldScrollY) {
+                    applyAnimation(scrollY);
+                }
+            });
+        } else {
+            profileScroll.getViewTreeObserver().addOnScrollChangedListener(
+                    () -> applyAnimation(profileScroll.getScrollY())
+            );
         }
     }
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_s__profile_, container, false);
+    private void prepareAnimationPositions(View root) {
+        // Starting position: where the view is initially (centered)
+        startX = ivProfilePic.getX();
+        startY = ivProfilePic.getY();
+
+        // Target (end) position: top-left corner inside the header
+        int margin = dpToPx(16);
+        float endX = margin;
+        float endY = margin;
+
+        // We will move the image using translation, not changing layout params
+        deltaX = endX - startX;
+        deltaY = endY - startY;
+
+        positionsReady = true;
+    }
+
+    private void applyAnimation(int scrollY) {
+        if (!positionsReady) return;
+
+        // How many pixels of scroll we use to finish the animation (adjust if you want)
+        int maxScrollForAnim = dpToPx(140);
+
+        float progress = scrollY / (float) maxScrollForAnim;
+        if (progress < 0f) progress = 0f;
+        if (progress > 1f) progress = 1f;
+
+        // 1) Move profile picture from center to top-left
+        ivProfilePic.setTranslationX(deltaX * progress);
+        ivProfilePic.setTranslationY(deltaY * progress);
+
+        // 2) Scale profile picture (make it smaller)
+        float startScale = 1.0f;
+        float endScale = 0.6f; // 60% of original size
+        float currentScale = startScale + (endScale - startScale) * progress;
+        ivProfilePic.setScaleX(currentScale);
+        ivProfilePic.setScaleY(currentScale);
+
+        // 3) Slightly move header up and fade it a bit (only visual, no layout changes)
+        float headerTranslationY = -dpToPx(40) * progress;
+        headerBg.setTranslationY(headerTranslationY);
+
+        float startAlpha = 1f;
+        float endAlpha = 0.7f;
+        float currentAlpha = startAlpha + (endAlpha - startAlpha) * progress;
+        headerBg.setAlpha(currentAlpha);
+    }
+
+    private int dpToPx(int dp) {
+        if (getContext() == null) return dp;
+        float density = getResources().getDisplayMetrics().density;
+        return Math.round(dp * density);
     }
 }

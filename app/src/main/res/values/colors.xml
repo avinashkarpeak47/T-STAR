@@ -14,6 +14,11 @@
     <color name="light_lavender_for_cards">#DCDDF8</color>
 
 
+    <color name="status_pending">#F44336</color> <!-- red -->
+    <color name="status_submitted">#4CAF50</color> <!-- green -->
+    <color name="status_checked">#2196F3</color> <!-- blue -->
+
+
     <color name="soft_greay">#E0E0E0</color>
     <color name="light_greay">#9E9E9E</color>
     <color name="dark_greay">#616161</color>

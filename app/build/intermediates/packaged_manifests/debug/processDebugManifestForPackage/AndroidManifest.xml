@@ -28,34 +28,55 @@
         android:testOnly="true"
         android:theme="@style/Theme.TSTAR" >
         <activity
-            android:name="com.example.t_star.TEACHERACTIVITIES.TCreateClassActivity"
+            android:name="com.example.t_star.TSTAR_Login_With_Mobile_Part_Two"
             android:exported="false" />
         <activity
-            android:name="com.example.t_star.TEACHERACTIVITIES.TClassesAssignActivity"
+            android:name="com.example.t_star.TSTAR_Login_With_Mobile_Part_One"
             android:exported="false" />
         <activity
-            android:name="com.example.t_star.TEACHERACTIVITIES.TClassesAttendActivity"
+            android:name="com.example.t_star.TSTAR_Signup_Activity"
             android:exported="false" />
         <activity
-            android:name="com.example.t_star.TEACHERACTIVITIES.TClassesChatStudActivity"
+            android:name="com.example.t_star.TSTAR_Login_Activity"
             android:exported="false" />
         <activity
-            android:name="com.example.t_star.TEACHERACTIVITIES.TClassesEventActivity"
+            android:name="com.example.t_star.TSTAR_Entry_Activity"
             android:exported="false" />
         <activity
-            android:name="com.example.t_star.TEACHERACTIVITIES.TClassesStudentsActivity"
+            android:name="com.example.t_star.STUDENTACTIVITIES.S_class_dashboard_notifications"
             android:exported="false" />
         <activity
-            android:name="com.example.t_star.TEACHERACTIVITIES.TClassesNotiActivity"
+            android:name="com.example.t_star.STUDENTACTIVITIES.S_class_dashboard_assignment"
             android:exported="false" />
         <activity
-            android:name="com.example.t_star.TEACHERACTIVITIES.TClassesResourcesActivity"
+            android:name="com.example.t_star.STUDENTACTIVITIES.S_class_dashboard_events"
+            android:exported="false" />
+        <activity
+            android:name="com.example.t_star.STUDENTACTIVITIES.S_class_dashboard_chat"
+            android:exported="false" />
+        <activity
+            android:name="com.example.t_star.STUDENTACTIVITIES.S_class_dashboard_quiz"
+            android:exported="false" />
+        <activity
+            android:name="com.example.t_star.STUDENTACTIVITIES.S_class_dashboard_notes"
+            android:exported="false" />
+        <activity
+            android:name="com.example.t_star.STUDENTACTIVITIES.S_class_dashboard_studymaterial"
+            android:exported="false" />
+        <activity
+            android:name="com.example.t_star.STUDENTACTIVITIES.S_class_dashboard_translator"
+            android:exported="false" />
+        <activity
+            android:name="com.example.t_star.STUDENTACTIVITIES.S_class_dashboard_attendance"
+            android:exported="false" />
+        <activity
+            android:name="com.example.t_star.STUDENTACTIVITIES.S_Class_Dashboard"
+            android:exported="false" />
+        <activity
+            android:name="com.example.t_star.STUDENTACTIVITIES.S_Enroll_in_Class"
             android:exported="false" />
         <activity
             android:name="com.example.t_star.TEACHERACTIVITIES.TResourcesActivity"
-            android:exported="false" />
-        <activity
-            android:name="com.example.t_star.TEACHERACTIVITIES.TStudentsActivity"
             android:exported="false" />
         <activity
             android:name="com.example.t_star.TEACHERACTIVITIES.TCreateNewEventActivity"
@@ -63,9 +84,6 @@
         <activity
             android:name="com.example.t_star.STUDENTACTIVITIES.S_Mainpage"
             android:exported="false" />
-        <!-- <activity -->
-        <!-- android:name=".STUDENTACTIVITIES.S_HomePagee" -->
-        <!-- android:exported="false" /> -->
         <activity
             android:name="com.example.t_star.TEACHERACTIVITIES.TChatActivity"
             android:exported="false" />
@@ -94,7 +112,7 @@
         <!-- android:exported="false" /> -->
         <!-- android:exported="false" /> -->
         <activity
-            android:name="com.example.t_star.Splash_Screen"
+            android:name="com.example.t_star.TSTAR_Splash_Screen"
             android:exported="true" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

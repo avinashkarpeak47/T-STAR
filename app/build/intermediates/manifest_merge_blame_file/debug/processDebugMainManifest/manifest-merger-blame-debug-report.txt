@@ -9,261 +9,300 @@
 9        android:targetSdkVersion="36" />
 10
 11    <permission
-11-->[androidx.core:core:1.16.0] C:\Users\Hp\.gradle\caches\8.11.1\transforms\26cb63592a94cda5c648703474a3b772\transformed\core-1.16.0\AndroidManifest.xml:22:5-24:47
+11-->[androidx.core:core:1.16.0] C:\Users\HP-JS\.gradle\caches\8.11.1\transforms\26cb63592a94cda5c648703474a3b772\transformed\core-1.16.0\AndroidManifest.xml:22:5-24:47
 12        android:name="com.example.t_star.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION"
-12-->[androidx.core:core:1.16.0] C:\Users\Hp\.gradle\caches\8.11.1\transforms\26cb63592a94cda5c648703474a3b772\transformed\core-1.16.0\AndroidManifest.xml:23:9-81
+12-->[androidx.core:core:1.16.0] C:\Users\HP-JS\.gradle\caches\8.11.1\transforms\26cb63592a94cda5c648703474a3b772\transformed\core-1.16.0\AndroidManifest.xml:23:9-81
 13        android:protectionLevel="signature" />
-13-->[androidx.core:core:1.16.0] C:\Users\Hp\.gradle\caches\8.11.1\transforms\26cb63592a94cda5c648703474a3b772\transformed\core-1.16.0\AndroidManifest.xml:24:9-44
+13-->[androidx.core:core:1.16.0] C:\Users\HP-JS\.gradle\caches\8.11.1\transforms\26cb63592a94cda5c648703474a3b772\transformed\core-1.16.0\AndroidManifest.xml:24:9-44
 14
 15    <uses-permission android:name="com.example.t_star.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION" />
-15-->[androidx.core:core:1.16.0] C:\Users\Hp\.gradle\caches\8.11.1\transforms\26cb63592a94cda5c648703474a3b772\transformed\core-1.16.0\AndroidManifest.xml:26:5-97
-15-->[androidx.core:core:1.16.0] C:\Users\Hp\.gradle\caches\8.11.1\transforms\26cb63592a94cda5c648703474a3b772\transformed\core-1.16.0\AndroidManifest.xml:26:22-94
+15-->[androidx.core:core:1.16.0] C:\Users\HP-JS\.gradle\caches\8.11.1\transforms\26cb63592a94cda5c648703474a3b772\transformed\core-1.16.0\AndroidManifest.xml:26:5-97
+15-->[androidx.core:core:1.16.0] C:\Users\HP-JS\.gradle\caches\8.11.1\transforms\26cb63592a94cda5c648703474a3b772\transformed\core-1.16.0\AndroidManifest.xml:26:22-94
 16
 17    <application
-17-->C:\Users\Hp\AndroidStudioProjects\T-STAR\app\src\main\AndroidManifest.xml:5:5-93:19
+17-->C:\Users\HP-JS\AndroidStudioProjects\TSTAR\app\src\main\AndroidManifest.xml:5:5-110:19
 18        android:allowBackup="true"
-18-->C:\Users\Hp\AndroidStudioProjects\T-STAR\app\src\main\AndroidManifest.xml:6:9-35
+18-->C:\Users\HP-JS\AndroidStudioProjects\TSTAR\app\src\main\AndroidManifest.xml:6:9-35
 19        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
-19-->[androidx.core:core:1.16.0] C:\Users\Hp\.gradle\caches\8.11.1\transforms\26cb63592a94cda5c648703474a3b772\transformed\core-1.16.0\AndroidManifest.xml:28:18-86
+19-->[androidx.core:core:1.16.0] C:\Users\HP-JS\.gradle\caches\8.11.1\transforms\26cb63592a94cda5c648703474a3b772\transformed\core-1.16.0\AndroidManifest.xml:28:18-86
 20        android:dataExtractionRules="@xml/data_extraction_rules"
-20-->C:\Users\Hp\AndroidStudioProjects\T-STAR\app\src\main\AndroidManifest.xml:7:9-65
+20-->C:\Users\HP-JS\AndroidStudioProjects\TSTAR\app\src\main\AndroidManifest.xml:7:9-65
 21        android:debuggable="true"
 22        android:extractNativeLibs="false"
 23        android:fullBackupContent="@xml/backup_rules"
-23-->C:\Users\Hp\AndroidStudioProjects\T-STAR\app\src\main\AndroidManifest.xml:8:9-54
+23-->C:\Users\HP-JS\AndroidStudioProjects\TSTAR\app\src\main\AndroidManifest.xml:8:9-54
 24        android:icon="@mipmap/ic_launcher"
-24-->C:\Users\Hp\AndroidStudioProjects\T-STAR\app\src\main\AndroidManifest.xml:9:9-43
+24-->C:\Users\HP-JS\AndroidStudioProjects\TSTAR\app\src\main\AndroidManifest.xml:9:9-43
 25        android:label="@string/app_name"
-25-->C:\Users\Hp\AndroidStudioProjects\T-STAR\app\src\main\AndroidManifest.xml:10:9-41
+25-->C:\Users\HP-JS\AndroidStudioProjects\TSTAR\app\src\main\AndroidManifest.xml:10:9-41
 26        android:roundIcon="@mipmap/ic_launcher_round"
-26-->C:\Users\Hp\AndroidStudioProjects\T-STAR\app\src\main\AndroidManifest.xml:11:9-54
+26-->C:\Users\HP-JS\AndroidStudioProjects\TSTAR\app\src\main\AndroidManifest.xml:11:9-54
 27        android:supportsRtl="true"
-27-->C:\Users\Hp\AndroidStudioProjects\T-STAR\app\src\main\AndroidManifest.xml:12:9-35
+27-->C:\Users\HP-JS\AndroidStudioProjects\TSTAR\app\src\main\AndroidManifest.xml:12:9-35
 28        android:testOnly="true"
 29        android:theme="@style/Theme.TSTAR" >
-29-->C:\Users\Hp\AndroidStudioProjects\T-STAR\app\src\main\AndroidManifest.xml:13:9-43
+29-->C:\Users\HP-JS\AndroidStudioProjects\TSTAR\app\src\main\AndroidManifest.xml:13:9-43
 30        <activity
-30-->C:\Users\Hp\AndroidStudioProjects\T-STAR\app\src\main\AndroidManifest.xml:15:9-17:40
-31            android:name="com.example.t_star.TEACHERACTIVITIES.TCreateClassActivity"
-31-->C:\Users\Hp\AndroidStudioProjects\T-STAR\app\src\main\AndroidManifest.xml:16:13-67
+30-->C:\Users\HP-JS\AndroidStudioProjects\TSTAR\app\src\main\AndroidManifest.xml:15:9-17:40
+31            android:name="com.example.t_star.TSTAR_Login_With_Mobile_Part_Two"
+31-->C:\Users\HP-JS\AndroidStudioProjects\TSTAR\app\src\main\AndroidManifest.xml:16:13-61
 32            android:exported="false" />
-32-->C:\Users\Hp\AndroidStudioProjects\T-STAR\app\src\main\AndroidManifest.xml:17:13-37
+32-->C:\Users\HP-JS\AndroidStudioProjects\TSTAR\app\src\main\AndroidManifest.xml:17:13-37
 33        <activity
-33-->C:\Users\Hp\AndroidStudioProjects\T-STAR\app\src\main\AndroidManifest.xml:18:9-20:40
-34            android:name="com.example.t_star.TEACHERACTIVITIES.TClassesAssignActivity"
-34-->C:\Users\Hp\AndroidStudioProjects\T-STAR\app\src\main\AndroidManifest.xml:19:13-69
+33-->C:\Users\HP-JS\AndroidStudioProjects\TSTAR\app\src\main\AndroidManifest.xml:18:9-20:40
+34            android:name="com.example.t_star.TSTAR_Login_With_Mobile_Part_One"
+34-->C:\Users\HP-JS\AndroidStudioProjects\TSTAR\app\src\main\AndroidManifest.xml:19:13-61
 35            android:exported="false" />
-35-->C:\Users\Hp\AndroidStudioProjects\T-STAR\app\src\main\AndroidManifest.xml:20:13-37
+35-->C:\Users\HP-JS\AndroidStudioProjects\TSTAR\app\src\main\AndroidManifest.xml:20:13-37
 36        <activity
-36-->C:\Users\Hp\AndroidStudioProjects\T-STAR\app\src\main\AndroidManifest.xml:21:9-23:40
-37            android:name="com.example.t_star.TEACHERACTIVITIES.TClassesAttendActivity"
-37-->C:\Users\Hp\AndroidStudioProjects\T-STAR\app\src\main\AndroidManifest.xml:22:13-69
+36-->C:\Users\HP-JS\AndroidStudioProjects\TSTAR\app\src\main\AndroidManifest.xml:22:9-23:39
+37            android:name="com.example.t_star.TSTAR_Signup_Activity"
+37-->C:\Users\HP-JS\AndroidStudioProjects\TSTAR\app\src\main\AndroidManifest.xml:22:19-56
 38            android:exported="false" />
-38-->C:\Users\Hp\AndroidStudioProjects\T-STAR\app\src\main\AndroidManifest.xml:23:13-37
+38-->C:\Users\HP-JS\AndroidStudioProjects\TSTAR\app\src\main\AndroidManifest.xml:23:13-37
 39        <activity
-39-->C:\Users\Hp\AndroidStudioProjects\T-STAR\app\src\main\AndroidManifest.xml:24:9-26:40
-40            android:name="com.example.t_star.TEACHERACTIVITIES.TClassesChatStudActivity"
-40-->C:\Users\Hp\AndroidStudioProjects\T-STAR\app\src\main\AndroidManifest.xml:25:13-71
+39-->C:\Users\HP-JS\AndroidStudioProjects\TSTAR\app\src\main\AndroidManifest.xml:24:9-26:40
+40            android:name="com.example.t_star.TSTAR_Login_Activity"
+40-->C:\Users\HP-JS\AndroidStudioProjects\TSTAR\app\src\main\AndroidManifest.xml:25:13-49
 41            android:exported="false" />
-41-->C:\Users\Hp\AndroidStudioProjects\T-STAR\app\src\main\AndroidManifest.xml:26:13-37
+41-->C:\Users\HP-JS\AndroidStudioProjects\TSTAR\app\src\main\AndroidManifest.xml:26:13-37
 42        <activity
-42-->C:\Users\Hp\AndroidStudioProjects\T-STAR\app\src\main\AndroidManifest.xml:27:9-29:40
-43            android:name="com.example.t_star.TEACHERACTIVITIES.TClassesEventActivity"
-43-->C:\Users\Hp\AndroidStudioProjects\T-STAR\app\src\main\AndroidManifest.xml:28:13-68
+42-->C:\Users\HP-JS\AndroidStudioProjects\TSTAR\app\src\main\AndroidManifest.xml:27:9-29:40
+43            android:name="com.example.t_star.TSTAR_Entry_Activity"
+43-->C:\Users\HP-JS\AndroidStudioProjects\TSTAR\app\src\main\AndroidManifest.xml:28:13-49
 44            android:exported="false" />
-44-->C:\Users\Hp\AndroidStudioProjects\T-STAR\app\src\main\AndroidManifest.xml:29:13-37
+44-->C:\Users\HP-JS\AndroidStudioProjects\TSTAR\app\src\main\AndroidManifest.xml:29:13-37
 45        <activity
-45-->C:\Users\Hp\AndroidStudioProjects\T-STAR\app\src\main\AndroidManifest.xml:30:9-32:40
-46            android:name="com.example.t_star.TEACHERACTIVITIES.TClassesStudentsActivity"
-46-->C:\Users\Hp\AndroidStudioProjects\T-STAR\app\src\main\AndroidManifest.xml:31:13-71
+45-->C:\Users\HP-JS\AndroidStudioProjects\TSTAR\app\src\main\AndroidManifest.xml:30:9-32:40
+46            android:name="com.example.t_star.STUDENTACTIVITIES.S_class_dashboard_notifications"
+46-->C:\Users\HP-JS\AndroidStudioProjects\TSTAR\app\src\main\AndroidManifest.xml:31:13-78
 47            android:exported="false" />
-47-->C:\Users\Hp\AndroidStudioProjects\T-STAR\app\src\main\AndroidManifest.xml:32:13-37
+47-->C:\Users\HP-JS\AndroidStudioProjects\TSTAR\app\src\main\AndroidManifest.xml:32:13-37
 48        <activity
-48-->C:\Users\Hp\AndroidStudioProjects\T-STAR\app\src\main\AndroidManifest.xml:34:9-36:40
-49            android:name="com.example.t_star.TEACHERACTIVITIES.TClassesNotiActivity"
-49-->C:\Users\Hp\AndroidStudioProjects\T-STAR\app\src\main\AndroidManifest.xml:35:13-67
+48-->C:\Users\HP-JS\AndroidStudioProjects\TSTAR\app\src\main\AndroidManifest.xml:33:9-35:40
+49            android:name="com.example.t_star.STUDENTACTIVITIES.S_class_dashboard_assignment"
+49-->C:\Users\HP-JS\AndroidStudioProjects\TSTAR\app\src\main\AndroidManifest.xml:34:13-75
 50            android:exported="false" />
-50-->C:\Users\Hp\AndroidStudioProjects\T-STAR\app\src\main\AndroidManifest.xml:36:13-37
+50-->C:\Users\HP-JS\AndroidStudioProjects\TSTAR\app\src\main\AndroidManifest.xml:35:13-37
 51        <activity
-51-->C:\Users\Hp\AndroidStudioProjects\T-STAR\app\src\main\AndroidManifest.xml:37:9-39:40
-52            android:name="com.example.t_star.TEACHERACTIVITIES.TClassesResourcesActivity"
-52-->C:\Users\Hp\AndroidStudioProjects\T-STAR\app\src\main\AndroidManifest.xml:38:13-72
+51-->C:\Users\HP-JS\AndroidStudioProjects\TSTAR\app\src\main\AndroidManifest.xml:36:9-38:40
+52            android:name="com.example.t_star.STUDENTACTIVITIES.S_class_dashboard_events"
+52-->C:\Users\HP-JS\AndroidStudioProjects\TSTAR\app\src\main\AndroidManifest.xml:37:13-71
 53            android:exported="false" />
-53-->C:\Users\Hp\AndroidStudioProjects\T-STAR\app\src\main\AndroidManifest.xml:39:13-37
+53-->C:\Users\HP-JS\AndroidStudioProjects\TSTAR\app\src\main\AndroidManifest.xml:38:13-37
 54        <activity
-54-->C:\Users\Hp\AndroidStudioProjects\T-STAR\app\src\main\AndroidManifest.xml:41:9-43:40
-55            android:name="com.example.t_star.TEACHERACTIVITIES.TResourcesActivity"
-55-->C:\Users\Hp\AndroidStudioProjects\T-STAR\app\src\main\AndroidManifest.xml:42:13-65
+54-->C:\Users\HP-JS\AndroidStudioProjects\TSTAR\app\src\main\AndroidManifest.xml:39:9-41:40
+55            android:name="com.example.t_star.STUDENTACTIVITIES.S_class_dashboard_chat"
+55-->C:\Users\HP-JS\AndroidStudioProjects\TSTAR\app\src\main\AndroidManifest.xml:40:13-69
 56            android:exported="false" />
-56-->C:\Users\Hp\AndroidStudioProjects\T-STAR\app\src\main\AndroidManifest.xml:43:13-37
+56-->C:\Users\HP-JS\AndroidStudioProjects\TSTAR\app\src\main\AndroidManifest.xml:41:13-37
 57        <activity
-57-->C:\Users\Hp\AndroidStudioProjects\T-STAR\app\src\main\AndroidManifest.xml:44:9-46:40
-58            android:name="com.example.t_star.TEACHERACTIVITIES.TStudentsActivity"
-58-->C:\Users\Hp\AndroidStudioProjects\T-STAR\app\src\main\AndroidManifest.xml:45:13-64
+57-->C:\Users\HP-JS\AndroidStudioProjects\TSTAR\app\src\main\AndroidManifest.xml:42:9-44:40
+58            android:name="com.example.t_star.STUDENTACTIVITIES.S_class_dashboard_quiz"
+58-->C:\Users\HP-JS\AndroidStudioProjects\TSTAR\app\src\main\AndroidManifest.xml:43:13-69
 59            android:exported="false" />
-59-->C:\Users\Hp\AndroidStudioProjects\T-STAR\app\src\main\AndroidManifest.xml:46:13-37
+59-->C:\Users\HP-JS\AndroidStudioProjects\TSTAR\app\src\main\AndroidManifest.xml:44:13-37
 60        <activity
-60-->C:\Users\Hp\AndroidStudioProjects\T-STAR\app\src\main\AndroidManifest.xml:47:9-49:40
-61            android:name="com.example.t_star.TEACHERACTIVITIES.TCreateNewEventActivity"
-61-->C:\Users\Hp\AndroidStudioProjects\T-STAR\app\src\main\AndroidManifest.xml:48:13-70
+60-->C:\Users\HP-JS\AndroidStudioProjects\TSTAR\app\src\main\AndroidManifest.xml:45:9-47:40
+61            android:name="com.example.t_star.STUDENTACTIVITIES.S_class_dashboard_notes"
+61-->C:\Users\HP-JS\AndroidStudioProjects\TSTAR\app\src\main\AndroidManifest.xml:46:13-70
 62            android:exported="false" />
-62-->C:\Users\Hp\AndroidStudioProjects\T-STAR\app\src\main\AndroidManifest.xml:49:13-37
+62-->C:\Users\HP-JS\AndroidStudioProjects\TSTAR\app\src\main\AndroidManifest.xml:47:13-37
 63        <activity
-63-->C:\Users\Hp\AndroidStudioProjects\T-STAR\app\src\main\AndroidManifest.xml:50:9-52:40
-64            android:name="com.example.t_star.STUDENTACTIVITIES.S_Mainpage"
-64-->C:\Users\Hp\AndroidStudioProjects\T-STAR\app\src\main\AndroidManifest.xml:51:13-57
+63-->C:\Users\HP-JS\AndroidStudioProjects\TSTAR\app\src\main\AndroidManifest.xml:48:9-50:40
+64            android:name="com.example.t_star.STUDENTACTIVITIES.S_class_dashboard_studymaterial"
+64-->C:\Users\HP-JS\AndroidStudioProjects\TSTAR\app\src\main\AndroidManifest.xml:49:13-78
 65            android:exported="false" />
-65-->C:\Users\Hp\AndroidStudioProjects\T-STAR\app\src\main\AndroidManifest.xml:52:13-37
-66        <!-- <activity -->
-67        <!-- android:name=".STUDENTACTIVITIES.S_HomePagee" -->
-68        <!-- android:exported="false" /> -->
+65-->C:\Users\HP-JS\AndroidStudioProjects\TSTAR\app\src\main\AndroidManifest.xml:50:13-37
+66        <activity
+66-->C:\Users\HP-JS\AndroidStudioProjects\TSTAR\app\src\main\AndroidManifest.xml:51:9-53:40
+67            android:name="com.example.t_star.STUDENTACTIVITIES.S_class_dashboard_translator"
+67-->C:\Users\HP-JS\AndroidStudioProjects\TSTAR\app\src\main\AndroidManifest.xml:52:13-75
+68            android:exported="false" />
+68-->C:\Users\HP-JS\AndroidStudioProjects\TSTAR\app\src\main\AndroidManifest.xml:53:13-37
 69        <activity
-69-->C:\Users\Hp\AndroidStudioProjects\T-STAR\app\src\main\AndroidManifest.xml:56:9-58:40
-70            android:name="com.example.t_star.TEACHERACTIVITIES.TChatActivity"
-70-->C:\Users\Hp\AndroidStudioProjects\T-STAR\app\src\main\AndroidManifest.xml:57:13-60
+69-->C:\Users\HP-JS\AndroidStudioProjects\TSTAR\app\src\main\AndroidManifest.xml:54:9-56:40
+70            android:name="com.example.t_star.STUDENTACTIVITIES.S_class_dashboard_attendance"
+70-->C:\Users\HP-JS\AndroidStudioProjects\TSTAR\app\src\main\AndroidManifest.xml:55:13-75
 71            android:exported="false" />
-71-->C:\Users\Hp\AndroidStudioProjects\T-STAR\app\src\main\AndroidManifest.xml:58:13-37
+71-->C:\Users\HP-JS\AndroidStudioProjects\TSTAR\app\src\main\AndroidManifest.xml:56:13-37
 72        <activity
-72-->C:\Users\Hp\AndroidStudioProjects\T-STAR\app\src\main\AndroidManifest.xml:59:9-61:40
-73            android:name="com.example.t_star.TEACHERACTIVITIES.TNotificationActivity"
-73-->C:\Users\Hp\AndroidStudioProjects\T-STAR\app\src\main\AndroidManifest.xml:60:13-68
+72-->C:\Users\HP-JS\AndroidStudioProjects\TSTAR\app\src\main\AndroidManifest.xml:57:9-59:40
+73            android:name="com.example.t_star.STUDENTACTIVITIES.S_Class_Dashboard"
+73-->C:\Users\HP-JS\AndroidStudioProjects\TSTAR\app\src\main\AndroidManifest.xml:58:13-64
 74            android:exported="false" />
-74-->C:\Users\Hp\AndroidStudioProjects\T-STAR\app\src\main\AndroidManifest.xml:61:13-37
+74-->C:\Users\HP-JS\AndroidStudioProjects\TSTAR\app\src\main\AndroidManifest.xml:59:13-37
 75        <activity
-75-->C:\Users\Hp\AndroidStudioProjects\T-STAR\app\src\main\AndroidManifest.xml:62:9-64:40
-76            android:name="com.example.t_star.TEACHERACTIVITIES.TEventActivity"
-76-->C:\Users\Hp\AndroidStudioProjects\T-STAR\app\src\main\AndroidManifest.xml:63:13-61
+75-->C:\Users\HP-JS\AndroidStudioProjects\TSTAR\app\src\main\AndroidManifest.xml:60:9-62:40
+76            android:name="com.example.t_star.STUDENTACTIVITIES.S_Enroll_in_Class"
+76-->C:\Users\HP-JS\AndroidStudioProjects\TSTAR\app\src\main\AndroidManifest.xml:61:13-64
 77            android:exported="false" />
-77-->C:\Users\Hp\AndroidStudioProjects\T-STAR\app\src\main\AndroidManifest.xml:64:13-37
+77-->C:\Users\HP-JS\AndroidStudioProjects\TSTAR\app\src\main\AndroidManifest.xml:62:13-37
 78        <activity
-78-->C:\Users\Hp\AndroidStudioProjects\T-STAR\app\src\main\AndroidManifest.xml:65:9-67:40
-79            android:name="com.example.t_star.TEACHERACTIVITIES.TAttendanceActivity"
-79-->C:\Users\Hp\AndroidStudioProjects\T-STAR\app\src\main\AndroidManifest.xml:66:13-66
+78-->C:\Users\HP-JS\AndroidStudioProjects\TSTAR\app\src\main\AndroidManifest.xml:63:9-65:40
+79            android:name="com.example.t_star.TEACHERACTIVITIES.TResourcesActivity"
+79-->C:\Users\HP-JS\AndroidStudioProjects\TSTAR\app\src\main\AndroidManifest.xml:64:13-65
 80            android:exported="false" />
-80-->C:\Users\Hp\AndroidStudioProjects\T-STAR\app\src\main\AndroidManifest.xml:67:13-37
+80-->C:\Users\HP-JS\AndroidStudioProjects\TSTAR\app\src\main\AndroidManifest.xml:65:13-37
 81        <activity
-81-->C:\Users\Hp\AndroidStudioProjects\T-STAR\app\src\main\AndroidManifest.xml:68:9-70:40
-82            android:name="com.example.t_star.TEACHERACTIVITIES.TProfileActivity"
-82-->C:\Users\Hp\AndroidStudioProjects\T-STAR\app\src\main\AndroidManifest.xml:69:13-63
+81-->C:\Users\HP-JS\AndroidStudioProjects\TSTAR\app\src\main\AndroidManifest.xml:67:9-69:40
+82            android:name="com.example.t_star.TEACHERACTIVITIES.TCreateNewEventActivity"
+82-->C:\Users\HP-JS\AndroidStudioProjects\TSTAR\app\src\main\AndroidManifest.xml:68:13-70
 83            android:exported="false" />
-83-->C:\Users\Hp\AndroidStudioProjects\T-STAR\app\src\main\AndroidManifest.xml:70:13-37
+83-->C:\Users\HP-JS\AndroidStudioProjects\TSTAR\app\src\main\AndroidManifest.xml:69:13-37
 84        <activity
-84-->C:\Users\Hp\AndroidStudioProjects\T-STAR\app\src\main\AndroidManifest.xml:71:9-73:40
-85            android:name="com.example.t_star.TEACHERACTIVITIES.TCreateNewAssignActivity"
-85-->C:\Users\Hp\AndroidStudioProjects\T-STAR\app\src\main\AndroidManifest.xml:72:13-71
+84-->C:\Users\HP-JS\AndroidStudioProjects\TSTAR\app\src\main\AndroidManifest.xml:70:9-72:40
+85            android:name="com.example.t_star.STUDENTACTIVITIES.S_Mainpage"
+85-->C:\Users\HP-JS\AndroidStudioProjects\TSTAR\app\src\main\AndroidManifest.xml:71:13-57
 86            android:exported="false" />
-86-->C:\Users\Hp\AndroidStudioProjects\T-STAR\app\src\main\AndroidManifest.xml:73:13-37
+86-->C:\Users\HP-JS\AndroidStudioProjects\TSTAR\app\src\main\AndroidManifest.xml:72:13-37
 87        <activity
-87-->C:\Users\Hp\AndroidStudioProjects\T-STAR\app\src\main\AndroidManifest.xml:74:9-76:40
-88            android:name="com.example.t_star.TEACHERACTIVITIES.TAsssignmentActivity"
-88-->C:\Users\Hp\AndroidStudioProjects\T-STAR\app\src\main\AndroidManifest.xml:75:13-67
+87-->C:\Users\HP-JS\AndroidStudioProjects\TSTAR\app\src\main\AndroidManifest.xml:74:9-76:40
+88            android:name="com.example.t_star.TEACHERACTIVITIES.TChatActivity"
+88-->C:\Users\HP-JS\AndroidStudioProjects\TSTAR\app\src\main\AndroidManifest.xml:75:13-60
 89            android:exported="false" />
-89-->C:\Users\Hp\AndroidStudioProjects\T-STAR\app\src\main\AndroidManifest.xml:76:13-37
+89-->C:\Users\HP-JS\AndroidStudioProjects\TSTAR\app\src\main\AndroidManifest.xml:76:13-37
 90        <activity
-90-->C:\Users\Hp\AndroidStudioProjects\T-STAR\app\src\main\AndroidManifest.xml:78:9-80:40
-91            android:name="com.example.t_star.TEACHERACTIVITIES.THomeActivity"
-91-->C:\Users\Hp\AndroidStudioProjects\T-STAR\app\src\main\AndroidManifest.xml:79:13-60
-92            android:exported="false" /> <!-- <activity -->
-92-->C:\Users\Hp\AndroidStudioProjects\T-STAR\app\src\main\AndroidManifest.xml:80:13-37
-93        <!-- android:name=".Splash_Screen" -->
-94        <!-- android:exported="false" /> -->
-95        <!-- android:exported="false" /> -->
+90-->C:\Users\HP-JS\AndroidStudioProjects\TSTAR\app\src\main\AndroidManifest.xml:77:9-79:40
+91            android:name="com.example.t_star.TEACHERACTIVITIES.TNotificationActivity"
+91-->C:\Users\HP-JS\AndroidStudioProjects\TSTAR\app\src\main\AndroidManifest.xml:78:13-68
+92            android:exported="false" />
+92-->C:\Users\HP-JS\AndroidStudioProjects\TSTAR\app\src\main\AndroidManifest.xml:79:13-37
+93        <activity
+93-->C:\Users\HP-JS\AndroidStudioProjects\TSTAR\app\src\main\AndroidManifest.xml:80:9-82:40
+94            android:name="com.example.t_star.TEACHERACTIVITIES.TEventActivity"
+94-->C:\Users\HP-JS\AndroidStudioProjects\TSTAR\app\src\main\AndroidManifest.xml:81:13-61
+95            android:exported="false" />
+95-->C:\Users\HP-JS\AndroidStudioProjects\TSTAR\app\src\main\AndroidManifest.xml:82:13-37
 96        <activity
-96-->C:\Users\Hp\AndroidStudioProjects\T-STAR\app\src\main\AndroidManifest.xml:84:9-92:20
-97            android:name="com.example.t_star.Splash_Screen"
-97-->C:\Users\Hp\AndroidStudioProjects\T-STAR\app\src\main\AndroidManifest.xml:85:13-42
-98            android:exported="true" >
-98-->C:\Users\Hp\AndroidStudioProjects\T-STAR\app\src\main\AndroidManifest.xml:86:13-36
-99            <intent-filter>
-99-->C:\Users\Hp\AndroidStudioProjects\T-STAR\app\src\main\AndroidManifest.xml:87:13-91:29
-100                <action android:name="android.intent.action.MAIN" />
-100-->C:\Users\Hp\AndroidStudioProjects\T-STAR\app\src\main\AndroidManifest.xml:88:17-69
-100-->C:\Users\Hp\AndroidStudioProjects\T-STAR\app\src\main\AndroidManifest.xml:88:25-66
-101
-102                <category android:name="android.intent.category.LAUNCHER" />
-102-->C:\Users\Hp\AndroidStudioProjects\T-STAR\app\src\main\AndroidManifest.xml:90:17-77
-102-->C:\Users\Hp\AndroidStudioProjects\T-STAR\app\src\main\AndroidManifest.xml:90:27-74
-103            </intent-filter>
-104        </activity>
-105
-106        <provider
-106-->[androidx.emoji2:emoji2:1.3.0] C:\Users\Hp\.gradle\caches\8.11.1\transforms\247c171c174335e707a1b0f1373fdc6e\transformed\emoji2-1.3.0\AndroidManifest.xml:24:9-32:20
-107            android:name="androidx.startup.InitializationProvider"
-107-->[androidx.emoji2:emoji2:1.3.0] C:\Users\Hp\.gradle\caches\8.11.1\transforms\247c171c174335e707a1b0f1373fdc6e\transformed\emoji2-1.3.0\AndroidManifest.xml:25:13-67
-108            android:authorities="com.example.t_star.androidx-startup"
-108-->[androidx.emoji2:emoji2:1.3.0] C:\Users\Hp\.gradle\caches\8.11.1\transforms\247c171c174335e707a1b0f1373fdc6e\transformed\emoji2-1.3.0\AndroidManifest.xml:26:13-68
-109            android:exported="false" >
-109-->[androidx.emoji2:emoji2:1.3.0] C:\Users\Hp\.gradle\caches\8.11.1\transforms\247c171c174335e707a1b0f1373fdc6e\transformed\emoji2-1.3.0\AndroidManifest.xml:27:13-37
-110            <meta-data
-110-->[androidx.emoji2:emoji2:1.3.0] C:\Users\Hp\.gradle\caches\8.11.1\transforms\247c171c174335e707a1b0f1373fdc6e\transformed\emoji2-1.3.0\AndroidManifest.xml:29:13-31:52
-111                android:name="androidx.emoji2.text.EmojiCompatInitializer"
-111-->[androidx.emoji2:emoji2:1.3.0] C:\Users\Hp\.gradle\caches\8.11.1\transforms\247c171c174335e707a1b0f1373fdc6e\transformed\emoji2-1.3.0\AndroidManifest.xml:30:17-75
-112                android:value="androidx.startup" />
-112-->[androidx.emoji2:emoji2:1.3.0] C:\Users\Hp\.gradle\caches\8.11.1\transforms\247c171c174335e707a1b0f1373fdc6e\transformed\emoji2-1.3.0\AndroidManifest.xml:31:17-49
-113            <meta-data
-113-->[androidx.lifecycle:lifecycle-process:2.9.0] C:\Users\Hp\.gradle\caches\8.11.1\transforms\208936aa62107c9f2a59427e7156f041\transformed\lifecycle-process-2.9.0\AndroidManifest.xml:29:13-31:52
-114                android:name="androidx.lifecycle.ProcessLifecycleInitializer"
-114-->[androidx.lifecycle:lifecycle-process:2.9.0] C:\Users\Hp\.gradle\caches\8.11.1\transforms\208936aa62107c9f2a59427e7156f041\transformed\lifecycle-process-2.9.0\AndroidManifest.xml:30:17-78
-115                android:value="androidx.startup" />
-115-->[androidx.lifecycle:lifecycle-process:2.9.0] C:\Users\Hp\.gradle\caches\8.11.1\transforms\208936aa62107c9f2a59427e7156f041\transformed\lifecycle-process-2.9.0\AndroidManifest.xml:31:17-49
-116            <meta-data
-116-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\Hp\.gradle\caches\8.11.1\transforms\d79a95a4f3646ec5fdd994f77c5e5127\transformed\profileinstaller-1.4.0\AndroidManifest.xml:29:13-31:52
-117                android:name="androidx.profileinstaller.ProfileInstallerInitializer"
-117-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\Hp\.gradle\caches\8.11.1\transforms\d79a95a4f3646ec5fdd994f77c5e5127\transformed\profileinstaller-1.4.0\AndroidManifest.xml:30:17-85
-118                android:value="androidx.startup" />
-118-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\Hp\.gradle\caches\8.11.1\transforms\d79a95a4f3646ec5fdd994f77c5e5127\transformed\profileinstaller-1.4.0\AndroidManifest.xml:31:17-49
-119        </provider>
-120
-121        <uses-library
-121-->[androidx.window:window:1.0.0] C:\Users\Hp\.gradle\caches\8.11.1\transforms\5814e54ced19af32957b1c0546fa23df\transformed\window-1.0.0\AndroidManifest.xml:25:9-27:40
-122            android:name="androidx.window.extensions"
-122-->[androidx.window:window:1.0.0] C:\Users\Hp\.gradle\caches\8.11.1\transforms\5814e54ced19af32957b1c0546fa23df\transformed\window-1.0.0\AndroidManifest.xml:26:13-54
-123            android:required="false" />
-123-->[androidx.window:window:1.0.0] C:\Users\Hp\.gradle\caches\8.11.1\transforms\5814e54ced19af32957b1c0546fa23df\transformed\window-1.0.0\AndroidManifest.xml:27:13-37
-124        <uses-library
-124-->[androidx.window:window:1.0.0] C:\Users\Hp\.gradle\caches\8.11.1\transforms\5814e54ced19af32957b1c0546fa23df\transformed\window-1.0.0\AndroidManifest.xml:28:9-30:40
-125            android:name="androidx.window.sidecar"
-125-->[androidx.window:window:1.0.0] C:\Users\Hp\.gradle\caches\8.11.1\transforms\5814e54ced19af32957b1c0546fa23df\transformed\window-1.0.0\AndroidManifest.xml:29:13-51
-126            android:required="false" />
-126-->[androidx.window:window:1.0.0] C:\Users\Hp\.gradle\caches\8.11.1\transforms\5814e54ced19af32957b1c0546fa23df\transformed\window-1.0.0\AndroidManifest.xml:30:13-37
-127
-128        <receiver
-128-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\Hp\.gradle\caches\8.11.1\transforms\d79a95a4f3646ec5fdd994f77c5e5127\transformed\profileinstaller-1.4.0\AndroidManifest.xml:34:9-52:20
-129            android:name="androidx.profileinstaller.ProfileInstallReceiver"
-129-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\Hp\.gradle\caches\8.11.1\transforms\d79a95a4f3646ec5fdd994f77c5e5127\transformed\profileinstaller-1.4.0\AndroidManifest.xml:35:13-76
-130            android:directBootAware="false"
-130-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\Hp\.gradle\caches\8.11.1\transforms\d79a95a4f3646ec5fdd994f77c5e5127\transformed\profileinstaller-1.4.0\AndroidManifest.xml:36:13-44
-131            android:enabled="true"
-131-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\Hp\.gradle\caches\8.11.1\transforms\d79a95a4f3646ec5fdd994f77c5e5127\transformed\profileinstaller-1.4.0\AndroidManifest.xml:37:13-35
-132            android:exported="true"
-132-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\Hp\.gradle\caches\8.11.1\transforms\d79a95a4f3646ec5fdd994f77c5e5127\transformed\profileinstaller-1.4.0\AndroidManifest.xml:38:13-36
-133            android:permission="android.permission.DUMP" >
-133-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\Hp\.gradle\caches\8.11.1\transforms\d79a95a4f3646ec5fdd994f77c5e5127\transformed\profileinstaller-1.4.0\AndroidManifest.xml:39:13-57
-134            <intent-filter>
-134-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\Hp\.gradle\caches\8.11.1\transforms\d79a95a4f3646ec5fdd994f77c5e5127\transformed\profileinstaller-1.4.0\AndroidManifest.xml:40:13-42:29
-135                <action android:name="androidx.profileinstaller.action.INSTALL_PROFILE" />
-135-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\Hp\.gradle\caches\8.11.1\transforms\d79a95a4f3646ec5fdd994f77c5e5127\transformed\profileinstaller-1.4.0\AndroidManifest.xml:41:17-91
-135-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\Hp\.gradle\caches\8.11.1\transforms\d79a95a4f3646ec5fdd994f77c5e5127\transformed\profileinstaller-1.4.0\AndroidManifest.xml:41:25-88
-136            </intent-filter>
-137            <intent-filter>
-137-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\Hp\.gradle\caches\8.11.1\transforms\d79a95a4f3646ec5fdd994f77c5e5127\transformed\profileinstaller-1.4.0\AndroidManifest.xml:43:13-45:29
-138                <action android:name="androidx.profileinstaller.action.SKIP_FILE" />
-138-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\Hp\.gradle\caches\8.11.1\transforms\d79a95a4f3646ec5fdd994f77c5e5127\transformed\profileinstaller-1.4.0\AndroidManifest.xml:44:17-85
-138-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\Hp\.gradle\caches\8.11.1\transforms\d79a95a4f3646ec5fdd994f77c5e5127\transformed\profileinstaller-1.4.0\AndroidManifest.xml:44:25-82
-139            </intent-filter>
-140            <intent-filter>
-140-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\Hp\.gradle\caches\8.11.1\transforms\d79a95a4f3646ec5fdd994f77c5e5127\transformed\profileinstaller-1.4.0\AndroidManifest.xml:46:13-48:29
-141                <action android:name="androidx.profileinstaller.action.SAVE_PROFILE" />
-141-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\Hp\.gradle\caches\8.11.1\transforms\d79a95a4f3646ec5fdd994f77c5e5127\transformed\profileinstaller-1.4.0\AndroidManifest.xml:47:17-88
-141-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\Hp\.gradle\caches\8.11.1\transforms\d79a95a4f3646ec5fdd994f77c5e5127\transformed\profileinstaller-1.4.0\AndroidManifest.xml:47:25-85
-142            </intent-filter>
-143            <intent-filter>
-143-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\Hp\.gradle\caches\8.11.1\transforms\d79a95a4f3646ec5fdd994f77c5e5127\transformed\profileinstaller-1.4.0\AndroidManifest.xml:49:13-51:29
-144                <action android:name="androidx.profileinstaller.action.BENCHMARK_OPERATION" />
-144-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\Hp\.gradle\caches\8.11.1\transforms\d79a95a4f3646ec5fdd994f77c5e5127\transformed\profileinstaller-1.4.0\AndroidManifest.xml:50:17-95
-144-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\Hp\.gradle\caches\8.11.1\transforms\d79a95a4f3646ec5fdd994f77c5e5127\transformed\profileinstaller-1.4.0\AndroidManifest.xml:50:25-92
-145            </intent-filter>
-146        </receiver>
-147    </application>
-148
-149</manifest>
+96-->C:\Users\HP-JS\AndroidStudioProjects\TSTAR\app\src\main\AndroidManifest.xml:83:9-85:40
+97            android:name="com.example.t_star.TEACHERACTIVITIES.TAttendanceActivity"
+97-->C:\Users\HP-JS\AndroidStudioProjects\TSTAR\app\src\main\AndroidManifest.xml:84:13-66
+98            android:exported="false" />
+98-->C:\Users\HP-JS\AndroidStudioProjects\TSTAR\app\src\main\AndroidManifest.xml:85:13-37
+99        <activity
+99-->C:\Users\HP-JS\AndroidStudioProjects\TSTAR\app\src\main\AndroidManifest.xml:86:9-88:40
+100            android:name="com.example.t_star.TEACHERACTIVITIES.TProfileActivity"
+100-->C:\Users\HP-JS\AndroidStudioProjects\TSTAR\app\src\main\AndroidManifest.xml:87:13-63
+101            android:exported="false" />
+101-->C:\Users\HP-JS\AndroidStudioProjects\TSTAR\app\src\main\AndroidManifest.xml:88:13-37
+102        <activity
+102-->C:\Users\HP-JS\AndroidStudioProjects\TSTAR\app\src\main\AndroidManifest.xml:89:9-91:40
+103            android:name="com.example.t_star.TEACHERACTIVITIES.TCreateNewAssignActivity"
+103-->C:\Users\HP-JS\AndroidStudioProjects\TSTAR\app\src\main\AndroidManifest.xml:90:13-71
+104            android:exported="false" />
+104-->C:\Users\HP-JS\AndroidStudioProjects\TSTAR\app\src\main\AndroidManifest.xml:91:13-37
+105        <activity
+105-->C:\Users\HP-JS\AndroidStudioProjects\TSTAR\app\src\main\AndroidManifest.xml:92:9-94:40
+106            android:name="com.example.t_star.TEACHERACTIVITIES.TAsssignmentActivity"
+106-->C:\Users\HP-JS\AndroidStudioProjects\TSTAR\app\src\main\AndroidManifest.xml:93:13-67
+107            android:exported="false" />
+107-->C:\Users\HP-JS\AndroidStudioProjects\TSTAR\app\src\main\AndroidManifest.xml:94:13-37
+108        <activity
+108-->C:\Users\HP-JS\AndroidStudioProjects\TSTAR\app\src\main\AndroidManifest.xml:95:9-97:40
+109            android:name="com.example.t_star.TEACHERACTIVITIES.THomeActivity"
+109-->C:\Users\HP-JS\AndroidStudioProjects\TSTAR\app\src\main\AndroidManifest.xml:96:13-60
+110            android:exported="false" /> <!-- <activity -->
+110-->C:\Users\HP-JS\AndroidStudioProjects\TSTAR\app\src\main\AndroidManifest.xml:97:13-37
+111        <!-- android:name=".Splash_Screen" -->
+112        <!-- android:exported="false" /> -->
+113        <!-- android:exported="false" /> -->
+114        <activity
+114-->C:\Users\HP-JS\AndroidStudioProjects\TSTAR\app\src\main\AndroidManifest.xml:101:9-109:20
+115            android:name="com.example.t_star.TSTAR_Splash_Screen"
+115-->C:\Users\HP-JS\AndroidStudioProjects\TSTAR\app\src\main\AndroidManifest.xml:102:13-48
+116            android:exported="true" >
+116-->C:\Users\HP-JS\AndroidStudioProjects\TSTAR\app\src\main\AndroidManifest.xml:103:13-36
+117            <intent-filter>
+117-->C:\Users\HP-JS\AndroidStudioProjects\TSTAR\app\src\main\AndroidManifest.xml:104:13-108:29
+118                <action android:name="android.intent.action.MAIN" />
+118-->C:\Users\HP-JS\AndroidStudioProjects\TSTAR\app\src\main\AndroidManifest.xml:105:17-69
+118-->C:\Users\HP-JS\AndroidStudioProjects\TSTAR\app\src\main\AndroidManifest.xml:105:25-66
+119
+120                <category android:name="android.intent.category.LAUNCHER" />
+120-->C:\Users\HP-JS\AndroidStudioProjects\TSTAR\app\src\main\AndroidManifest.xml:107:17-77
+120-->C:\Users\HP-JS\AndroidStudioProjects\TSTAR\app\src\main\AndroidManifest.xml:107:27-74
+121            </intent-filter>
+122        </activity>
+123
+124        <provider
+124-->[androidx.emoji2:emoji2:1.3.0] C:\Users\HP-JS\.gradle\caches\8.11.1\transforms\247c171c174335e707a1b0f1373fdc6e\transformed\emoji2-1.3.0\AndroidManifest.xml:24:9-32:20
+125            android:name="androidx.startup.InitializationProvider"
+125-->[androidx.emoji2:emoji2:1.3.0] C:\Users\HP-JS\.gradle\caches\8.11.1\transforms\247c171c174335e707a1b0f1373fdc6e\transformed\emoji2-1.3.0\AndroidManifest.xml:25:13-67
+126            android:authorities="com.example.t_star.androidx-startup"
+126-->[androidx.emoji2:emoji2:1.3.0] C:\Users\HP-JS\.gradle\caches\8.11.1\transforms\247c171c174335e707a1b0f1373fdc6e\transformed\emoji2-1.3.0\AndroidManifest.xml:26:13-68
+127            android:exported="false" >
+127-->[androidx.emoji2:emoji2:1.3.0] C:\Users\HP-JS\.gradle\caches\8.11.1\transforms\247c171c174335e707a1b0f1373fdc6e\transformed\emoji2-1.3.0\AndroidManifest.xml:27:13-37
+128            <meta-data
+128-->[androidx.emoji2:emoji2:1.3.0] C:\Users\HP-JS\.gradle\caches\8.11.1\transforms\247c171c174335e707a1b0f1373fdc6e\transformed\emoji2-1.3.0\AndroidManifest.xml:29:13-31:52
+129                android:name="androidx.emoji2.text.EmojiCompatInitializer"
+129-->[androidx.emoji2:emoji2:1.3.0] C:\Users\HP-JS\.gradle\caches\8.11.1\transforms\247c171c174335e707a1b0f1373fdc6e\transformed\emoji2-1.3.0\AndroidManifest.xml:30:17-75
+130                android:value="androidx.startup" />
+130-->[androidx.emoji2:emoji2:1.3.0] C:\Users\HP-JS\.gradle\caches\8.11.1\transforms\247c171c174335e707a1b0f1373fdc6e\transformed\emoji2-1.3.0\AndroidManifest.xml:31:17-49
+131            <meta-data
+131-->[androidx.lifecycle:lifecycle-process:2.9.0] C:\Users\HP-JS\.gradle\caches\8.11.1\transforms\208936aa62107c9f2a59427e7156f041\transformed\lifecycle-process-2.9.0\AndroidManifest.xml:29:13-31:52
+132                android:name="androidx.lifecycle.ProcessLifecycleInitializer"
+132-->[androidx.lifecycle:lifecycle-process:2.9.0] C:\Users\HP-JS\.gradle\caches\8.11.1\transforms\208936aa62107c9f2a59427e7156f041\transformed\lifecycle-process-2.9.0\AndroidManifest.xml:30:17-78
+133                android:value="androidx.startup" />
+133-->[androidx.lifecycle:lifecycle-process:2.9.0] C:\Users\HP-JS\.gradle\caches\8.11.1\transforms\208936aa62107c9f2a59427e7156f041\transformed\lifecycle-process-2.9.0\AndroidManifest.xml:31:17-49
+134            <meta-data
+134-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\HP-JS\.gradle\caches\8.11.1\transforms\d79a95a4f3646ec5fdd994f77c5e5127\transformed\profileinstaller-1.4.0\AndroidManifest.xml:29:13-31:52
+135                android:name="androidx.profileinstaller.ProfileInstallerInitializer"
+135-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\HP-JS\.gradle\caches\8.11.1\transforms\d79a95a4f3646ec5fdd994f77c5e5127\transformed\profileinstaller-1.4.0\AndroidManifest.xml:30:17-85
+136                android:value="androidx.startup" />
+136-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\HP-JS\.gradle\caches\8.11.1\transforms\d79a95a4f3646ec5fdd994f77c5e5127\transformed\profileinstaller-1.4.0\AndroidManifest.xml:31:17-49
+137        </provider>
+138
+139        <uses-library
+139-->[androidx.window:window:1.0.0] C:\Users\HP-JS\.gradle\caches\8.11.1\transforms\5814e54ced19af32957b1c0546fa23df\transformed\window-1.0.0\AndroidManifest.xml:25:9-27:40
+140            android:name="androidx.window.extensions"
+140-->[androidx.window:window:1.0.0] C:\Users\HP-JS\.gradle\caches\8.11.1\transforms\5814e54ced19af32957b1c0546fa23df\transformed\window-1.0.0\AndroidManifest.xml:26:13-54
+141            android:required="false" />
+141-->[androidx.window:window:1.0.0] C:\Users\HP-JS\.gradle\caches\8.11.1\transforms\5814e54ced19af32957b1c0546fa23df\transformed\window-1.0.0\AndroidManifest.xml:27:13-37
+142        <uses-library
+142-->[androidx.window:window:1.0.0] C:\Users\HP-JS\.gradle\caches\8.11.1\transforms\5814e54ced19af32957b1c0546fa23df\transformed\window-1.0.0\AndroidManifest.xml:28:9-30:40
+143            android:name="androidx.window.sidecar"
+143-->[androidx.window:window:1.0.0] C:\Users\HP-JS\.gradle\caches\8.11.1\transforms\5814e54ced19af32957b1c0546fa23df\transformed\window-1.0.0\AndroidManifest.xml:29:13-51
+144            android:required="false" />
+144-->[androidx.window:window:1.0.0] C:\Users\HP-JS\.gradle\caches\8.11.1\transforms\5814e54ced19af32957b1c0546fa23df\transformed\window-1.0.0\AndroidManifest.xml:30:13-37
+145
+146        <receiver
+146-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\HP-JS\.gradle\caches\8.11.1\transforms\d79a95a4f3646ec5fdd994f77c5e5127\transformed\profileinstaller-1.4.0\AndroidManifest.xml:34:9-52:20
+147            android:name="androidx.profileinstaller.ProfileInstallReceiver"
+147-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\HP-JS\.gradle\caches\8.11.1\transforms\d79a95a4f3646ec5fdd994f77c5e5127\transformed\profileinstaller-1.4.0\AndroidManifest.xml:35:13-76
+148            android:directBootAware="false"
+148-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\HP-JS\.gradle\caches\8.11.1\transforms\d79a95a4f3646ec5fdd994f77c5e5127\transformed\profileinstaller-1.4.0\AndroidManifest.xml:36:13-44
+149            android:enabled="true"
+149-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\HP-JS\.gradle\caches\8.11.1\transforms\d79a95a4f3646ec5fdd994f77c5e5127\transformed\profileinstaller-1.4.0\AndroidManifest.xml:37:13-35
+150            android:exported="true"
+150-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\HP-JS\.gradle\caches\8.11.1\transforms\d79a95a4f3646ec5fdd994f77c5e5127\transformed\profileinstaller-1.4.0\AndroidManifest.xml:38:13-36
+151            android:permission="android.permission.DUMP" >
+151-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\HP-JS\.gradle\caches\8.11.1\transforms\d79a95a4f3646ec5fdd994f77c5e5127\transformed\profileinstaller-1.4.0\AndroidManifest.xml:39:13-57
+152            <intent-filter>
+152-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\HP-JS\.gradle\caches\8.11.1\transforms\d79a95a4f3646ec5fdd994f77c5e5127\transformed\profileinstaller-1.4.0\AndroidManifest.xml:40:13-42:29
+153                <action android:name="androidx.profileinstaller.action.INSTALL_PROFILE" />
+153-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\HP-JS\.gradle\caches\8.11.1\transforms\d79a95a4f3646ec5fdd994f77c5e5127\transformed\profileinstaller-1.4.0\AndroidManifest.xml:41:17-91
+153-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\HP-JS\.gradle\caches\8.11.1\transforms\d79a95a4f3646ec5fdd994f77c5e5127\transformed\profileinstaller-1.4.0\AndroidManifest.xml:41:25-88
+154            </intent-filter>
+155            <intent-filter>
+155-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\HP-JS\.gradle\caches\8.11.1\transforms\d79a95a4f3646ec5fdd994f77c5e5127\transformed\profileinstaller-1.4.0\AndroidManifest.xml:43:13-45:29
+156                <action android:name="androidx.profileinstaller.action.SKIP_FILE" />
+156-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\HP-JS\.gradle\caches\8.11.1\transforms\d79a95a4f3646ec5fdd994f77c5e5127\transformed\profileinstaller-1.4.0\AndroidManifest.xml:44:17-85
+156-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\HP-JS\.gradle\caches\8.11.1\transforms\d79a95a4f3646ec5fdd994f77c5e5127\transformed\profileinstaller-1.4.0\AndroidManifest.xml:44:25-82
+157            </intent-filter>
+158            <intent-filter>
+158-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\HP-JS\.gradle\caches\8.11.1\transforms\d79a95a4f3646ec5fdd994f77c5e5127\transformed\profileinstaller-1.4.0\AndroidManifest.xml:46:13-48:29
+159                <action android:name="androidx.profileinstaller.action.SAVE_PROFILE" />
+159-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\HP-JS\.gradle\caches\8.11.1\transforms\d79a95a4f3646ec5fdd994f77c5e5127\transformed\profileinstaller-1.4.0\AndroidManifest.xml:47:17-88
+159-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\HP-JS\.gradle\caches\8.11.1\transforms\d79a95a4f3646ec5fdd994f77c5e5127\transformed\profileinstaller-1.4.0\AndroidManifest.xml:47:25-85
+160            </intent-filter>
+161            <intent-filter>
+161-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\HP-JS\.gradle\caches\8.11.1\transforms\d79a95a4f3646ec5fdd994f77c5e5127\transformed\profileinstaller-1.4.0\AndroidManifest.xml:49:13-51:29
+162                <action android:name="androidx.profileinstaller.action.BENCHMARK_OPERATION" />
+162-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\HP-JS\.gradle\caches\8.11.1\transforms\d79a95a4f3646ec5fdd994f77c5e5127\transformed\profileinstaller-1.4.0\AndroidManifest.xml:50:17-95
+162-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\HP-JS\.gradle\caches\8.11.1\transforms\d79a95a4f3646ec5fdd994f77c5e5127\transformed\profileinstaller-1.4.0\AndroidManifest.xml:50:25-92
+163            </intent-filter>
+164        </receiver>
+165    </application>
+166
+167</manifest>

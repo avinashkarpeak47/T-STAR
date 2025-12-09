@@ -29,6 +29,7 @@
             android:layout_gravity="end|center_vertical"
             android:background="@android:color/transparent"
             android:src="@drawable/tlogout"
+            app:tint="@color/white"
             android:padding="8dp"/>
     </com.google.android.material.appbar.MaterialToolbar>
 
@@ -67,6 +68,7 @@
                     android:layout_gravity="center"
                     android:background="@drawable/profile_circle"
                     android:clipToOutline="true"
+                    app:tint="@color/white"
                     android:contentDescription="profile"
                     android:src="@drawable/tprofile" />
 

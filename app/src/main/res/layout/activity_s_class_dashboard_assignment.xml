@@ -1,10 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".STUDENTACTIVITIES.S_class_dashboard_assignment">
+    android:layout_height="match_parent">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <!-- AppBar -->
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/ThemeOverlay.MaterialComponents.Dark.ActionBar">
+
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/toolbarAssignments"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@color/light_lavender_for_cards"
+            app:title="Assignments"
+            app:subtitleTextColor="@color/Lavender"
+            app:titleTextColor="@color/Lavender"/>
+
+        <!-- Tabs: All / Pending / Submit / Checked -->
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/tabLayoutStatus"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:tabMode="fixed"
+            app:tabGravity="fill"
+            app:tabIndicatorFullWidth="false"/>
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <!-- RecyclerView for all assignments -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvAssignments"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        android:padding="8dp"/>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

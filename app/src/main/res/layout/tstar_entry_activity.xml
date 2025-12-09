@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:id="@+id/entry_page_ll_id1"
+        android:background="@drawable/finalist_entrypage_bg"
+        android:gravity="center_horizontal">
+
+
+
+
+
+
+        <!-- TITLE -->
+        <TextView
+            android:id="@+id/txtWelcome"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Welcome back\nto T-STAR"
+            android:textStyle="bold"
+            android:textColor="#FFFFFF"
+            android:textSize="31sp"
+            android:gravity="center"
+            android:layout_marginTop="50dp" />
+
+        <!-- SUBTITLE -->
+        <TextView
+            android:id="@+id/txtDesc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Teacher - Student Teaching And Resources"
+            android:textColor="#EDEAFF"
+            android:textSize="15sp"
+            android:gravity="center"
+            android:layout_marginTop="10dp" />
+
+
+
+        <!-- LOGIN BUTTON -->
+        <Button
+            android:id="@+id/btnLogin"
+            android:layout_width="260dp"
+            android:layout_height="54dp"
+            android:text="Login"
+            android:textSize="18sp"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            android:backgroundTint="#B8C4FF"
+            android:layout_marginTop="440dp"/>
+
+        <!-- SIGNUP BUTTON -->
+        <Button
+            android:id="@+id/btnSignup"
+            android:layout_width="260dp"
+            android:layout_height="54dp"
+            android:text="Signup"
+            android:textSize="18sp"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            android:backgroundTint="#B8C4FF"
+            android:layout_marginTop="10dp" />
+
+    </LinearLayout>
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

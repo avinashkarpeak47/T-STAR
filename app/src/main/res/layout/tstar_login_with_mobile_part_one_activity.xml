@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:id="@+id/entry_page_ll_id1"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="@drawable/finalist_loginpage_bg">
+
+
+        <!-- Title -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Login to\nyour account"
+            android:textSize="27sp"
+            android:textStyle="bold"
+            android:textColor="@color/white"
+            android:layout_marginTop="68dp"
+            android:layout_marginLeft="31dp"/>
+
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="24dp"
+            android:layout_marginTop="150dp">
+
+            <!-- Email Field -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="  Login using Mobile number"
+                android:textColor="@color/black"
+                android:textSize="16sp" />
+
+            <EditText
+                android:id="@+id/et_login_mobile"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:background="@drawable/s_edittext_border"
+                android:paddingStart="14dp"
+                android:hint="Enter your mobile number"
+                android:textColor="@color/black"
+                android:textColorHint="#8A8A8A"
+                android:layout_marginTop="10dp"
+                android:inputType="phone"/>
+
+
+
+
+            <!-- Login Button -->
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btn_login_send_otp"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:text="Send OTP"
+                android:textAllCaps="false"
+                android:textSize="17dp"
+                android:textStyle="bold"
+                android:textColor="@color/black"
+                android:background="@drawable/s_btn_bg_shape"
+                android:layout_marginTop="26dp"/>
+
+
+
+        </LinearLayout>
+
+
+
+
+
+
+    </LinearLayout>
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    <!-- <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="12dp"
+                    android:weightSum="2">
+
+                    <EditText
+                        android:id="@+id/etFirstName"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="48dp"
+                        android:hint="First Name"
+                        android:paddingStart="12dp"
+                        android:background="@drawable/input_bg"
+                        android:layout_marginEnd="8dp"
+                        android:inputType="textPersonName"/>
+
+                    <EditText
+                        android:id="@+id/etLastName"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="48dp"
+                        android:hint="Last Name"
+                        android:paddingStart="12dp"
+                        android:background="@drawable/input_bg"
+                        android:layout_marginStart="8dp"
+                        android:inputType="textPersonName"/>
+                </LinearLayout>-->

@@ -3835,6 +3835,7 @@ int drawable tperson_logo 0x7f07013b
 int drawable tprofile 0x7f07013c
 int drawable tresources 0x7f07013d
 int drawable tsearchbar_shape 0x7f07013e
+int drawable tstar_app_logo 0x7f070141
 int drawable tstudent 0x7f07013f
 int drawable white_shadow_entry_page 0x7f070140
 int id ALT 0x7f080000
@@ -4150,6 +4151,7 @@ int id image 0x7f080135
 int id imgArrow 0x7f080136
 int id imgProfile 0x7f080137
 int id imgStudent 0x7f080138
+int id img_logo 0x7f0802a5
 int id immediateStop 0x7f080139
 int id included 0x7f08013a
 int id indeterminate 0x7f08013b
@@ -4480,6 +4482,7 @@ int id tvSubjectName 0x7f08027f
 int id tvTeacher 0x7f080280
 int id tvTitle 0x7f080281
 int id tvUserName 0x7f080282
+int id tv_app_name 0x7f0802a6
 int id tv_login_forgot_password 0x7f080283
 int id tv_login_on_signup_page 0x7f080284
 int id tv_register 0x7f080285

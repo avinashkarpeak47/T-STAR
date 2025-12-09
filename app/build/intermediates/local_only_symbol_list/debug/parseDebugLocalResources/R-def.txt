@@ -79,6 +79,7 @@ drawable tperson_logo
 drawable tprofile
 drawable tresources
 drawable tsearchbar_shape
+drawable tstar_app_logo
 drawable tstudent
 drawable white_shadow_entry_page
 id FirstFragment
@@ -151,6 +152,7 @@ id header_bg
 id imgArrow
 id imgProfile
 id imgStudent
+id img_logo
 id ivProfilePic
 id ivUserProfile
 id leftPanel
@@ -206,6 +208,7 @@ id tvSubjectName
 id tvTeacher
 id tvTitle
 id tvUserName
+id tv_app_name
 id tv_login_forgot_password
 id tv_login_on_signup_page
 id tv_register

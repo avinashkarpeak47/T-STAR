@@ -1,9 +1,9 @@
 -- Merging decision tree log ---
 manifest
-ADDED from C:\Users\HP-JS\AndroidStudioProjects\TSTAR\app\src\main\AndroidManifest.xml:2:1-112:12
-INJECTED from C:\Users\HP-JS\AndroidStudioProjects\TSTAR\app\src\main\AndroidManifest.xml:2:1-112:12
-INJECTED from C:\Users\HP-JS\AndroidStudioProjects\TSTAR\app\src\main\AndroidManifest.xml:2:1-112:12
-INJECTED from C:\Users\HP-JS\AndroidStudioProjects\TSTAR\app\src\main\AndroidManifest.xml:2:1-112:12
+ADDED from C:\Users\HP-JS\AndroidStudioProjects\TSTAR\app\src\main\AndroidManifest.xml:2:1-114:12
+INJECTED from C:\Users\HP-JS\AndroidStudioProjects\TSTAR\app\src\main\AndroidManifest.xml:2:1-114:12
+INJECTED from C:\Users\HP-JS\AndroidStudioProjects\TSTAR\app\src\main\AndroidManifest.xml:2:1-114:12
+INJECTED from C:\Users\HP-JS\AndroidStudioProjects\TSTAR\app\src\main\AndroidManifest.xml:2:1-114:12
 MERGED from [androidx.databinding:viewbinding:8.10.1] C:\Users\HP-JS\.gradle\caches\8.11.1\transforms\4c97ad82f540af5f1770ff7afd54b0a1\transformed\viewbinding-8.10.1\AndroidManifest.xml:2:1-7:12
 MERGED from [androidx.navigation:navigation-runtime-android:2.9.3] C:\Users\HP-JS\.gradle\caches\8.11.1\transforms\a12a8bc1128fa40127ed8491b1c3773b\transformed\navigation-runtime-release\AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.navigation:navigation-common-android:2.9.3] C:\Users\HP-JS\.gradle\caches\8.11.1\transforms\9f78fc1973989f293e315530c6c30119\transformed\navigation-common-release\AndroidManifest.xml:17:1-22:12
@@ -98,8 +98,8 @@ MERGED from [com.google.android.play:core-common:2.0.3] C:\Users\HP-JS\.gradle\c
 	xmlns:android
 		ADDED from C:\Users\HP-JS\AndroidStudioProjects\TSTAR\app\src\main\AndroidManifest.xml:2:11-69
 application
-ADDED from C:\Users\HP-JS\AndroidStudioProjects\TSTAR\app\src\main\AndroidManifest.xml:5:5-110:19
-INJECTED from C:\Users\HP-JS\AndroidStudioProjects\TSTAR\app\src\main\AndroidManifest.xml:5:5-110:19
+ADDED from C:\Users\HP-JS\AndroidStudioProjects\TSTAR\app\src\main\AndroidManifest.xml:5:5-112:19
+INJECTED from C:\Users\HP-JS\AndroidStudioProjects\TSTAR\app\src\main\AndroidManifest.xml:5:5-112:19
 MERGED from [com.google.android.material:material:1.13.0] C:\Users\HP-JS\.gradle\caches\8.11.1\transforms\790a2b1c9877dd6daa1127a4d1d7859c\transformed\material-1.13.0\AndroidManifest.xml:22:5-20
 MERGED from [com.google.android.material:material:1.13.0] C:\Users\HP-JS\.gradle\caches\8.11.1\transforms\790a2b1c9877dd6daa1127a4d1d7859c\transformed\material-1.13.0\AndroidManifest.xml:22:5-20
 MERGED from [androidx.constraintlayout:constraintlayout:2.2.1] C:\Users\HP-JS\.gradle\caches\8.11.1\transforms\6eec879923cec453dc9eef6abe9665df\transformed\constraintlayout-2.2.1\AndroidManifest.xml:7:5-20
@@ -322,28 +322,34 @@ ADDED from C:\Users\HP-JS\AndroidStudioProjects\TSTAR\app\src\main\AndroidManife
 		ADDED from C:\Users\HP-JS\AndroidStudioProjects\TSTAR\app\src\main\AndroidManifest.xml:94:13-37
 	android:name
 		ADDED from C:\Users\HP-JS\AndroidStudioProjects\TSTAR\app\src\main\AndroidManifest.xml:93:13-67
+activity#com.example.t_star.TEACHERACTIVITIES.TClassesAssignActivity
+ADDED from C:\Users\HP-JS\AndroidStudioProjects\TSTAR\app\src\main\AndroidManifest.xml:95:9-96:39
+	android:exported
+		ADDED from C:\Users\HP-JS\AndroidStudioProjects\TSTAR\app\src\main\AndroidManifest.xml:96:13-37
+	android:name
+		ADDED from C:\Users\HP-JS\AndroidStudioProjects\TSTAR\app\src\main\AndroidManifest.xml:95:19-75
 activity#com.example.t_star.TEACHERACTIVITIES.THomeActivity
-ADDED from C:\Users\HP-JS\AndroidStudioProjects\TSTAR\app\src\main\AndroidManifest.xml:95:9-97:40
+ADDED from C:\Users\HP-JS\AndroidStudioProjects\TSTAR\app\src\main\AndroidManifest.xml:97:9-99:40
 	android:exported
-		ADDED from C:\Users\HP-JS\AndroidStudioProjects\TSTAR\app\src\main\AndroidManifest.xml:97:13-37
+		ADDED from C:\Users\HP-JS\AndroidStudioProjects\TSTAR\app\src\main\AndroidManifest.xml:99:13-37
 	android:name
-		ADDED from C:\Users\HP-JS\AndroidStudioProjects\TSTAR\app\src\main\AndroidManifest.xml:96:13-60
+		ADDED from C:\Users\HP-JS\AndroidStudioProjects\TSTAR\app\src\main\AndroidManifest.xml:98:13-60
 activity#com.example.t_star.TSTAR_Splash_Screen
-ADDED from C:\Users\HP-JS\AndroidStudioProjects\TSTAR\app\src\main\AndroidManifest.xml:101:9-109:20
+ADDED from C:\Users\HP-JS\AndroidStudioProjects\TSTAR\app\src\main\AndroidManifest.xml:103:9-111:20
 	android:exported
-		ADDED from C:\Users\HP-JS\AndroidStudioProjects\TSTAR\app\src\main\AndroidManifest.xml:103:13-36
+		ADDED from C:\Users\HP-JS\AndroidStudioProjects\TSTAR\app\src\main\AndroidManifest.xml:105:13-36
 	android:name
-		ADDED from C:\Users\HP-JS\AndroidStudioProjects\TSTAR\app\src\main\AndroidManifest.xml:102:13-48
+		ADDED from C:\Users\HP-JS\AndroidStudioProjects\TSTAR\app\src\main\AndroidManifest.xml:104:13-48
 intent-filter#action:name:android.intent.action.MAIN+category:name:android.intent.category.LAUNCHER
-ADDED from C:\Users\HP-JS\AndroidStudioProjects\TSTAR\app\src\main\AndroidManifest.xml:104:13-108:29
+ADDED from C:\Users\HP-JS\AndroidStudioProjects\TSTAR\app\src\main\AndroidManifest.xml:106:13-110:29
 action#android.intent.action.MAIN
-ADDED from C:\Users\HP-JS\AndroidStudioProjects\TSTAR\app\src\main\AndroidManifest.xml:105:17-69
+ADDED from C:\Users\HP-JS\AndroidStudioProjects\TSTAR\app\src\main\AndroidManifest.xml:107:17-69
 	android:name
-		ADDED from C:\Users\HP-JS\AndroidStudioProjects\TSTAR\app\src\main\AndroidManifest.xml:105:25-66
+		ADDED from C:\Users\HP-JS\AndroidStudioProjects\TSTAR\app\src\main\AndroidManifest.xml:107:25-66
 category#android.intent.category.LAUNCHER
-ADDED from C:\Users\HP-JS\AndroidStudioProjects\TSTAR\app\src\main\AndroidManifest.xml:107:17-77
+ADDED from C:\Users\HP-JS\AndroidStudioProjects\TSTAR\app\src\main\AndroidManifest.xml:109:17-77
 	android:name
-		ADDED from C:\Users\HP-JS\AndroidStudioProjects\TSTAR\app\src\main\AndroidManifest.xml:107:27-74
+		ADDED from C:\Users\HP-JS\AndroidStudioProjects\TSTAR\app\src\main\AndroidManifest.xml:109:27-74
 uses-sdk
 INJECTED from C:\Users\HP-JS\AndroidStudioProjects\TSTAR\app\src\main\AndroidManifest.xml reason: use-sdk injection requested
 INJECTED from C:\Users\HP-JS\AndroidStudioProjects\TSTAR\app\src\main\AndroidManifest.xml

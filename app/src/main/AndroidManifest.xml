@@ -92,6 +92,8 @@
         <activity
             android:name=".TEACHERACTIVITIES.TAsssignmentActivity"
             android:exported="false" />
+        <activity android:name=".TEACHERACTIVITIES.TClassesAssignActivity"
+            android:exported="false"/>
         <activity
             android:name=".TEACHERACTIVITIES.THomeActivity"
             android:exported="false" /> <!-- <activity -->

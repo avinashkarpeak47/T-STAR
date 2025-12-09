@@ -5,6 +5,7 @@
     android:id="@+id/fragment_classes_root"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     android:padding="16dp">
 
     <!-- Greeting + name + profile pic -->
@@ -45,7 +46,6 @@
             android:id="@+id/ivProfilePic"
             android:layout_width="48dp"
             android:layout_height="48dp"
-            android:src="@drawable/s_profile"
             android:scaleType="centerCrop"/>
 
     </LinearLayout>
@@ -124,8 +124,8 @@ app:layout_constraintVertical_bias="0.0">
     android:orientation="vertical"
     android:padding="18dp">
 
-    <!- Promo Card -->
-   <!-- <androidx.cardview.widget.CardView
+
+   <androidx.cardview.widget.CardView
         android:layout_width="310dp"
         android:layout_height="180dp"
         android:layout_marginBottom="16dp"

@@ -32,13 +32,6 @@ public class TClassesAttendActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         toolbar.setNavigationOnClickListener(v -> finish());
 
-        // TOP CREATE BUTTON
-        ImageButton btnCreateTop = findViewById(R.id.btnCreate);
-        btnCreateTop.setOnClickListener(v -> {
-            // OPEN CREATE ATTENDANCE PAGE
-            Intent i = new Intent(TClassesAttendActivity.this, TCreateClassActivity.class);
-            startActivity(i);
-        });
 
         rvClasses = findViewById(R.id.rvClasses);
         rvClasses.setLayoutManager(new LinearLayoutManager(this));

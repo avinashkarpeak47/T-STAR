@@ -1,5 +1,4 @@
 package com.example.t_star.TEACHERACTIVITIES;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Toast;
@@ -31,11 +30,6 @@ public class TClassesAssignActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         toolbar.setNavigationOnClickListener(v -> finish());
 
-        // Create Button
-        findViewById(R.id.btnCreate).setOnClickListener(v -> {
-            Intent i = new Intent(TClassesAssignActivity.this, TCreateClassActivity.class);
-            startActivity(i);
-        });
 
         // RecyclerView setup
         rvClasses = findViewById(R.id.rvClasses);

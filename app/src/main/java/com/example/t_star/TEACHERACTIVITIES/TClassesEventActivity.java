@@ -32,13 +32,6 @@ public class TClassesEventActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         toolbar.setNavigationOnClickListener(v -> finish());
 
-        // CREATE BUTTON
-        ImageButton btnCreateTop = findViewById(R.id.btnCreate);
-        btnCreateTop.setOnClickListener(v -> {
-            // OPEN CREATE NEW EVENT PAGE
-            Intent i = new Intent(TClassesEventActivity.this, TCreateClassActivity.class);
-            startActivity(i);
-        });
 
         rvClasses = findViewById(R.id.rvClasses);
         rvClasses.setLayoutManager(new LinearLayoutManager(this));

@@ -1,34 +1,184 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
+    android:background="@color/white"
     tools:context=".TEACHERACTIVITIES.TCreateClassActivity">
 
+    <!-- TOP TOOLBAR -->
     <com.google.android.material.appbar.MaterialToolbar
         android:id="@+id/toolbar"
         android:layout_width="0dp"
-        android:layout_height="52dp"
+        android:layout_height="wrap_content"
         android:background="@drawable/header_gradient"
-        app:navigationIcon="@drawable/arrow_back"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
         app:title="Create Class"
         app:titleTextColor="@color/white"
+        app:navigationIcon="@drawable/arrow_back"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
+        app:layout_constraintEnd_toEndOf="parent" />
 
-        <ImageButton
-            android:id="@+id/btnCreate"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:scaleType="centerInside"
-            android:layout_gravity="end|center_vertical"
-            android:background="@android:color/transparent"
-            android:src="@drawable/tnewassign"
-            android:padding="8dp"/>
-    </com.google.android.material.appbar.MaterialToolbar>
+    <!-- SCROLLVIEW -->
+    <ScrollView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:padding="16dp"
+        android:fillViewport="true"
+        app:layout_constraintTop_toBottomOf="@id/toolbar"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <!-- CARD VIEW -->
+            <androidx.cardview.widget.CardView
+                android:id="@+id/classCard"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                app:cardCornerRadius="18dp"
+                app:cardElevation="8dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="590dp"
+                    android:orientation="vertical"
+                    android:padding="20dp">
+
+                    <!-- CLASS NAME -->
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Class Name"
+                        android:textColor="@color/black"
+                        android:textSize="26sp"
+                        android:textStyle="bold" />
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:boxBackgroundMode="outline">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/showClassName"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="Class 10 A"
+                            android:maxLines="2"
+                            android:textColor="@color/black"
+                            android:textColorHint="@color/light_greay" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <!-- DESCRIPTION -->
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:text="Description"
+                        android:textColor="@color/black"
+                        android:textSize="20sp"
+                        android:textStyle="bold" />
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:boxBackgroundMode="outline">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/showDescription"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="Description"
+                            android:minLines="3"
+                            android:maxLines="3"
+                            android:textColor="@color/black"
+                            android:textColorHint="@color/light_greay" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <!-- TEACHER NAME -->
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:text="Teacher Name"
+                        android:textColor="@color/black"
+                        android:textSize="20sp"
+                        android:textStyle="bold" />
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:boxBackgroundMode="outline">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/showTeacherName"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="Ankita Madam"
+                            android:maxLines="1"
+                            android:textColor="@color/black"
+                            android:textColorHint="@color/light_greay" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <!-- CLASS ID -->
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:text="Create Class ID"
+                        android:textColor="@color/black"
+                        android:textSize="20sp"
+                        android:textStyle="bold" />
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:boxBackgroundMode="outline">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/edtClassId"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="Ex. CL1001"
+                            android:textColor="@color/black"
+                            android:textColorHint="@color/light_greay" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <!-- BUTTON -->
+                    <Button
+                        android:id="@+id/btnSend"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="24dp"
+                        android:backgroundTint="@color/maroon_dark"
+                        android:text="CREATE CLASS"
+                        android:textColor="@android:color/white" />
+
+                    <TextView
+                        android:id="@+id/txtCheck"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="10dp"
+                        android:text="Check Availability"
+                        android:textColor="@color/black"
+                        android:textStyle="bold"
+                        android:visibility="visible" />
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+        </LinearLayout>
+    </ScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

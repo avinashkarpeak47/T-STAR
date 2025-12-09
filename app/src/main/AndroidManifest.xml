@@ -12,6 +12,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.TSTAR"
         tools:targetApi="31">
+
         <activity
             android:name=".STUDENTACTIVITIES.S_class_dashboard_notifications"
             android:exported="false" />
@@ -45,18 +46,15 @@
         <activity
             android:name=".STUDENTACTIVITIES.S_Enroll_in_Class"
             android:exported="false" />
-
         <activity
             android:name=".TEACHERACTIVITIES.TClassesAssignActivity"
             android:exported="false" />
-
         <activity
             android:name=".TEACHERACTIVITIES.TClassesAttendActivity"
             android:exported="false" />
         <activity
             android:name=".TEACHERACTIVITIES.TClassesEventActivity"
             android:exported="false" />
-
         <activity
             android:name=".TEACHERACTIVITIES.TClassesChatStudActivity"
             android:exported="false" />
@@ -83,10 +81,9 @@
             android:exported="false" />
         <activity
             android:name=".STUDENTACTIVITIES.S_Mainpage"
-            android:exported="false" />
-<!--        <activity-->
-<!--            android:name=".STUDENTACTIVITIES.S_HomePagee"-->
-<!--            android:exported="false" />-->
+            android:exported="false" /> <!-- <activity -->
+        <!-- android:name=".STUDENTACTIVITIES.S_HomePagee" -->
+        <!-- android:exported="false" /> -->
         <activity
             android:name=".TEACHERACTIVITIES.TChatActivity"
             android:exported="false" />
@@ -111,9 +108,13 @@
         <activity
             android:name=".TEACHERACTIVITIES.TAssignDetailActivity"
             android:exported="false" />
-<!--        <activity-->
-<!--            android:name=".STUDENTACTIVITIES.SHome_Page"-->
-<!--            android:exported="false" />-->
+        <activity
+            android:name=".TEACHERACTIVITIES.DrawerActivity"
+            android:exported="false" />
+
+        <!-- <activity -->
+        <!-- android:name=".STUDENTACTIVITIES.SHome_Page" -->
+        <!-- android:exported="false" /> -->
         <activity
             android:name=".TEACHERACTIVITIES.THomeActivity"
             android:exported="false" /> <!-- <activity -->

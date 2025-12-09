@@ -18,7 +18,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.t_star.R;
-import com.example.t_star.Splash_Screen;
 
 /*import com.bumptech.glide.Glide;
 import com.example.t_star.R;

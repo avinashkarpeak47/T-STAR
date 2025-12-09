@@ -2,19 +2,21 @@ package com.example.t_star.STUDENTACTIVITIES.SFragment;
 
 import android.os.Build;
 import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewTreeObserver;
-import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.widget.NestedScrollView;
 import androidx.fragment.app.Fragment;
 
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.view.ViewTreeObserver;
+
 import com.example.t_star.R;
 
 import de.hdodenhof.circleimageview.CircleImageView;
+
 
 public class S_Profile_Fragment extends Fragment {
 

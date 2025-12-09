@@ -37,6 +37,8 @@ public class TSTAR_Entry_Activity extends AppCompatActivity {
             public void onClick(View v) {
 
                 Intent intent = new Intent(TSTAR_Entry_Activity.this,TSTAR_Signup_Activity.class);
+                startActivity(intent);
+                finish();
             }
         });
 

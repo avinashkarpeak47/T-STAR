@@ -60,7 +60,7 @@
                         android:orientation="horizontal"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:gravity=""
+                        android:gravity="space_between"
                         android:layout_marginBottom="10dp">
 
                         <TextView
@@ -84,7 +84,7 @@
                         android:orientation="horizontal"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:gravity=""
+                        android:gravity="space_between"
                         android:layout_marginBottom="10dp">
 
                         <TextView
@@ -108,7 +108,7 @@
                         android:orientation="horizontal"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:gravity=""
+                        android:gravity="space_between"
                         android:layout_marginBottom="10dp">
 
                         <TextView
@@ -132,7 +132,7 @@
                         android:orientation="horizontal"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:gravity="">
+                        android:gravity="space_between">
 
                         <TextView
                             android:text="Teacher:"
@@ -162,9 +162,8 @@
                 app:queryHint="Search here..."
                 android:iconifiedByDefault="false"
                 android:background="@drawable/s_edittext_border"
+                android:theme="@style/ThemeOverlay.App.SearchView"
                 android:layout_margin="8dp" />
-               <!-- android:theme="@style/ThemeOverlay.App.SearchView"-->
-
 
             <!-- GRID DASHBOARD -->
             <GridLayout

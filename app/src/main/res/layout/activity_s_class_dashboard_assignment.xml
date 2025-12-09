@@ -15,9 +15,10 @@
             android:id="@+id/toolbarAssignments"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:background="?attr/colorPrimary"
+            android:background="@color/light_lavender_for_cards"
             app:title="Assignments"
-            app:titleTextColor="@android:color/white"/>
+            app:subtitleTextColor="@color/Lavender"
+            app:titleTextColor="@color/Lavender"/>
 
         <!-- Tabs: All / Pending / Submit / Checked -->
         <com.google.android.material.tabs.TabLayout

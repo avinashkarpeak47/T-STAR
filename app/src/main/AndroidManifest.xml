@@ -45,11 +45,38 @@
         <activity
             android:name=".STUDENTACTIVITIES.S_Enroll_in_Class"
             android:exported="false" />
+
+        <activity
+            android:name=".TEACHERACTIVITIES.TClassesAssignActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".TEACHERACTIVITIES.TClassesAttendActivity"
+            android:exported="false" />
+        <activity
+            android:name=".TEACHERACTIVITIES.TClassesEventActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".TEACHERACTIVITIES.TClassesChatStudActivity"
+            android:exported="false" />
+        <activity
+            android:name=".TEACHERACTIVITIES.TClassesStudentsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".TEACHERACTIVITIES.TClassesResourcesActivity"
+            android:exported="false" />
+        <activity
+            android:name=".TEACHERACTIVITIES.TClassesNotiActivity"
+            android:exported="false" />
+        <activity
+            android:name=".TEACHERACTIVITIES.TCreateClassActivity"
+            android:exported="false" />
         <activity
             android:name=".TEACHERACTIVITIES.TResourcesActivity"
             android:exported="false" />
         <activity
-            android:name=".TEACHERACTIVITIES.TStudentActivity"
+            android:name=".TEACHERACTIVITIES.TStudentsActivity"
             android:exported="false" />
         <activity
             android:name=".TEACHERACTIVITIES.TCreateNewEventActivity"
@@ -57,9 +84,9 @@
         <activity
             android:name=".STUDENTACTIVITIES.S_Mainpage"
             android:exported="false" />
-        <activity
-            android:name=".STUDENTACTIVITIES.S_HomePagee"
-            android:exported="false" />
+<!--        <activity-->
+<!--            android:name=".STUDENTACTIVITIES.S_HomePagee"-->
+<!--            android:exported="false" />-->
         <activity
             android:name=".TEACHERACTIVITIES.TChatActivity"
             android:exported="false" />
@@ -82,8 +109,11 @@
             android:name=".TEACHERACTIVITIES.TAsssignmentActivity"
             android:exported="false" />
         <activity
-            android:name=".STUDENTACTIVITIES.SHome_Page"
+            android:name=".TEACHERACTIVITIES.TAssignDetailActivity"
             android:exported="false" />
+<!--        <activity-->
+<!--            android:name=".STUDENTACTIVITIES.SHome_Page"-->
+<!--            android:exported="false" />-->
         <activity
             android:name=".TEACHERACTIVITIES.THomeActivity"
             android:exported="false" /> <!-- <activity -->

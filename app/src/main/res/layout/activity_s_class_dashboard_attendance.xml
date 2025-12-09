@@ -15,9 +15,9 @@
             android:id="@+id/toolbarAttendance"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:background="?attr/colorPrimary"
+            android:background="@color/Lavender"
             app:title="Attendance"
-            app:titleTextColor="@android:color/white"/>
+            app:titleTextColor="@color/light_lavender_for_cards"/>
 
         <!-- Tabs: All / Present / Absent / Leave -->
         <com.google.android.material.tabs.TabLayout

@@ -15,7 +15,7 @@ public class TSTAR_Splash_Screen extends AppCompatActivity {
         setContentView(R.layout.tstar_splash_screen);
         //  Intent intent = new Intent(Splash_Screen.this, S_Mainpage.class);
        // Intent intent = new Intent(TSTAR_Splash_Screen.this, THomeActivity.class);
-        Intent intent = new Intent(TSTAR_Splash_Screen.this, TSTAR_Login_Activity.class);
+        Intent intent = new Intent(TSTAR_Splash_Screen.this, TSTAR_Signup_Activity.class);
         startActivity(intent);
         finish();
 

@@ -141,6 +141,7 @@ id et_login_password
 id et_signup_email
 id et_signup_firstname
 id et_signup_lastname
+id et_signup_mobile
 id et_signup_password
 id fragmentContainer
 id fragment_classes_root
@@ -272,10 +273,16 @@ mipmap ic_launcher_round
 navigation nav_graph
 string app_name
 string first_fragment_label
+string gcm_defaultSenderId
+string google_api_key
+string google_app_id
+string google_crash_reporting_api_key
+string google_storage_bucket
 string hello_blank_fragment
 string lorem_ipsum
 string next
 string previous
+string project_id
 string second_fragment_label
 style Base.Theme.TSTAR
 style Theme.TSTAR

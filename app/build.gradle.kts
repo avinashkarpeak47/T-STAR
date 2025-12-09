@@ -1,5 +1,6 @@
 plugins {
     alias(libs.plugins.android.application)
+    alias(libs.plugins.google.gms.google.services)
 }
 
 android {
@@ -45,6 +46,7 @@ dependencies {
     implementation(libs.gridlayout)
     implementation(libs.navigation.fragment)
     implementation(libs.navigation.ui)
+    implementation(libs.firebase.auth)
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
@@ -53,6 +55,9 @@ dependencies {
     implementation ("androidx.constraintlayout:constraintlayout:2.1.4")
     implementation ("com.google.android.material:material:1.12.0")
     implementation ("androidx.recyclerview:recyclerview:1.3.0")
+
+    implementation("com.google.firebase:firebase-auth:24.0.1")
+    implementation("com.google.firebase:firebase-database:22.0.1")
 
 
 

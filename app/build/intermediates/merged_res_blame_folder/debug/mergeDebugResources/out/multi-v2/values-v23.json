@@ -1,10 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "com.example.t_star.app-mergeDebugResources-47:/values-v23/values-v23.xml",
+            "outputFile": "com.example.t_star.app-mergeDebugResources-60:/values-v23/values-v23.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\HP-JS\\.gradle\\caches\\8.11.1\\transforms\\6be87d612c3da92a4adbc31dba46cafb\\transformed\\material-1.13.0\\res\\values-v23\\values-v23.xml",
+                    "source": "C:\\Users\\HP-JS\\.gradle\\caches\\8.11.1\\transforms\\790a2b1c9877dd6daa1127a4d1d7859c\\transformed\\material-1.13.0\\res\\values-v23\\values-v23.xml",
                     "from": {
                         "startLines": "2,5,9,13,16,19,22,25,28,32",
                         "startColumns": "4,4,4,4,4,4,4,4,4,4",
@@ -42,7 +42,7 @@
                     }
                 },
                 {
-                    "source": "C:\\Users\\HP-JS\\.gradle\\caches\\8.11.1\\transforms\\f7299578b29a9968520a45726efc2fb7\\transformed\\cardview-1.0.0\\res\\values-v23\\values-v23.xml",
+                    "source": "C:\\Users\\HP-JS\\.gradle\\caches\\8.11.1\\transforms\\fff27dd493a1a3b0e0236bfd21ab325c\\transformed\\cardview-1.0.0\\res\\values-v23\\values-v23.xml",
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",
@@ -61,7 +61,7 @@
                     }
                 },
                 {
-                    "source": "C:\\Users\\HP-JS\\.gradle\\caches\\8.11.1\\transforms\\36c4cc1e9f3fa1d59544ce5184f57280\\transformed\\appcompat-1.7.1\\res\\values-v23\\values-v23.xml",
+                    "source": "C:\\Users\\HP-JS\\.gradle\\caches\\8.11.1\\transforms\\408dceb8c735272e33b7c7513803f1bb\\transformed\\appcompat-1.7.1\\res\\values-v23\\values-v23.xml",
                     "from": {
                         "startLines": "2,3,4,5,6,20,34,35,36,39,43,44,45,46",
                         "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4",

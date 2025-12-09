@@ -31,11 +31,6 @@ public class TClassesAssignActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         toolbar.setNavigationOnClickListener(v -> finish());
 
-        // Create Button
-        findViewById(R.id.btnCreate).setOnClickListener(v -> {
-            Intent i = new Intent(TClassesAssignActivity.this, TCreateClassActivity.class);
-            startActivity(i);
-        });
 
         // RecyclerView setup
         rvClasses = findViewById(R.id.rvClasses);

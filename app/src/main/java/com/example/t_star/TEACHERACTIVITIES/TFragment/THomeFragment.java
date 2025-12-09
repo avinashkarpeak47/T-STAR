@@ -3,18 +3,19 @@ package com.example.t_star.TEACHERACTIVITIES.TFragment;
 import android.content.Intent;
 import android.os.Bundle;
 
-import androidx.cardview.widget.CardView;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
+
+import androidx.cardview.widget.CardView;
 
 import com.example.t_star.R;
-import com.example.t_star.TEACHERACTIVITIES.TAsssignmentActivity;
-import com.example.t_star.TEACHERACTIVITIES.TAttendanceActivity;
-import com.example.t_star.TEACHERACTIVITIES.TChatActivity;
 import com.example.t_star.TEACHERACTIVITIES.TClassesAssignActivity;
 import com.example.t_star.TEACHERACTIVITIES.TClassesAttendActivity;
 import com.example.t_star.TEACHERACTIVITIES.TClassesChatStudActivity;
@@ -22,31 +23,32 @@ import com.example.t_star.TEACHERACTIVITIES.TClassesEventActivity;
 import com.example.t_star.TEACHERACTIVITIES.TClassesNotiActivity;
 import com.example.t_star.TEACHERACTIVITIES.TClassesResourcesActivity;
 import com.example.t_star.TEACHERACTIVITIES.TClassesStudentsActivity;
-import com.example.t_star.TEACHERACTIVITIES.TEventActivity;
-import com.example.t_star.TEACHERACTIVITIES.TNotificationActivity;
-import com.example.t_star.TEACHERACTIVITIES.TProfileActivity;
-import com.example.t_star.TEACHERACTIVITIES.TResourcesActivity;
-import com.example.t_star.TEACHERACTIVITIES.TStudentsActivity;
+import com.google.android.material.appbar.MaterialToolbar;
+import com.google.android.material.navigation.NavigationView;
 
 public class THomeFragment extends Fragment {
 
-    CardView cardCreateAssignment, cardAttendance, cardCreateEvent, cardChat, cardStudents, cardResources, cardNotifications;
-    ImageView imgProfile;
+    MaterialToolbar toolbar;
+    DrawerLayout drawerLayout;
+    NavigationView navigationView;
 
-    public THomeFragment() {}
+    CardView cardCreateAssignment, cardAttendance, cardCreateEvent, cardChat, cardStudents, cardResources, cardNotifications;
+
+    public THomeFragment() {
+        // Required empty constructor
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
+        // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_t_home, container, false);
 
-        imgProfile = view.findViewById(R.id.imgProfile);
-        imgProfile.setOnClickListener(v ->
-                startActivity(new Intent(requireContext(), TProfileActivity.class))
-        );
+        // Toolbar from fragment layout
+        toolbar = view.findViewById(R.id.toolbar);
 
-        // Cards
+        // Cards from fragment layout
         cardCreateAssignment = view.findViewById(R.id.cardCreateAssignment);
         cardAttendance = view.findViewById(R.id.cardAttendance);
         cardCreateEvent = view.findViewById(R.id.cardCreateEvent);
@@ -55,6 +57,21 @@ public class THomeFragment extends Fragment {
         cardResources = view.findViewById(R.id.cardResources);
         cardNotifications = view.findViewById(R.id.cardNotifications);
 
+        return view;
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        // Drawer & Navigation from Parent Activity
+        drawerLayout = requireActivity().findViewById(R.id.drawerLayout);
+        navigationView = requireActivity().findViewById(R.id.navigationView);
+
+        // Toolbar navigation (hamburger icon) opens drawer
+        toolbar.setNavigationOnClickListener(v -> drawerLayout.openDrawer(GravityCompat.START));
+
+        // ---------- CARD CLICK FUNCTIONS ----------
         cardCreateAssignment.setOnClickListener(v ->
                 startActivity(new Intent(getActivity(), TClassesAssignActivity.class)));
 
@@ -75,7 +92,5 @@ public class THomeFragment extends Fragment {
 
         cardNotifications.setOnClickListener(v ->
                 startActivity(new Intent(getActivity(), TClassesNotiActivity.class)));
-
-        return view;
     }
 }

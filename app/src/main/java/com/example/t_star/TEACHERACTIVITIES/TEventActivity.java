@@ -10,6 +10,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.t_star.R;
+import com.example.t_star.TEACHERACTIVITIES.EVENT.TEventAdapter;
+import com.example.t_star.TEACHERACTIVITIES.EVENT.TEventModel;
 import com.google.android.material.appbar.MaterialToolbar;
 
 import java.util.ArrayList;
@@ -33,7 +35,6 @@ public class TEventActivity extends AppCompatActivity {
         toolbar.setNavigationOnClickListener(v -> finish());
         ImageButton btnCreate = toolbar.findViewById(R.id.btnCreate);
         btnCreate.setOnClickListener(v -> startActivity(new Intent(this, TCreateNewEventActivity.class)));
-
 
         rvEvents = findViewById(R.id.rvEvents);
         rvEvents.setLayoutManager(new LinearLayoutManager(this));

@@ -49,7 +49,7 @@ public class S_Profile_Fragment extends Fragment {
 
         // 1) Wait until layout is done so we know start position of profile image
         view.getViewTreeObserver().addOnGlobalLayoutListener(
-                new ViewTreeObserver.OnGlobalLayoutListener() {
+                new ViewTreeObserver.OnGlobalLayoutListener(){
                     @Override
                     public void onGlobalLayout() {
                         view.getViewTreeObserver().removeOnGlobalLayoutListener(this);

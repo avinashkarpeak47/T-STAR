@@ -10,7 +10,8 @@
     <color name="icon_circle">#F7EAF0</color>
 
     <color name="Lavender">#8692f7</color>
-    <color name="light_lavender_for_cards">#DCDDF8</color>
+    <!--<color name="light_lavender_for_cards">#DCDDF8</color>-->
+    <color name="light_lavender_for_cards">#C7CFFF</color>
 
 
     <color name="status_pending">#F44336</color> <!-- red -->

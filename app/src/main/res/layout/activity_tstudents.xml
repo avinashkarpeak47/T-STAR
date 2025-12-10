@@ -6,6 +6,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:fitsSystemWindows="true"
     tools:context=".TEACHERACTIVITIES.TStudentsActivity"
+    android:background="@color/white"
    >
 
     <!-- Search Bar -->
@@ -24,11 +25,12 @@
         tools:layout_editor_absoluteX="-1dp"
         tools:layout_editor_absoluteY="0dp" />
 
+
     <SearchView
         android:id="@+id/searchViewStudents"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="52dp"
+        android:layout_marginTop="12dp"
         android:background="@drawable/tsearchbar_shape"
         android:elevation="6dp"
         android:hint="Search Students"
@@ -36,7 +38,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/toolbar" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvStudents"

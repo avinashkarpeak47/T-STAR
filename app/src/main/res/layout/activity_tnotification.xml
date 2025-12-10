@@ -90,15 +90,25 @@
                     android:textSize="20sp"
                     android:layout_margin="5dp"
                     android:textStyle="bold"/>
-
-                <EditText
-                    android:id="@+id/etTitle"
+                <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Enter title"
-                    android:maxLines="2"
-                    android:textSize="18dp"
-                    android:layout_marginBottom="16dp"/>
+                    app:boxBackgroundMode="outline"
+                   >
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/etTitle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Enter title"
+                        android:maxLines="2"
+                        android:textSize="18dp"
+
+                        />
+
+
+                </com.google.android.material.textfield.TextInputLayout>
+
 
                 <!-- Message -->
                 <TextView
@@ -110,18 +120,27 @@
                     android:textSize="20sp"
                     android:textStyle="bold"/>
 
-                <EditText
-                    android:id="@+id/etMessage"
+                <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
-                    android:layout_height="150dp"
-                    android:hint="Enter message"
-                    android:gravity="top"
-                    android:textSize="18sp"
-                    android:layout_marginLeft="5dp"
-                    android:paddingLeft="5sp"
-                    android:minLines="3"
-                    android:background="#F3E8FF"
-                    android:layout_marginBottom="20dp"/>
+                    android:layout_height="wrap_content"
+                    app:boxBackgroundMode="outline"
+
+                    >
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/etMessage"
+                        android:layout_width="match_parent"
+                        android:layout_height="150dp"
+                        android:hint="Enter message"
+                        android:gravity="top"
+                        android:textSize="18sp"
+                        android:layout_marginLeft="5dp"
+                        android:minLines="3"
+                        android:background="#F3E8FF"
+                        />
+
+
+                </com.google.android.material.textfield.TextInputLayout>
+
 
                 <!-- Send Button -->
                 <Button
@@ -130,6 +149,9 @@
                     android:layout_height="wrap_content"
                     android:text="SEND NOTIFICATION"
                     android:layout_marginBottom="20dp"
+                    android:layout_marginTop="20sp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20sp"
                     android:backgroundTint="@android:color/holo_blue_dark"
                     android:textColor="@android:color/white"/>
 

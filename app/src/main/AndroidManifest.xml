@@ -80,6 +80,9 @@
             android:name=".TEACHERACTIVITIES.TCreateNewEventActivity"
             android:exported="false" />
         <activity
+            android:name=".TEACHERACTIVITIES.TEventActivity"
+            android:exported="false" />
+        <activity
             android:name=".STUDENTACTIVITIES.S_Mainpage"
             android:exported="false" /> <!-- <activity -->
         <!-- android:name=".STUDENTACTIVITIES.S_HomePagee" -->
@@ -90,9 +93,6 @@
 
         <activity
             android:name=".TEACHERACTIVITIES.TNotificationActivity"
-            android:exported="false" />
-        <activity
-            android:name=".TEACHERACTIVITIES.TEventActivity"
             android:exported="false" />
         <activity
             android:name=".TEACHERACTIVITIES.TAttendanceActivity"

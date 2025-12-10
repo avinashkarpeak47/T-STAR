@@ -47,6 +47,9 @@ dependencies {
     implementation(libs.navigation.fragment)
     implementation(libs.navigation.ui)
     implementation(libs.firebase.auth)
+    implementation(libs.credentials)
+    implementation(libs.credentials.play.services.auth)
+    implementation(libs.googleid)
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
@@ -56,6 +59,7 @@ dependencies {
     implementation ("com.google.android.material:material:1.12.0")
     implementation ("androidx.recyclerview:recyclerview:1.3.0")
 
+
     implementation("com.google.firebase:firebase-auth:24.0.1")
     implementation("com.google.firebase:firebase-database:22.0.1")
     implementation ("de.hdodenhof:circleimageview:3.1.0")
@@ -63,4 +67,5 @@ dependencies {
 
 
 }
+
 

@@ -32,7 +32,6 @@
 
         <LinearLayout
             android:orientation="vertical"
-            android:padding="20dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
@@ -62,6 +61,7 @@
                         android:textColor="@color/black"
                         android:textSize="20sp"
                         android:textStyle="bold" />
+
 
                     <EditText
                         android:id="@+id/etEventTitle"
@@ -115,12 +115,11 @@
                         android:padding="12dp" />
 
                     <!-- SAVE BUTTON -->
-                    <Button
+                    <com.google.android.material.button.MaterialButton
                         android:id="@+id/btnSaveEvent"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="50dp"
-                        android:background="@color/maroon_variant"
                         android:padding="14dp"
                         android:text="Add Event"
                         android:textAllCaps="false"

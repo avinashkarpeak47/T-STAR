@@ -1,6 +1,113 @@
 package com.example.t_star;
 
+
 import android.content.Intent;
+import android.os.Bundle;
+import android.text.TextUtils;
+import android.widget.*;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+import java.util.Locale;
+
+/**
+ * SIGNUP ACTIVITY
+ * ----------------
+ * Signup Flow (Option 2 - Mobile OTP verified during signup):
+ *
+ * 1. User enters:
+ *      - First Name
+ *      - Last Name
+ *      - Email
+ *      - Password
+ *      - Mobile
+ *      - Role (Student/Teacher via Radio Buttons)
+ *
+ * 2. After validation → we open OTP Activity (Part One)
+ *      with flow = "signup"
+ *
+ * 3. OTP Screen verifies mobile first.
+ *
+ * 4. After OTP success → we create Email/Password user,
+ *    then link the PhoneAuthCredential to same UID.
+ *
+ * 5. Then UserModel is saved in Realtime DB under Users/UID.
+ */
+
+public class TSTAR_Signup_Activity extends AppCompatActivity {
+
+    EditText etFirstName, etLastName, etEmail, etPassword, etMobile;
+    RadioGroup rgRole;
+    RadioButton rbStudent, rbTeacher;
+    Button btnRegister;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.tstar_signup_activity);  // Your XML file
+
+        // Initialize Views
+        etFirstName = findViewById(R.id.et_signup_firstname);
+        etLastName = findViewById(R.id.et_signup_lastname);
+        etEmail = findViewById(R.id.et_signup_email);
+        etPassword = findViewById(R.id.et_signup_password);
+        etMobile = findViewById(R.id.et_signup_mobile);
+
+        rgRole = findViewById(R.id.rg_signup_select_role);
+        rbStudent = findViewById(R.id.rb_signup_studentrole);
+        rbTeacher = findViewById(R.id.rb_signup_teacherrole);
+
+        btnRegister = findViewById(R.id.btn_signup);
+
+        // Register button click
+        btnRegister.setOnClickListener(v -> attemptSignup());
+    }
+
+    /**
+     * Validates input and starts OTP verification activity.
+     */
+    private void attemptSignup() {
+
+        // Collect input
+        String firstname = etFirstName.getText().toString().trim();
+        String lastname = etLastName.getText().toString().trim();
+        String email = etEmail.getText().toString().trim().toLowerCase(Locale.ROOT);
+        String password = etPassword.getText().toString().trim();
+        String mobile = etMobile.getText().toString().trim();
+
+        // Validate fields
+        if (TextUtils.isEmpty(firstname)) { etFirstName.setError("Enter first name"); etFirstName.requestFocus(); return; }
+        if (TextUtils.isEmpty(lastname)) { etLastName.setError("Enter last name"); etLastName.requestFocus(); return; }
+        if (TextUtils.isEmpty(email) || !email.contains("@")) { etEmail.setError("Enter valid email"); etEmail.requestFocus(); return; }
+        if (TextUtils.isEmpty(password) || password.length() < 8) { etPassword.setError("Min 8 characters"); etPassword.requestFocus(); return; }
+        if (TextUtils.isEmpty(mobile) || mobile.length() != 10) { etMobile.setError("Enter 10-digit number"); etMobile.requestFocus(); return; }
+
+        // Role Selection (Radio Buttons)
+        int selectedId = rgRole.getCheckedRadioButtonId();
+        if (selectedId == -1) {
+            Toast.makeText(this, "Select a role", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        String role = rbStudent.isChecked() ? "Student" : "Teacher";
+
+        // Open OTP Activity for SIGNUP flow
+        Intent otpIntent = new Intent(TSTAR_Signup_Activity.this, TSTAR_Login_With_Mobile_Part_One.class);
+
+        otpIntent.putExtra("flow", "signup");
+        otpIntent.putExtra("firstname", firstname);
+        otpIntent.putExtra("lastname", lastname);
+        otpIntent.putExtra("email", email);
+        otpIntent.putExtra("password", password);
+        otpIntent.putExtra("mobile", mobile);
+        otpIntent.putExtra("role", role);
+
+        startActivity(otpIntent);
+    }
+}
+
+
+/*import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -59,6 +166,9 @@ public class TSTAR_Signup_Activity extends AppCompatActivity {
             finish();
         });
     }
+
+
+
 
     private void registeruser1() {
         String userfirstname = Et_FirstName.getText().toString().trim();
@@ -157,6 +267,7 @@ public class TSTAR_Signup_Activity extends AppCompatActivity {
                             userData.put("email", useremail);
                             userData.put("password", userpassword); // consider not storing raw password in production
                             userData.put("role", role); // save role here
+                            userData.put("userId",userId);// save uid
 
                             databaseReference.child(userId).setValue(userData)
                                     .addOnCompleteListener(task1 -> {
@@ -191,4 +302,4 @@ public class TSTAR_Signup_Activity extends AppCompatActivity {
                     }
                 });
     }
-}
+}*/

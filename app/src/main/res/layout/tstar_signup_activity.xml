@@ -158,7 +158,8 @@
                 android:textColor="@color/black"
                 android:textColorHint="#8A8A8A"
                 android:layout_marginTop="6dp"
-                android:inputType="number" />
+                android:inputType="number"
+                android:maxLength="10"/>
 
             <!-- Email Field -->
             <TextView

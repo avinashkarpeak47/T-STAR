@@ -1,7 +1,6 @@
 package com.example.t_star.TEACHERACTIVITIES;
 
 import android.os.Bundle;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -20,14 +19,17 @@ public class TAssignDetailActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_tassign_detail);  // <-- your XML file name
+        setContentView(R.layout.activity_tassign_detail);
 
-        // Toolbar
+        // ---------------- TOOLBAR ----------------
         MaterialToolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        }
         toolbar.setNavigationOnClickListener(v -> finish());
 
-        // Views
+        // ---------------- FIND VIEWS ----------------
         tvTitleDetail = findViewById(R.id.tvTitleDetail);
         tvDescDetail = findViewById(R.id.tvDescDetail);
         tvDueDateDetail = findViewById(R.id.tvDueDateDetail);
@@ -37,7 +39,7 @@ public class TAssignDetailActivity extends AppCompatActivity {
         tvUnsubmitted = findViewById(R.id.tvUnsubmitted);
         btnViewAttachment = findViewById(R.id.btnViewAttachment);
 
-        // ----- Get data from Intent -----
+        // ---------------- GET INTENT DATA ----------------
         String title = getIntent().getStringExtra("title");
         String desc = getIntent().getStringExtra("description");
         String dueDate = getIntent().getStringExtra("dueDate");
@@ -45,12 +47,13 @@ public class TAssignDetailActivity extends AppCompatActivity {
         String attachmentName = getIntent().getStringExtra("attachmentName");
         int totalStudents = getIntent().getIntExtra("totalStudents", 0);
         int submittedCount = getIntent().getIntExtra("submittedCount", 0);
+
         int unsubmittedCount = totalStudents - submittedCount;
 
-        // ----- Set UI -----
-        tvTitleDetail.setText(title);
-        tvDescDetail.setText(desc);
-        tvDueDateDetail.setText("Due: " + dueDate);
+        // ---------------- SET DATA TO UI ----------------
+        tvTitleDetail.setText(title != null ? title : "No Title");
+        tvDescDetail.setText(desc != null ? desc : "No Description");
+        tvDueDateDetail.setText(dueDate != null ? ("Due: " + dueDate) : "Due: Not Given");
 
         tvTotalStudents.setText("Total Students: " + totalStudents);
         tvSubmitted.setText("Submitted: " + submittedCount);
@@ -59,12 +62,19 @@ public class TAssignDetailActivity extends AppCompatActivity {
         if (hasAttachment && attachmentName != null && !attachmentName.isEmpty()) {
             tvAttachmentName.setText(attachmentName);
             btnViewAttachment.setEnabled(true);
+            btnViewAttachment.setAlpha(1f);
         } else {
             tvAttachmentName.setText("No file attached");
             btnViewAttachment.setEnabled(false);
+            btnViewAttachment.setAlpha(0.4f);
         }
 
-        btnViewAttachment.setOnClickListener(v ->
-                Toast.makeText(this, "Open attachment: " + attachmentName, Toast.LENGTH_SHORT).show());
+        // ---------------- ATTACHMENT CLICK ----------------
+        btnViewAttachment.setOnClickListener(v -> {
+            if (hasAttachment) {
+                Toast.makeText(this, "Opening: " + attachmentName, Toast.LENGTH_SHORT).show();
+                // TODO: open actual file viewer here
+            }
+        });
     }
 }

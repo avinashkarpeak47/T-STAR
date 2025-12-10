@@ -58,6 +58,7 @@ dependencies {
 
     implementation("com.google.firebase:firebase-auth:24.0.1")
     implementation("com.google.firebase:firebase-database:22.0.1")
+    implementation ("de.hdodenhof:circleimageview:3.1.0")
 
     implementation ("androidx.appcompat:appcompat:1.6.1")
     implementation ("androidx.cardview:cardview:1.0.0")

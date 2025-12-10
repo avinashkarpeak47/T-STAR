@@ -87,6 +87,7 @@
         <activity
             android:name=".TEACHERACTIVITIES.TChatActivity"
             android:exported="false" />
+
         <activity
             android:name=".TEACHERACTIVITIES.TNotificationActivity"
             android:exported="false" />
@@ -109,7 +110,20 @@
             android:name=".TEACHERACTIVITIES.TAssignDetailActivity"
             android:exported="false" />
         <activity
-            android:name=".TEACHERACTIVITIES.DrawerActivity"
+            android:name=".TSTAR_Signup_Activity"
+            android:exported="false" />
+        <activity
+            android:name=".TSTAR_Entry_Activity"
+            android:exported="false" />
+
+        <activity
+            android:name=".TSTAR_Login_Activity"
+            android:exported="false" />
+        <activity
+            android:name=".TSTAR_Login_With_Mobile_Part_Two"
+            android:exported="false" />
+        <activity
+            android:name=".TSTAR_Login_With_Mobile_Part_One"
             android:exported="false" />
 
         <!-- <activity -->
@@ -122,7 +136,7 @@
         <!-- android:exported="false" /> -->
         <!-- android:exported="false" /> -->
         <activity
-            android:name=".Splash_Screen"
+            android:name=".TSTAR_Splash_Screen"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

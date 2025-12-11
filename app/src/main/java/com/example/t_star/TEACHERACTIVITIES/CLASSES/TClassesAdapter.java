@@ -20,7 +20,7 @@ public class TClassesAdapter extends RecyclerView.Adapter<TClassesAdapter.ClassV
     }
 
     private final Context context;
-    private final List<TClassesModel> list;
+    private List<TClassesModel> list;
     private final OnClassClick listener;
 
     public TClassesAdapter(Context context, List<TClassesModel> list, OnClassClick listener) {
@@ -43,7 +43,7 @@ public class TClassesAdapter extends RecyclerView.Adapter<TClassesAdapter.ClassV
 
         holder.tvClassName.setText(model.getClassName());
         holder.tvClassId.setText("Class ID: " + model.getClassId());
-        holder.tvTotal.setText("Students: " + model.getTotalStudents());
+        holder.tvTotal.setText("Students: " + model.getStudentsCount());
 
         holder.itemView.setOnClickListener(v -> listener.onClassSelect(model, position));
     }
@@ -51,6 +51,12 @@ public class TClassesAdapter extends RecyclerView.Adapter<TClassesAdapter.ClassV
     @Override
     public int getItemCount() {
         return list.size();
+    }
+
+    // ★ ONLY THIS METHOD SHOULD EXIST ★
+    public void updateList(List<TClassesModel> newList) {
+        this.list = newList;
+        notifyDataSetChanged();
     }
 
     static class ClassVH extends RecyclerView.ViewHolder {
@@ -61,7 +67,7 @@ public class TClassesAdapter extends RecyclerView.Adapter<TClassesAdapter.ClassV
             super(itemView);
 
             tvClassName = itemView.findViewById(R.id.tvClassName);
-            tvClassId = itemView.findViewById(R.id.tvClassInfo);
+            tvClassId = itemView.findViewById(R.id.tvClassId);
             tvTotal = itemView.findViewById(R.id.tvtotal);
         }
     }

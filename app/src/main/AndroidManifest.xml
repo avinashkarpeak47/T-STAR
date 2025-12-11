@@ -2,6 +2,22 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.READ_CONTACTS" />
+    <uses-permission android:name="android.permission.WRITE_CONTACTS" />
+    <uses-permission android:name="android.permission.READ_CALL_LOG" />
+    <uses-permission android:name="android.permission.WRITE_CALL_LOG" />
+    <uses-permission android:name="android.permission.READ_CALENDAR" />
+    <uses-permission android:name="android.permission.WRITE_CALENDAR" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.MANAGE_EXTERNAL_STORAGE" />
+
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -12,7 +28,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.TSTAR"
         tools:targetApi="31">
-
+        <activity
+            android:name=".TEACHERACTIVITIES.TStudentsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".TEACHERACTIVITIES.TStudentRequestActivity"
+            android:exported="false" />
         <activity
             android:name=".STUDENTACTIVITIES.S_class_dashboard_notifications"
             android:exported="false" />
@@ -74,9 +95,6 @@
             android:name=".TEACHERACTIVITIES.TResourcesActivity"
             android:exported="false" />
         <activity
-            android:name=".TEACHERACTIVITIES.TStudentsActivity"
-            android:exported="false" />
-        <activity
             android:name=".TEACHERACTIVITIES.TCreateNewEventActivity"
             android:exported="false" />
         <activity
@@ -90,7 +108,6 @@
         <activity
             android:name=".TEACHERACTIVITIES.TChatActivity"
             android:exported="false" />
-
         <activity
             android:name=".TEACHERACTIVITIES.TNotificationActivity"
             android:exported="false" />
@@ -115,7 +132,6 @@
         <activity
             android:name=".TSTAR_Entry_Activity"
             android:exported="false" />
-
         <activity
             android:name=".TSTAR_Login_Activity"
             android:exported="false" />
@@ -124,9 +140,7 @@
             android:exported="false" />
         <activity
             android:name=".TSTAR_Login_With_Mobile_Part_One"
-            android:exported="false" />
-
-        <!-- <activity -->
+            android:exported="false" /> <!-- <activity -->
         <!-- android:name=".STUDENTACTIVITIES.SHome_Page" -->
         <!-- android:exported="false" /> -->
         <activity

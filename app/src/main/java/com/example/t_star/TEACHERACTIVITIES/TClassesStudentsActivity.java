@@ -10,56 +10,84 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.t_star.R;
+import com.example.t_star.REAL_TIME_DATABASE.PUT_ON_DATABASE.HelperClasses.Classes_helper;
 import com.example.t_star.TEACHERACTIVITIES.CLASSES.TClassesAdapter;
 import com.example.t_star.TEACHERACTIVITIES.CLASSES.TClassesModel;
 import com.google.android.material.appbar.MaterialToolbar;
+import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class TClassesStudentsActivity extends AppCompatActivity {
 
     private RecyclerView rvClasses;
     private TClassesAdapter adapter;
-    private List<TClassesModel> classList;
+    private ArrayList<TClassesModel> classList;
+
+    private String currentTeacherId;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tclasses_students);
 
+        currentTeacherId = FirebaseAuth.getInstance().getUid();
+
         MaterialToolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         toolbar.setNavigationOnClickListener(v -> finish());
 
-        // TOP CREATE BUTTON
         ImageButton btnCreateTop = findViewById(R.id.btnCreate);
         btnCreateTop.setOnClickListener(v -> {
-            // Open Create Student Screen
-            Intent i = new Intent(TClassesStudentsActivity.this, TCreateClassActivity.class);
-            startActivity(i);
+            startActivity(new Intent(this, TCreateClassActivity.class));
         });
 
         rvClasses = findViewById(R.id.rvClasses);
         rvClasses.setLayoutManager(new LinearLayoutManager(this));
 
         classList = new ArrayList<>();
-        classList.add(new TClassesModel("Class 5", "501", 40));
-        classList.add(new TClassesModel("Class 6", "601", 42));
-        classList.add(new TClassesModel("Class 7", "701", 38));
-        classList.add(new TClassesModel("Class 8", "801", 35));
-        classList.add(new TClassesModel("Class 9", "901", 41));
 
         adapter = new TClassesAdapter(this, classList, (model, pos) -> {
-            Toast.makeText(this, "Opening " + model.getClassName(), Toast.LENGTH_SHORT).show();
 
-            // OPEN NEXT PAGE WITH CLASS DATA
-            Intent i = new Intent(TClassesStudentsActivity.this, TStudentsActivity.class);
+            Intent i = new Intent(this,TStudentsActivity.class);
             i.putExtra("className", model.getClassName());
             i.putExtra("classId", model.getClassId());
             startActivity(i);
         });
 
         rvClasses.setAdapter(adapter);
+
+        loadClasses();  // First time load
+    }
+
+    // 🔥 FIX: Load classes every time user returns to this screen
+    @Override
+    protected void onResume() {
+        super.onResume();
+        loadClasses();  // reload when coming back from CreateClass page
+    }
+
+    private void loadClasses() {
+
+        Classes_helper.getAllClasses(list -> {
+
+            classList.clear();
+
+            for (TClassesModel model : list) {
+
+                if (model.getTeacherId() != null &&
+                        model.getTeacherId().equals(currentTeacherId)) {
+
+                    classList.add(model);
+                }
+            }
+
+            adapter.updateList(classList);
+
+            if (classList.isEmpty()) {
+                Toast.makeText(this, "No classes created by you!", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 }

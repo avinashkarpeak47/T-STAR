@@ -1,24 +1,27 @@
 package com.example.t_star.TEACHERACTIVITIES;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.widget.ImageView;
 import android.widget.SearchView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import com.example.t_star.R;
+import com.example.t_star.REAL_TIME_DATABASE.PUT_ON_DATABASE.HelperClasses.Classes_helper;
 import com.example.t_star.TEACHERACTIVITIES.STUDENTS.TStudentAdapter;
 import com.example.t_star.TEACHERACTIVITIES.STUDENTS.TStudentModel;
 import com.google.android.material.appbar.MaterialToolbar;
-
 import java.util.ArrayList;
-import java.util.List;
 
 public class TStudentsActivity extends AppCompatActivity {
 
-    private RecyclerView rvStudents;
-    private SearchView searchView;
-    private TStudentAdapter adapter;
-    private List<TStudentModel> studentList;
+    ImageView btnNotifications;
+    RecyclerView rvStudents;
+    SearchView searchView;
+    TStudentAdapter adapter;
+    ArrayList<TStudentModel> studentList = new ArrayList<>();
+    String classId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,39 +30,67 @@ public class TStudentsActivity extends AppCompatActivity {
 
         rvStudents = findViewById(R.id.rvStudents);
         searchView = findViewById(R.id.searchViewStudents);
+        btnNotifications = findViewById(R.id.btnNotifications);
 
-        rvStudents.setLayoutManager(new LinearLayoutManager(this));
-
-
-        // ----- Toolbar -----
         MaterialToolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        // handle back arrow
         toolbar.setNavigationOnClickListener(v -> finish());
 
-        // Sample Data
-        studentList = new ArrayList<>();
-        studentList.add(new TStudentModel("Avinash", "01", R.drawable.taklogo));
-        studentList.add(new TStudentModel("Ankita", "02", R.drawable.taklogo));
-        studentList.add(new TStudentModel("Rohan", "03", R.drawable.taklogo));
-        studentList.add(new TStudentModel("Priya", "04", R.drawable.taklogo));
+        classId = getIntent().getStringExtra("classId");
+
+        btnNotifications.setOnClickListener(v -> {
+            Intent i = new Intent(this, TStudentRequestActivity.class);
+            i.putExtra("classId", classId);
+            startActivity(i);
+        });
 
         adapter = new TStudentAdapter(this, studentList);
+        rvStudents.setLayoutManager(new LinearLayoutManager(this));
         rvStudents.setAdapter(adapter);
 
-        // 🔍 Search Feature
-        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-            @Override
-            public boolean onQueryTextSubmit(String s) {
-                adapter.filter(s);
-                return false;
-            }
+        loadStudents();
 
-            @Override
-            public boolean onQueryTextChange(String s) {
-                adapter.filter(s);
-                return false;
-            }
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override public boolean onQueryTextSubmit(String q) { adapter.filter(q); return false; }
+            @Override public boolean onQueryTextChange(String q) { adapter.filter(q); return false; }
         });
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        loadStudents();
+    }
+
+    private void loadStudents() {
+        Classes_helper.getClassStudents(classId, uids -> {
+            studentList.clear();
+            adapter.updateList(studentList);
+
+            if (uids == null || uids.isEmpty()) return;
+
+            loadStudentDetails(uids);
+        });
+    }
+
+    private void loadStudentDetails(ArrayList<String> uids) {
+        studentList.clear();
+
+        final int total = uids.size();
+        final int[] loaded = {0};
+
+        for (String uid : uids) {
+            Classes_helper.Users_Helper.getUserDetails(uid, user -> {
+                if (user != null) {
+                    String name = user.firstname + " " + user.lastname;
+                    studentList.add(new TStudentModel(name, uid, R.drawable.taklogo));
+                }
+
+                loaded[0]++;
+                if (loaded[0] == total) {
+                    adapter.updateList(studentList);
+                }
+            });
+        }
     }
 }

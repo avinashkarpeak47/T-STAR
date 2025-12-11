@@ -1,22 +1,19 @@
 package com.example.t_star.TEACHERACTIVITIES.ASSIGNMENTS;
 
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
+import android.view.*;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.t_star.R;
 
 import java.util.List;
 
-public class TAssignmentAdapter extends RecyclerView.Adapter<TAssignmentAdapter.AssignmentVH> {
+public class TAssignmentAdapter extends RecyclerView.Adapter<TAssignmentAdapter.VH> {
 
     public interface OnAssignmentClick {
-        void onAssignmentSelect(TAssignmentModel model, int position);
+        void onClick(TAssignmentModel model);
     }
 
     private final List<TAssignmentModel> list;
@@ -29,38 +26,34 @@ public class TAssignmentAdapter extends RecyclerView.Adapter<TAssignmentAdapter.
 
     @NonNull
     @Override
-    public AssignmentVH onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public VH onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.tassignmentsview, parent, false);
-        return new AssignmentVH(v);
+        return new VH(v);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull AssignmentVH holder, int position) {
-        TAssignmentModel model = list.get(position);
+    public void onBindViewHolder(@NonNull VH h, int pos) {
 
-        holder.tvTitle.setText(model.getTitle());
-        holder.tvDesc.setText(model.getDescription());
+        TAssignmentModel m = list.get(pos);
 
-        holder.card.setOnClickListener(v ->
-                listener.onAssignmentSelect(model, holder.getAdapterPosition()));
+        h.title.setText(m.getTitle());
+        h.desc.setText(m.getDescription());
+
+        h.itemView.setOnClickListener(v -> listener.onClick(m));
     }
 
     @Override
-    public int getItemCount() {
-        return list.size();
-    }
+    public int getItemCount() { return list.size(); }
 
-    static class AssignmentVH extends RecyclerView.ViewHolder {
+    static class VH extends RecyclerView.ViewHolder {
 
-        CardView card;
-        TextView tvTitle, tvDesc;
+        TextView title, desc;
 
-        public AssignmentVH(@NonNull View itemView) {
-            super(itemView);
-            card = (CardView) itemView;
-            tvTitle = itemView.findViewById(R.id.tvAssignmentTitle);
-            tvDesc = itemView.findViewById(R.id.tvAssignmentDesc);
+        public VH(@NonNull View v) {
+            super(v);
+            title = v.findViewById(R.id.tvAssignmentTitle);
+            desc = v.findViewById(R.id.tvAssignmentDesc);
         }
     }
 }

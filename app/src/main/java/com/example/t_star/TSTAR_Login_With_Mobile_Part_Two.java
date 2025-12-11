@@ -2,66 +2,215 @@ package com.example.t_star;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
+import android.text.TextUtils;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import androidx.activity.EdgeToEdge;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.AppCompatButton;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 
-import com.example.t_star.STUDENTACTIVITIES.S_Mainpage;
-import com.google.firebase.Firebase;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.PhoneAuthCredential;
-import com.google.firebase.auth.PhoneAuthProvider;
+import com.example.t_star.REAL_TIME_DATABASE.PUT_ON_DATABASE.HelperClasses.User_Authentication_Helper;
+import com.example.t_star.REAL_TIME_DATABASE.PUT_ON_DATABASE.ModelClasses.User_Authentication_Model;
+import com.google.firebase.FirebaseException;
+import com.google.firebase.auth.*;
 
 public class TSTAR_Login_With_Mobile_Part_Two extends AppCompatActivity {
 
-    EditText otpInput;
-    AppCompatButton verifyOtp;
-    FirebaseAuth mauth;
+    EditText etOtp;
+    Button btnVerify;
+    FirebaseAuth mAuth;
+
+    // Data passed from Part One
     String verificationId;
+    String flow;
+    String firstname, lastname, email, password, mobile, role;
+
+    boolean credentialFromAuto = false; // auto-verification flag
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.tstar_login_with_mobile_part_two_activity);
 
-        otpInput = findViewById(R.id.et_login_mobile);
-        verifyOtp = findViewById(R.id.btn_login_verify_otp);
-        mauth = FirebaseAuth.getInstance();
-        verificationId = getIntent().getStringExtra("verificationId");
+        etOtp = findViewById(R.id.et_otp); // IMPORTANT: must be OTP EditText
+        btnVerify = findViewById(R.id.btn_login_verify_otp);
+        mAuth = FirebaseAuth.getInstance();
 
-        verifyOtp.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        Intent in = getIntent();
+        flow = in.getStringExtra("flow");
+        verificationId = in.getStringExtra("verificationId");
+        credentialFromAuto = in.getBooleanExtra("credentialFromAuto", false);
+        mobile = in.getStringExtra("mobile");
 
-                String code = otpInput.getText().toString().trim();
-                if(code.isEmpty() || code.length()<6)
-                {
-                    otpInput.setError("Enter a valid OTP");
-                    return;
-                }
-                verifyCode(code);
+        if ("signup".equals(flow)) {
+            firstname = in.getStringExtra("firstname");
+            lastname = in.getStringExtra("lastname");
+            email = in.getStringExtra("email");
+            password = in.getStringExtra("password");
+            role = in.getStringExtra("role");
+        }
+
+        btnVerify.setOnClickListener(v -> {
+            if (credentialFromAuto) {
+                Toast.makeText(this, "Auto verification detected, completing login...", Toast.LENGTH_SHORT).show();
+                handleAutoLoginOrSignup();
+                return;
             }
+
+            String code = etOtp.getText().toString().trim();
+            if (TextUtils.isEmpty(code) || code.length() < 6) {
+                etOtp.setError("Enter valid OTP");
+                return;
+            }
+
+            verifyCode(code);
         });
     }
-    private void verifyCode(String code){
-        PhoneAuthCredential credential = PhoneAuthProvider.getCredential(verificationId,code);
-        mauth.signInWithCredential(credential)
-                .addOnCompleteListener(task -> {
-                    if (task.isSuccessful()){
-                        Toast.makeText(this, "Login Successfull", Toast.LENGTH_SHORT).show();
-                        Intent intent = new Intent(TSTAR_Login_With_Mobile_Part_Two.this, S_Mainpage.class);
-                        startActivity(intent);
-                        finish();
-                    }else{
-                        Toast.makeText(this, "Invalid OTP", Toast.LENGTH_SHORT).show();
+
+    private void verifyCode(String code) {
+        PhoneAuthCredential credential;
+
+        try {
+            credential = PhoneAuthProvider.getCredential(verificationId, code);
+        } catch (Exception e) {
+            Toast.makeText(this, "Invalid OTP", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        if ("signup".equals(flow)) handleSignup(credential);
+        else handleLogin(credential);
+    }
+
+    //-------------------------------------------------------
+    //        AUTO VERIFICATION HANDLING (Part One)
+    //-------------------------------------------------------
+    private void handleAutoLoginOrSignup() {
+
+        // Auto verification only provides the phone credential on Part One
+        // So we reattempt sign-in with the auto credential
+        // (Firebase automatically stores the credential behind the scenes)
+
+        // There is a chance verificationId is null in auto mode.
+        // So for auto verification we simply call signInWithCredential from part one.
+        // But since we cannot pass the credential object via Intent,
+        // we force user to enter OTP if auto failed.
+
+        Toast.makeText(this, "Auto verification – please enter OTP if not logged in", Toast.LENGTH_LONG).show();
+    }
+
+    //-------------------------------------------------------
+    //                  SIGNUP FLOW
+    //-------------------------------------------------------
+    private void handleSignup(PhoneAuthCredential phoneCred) {
+
+        mAuth.createUserWithEmailAndPassword(email, password)
+                .addOnSuccessListener(result -> {
+
+                    FirebaseUser user = result.getUser();
+                    if (user == null) {
+                        Toast.makeText(this, "Signup failed", Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+
+                    // Link phone to the same UID
+                    user.linkWithCredential(phoneCred)
+                            .addOnSuccessListener(linkRes -> {
+                                FirebaseUser finalUser = linkRes.getUser();
+                                if (finalUser == null) {
+                                    Toast.makeText(this, "Invalid OTP", Toast.LENGTH_SHORT).show();
+                                    return;
+                                }
+
+                                String uid = finalUser.getUid();
+
+                                User_Authentication_Model model =
+                                        new User_Authentication_Model(uid, firstname, lastname, email, mobile, role);
+
+                                User_Authentication_Helper.saveUserModel(uid, model, new User_Authentication_Helper.DatabaseSaveCallback() {
+                                    @Override
+                                    public void onSuccess() {
+                                        User_Authentication_Helper.redirectToRole(TSTAR_Login_With_Mobile_Part_Two.this, role);
+                                    }
+
+                                    @Override
+                                    public void onFailure(Exception e) {
+                                        Toast.makeText(TSTAR_Login_With_Mobile_Part_Two.this, "DB Error: " + e, Toast.LENGTH_SHORT).show();
+                                    }
+                                });
+                            })
+                            .addOnFailureListener(e ->
+                                    Toast.makeText(this, "Phone linking error: " + e.getMessage(), Toast.LENGTH_LONG).show()
+                            );
+
+                })
+                .addOnFailureListener(e -> {
+                    if (e instanceof FirebaseAuthUserCollisionException) {
+                        handleExistingEmailSignup(phoneCred);
+                    } else {
+                        Toast.makeText(this, "Signup failed: " + e.getMessage(), Toast.LENGTH_LONG).show();
                     }
                 });
+    }
+
+    //-------------------------------------------------------
+    //    EXISTING EMAIL → SIGN-IN → THEN LINK PHONE
+    //-------------------------------------------------------
+    private void handleExistingEmailSignup(PhoneAuthCredential phoneCred) {
+
+        mAuth.signInWithEmailAndPassword(email, password)
+                .addOnSuccessListener(result -> {
+
+                    FirebaseUser user = result.getUser();
+                    if (user == null) return;
+
+                    user.linkWithCredential(phoneCred)
+                            .addOnSuccessListener(link -> {
+
+                                String uid = user.getUid();
+
+                                User_Authentication_Model model =
+                                        new User_Authentication_Model(uid, firstname, lastname, email, mobile, role);
+
+                                User_Authentication_Helper.saveUserModel(uid, model,
+                                        new User_Authentication_Helper.DatabaseSaveCallback() {
+                                            @Override
+                                            public void onSuccess() {
+                                                User_Authentication_Helper.redirectToRole(TSTAR_Login_With_Mobile_Part_Two.this, role);
+                                            }
+
+                                            @Override
+                                            public void onFailure(Exception e) {
+                                                Toast.makeText(TSTAR_Login_With_Mobile_Part_Two.this, "DB Error: " + e, Toast.LENGTH_SHORT).show();
+                                            }
+                                        });
+
+                            })
+                            .addOnFailureListener(e ->
+                                    Toast.makeText(this, "Phone linking failed", Toast.LENGTH_SHORT).show()
+                            );
+
+                })
+                .addOnFailureListener(e ->
+                        Toast.makeText(this, "Email exists but login failed: " + e, Toast.LENGTH_SHORT).show()
+                );
+    }
+
+    //-------------------------------------------------------
+    //                    LOGIN FLOW
+    //-------------------------------------------------------
+    private void handleLogin(PhoneAuthCredential phoneCred) {
+
+        mAuth.signInWithCredential(phoneCred)
+                .addOnSuccessListener(result -> {
+
+                    FirebaseUser user = result.getUser();
+                    if (user == null) return;
+
+                    User_Authentication_Helper.loadRoleAndRedirect(user.getUid(), this);
+                })
+                .addOnFailureListener(e ->
+                        Toast.makeText(this, "Phone login failed: " + e.getMessage(), Toast.LENGTH_LONG).show()
+                );
     }
 }

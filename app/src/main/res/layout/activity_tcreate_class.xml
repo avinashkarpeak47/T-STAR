@@ -172,9 +172,9 @@
                         android:layout_gravity="center"
                         android:layout_marginTop="10dp"
                         android:text="Check Availability"
-                        android:textColor="@color/black"
+                        android:textColor="@color/red"
                         android:textStyle="bold"
-                        android:visibility="visible" />
+                        android:visibility="gone" />
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
 

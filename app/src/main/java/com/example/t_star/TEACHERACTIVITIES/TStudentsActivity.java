@@ -2,23 +2,25 @@ package com.example.t_star.TEACHERACTIVITIES;
 
 import android.os.Bundle;
 import android.widget.SearchView;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
 import com.example.t_star.R;
+import com.example.t_star.REAL_TIME_DATABASE.PUT_ON_DATABASE.HelperClasses.Classes_helper;
 import com.example.t_star.TEACHERACTIVITIES.STUDENTS.TStudentAdapter;
 import com.example.t_star.TEACHERACTIVITIES.STUDENTS.TStudentModel;
 import com.google.android.material.appbar.MaterialToolbar;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class TStudentsActivity extends AppCompatActivity {
 
     private RecyclerView rvStudents;
     private SearchView searchView;
     private TStudentAdapter adapter;
-    private List<TStudentModel> studentList;
+    private ArrayList<TStudentModel> studentList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,35 +32,49 @@ public class TStudentsActivity extends AppCompatActivity {
 
         rvStudents.setLayoutManager(new LinearLayoutManager(this));
 
-
-        // ----- Toolbar -----
         MaterialToolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        // handle back arrow
         toolbar.setNavigationOnClickListener(v -> finish());
 
-        // Sample Data
-        studentList = new ArrayList<>();
-        studentList.add(new TStudentModel("Avinash", "01", R.drawable.taklogo));
-        studentList.add(new TStudentModel("Ankita", "02", R.drawable.taklogo));
-        studentList.add(new TStudentModel("Rohan", "03", R.drawable.taklogo));
-        studentList.add(new TStudentModel("Priya", "04", R.drawable.taklogo));
+        String classId = getIntent().getStringExtra("classId");
 
+        studentList = new ArrayList<>();
         adapter = new TStudentAdapter(this, studentList);
         rvStudents.setAdapter(adapter);
 
-        // 🔍 Search Feature
-        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-            @Override
-            public boolean onQueryTextSubmit(String s) {
-                adapter.filter(s);
-                return false;
-            }
+        loadStudents(classId);
 
-            @Override
-            public boolean onQueryTextChange(String s) {
-                adapter.filter(s);
-                return false;
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override public boolean onQueryTextSubmit(String query) { adapter.filter(query); return false; }
+            @Override public boolean onQueryTextChange(String text) { adapter.filter(text); return false; }
+        });
+    }
+
+    private void loadStudents(String classId) {
+
+        Classes_helper.getClassStudents(classId, uids -> {
+
+            if (uids == null || uids.isEmpty()) return;
+
+            studentList.clear();
+
+            for (String uid : uids) {
+
+                Classes_helper.Users_Helper.getUserDetails(uid, user -> {
+
+                    if (user != null) {
+
+                        String name = user.firstname + " " + user.lastname;
+
+                        studentList.add(new TStudentModel(
+                                name,
+                                uid,
+                                R.drawable.taklogo
+                        ));
+
+                        adapter.notifyDataSetChanged();
+                    }
+                });
             }
         });
     }

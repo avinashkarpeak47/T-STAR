@@ -28,7 +28,6 @@ public class TSTAR_Entry_Activity extends AppCompatActivity {
 
                 Intent intent = new Intent(TSTAR_Entry_Activity.this,TSTAR_Login_Activity.class);
                 startActivity(intent);
-                finish();
             }
         });
 
@@ -38,7 +37,6 @@ public class TSTAR_Entry_Activity extends AppCompatActivity {
 
                 Intent intent = new Intent(TSTAR_Entry_Activity.this,TSTAR_Signup_Activity.class);
                 startActivity(intent);
-                finish();
             }
         });
 

@@ -81,6 +81,10 @@
               android:textColor="#ffffff" />
         </com.google.android.material.textfield.TextInputLayout>
 
+
+        <!-- Attachment -->
+
+
         <!-- Due Date -->
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
@@ -98,6 +102,44 @@
               android:maxLines="1"
               android:textColor="#ffffff" />
         </com.google.android.material.textfield.TextInputLayout>
+
+        <!-- ATTACHMENT TITLE -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+           android:layout_marginLeft="7dp"
+            android:text="Attachment"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <!-- UPDATED ATTACHMENT ROW -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:layout_marginStart="7dp"
+            android:layout_marginTop="10dp">
+
+          <ImageView
+              android:layout_width="24dp"
+              android:layout_height="24dp"
+              android:id="@+id/btnViewAttachment"
+              android:src="@drawable/t_attachment"
+              app:tint="@color/white"/>
+
+          <TextView
+              android:id="@+id/tvAttachmentName"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:layout_marginStart="10dp"
+              android:text="Add file attachement"
+              android:textColor="@color/white"
+              android:textSize="14sp"
+              android:alpha="0.85"/>
+        </LinearLayout>
 
         <!-- Create Button -->
         <com.google.android.material.button.MaterialButton

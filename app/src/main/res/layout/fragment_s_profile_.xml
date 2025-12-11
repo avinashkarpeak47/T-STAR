@@ -84,7 +84,7 @@
                         app:boxCornerRadiusBottomStart="20sp"
                         app:boxCornerRadiusTopEnd="20sp"
                         app:boxCornerRadiusTopStart="20sp"
-                        android:hint="Full Name">
+                        android:hint="First Name">
 
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/etFullName"
@@ -108,7 +108,7 @@
                         app:boxCornerRadiusBottomStart="20sp"
                         app:boxCornerRadiusTopEnd="20sp"
                         app:boxCornerRadiusTopStart="20sp"
-                        android:hint="Student Name">
+                        android:hint="Last Name">
 
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/etUserName"

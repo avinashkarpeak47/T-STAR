@@ -1,19 +1,21 @@
 package com.example.t_star;
 
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.view.View;
 import android.widget.*;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.google.firebase.database.*;
 
 import java.util.Locale;
 
 /**
  * SIGNUP ACTIVITY
  * ----------------
- * Signup Flow (Option 2 - Mobile OTP verified during signup):
+ * Signup Flow:
  *
  * 1. User enters:
  *      - First Name
@@ -21,17 +23,13 @@ import java.util.Locale;
  *      - Email
  *      - Password
  *      - Mobile
- *      - Role (Student/Teacher via Radio Buttons)
+ *      - Role (Student/Teacher)
  *
- * 2. After validation → we open OTP Activity (Part One)
- *      with flow = "signup"
+ * 2. After validation → we check in Firebase Realtime Database:
+ *      If email OR mobile already exist → Stop + toast.
  *
- * 3. OTP Screen verifies mobile first.
- *
- * 4. After OTP success → we create Email/Password user,
- *    then link the PhoneAuthCredential to same UID.
- *
- * 5. Then UserModel is saved in Realtime DB under Users/UID.
+ * 3. If user does NOT exist → we open OTP Activity (Part One)
+ *      with flow = "signup".
  */
 
 public class TSTAR_Signup_Activity extends AppCompatActivity {
@@ -40,11 +38,12 @@ public class TSTAR_Signup_Activity extends AppCompatActivity {
     RadioGroup rgRole;
     RadioButton rbStudent, rbTeacher;
     Button btnRegister;
+    TextView tvGoToLOginPage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.tstar_signup_activity);  // Your XML file
+        setContentView(R.layout.tstar_signup_activity);
 
         // Initialize Views
         etFirstName = findViewById(R.id.et_signup_firstname);
@@ -52,19 +51,24 @@ public class TSTAR_Signup_Activity extends AppCompatActivity {
         etEmail = findViewById(R.id.et_signup_email);
         etPassword = findViewById(R.id.et_signup_password);
         etMobile = findViewById(R.id.et_signup_mobile);
-
         rgRole = findViewById(R.id.rg_signup_select_role);
         rbStudent = findViewById(R.id.rb_signup_studentrole);
         rbTeacher = findViewById(R.id.rb_signup_teacherrole);
-
         btnRegister = findViewById(R.id.btn_signup);
+        tvGoToLOginPage = findViewById(R.id.tv_login_on_signup_page);
 
         // Register button click
         btnRegister.setOnClickListener(v -> attemptSignup());
+
+        // Go to Login Page
+        tvGoToLOginPage.setOnClickListener(v -> {
+            Intent intent = new Intent(TSTAR_Signup_Activity.this, TSTAR_Login_Activity.class);
+            startActivity(intent);
+        });
     }
 
     /**
-     * Validates input and starts OTP verification activity.
+     * Validates input and then checks if user already exists before starting OTP flow.
      */
     private void attemptSignup() {
 
@@ -76,13 +80,29 @@ public class TSTAR_Signup_Activity extends AppCompatActivity {
         String mobile = etMobile.getText().toString().trim();
 
         // Validate fields
-        if (TextUtils.isEmpty(firstname)) { etFirstName.setError("Enter first name"); etFirstName.requestFocus(); return; }
-        if (TextUtils.isEmpty(lastname)) { etLastName.setError("Enter last name"); etLastName.requestFocus(); return; }
-        if (TextUtils.isEmpty(email) || !email.contains("@")) { etEmail.setError("Enter valid email"); etEmail.requestFocus(); return; }
-        if (TextUtils.isEmpty(password) || password.length() < 8) { etPassword.setError("Min 8 characters"); etPassword.requestFocus(); return; }
-        if (TextUtils.isEmpty(mobile) || mobile.length() != 10) { etMobile.setError("Enter 10-digit number"); etMobile.requestFocus(); return; }
+        if (TextUtils.isEmpty(firstname)) {
+            etFirstName.setError("Enter first name");
+            etFirstName.requestFocus();
+            return;
+        } else if (TextUtils.isEmpty(lastname)) {
+            etLastName.setError("Enter last name");
+            etLastName.requestFocus();
+            return;
+        } else if (TextUtils.isEmpty(mobile) || mobile.length() != 10) {
+            etMobile.setError("Enter 10-digit number");
+            etMobile.requestFocus();
+            return;
+        } else if (TextUtils.isEmpty(email) || !email.contains("@") || !email.contains(".")) {
+            etEmail.setError("Enter valid email");
+            etEmail.requestFocus();
+            return;
+        } else if (TextUtils.isEmpty(password) || password.length() < 8) {
+            etPassword.setError("Min 8 characters");
+            etPassword.requestFocus();
+            return;
+        }
 
-        // Role Selection (Radio Buttons)
+        // Role selection validation
         int selectedId = rgRole.getCheckedRadioButtonId();
         if (selectedId == -1) {
             Toast.makeText(this, "Select a role", Toast.LENGTH_SHORT).show();
@@ -91,21 +111,75 @@ public class TSTAR_Signup_Activity extends AppCompatActivity {
 
         String role = rbStudent.isChecked() ? "Student" : "Teacher";
 
-        // Open OTP Activity for SIGNUP flow
-        Intent otpIntent = new Intent(TSTAR_Signup_Activity.this, TSTAR_Login_With_Mobile_Part_One.class);
+        // ***************************************************************
+        // NEW UPDATE:
+        // Before opening OTP Activity, first check if email or mobile exists.
+        // ***************************************************************
+        checkIfUserExists(firstname, lastname, email, password, mobile, role);
+    }
 
-        otpIntent.putExtra("flow", "signup");
-        otpIntent.putExtra("firstname", firstname);
-        otpIntent.putExtra("lastname", lastname);
-        otpIntent.putExtra("email", email);
-        otpIntent.putExtra("password", password);
-        otpIntent.putExtra("mobile", mobile);
-        otpIntent.putExtra("role", role);
+    /**
+     * NEW METHOD ADDED
+     * --------------------------------------------------------------------
+     * Checks Realtime Database for existing user with same email or mobile.
+     * If user exists → show toast and DO NOT continue to OTP screen.
+     * If user does NOT exist → proceed to OTP Activity.
+     * --------------------------------------------------------------------
+     */
+    private void checkIfUserExists(String firstname, String lastname, String email,
+                                   String password, String mobile, String role) {
 
-        startActivity(otpIntent);
+        DatabaseReference usersRef = FirebaseDatabase.getInstance()
+                .getReference("Users");  // Your DB path
+
+        usersRef.get().addOnCompleteListener(task -> {
+
+            if (!task.isSuccessful()) {
+                Toast.makeText(this, "Error checking user. Try again.", Toast.LENGTH_SHORT).show();
+                return;
+            }
+
+            boolean exists = false;
+
+            // Loop through existing users
+            for (DataSnapshot snap : task.getResult().getChildren()) {
+
+                String dbEmail = snap.child("email").getValue(String.class);
+                String dbMobile = snap.child("mobile").getValue(String.class);
+
+                if (email.equalsIgnoreCase(dbEmail) || mobile.equals(dbMobile)) {
+                    exists = true;
+                    break;
+                }
+            }
+
+            if (exists) {
+                // STOP SIGNUP → user already exists
+                Toast.makeText(this,
+                        "Account already exists. Use different email or mobile.",
+                        Toast.LENGTH_LONG).show();
+                return; // STOP HERE
+            }
+
+            // If no user exists → continue original flow
+            Intent otpIntent = new Intent(TSTAR_Signup_Activity.this,
+                    TSTAR_Login_With_Mobile_Part_One.class);
+
+            otpIntent.putExtra("flow", "signup");
+            otpIntent.putExtra("firstname", firstname);
+            otpIntent.putExtra("lastname", lastname);
+            otpIntent.putExtra("email", email);
+            otpIntent.putExtra("password", password);
+            otpIntent.putExtra("mobile", mobile);
+            otpIntent.putExtra("role", role);
+
+            startActivity(otpIntent);
+        });
     }
 }
 
+
+//Below is also important code of proper working of Signup... Dont Delete or Uncomment it...
 
 /*import android.content.Intent;
 import android.os.Bundle;

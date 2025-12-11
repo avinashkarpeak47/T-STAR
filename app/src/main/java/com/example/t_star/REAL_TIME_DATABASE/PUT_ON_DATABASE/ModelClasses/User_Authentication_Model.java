@@ -1,10 +1,11 @@
-package com.example.t_star.REAL_TIME_DATABASE.PUT_ON_DATABASE;
+package com.example.t_star.REAL_TIME_DATABASE.PUT_ON_DATABASE.ModelClasses;
+
 
 /**
  * Simple POJO representing user data saved under /Users/{uid}.
  * Note: Do NOT store raw passwords here.
  */
-public class UserModel {
+public class User_Authentication_Model {
     public String uid;
     public String firstname;
     public String lastname;
@@ -13,9 +14,9 @@ public class UserModel {
     public String role;
 
     // Required no-arg constructor for Firebase deserialization
-    public UserModel() {}
+    public User_Authentication_Model() {}
 
-    public UserModel(String uid, String firstname, String lastname,
+    public User_Authentication_Model(String uid, String firstname, String lastname,
                      String email, String mobile, String role) {
         this.uid = uid;
         this.firstname = firstname;

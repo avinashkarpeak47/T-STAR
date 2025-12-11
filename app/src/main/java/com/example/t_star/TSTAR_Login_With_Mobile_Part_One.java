@@ -13,6 +13,7 @@ import com.google.firebase.FirebaseException;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.PhoneAuthOptions;
 import com.google.firebase.auth.PhoneAuthProvider;
+import com.google.firebase.database.*;
 
 import java.util.concurrent.TimeUnit;
 
@@ -20,9 +21,10 @@ import java.util.concurrent.TimeUnit;
  * Part One: Collect phone (either from Signup extras or local input).
  * Sends OTP using Firebase PhoneAuth and then opens Part Two with verificationId and original extras.
  *
- * This activity handles both flows:
- * - flow="signup" : extra fields firstname, lastname, email, password, mobile, role
- * - flow="login"  : no extra fields required (or mobile may be typed)
+ * Behavior changes:
+ * - flow="signup": always send OTP (signup path)
+ * - flow="login" : first check if mobile exists in Realtime DB under Users/
+ *                  only send OTP if mobile exists; otherwise show Toast instructing signup.
  */
 public class TSTAR_Login_With_Mobile_Part_One extends AppCompatActivity {
 
@@ -34,6 +36,9 @@ public class TSTAR_Login_With_Mobile_Part_One extends AppCompatActivity {
     // Signup extras (may be null when flow=login)
     String firstname, lastname, email, password, mobile, role;
 
+    // Realtime DB reference to Users node
+    private DatabaseReference usersRef;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,6 +47,9 @@ public class TSTAR_Login_With_Mobile_Part_One extends AppCompatActivity {
         etPhone = findViewById(R.id.et_login_mobile);
         btnSendOtp = findViewById(R.id.btn_login_send_otp);
         mAuth = FirebaseAuth.getInstance();
+
+        // Initialize DB reference
+        usersRef = FirebaseDatabase.getInstance().getReference("Users");
 
         // Read extras if present
         Intent in = getIntent();
@@ -64,8 +72,48 @@ public class TSTAR_Login_With_Mobile_Part_One extends AppCompatActivity {
                 etPhone.setError("Enter 10-digit mobile");
                 return;
             }
-            sendVerificationCode("+91" + phone);
+
+            // If flow is "signup" -> always send OTP
+            if ("signup".equals(flow)) {
+                sendVerificationCode("+91" + phone);
+                return;
+            }
+
+            // If flow is "login" -> verify mobile exists in DB before sending OTP
+            checkMobileExistsAndSendOtp(phone);
         });
+    }
+
+    /**
+     * For login flow: check if Users node contains a record with mobile == phone.
+     * If exists -> send OTP; else -> show Toast asking user to signup first.
+     */
+    private void checkMobileExistsAndSendOtp(String phoneWithoutCountryCode) {
+        String phoneToCheck = phoneWithoutCountryCode; // 10-digit number as stored in your DB
+        // Query Users where mobile equals phone
+        usersRef.orderByChild("mobile").equalTo(phoneToCheck)
+                .addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        if (snapshot.exists()) {
+                            // Mobile exists — send OTP (with +91 prefix)
+                            sendVerificationCode("+91" + phoneToCheck);
+                        } else {
+                            // Mobile does not exist — inform user to sign up first
+                            Toast.makeText(TSTAR_Login_With_Mobile_Part_One.this,
+                                    "Account with this mobile does not exist. Please sign up first.",
+                                    Toast.LENGTH_LONG).show();
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+                        // DB read error — notify and do not send OTP
+                        Toast.makeText(TSTAR_Login_With_Mobile_Part_One.this,
+                                "Database error: " + error.getMessage(),
+                                Toast.LENGTH_LONG).show();
+                    }
+                });
     }
 
     private void sendVerificationCode(String phoneNumber) {
@@ -85,12 +133,16 @@ public class TSTAR_Login_With_Mobile_Part_One extends AppCompatActivity {
             new PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
                 @Override
                 public void onVerificationCompleted(@NonNull com.google.firebase.auth.PhoneAuthCredential credential) {
-                    // Auto-retrieval or instant verification — in many cases the credential can be used directly.
-                    // We still navigate to Part Two and let Part Two handle the credential.
+                    /*
+                     * Auto-retrieval or instant verification — in some cases the credential will be
+                     * available without user entering SMS code. We still navigate to Part Two and
+                     * let Part Two handle sign-in/linking using the available information.
+                     */
                     Intent i = new Intent(TSTAR_Login_With_Mobile_Part_One.this, TSTAR_Login_With_Mobile_Part_Two.class);
                     i.putExtra("flow", flow);
                     i.putExtra("credentialFromAuto", true); // indicate auto credential present
-                    // pass signup fields if any
+
+                    // Pass signup fields if any
                     if ("signup".equals(flow)) {
                         i.putExtra("firstname", firstname);
                         i.putExtra("lastname", lastname);
@@ -98,8 +150,11 @@ public class TSTAR_Login_With_Mobile_Part_One extends AppCompatActivity {
                         i.putExtra("password", password);
                         i.putExtra("mobile", etPhone.getText().toString().trim());
                         i.putExtra("role", role);
+                    } else {
+                        // flow=login: pass phone number to prefill
+                        i.putExtra("mobile", etPhone.getText().toString().trim());
                     }
-                    // We cannot directly put Credential object via Intent, PartTwo will call verify again or use signInWithCredential approach.
+
                     startActivity(i);
                 }
 
@@ -132,85 +187,3 @@ public class TSTAR_Login_With_Mobile_Part_One extends AppCompatActivity {
                 }
             };
 }
-
-
-/*import android.content.Intent;
-import android.os.Bundle;
-import android.view.View;
-import android.widget.EditText;
-import android.widget.Toast;
-
-import androidx.activity.EdgeToEdge;
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.AppCompatButton;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
-
-import com.google.firebase.FirebaseException;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.PhoneAuthCredential;
-import com.google.firebase.auth.PhoneAuthOptions;
-import com.google.firebase.auth.PhoneAuthProvider;
-
-import java.util.concurrent.TimeUnit;
-
-public class TSTAR_Login_With_Mobile_Part_One extends AppCompatActivity {
-
-    EditText phoneInput;
-    AppCompatButton sendOtpBtn;
-    FirebaseAuth mauth;
-    String verificationId;
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.tstar_login_with_mobile_part_one_activity);
-
-        mauth = FirebaseAuth.getInstance();
-        phoneInput = findViewById(R.id.et_login_mobile);
-        sendOtpBtn = findViewById(R.id.btn_login_send_otp);
-
-        sendOtpBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                String phone = phoneInput.getText().toString().trim();
-                if((phone.isEmpty()) || (phone.length()!=10)){
-                    phoneInput.setError("Enter valid phone number");
-                    return;
-                }
-                sendVerificationCode("+91"+phone);
-            }
-        });
-    }
-    private void sendVerificationCode(String phoneNumber){
-        PhoneAuthOptions options = PhoneAuthOptions.newBuilder(mauth).
-                setPhoneNumber(phoneNumber)
-                .setTimeout(60L, TimeUnit.SECONDS)
-                .setActivity(this)
-                .setCallbacks(callbacks)
-                .build();
-        PhoneAuthProvider.verifyPhoneNumber(options);
-    }
-
-    PhoneAuthProvider.OnVerificationStateChangedCallbacks callbacks = new PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
-        @Override
-        public void onVerificationCompleted(@NonNull PhoneAuthCredential phoneAuthCredential) {
-
-        }
-
-        @Override
-        public void onVerificationFailed(@NonNull FirebaseException e) {
-            Toast.makeText(TSTAR_Login_With_Mobile_Part_One.this, "Failed"+e.getMessage(), Toast.LENGTH_SHORT).show();
-        }
-
-        public void onCodeSent(@NonNull String vId,@NonNull PhoneAuthProvider.ForceResendingToken token){
-            verificationId = vId;
-            Intent intent = new Intent(TSTAR_Login_With_Mobile_Part_One.this, TSTAR_Login_With_Mobile_Part_Two.class);
-            intent.putExtra("verificationId",verificationId);
-            intent.putExtra("phone number",phoneInput.getText().toString().trim());
-            startActivity(intent);
-        }
-    };
-}*/

@@ -271,9 +271,15 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="68f55fa5-e357-4619-9e9e-b24458d6d83c" name="Changes" comment="Authentication">
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/example/t_star/REAL_TIME_DATABASE/PUT_ON_DATABASE/UserHelper.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/example/t_star/REAL_TIME_DATABASE/PUT_ON_DATABASE/UserModel.java" afterDir="false" />
+    <list default="true" id="68f55fa5-e357-4619-9e9e-b24458d6d83c" name="Changes" comment="Summary of what I added in TSTAR_Signup_Activity.java&#10;&#10;Added a Firebase DB reference.&#10;&#10;Added a method checkIfUserExists() to validate:&#10;&#10;Email already exists?&#10;&#10;OR Mobile number already exists?&#10;&#10;If user exists → show Toast → STOP.&#10;&#10;If not → start OTP Activity (your original code).">
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/example/t_star/REAL_TIME_DATABASE/GET_FROM_DATABASE/User_Data_Fetcher.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/example/t_star/REAL_TIME_DATABASE/PUT_ON_DATABASE/ModelClasses/Updated_User_Model.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/example/t_star/REAL_TIME_DATABASE/Validation/User_Input_Validator.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/s_profile_activity_bg.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/s_profile_email.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/s_profile_icon.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/s_profile_id.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/s_profile_person.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/8.11.1/checksums/checksums.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.11.1/checksums/checksums.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/8.11.1/checksums/md5-checksums.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.11.1/checksums/md5-checksums.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/8.11.1/checksums/sha1-checksums.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.11.1/checksums/sha1-checksums.bin" afterDir="false" />
@@ -283,18 +289,12 @@
       <change beforePath="$PROJECT_DIR$/.gradle/8.11.1/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.11.1/fileHashes/fileHashes.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/8.11.1/fileHashes/resourceHashesCache.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.11.1/fileHashes/resourceHashesCache.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/file-system.probe" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/file-system.probe" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/t_star/TSTAR_Entry_Activity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/t_star/TSTAR_Entry_Activity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/t_star/TSTAR_Login_Activity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/t_star/TSTAR_Login_Activity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/t_star/TSTAR_Login_With_Mobile_Part_One.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/t_star/TSTAR_Login_With_Mobile_Part_One.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/t_star/TSTAR_Login_With_Mobile_Part_Two.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/t_star/TSTAR_Login_With_Mobile_Part_Two.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/t_star/TSTAR_Signup_Activity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/t_star/TSTAR_Signup_Activity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/t_star/TSTAR_Splash_Screen.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/t_star/TSTAR_Splash_Screen.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/tstar_signup_activity.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/tstar_signup_activity.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/local.properties" beforeDir="false" afterPath="$PROJECT_DIR$/local.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/app/build.gradle.kts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/t_star/STUDENTACTIVITIES/SFragment/S_Profile_Fragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/t_star/STUDENTACTIVITIES/SFragment/S_Profile_Fragment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_s__profile_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_s__profile_.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -633,7 +633,39 @@
       <option name="project" value="LOCAL" />
       <updated>1765298819624</updated>
     </task>
-    <option name="localTasksCounter" value="17" />
+    <task id="LOCAL-00017" summary="Proper working of Signup , Login and OTP">
+      <option name="closed" value="true" />
+      <created>1765387527653</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1765387527653</updated>
+    </task>
+    <task id="LOCAL-00018" summary="COMMIT TITLE: Add complete authentication flow with splash screen, login, signup, and OTP mobile login&#10;&#10;COMMIT DESCRIPTION: Implemented full user authentication module including:&#10;                    - Splash screen with Firebase session check and role-based redirection&#10;                    - Entry activity for navigation&#10;                    - Email/Password login activity&#10;                    - Signup activity with role selection and Realtime Database storage&#10;                    - Mobile number OTP login (send + verify)&#10;                    - Updated AndroidManifest with all required activities&#10;                    Fully tested and working end-to-end.">
+      <option name="closed" value="true" />
+      <created>1765427762842</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1765427762842</updated>
+    </task>
+    <task id="LOCAL-00019" summary="tstar_login_with_mobile_part_one_activity.xml&#10;tstar_login_with_mobile_part_two_activity.xml &#10;edittext lenght and input type corrected">
+      <option name="closed" value="true" />
+      <created>1765428588106</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1765428588106</updated>
+    </task>
+    <task id="LOCAL-00020" summary="Summary of what I added in TSTAR_Signup_Activity.java&#10;&#10;Added a Firebase DB reference.&#10;&#10;Added a method checkIfUserExists() to validate:&#10;&#10;Email already exists?&#10;&#10;OR Mobile number already exists?&#10;&#10;If user exists → show Toast → STOP.&#10;&#10;If not → start OTP Activity (your original code).">
+      <option name="closed" value="true" />
+      <created>1765469173294</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1765469173294</updated>
+    </task>
+    <option name="localTasksCounter" value="21" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -678,19 +710,25 @@
     <MESSAGE value="Splash Screen , Entry Activity,Signup Activity and Login Activity Backend" />
     <MESSAGE value="Stop tracking app/build and ignore build artifacts" />
     <MESSAGE value="Authentication" />
-    <option name="LAST_COMMIT_MESSAGE" value="Authentication" />
+    <MESSAGE value="Proper working of Signup , Login and OTP" />
+    <MESSAGE value="Login" />
+    <MESSAGE value="COMMIT TITLE: Add complete authentication flow with splash screen, login, signup, and OTP mobile login&#10;&#10;COMMIT DESCRIPTION: Implemented full user authentication module including:&#10;                    - Splash screen with Firebase session check and role-based redirection&#10;                    - Entry activity for navigation&#10;                    - Email/Password login activity&#10;                    - Signup activity with role selection and Realtime Database storage&#10;                    - Mobile number OTP login (send + verify)&#10;                    - Updated AndroidManifest with all required activities&#10;                    Fully tested and working end-to-end." />
+    <MESSAGE value="tstar_login_with_mobile_part_one_activity.xml&#10;tstar_login_with_mobile_part_two_activity.xml &#10;edittext lenght and input type corrected" />
+    <MESSAGE value="tstar_login_with_mobile_part_one_activity.xml&#10;tstar_login_with_mobile_part_two_activity.xml&#10;edittext lenght and input type corrected" />
+    <MESSAGE value="Summary of what I added in TSTAR_Signup_Activity.java&#10;&#10;Added a Firebase DB reference.&#10;&#10;Added a method checkIfUserExists() to validate:&#10;&#10;Email already exists?&#10;&#10;OR Mobile number already exists?&#10;&#10;If user exists → show Toast → STOP.&#10;&#10;If not → start OTP Activity (your original code)." />
+    <option name="LAST_COMMIT_MESSAGE" value="Summary of what I added in TSTAR_Signup_Activity.java&#10;&#10;Added a Firebase DB reference.&#10;&#10;Added a method checkIfUserExists() to validate:&#10;&#10;Email already exists?&#10;&#10;OR Mobile number already exists?&#10;&#10;If user exists → show Toast → STOP.&#10;&#10;If not → start OTP Activity (your original code)." />
   </component>
   <component name="play_dynamic_filters_status">
     <option name="appIdToCheckInfo">
       <map>
         <entry key="com.example.t_star">
           <value>
-            <CheckInfo lastCheckTimestamp="1765385463671" />
+            <CheckInfo lastCheckTimestamp="1765473675005" />
           </value>
         </entry>
         <entry key="com.example.t_star.test">
           <value>
-            <CheckInfo lastCheckTimestamp="1765385463671" />
+            <CheckInfo lastCheckTimestamp="1765473675005" />
           </value>
         </entry>
       </map>

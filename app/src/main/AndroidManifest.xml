@@ -12,7 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.TSTAR"
         tools:targetApi="31">
-
+        <activity
+            android:name=".REAL_TIME_DATABASE.Sample_Activity"
+            android:exported="false" />
         <activity
             android:name=".STUDENTACTIVITIES.S_class_dashboard_notifications"
             android:exported="false" />
@@ -87,7 +89,6 @@
         <activity
             android:name=".TEACHERACTIVITIES.TChatActivity"
             android:exported="false" />
-
         <activity
             android:name=".TEACHERACTIVITIES.TNotificationActivity"
             android:exported="false" />
@@ -115,7 +116,6 @@
         <activity
             android:name=".TSTAR_Entry_Activity"
             android:exported="false" />
-
         <activity
             android:name=".TSTAR_Login_Activity"
             android:exported="false" />
@@ -124,9 +124,7 @@
             android:exported="false" />
         <activity
             android:name=".TSTAR_Login_With_Mobile_Part_One"
-            android:exported="false" />
-
-        <!-- <activity -->
+            android:exported="false" /> <!-- <activity -->
         <!-- android:name=".STUDENTACTIVITIES.SHome_Page" -->
         <!-- android:exported="false" /> -->
         <activity

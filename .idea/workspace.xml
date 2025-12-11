@@ -10,11 +10,6 @@
           <theme>@style/Theme.TSTAR</theme>
         </config>
       </layout>
-      <layout url="file://$PROJECT_DIR$/app/src/main/res/drawable/bg_status_circle.xml">
-        <config>
-          <theme>@style/Theme.TSTAR</theme>
-        </config>
-      </layout>
       <layout url="file://$PROJECT_DIR$/app/src/main/res/drawable/icon_circle_bg.xml">
         <config>
           <theme>@style/Theme.TSTAR</theme>
@@ -35,7 +30,22 @@
           <theme>@style/Theme.TSTAR</theme>
         </config>
       </layout>
-      <layout url="file://$PROJECT_DIR$/app/src/main/res/drawable/s_setting.xml">
+      <layout url="file://$PROJECT_DIR$/app/src/main/res/drawable/s_arrowback.xml">
+        <config>
+          <theme>@style/Theme.TSTAR</theme>
+        </config>
+      </layout>
+      <layout url="file://$PROJECT_DIR$/app/src/main/res/drawable/s_btn_bg_shape.xml">
+        <config>
+          <theme>@style/Theme.TSTAR</theme>
+        </config>
+      </layout>
+      <layout url="file://$PROJECT_DIR$/app/src/main/res/drawable/s_classess_card_bg.xml">
+        <config>
+          <theme>@style/Theme.TSTAR</theme>
+        </config>
+      </layout>
+      <layout url="file://$PROJECT_DIR$/app/src/main/res/drawable/s_edittext_border.xml">
         <config>
           <theme>@style/Theme.TSTAR</theme>
         </config>
@@ -70,6 +80,21 @@
           <theme>@style/Theme.TSTAR</theme>
         </config>
       </layout>
+      <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/activity_s_class_dashboard_quiz.xml">
+        <config>
+          <theme>@style/Theme.TSTAR</theme>
+        </config>
+      </layout>
+      <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/activity_s_class_dashboard_studymaterial.xml">
+        <config>
+          <theme>@style/Theme.TSTAR</theme>
+        </config>
+      </layout>
+      <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/activity_s_class_dashboard_translator.xml">
+        <config>
+          <theme>@style/Theme.TSTAR</theme>
+        </config>
+      </layout>
       <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/activity_s_enroll_in_class.xml">
         <config>
           <theme>@style/Theme.TSTAR</theme>
@@ -90,12 +115,32 @@
           <theme>@style/Theme.TSTAR</theme>
         </config>
       </layout>
+      <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/activity_tclasses_noti.xml">
+        <config>
+          <theme>@style/Theme.TSTAR</theme>
+        </config>
+      </layout>
       <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/activity_tcreate_new_assign.xml">
         <config>
           <theme>@style/Theme.TSTAR</theme>
         </config>
       </layout>
+      <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/activity_tcreate_new_event.xml">
+        <config>
+          <theme>@style/Theme.TSTAR</theme>
+        </config>
+      </layout>
+      <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/activity_tevent.xml">
+        <config>
+          <theme>@style/Theme.TSTAR</theme>
+        </config>
+      </layout>
       <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/activity_thome.xml">
+        <config>
+          <theme>@style/Theme.TSTAR</theme>
+        </config>
+      </layout>
+      <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/activity_tnotification.xml">
         <config>
           <theme>@style/Theme.TSTAR</theme>
         </config>
@@ -115,17 +160,17 @@
           <theme>@style/Theme.TSTAR</theme>
         </config>
       </layout>
-      <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_s__event_.xml">
-        <config>
-          <theme>@style/Theme.TSTAR</theme>
-        </config>
-      </layout>
       <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_s__offline_download_.xml">
         <config>
           <theme>@style/Theme.TSTAR</theme>
         </config>
       </layout>
-      <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_s_profile_.xml">
+      <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_s__profile_.xml">
+        <config>
+          <theme>@style/Theme.TSTAR</theme>
+        </config>
+      </layout>
+      <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_t_chat.xml">
         <config>
           <theme>@style/Theme.TSTAR</theme>
         </config>
@@ -135,12 +180,12 @@
           <theme>@style/Theme.TSTAR</theme>
         </config>
       </layout>
-      <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/item_assignment.xml">
+      <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_t_notification.xml">
         <config>
           <theme>@style/Theme.TSTAR</theme>
         </config>
       </layout>
-      <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/item_attendance.xml">
+      <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_t_profile.xml">
         <config>
           <theme>@style/Theme.TSTAR</theme>
         </config>
@@ -151,6 +196,16 @@
         </config>
       </layout>
       <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/s_mainpage.xml">
+        <config>
+          <theme>@style/Theme.TSTAR</theme>
+        </config>
+      </layout>
+      <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/tclassesview.xml">
+        <config>
+          <theme>@style/Theme.TSTAR</theme>
+        </config>
+      </layout>
+      <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/teventview.xml">
         <config>
           <theme>@style/Theme.TSTAR</theme>
         </config>
@@ -195,7 +250,17 @@
           <theme>@style/Theme.TSTAR</theme>
         </config>
       </layout>
-      <layout url="file://$PROJECT_DIR$/app/src/main/res/xml/profile_motion_scene.xml">
+      <layout url="file://$PROJECT_DIR$/app/src/main/res/menu/s_class_dashboard_delete_menu.xml">
+        <config>
+          <theme>@style/Theme.TSTAR</theme>
+        </config>
+      </layout>
+      <layout url="file://$PROJECT_DIR$/app/src/main/res/menu/tbottom_nav_file.xml">
+        <config>
+          <theme>@style/Theme.TSTAR</theme>
+        </config>
+      </layout>
+      <layout url="file://$PROJECT_DIR$/app/src/main/res/menu/tprofile_menu.xml">
         <config>
           <theme>@style/Theme.TSTAR</theme>
         </config>
@@ -206,7 +271,18 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="68f55fa5-e357-4619-9e9e-b24458d6d83c" name="Changes" comment="." />
+    <list default="true" id="68f55fa5-e357-4619-9e9e-b24458d6d83c" name="Changes" comment="COMMIT TITLE: Add complete authentication flow with splash screen, login, signup, and OTP mobile login&#10;&#10;COMMIT DESCRIPTION: Implemented full user authentication module including:&#10;                    - Splash screen with Firebase session check and role-based redirection&#10;                    - Entry activity for navigation&#10;                    - Email/Password login activity&#10;                    - Signup activity with role selection and Realtime Database storage&#10;                    - Mobile number OTP login (send + verify)&#10;                    - Updated AndroidManifest with all required activities&#10;                    Fully tested and working end-to-end.">
+      <change beforePath="$PROJECT_DIR$/.gradle/8.11.1/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.11.1/executionHistory/executionHistory.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/8.11.1/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.11.1/executionHistory/executionHistory.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/8.11.1/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.11.1/fileHashes/fileHashes.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/8.11.1/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.11.1/fileHashes/fileHashes.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/8.11.1/fileHashes/resourceHashesCache.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.11.1/fileHashes/resourceHashesCache.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/file-system.probe" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/file-system.probe" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/tstar_login_with_mobile_part_one_activity.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/tstar_login_with_mobile_part_one_activity.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/tstar_login_with_mobile_part_two_activity.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/tstar_login_with_mobile_part_two_activity.xml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -215,7 +291,7 @@
   <component name="ClangdSettings">
     <option name="formatViaClangd" value="false" />
   </component>
-  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[DeviceId(pluginId=LocalEmulator, isTemplate=false, identifier=path=/Users/architkulkarni/.android/avd/Pixel_9_Pro.avd)]" />
+  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[]" />
   <component name="ExternalProjectsData">
     <projectState path="$PROJECT_DIR$">
       <ProjectState />
@@ -224,8 +300,9 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="resourceFile" />
+        <option value="valueResourceFile" />
         <option value="layoutResourceFile" />
+        <option value="resourceFile" />
         <option value="Class" />
       </list>
     </option>
@@ -236,6 +313,12 @@
         <option value="sawantankita23 &lt;sawantashok7558&gt;" />
         <option value="Rutuja Nage &lt;rutujanage979@gmail.com&gt;" />
       </list>
+    </option>
+    <option name="PUSH_TAGS">
+      <GitPushTagMode>
+        <option name="argument" value="--tags" />
+        <option name="title" value="All" />
+      </GitPushTagMode>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
@@ -248,7 +331,7 @@
   <component name="GithubPullRequestsUISettings">{
   &quot;selectedUrlAndAccountId&quot;: {
     &quot;url&quot;: &quot;https://github.com/rutujanage/T-STAR.git&quot;,
-    &quot;accountId&quot;: &quot;579e9bd0-cc53-4cb6-be14-1b48c130cf9b&quot;
+    &quot;accountId&quot;: &quot;383b70b4-c5e8-405b-ab68-38e68ab53fe2&quot;
   }
 }</component>
   <component name="ProblemsViewState">
@@ -258,7 +341,7 @@
   &quot;associatedIndex&quot;: 5
 }</component>
   <component name="ProjectId" id="366bEdXwYRro5A7D7PHbCMiVRkA" />
-  <component name="ProjectLevelVcsManager">
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <ConfirmationsSetting value="2" id="Add" />
   </component>
   <component name="ProjectReloadState">
@@ -268,27 +351,64 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Android App..executor": "Run",
-    "Android App.app.executor": "Run",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.cidr.known.project.marker": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "RunOnceActivity.readMode.enableVisualFormatting": "true",
-    "ScreenRecorder.SavePath": "/Users/architkulkarni/Downloads",
-    "cf.first.check.clang-format": "false",
-    "cidr.known.project.marker": "true",
-    "com.google.services.firebase.aqiPopupShown": "true",
-    "git-widget-placeholder": "master",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/Hp/AndroidStudioProjects/T-STAR",
-    "project.structure.last.edited": "SDK Location",
-    "project.structure.proportion": "0.17",
-    "project.structure.side.proportion": "0.2",
-    "settings.editor.selected.configurable": "com.google.gct.login2.settings.GoogleLoginApplicationSettingsConfigurableProvider"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Android App..executor&quot;: &quot;Run&quot;,
+    &quot;Android App.app.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.cidr.known.project.marker&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.readMode.enableVisualFormatting&quot;: &quot;true&quot;,
+    &quot;cf.first.check.clang-format&quot;: &quot;false&quot;,
+    &quot;cidr.known.project.marker&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/HP-JS/AndroidStudioProjects/TSTAR/app/src/main/res/drawable&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;SDK Location&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.17&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;AndroidSdkUpdater&quot;
   }
-}]]></component>
+}</component>
+  <component name="RecentsManager">
+    <key name="CreateClassDialog.RecentsKey">
+      <recent name="com.example.t_star.STUDENTACTIVITIES" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\HP-JS\AndroidStudioProjects\TSTAR\app\src\main\res\drawable" />
+      <recent name="C:\Users\Hp\AndroidStudioProjects\T-STAR\app\src\main\res\drawable" />
+    </key>
+    <key name="android.template.-1922954501">
+      <recent name="com.example.t_star.STUDENTACTIVITIES" />
+    </key>
+    <key name="android.template.1269482292">
+      <recent name="com.example.t_star" />
+    </key>
+    <key name="android.template.-1969220334">
+      <recent name="com.example.t_star.TEACHERACTIVITIES" />
+    </key>
+    <key name="android.template.-935785377">
+      <recent name="com.example.t_star.REAL_TIME_DATABASE" />
+    </key>
+    <key name="android.template.1375666320">
+      <recent name="com.example.t_star.TEACHERACTIVITIES" />
+    </key>
+    <key name="android.template.-1194409621">
+      <recent name="com.example.t_star.STUDENTACTIVITIES" />
+    </key>
+    <key name="android.template.394202365">
+      <recent name="com.example.t_star" />
+    </key>
+    <key name="android.template.-260573415">
+      <recent name="com.example.t_star.STUDENTACTIVITIES" />
+    </key>
+    <key name="android.template.1896216110">
+      <recent name="com.example.t_star" />
+    </key>
+    <key name="android.template.1001423832">
+      <recent name="com.example.t_star.TEACHERACTIVITIES" />
+    </key>
+  </component>
   <component name="RunManager">
     <configuration name="app" type="AndroidRunConfigurationType" factoryName="Android App" activateToolWindowBeforeRun="false">
       <module name="T-STAR.app" />
@@ -404,47 +524,119 @@
       <option name="project" value="LOCAL" />
       <updated>1764500789501</updated>
     </task>
-    <task id="LOCAL-00005" summary="change in student ui">
+    <task id="LOCAL-00005" summary="Notification ..">
       <option name="closed" value="true" />
-      <created>1765106745907</created>
+      <created>1764699057343</created>
       <option name="number" value="00005" />
       <option name="presentableId" value="LOCAL-00005" />
       <option name="project" value="LOCAL" />
-      <updated>1765106745907</updated>
+      <updated>1764699057343</updated>
     </task>
-    <task id="LOCAL-00006" summary="proflie change">
+    <task id="LOCAL-00006" summary="Navigation Change....">
       <option name="closed" value="true" />
-      <created>1765174423207</created>
+      <created>1764845675903</created>
       <option name="number" value="00006" />
       <option name="presentableId" value="LOCAL-00006" />
       <option name="project" value="LOCAL" />
-      <updated>1765174423207</updated>
+      <updated>1764845675903</updated>
     </task>
-    <task id="LOCAL-00007" summary="perform some backend opration on profile">
+    <task id="LOCAL-00007" summary="Navigation Change....">
       <option name="closed" value="true" />
-      <created>1765178722601</created>
+      <created>1764845699378</created>
       <option name="number" value="00007" />
       <option name="presentableId" value="LOCAL-00007" />
       <option name="project" value="LOCAL" />
-      <updated>1765178722601</updated>
+      <updated>1764845699378</updated>
     </task>
-    <task id="LOCAL-00008" summary=".">
+    <task id="LOCAL-00008" summary="Navigation Change....">
       <option name="closed" value="true" />
-      <created>1765464909079</created>
+      <created>1764845722206</created>
       <option name="number" value="00008" />
       <option name="presentableId" value="LOCAL-00008" />
       <option name="project" value="LOCAL" />
-      <updated>1765464909079</updated>
+      <updated>1764845722206</updated>
     </task>
-    <task id="LOCAL-00009" summary=".">
+    <task id="LOCAL-00009" summary="Navigation Change....">
       <option name="closed" value="true" />
-      <created>1765464938487</created>
+      <created>1764846426220</created>
       <option name="number" value="00009" />
       <option name="presentableId" value="LOCAL-00009" />
       <option name="project" value="LOCAL" />
-      <updated>1765464938487</updated>
+      <updated>1764846426220</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="Navigation Change....">
+      <option name="closed" value="true" />
+      <created>1764846439506</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1764846439506</updated>
+    </task>
+    <task id="LOCAL-00011" summary="Navigation Change....">
+      <option name="closed" value="true" />
+      <created>1764846448005</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1764846448005</updated>
+    </task>
+    <task id="LOCAL-00012" summary="Navigation Change....">
+      <option name="closed" value="true" />
+      <created>1765076704321</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1765076704321</updated>
+    </task>
+    <task id="LOCAL-00013" summary="student Fragment , Classes Fragment Desing , Enroll in new class activity , Clsass Dashboard , Dashboard Activities">
+      <option name="closed" value="true" />
+      <created>1765087525456</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1765087525456</updated>
+    </task>
+    <task id="LOCAL-00014" summary="Entry Activity , Signup Activity and Login Activity">
+      <option name="closed" value="true" />
+      <created>1765258516421</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1765258516421</updated>
+    </task>
+    <task id="LOCAL-00015" summary="Signup Activity and Login Activity Backend">
+      <option name="closed" value="true" />
+      <created>1765275798842</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1765275798842</updated>
+    </task>
+    <task id="LOCAL-00016" summary="Authentication">
+      <option name="closed" value="true" />
+      <created>1765298819624</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1765298819624</updated>
+    </task>
+    <task id="LOCAL-00017" summary="Proper working of Signup , Login and OTP">
+      <option name="closed" value="true" />
+      <created>1765387527653</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1765387527653</updated>
+    </task>
+    <task id="LOCAL-00018" summary="COMMIT TITLE: Add complete authentication flow with splash screen, login, signup, and OTP mobile login&#10;&#10;COMMIT DESCRIPTION: Implemented full user authentication module including:&#10;                    - Splash screen with Firebase session check and role-based redirection&#10;                    - Entry activity for navigation&#10;                    - Email/Password login activity&#10;                    - Signup activity with role selection and Realtime Database storage&#10;                    - Mobile number OTP login (send + verify)&#10;                    - Updated AndroidManifest with all required activities&#10;                    Fully tested and working end-to-end.">
+      <option name="closed" value="true" />
+      <created>1765427762842</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1765427762842</updated>
+    </task>
+    <option name="localTasksCounter" value="19" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -452,7 +644,19 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="master" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
           </value>
         </entry>
       </map>
@@ -464,23 +668,34 @@
     <MESSAGE value="made fragment folder in student activity &#10;&#10;add some vector assect&#10;&#10;and create a home_page design" />
     <MESSAGE value="Merge remote-tracking branch 'origin/master'&#10;&#10;# Conflicts:&#10;#&#9;.gradle/8.11.1/checksums/checksums.lock&#10;#&#9;.gradle/8.11.1/checksums/md5-checksums.bin&#10;#&#9;.gradle/8.11.1/checksums/sha1-checksums.bin&#10;#&#9;.gradle/8.11.1/fileHashes/fileHashes.bin&#10;#&#9;.gradle/8.11.1/fileHashes/fileHashes.lock&#10;#&#9;.idea/workspace.xml" />
     <MESSAGE value="made fragment folder in student activity&#10;&#10;add some vector assect&#10;&#10;and create a home_page design" />
-    <MESSAGE value="change in student ui" />
-    <MESSAGE value="proflie change" />
-    <MESSAGE value="perform some backend opration on profile" />
-    <MESSAGE value="." />
-    <option name="LAST_COMMIT_MESSAGE" value="." />
+    <MESSAGE value="Dashboard Changed.." />
+    <MESSAGE value="Merge remote-tracking branch 'origin/master'&#10;&#10;# Conflicts:&#10;#&#9;.gradle/8.11.1/executionHistory/executionHistory.bin&#10;#&#9;.gradle/8.11.1/executionHistory/executionHistory.lock&#10;#&#9;.gradle/8.11.1/fileHashes/fileHashes.bin&#10;#&#9;.gradle/8.11.1/fileHashes/fileHashes.lock&#10;#&#9;.gradle/8.11.1/fileHashes/resourceHashesCache.bin&#10;#&#9;.gradle/buildOutputCleanup/buildOutputCleanup.lock&#10;#&#9;.gradle/buildOutputCleanup/outputFiles.bin&#10;#&#9;.gradle/file-system.probe&#10;#&#9;.idea/workspace.xml&#10;#&#9;app/build/intermediates/apk/debug/app-debug.apk&#10;#&#9;app/build/intermediates/compile_and_runtime_not_namespaced_r_class_jar/debug/processDebugResources/R.jar&#10;#&#9;app/build/intermediates/desugar_graph/debug/dexBuilderDebug/out/currentProject/dirs_bucket_1/graph.bin&#10;#&#9;app/build/intermediates/dex/debug/mergeProjectDexDebug/0/classes.dex&#10;#&#9;app/build/intermediates/dex/debug/mergeProjectDexDebug/12/classes.dex&#10;#&#9;app/build/intermediates/dex_archive_input_jar_hashes/debug/dexBuilderDebug/out&#10;#&#9;app/build/intermediates/incremental/debug/mergeDebugResources/compile-file-map.properties&#10;#&#9;app/build/intermediates/incremental/debug/mergeDebugResources/merger.xml&#10;#&#9;app/build/intermediates/incremental/debug/packageDebugResources/compile-file-map.properties&#10;#&#9;app/build/intermediates/incremental/debug/packageDebugResources/merger.xml&#10;#&#9;app/build/intermediates/incremental/packageDebug/tmp/debug/dex-renamer-state.txt&#10;#&#9;app/build/intermediates/incremental/packageDebug/tmp/debug/zip-cache/androidResources&#10;#&#9;app/build/intermediates/linked_resources_binary_format/debug/processDebugResources/linked-resources-binary-format-debug.ap_&#10;#&#9;app/build/intermediates/manifest_merge_blame_file/debug/processDebugMainManifest/manifest-merger-blame-debug-report.txt&#10;#&#9;app/build/intermediates/merged_res_blame_folder/debug/mergeDebugResources/out/multi-v2/mergeDebugResources.json&#10;#&#9;app/build/intermediates/merged_res_blame_folder/debug/mergeDebugResources/out/multi-v2/values-af.json&#10;#&#9;app/build/intermediates/merged_res_blame_folder/debug/mergeDebugResources/out/multi-v2/values-am.json&#10;#&#9;app/build/intermediates/merged_res_blame_folder/debug/mergeDebugResources/out/multi-v2/values-ar.json&#10;#&#9;app/build/intermediates/merged_res_blame_folder/debug/mergeDebugResources/out/multi-v2/values-as.json&#10;#&#9;app/build/intermediates/merged_res_blame_folder/debug/mergeDebugResources/out/multi-v2/values-az.json&#10;#&#9;app/build/intermediates/merged_res_blame_folder/debug/mergeDebugResources/out/multi-v2/values-b+es+419.json&#10;#&#9;app/build/intermediates/merged_res_blame_folder/debug/mergeDebugResources/out/multi-v2/values-b+sr+Latn.json&#10;#&#9;app/build/intermediates/merged_res_blame_folder/debug/mergeDebugResources/out/multi-v2/values-be.json&#10;#&#9;app/build/intermediates/merged_res_blame_folder/debug/mergeDebugResources/out/multi-v2/values-bg.json&#10;#&#9;app/build/intermediates/merged_res_blame_folder/debug/mergeDebugResources/out/multi-v2/values-bn.json&#10;#&#9;app/build/intermediates/merged_res_blame_folder/debug/mergeDebugResources/out/multi-v2/values-bs.json&#10;#&#9;app/build/intermediates/merged_res_blame_folder/debug/mergeDebugResources/out/multi-v2/values-ca.json&#10;#&#9;app/build/intermediates/merged_res_blame_folder/debug/mergeDebugResources/out/multi-v2/values-cs.json&#10;#&#9;app/build/intermediates/merged_res_blame_folder/debug/mergeDebugResources/out/multi-v2/values-da.json&#10;#&#9;app/build/intermediates/merged_res_blame_folder/debug/mergeDebugResources/out/multi-v2/values-de.json&#10;#&#9;app/build/intermediates/merged_res_blame_folder/debug/mergeDebugResources/out/multi-v2/values-el.json&#10;#&#9;app/build/intermediates/merged_res_blame_folder/debug/mergeDebugResources/out/multi-v2/values-en-rAU.json&#10;#&#9;app/build/intermediates/merged_res_blame_folder/debug/mergeDebugResources/out/multi-v2/values-en-rCA.json&#10;#&#9;app/build/intermediates/merged_res_blame_folder/debug/mergeDebugResources/out/multi-v2/values-en-rGB.json&#10;#&#9;app/build/intermediates/merged_res_blame_folder/debug/mergeDebugResources/out/multi-v2/values-en-rIN.json&#10;#&#9;app/build/intermediates/merged_res_blame_folder/debug/mergeDebugResources/out/multi-v2/values-en-rXC.json&#10;#&#9;app/build/intermediates/merged_res_blame_folder/debug/mergeDebugResources/out/multi-v2/values-es-rUS.json&#10;#&#9;app/build/intermediates/merged_res_blame_folder/debug/mergeDebugResources/out/multi-v2/values-es.json&#10;#&#9;app/build/intermediates/merged_res_blame_folder/debug/mergeDebugResources/out/multi-v2/values-et.json&#10;#&#9;app/build/intermediates/merged_res_blame_folder/debug/mergeDebugResources/out/multi-v2/values-eu.json&#10;#&#9;app/build/intermediates/merged_res_blame_folder/debug/mergeDebugResources/out/multi-v2/values-fa.json&#10;#&#9;app/build/intermediates/merged_res_blame_folder/debug/mergeDebugResources/out/multi-v2/values-fi.json&#10;#&#9;app/build/intermediates/merged_res_blame_folder/debug/mergeDebugResources/out/multi-v2/values-fr-rCA.json&#10;#&#9;app/build/intermediates/merged_res_blame_folder/debug/mergeDebugResources/out/multi-v2/values-fr.json&#10;#&#9;app/build/intermediates/merged_res_blame_folder/debug/mergeDebugResources/out/multi-v2/values-gl.json&#10;#&#9;app/build/intermediates/merged_res_blame_folder/debug/mergeDebugResources/out/multi-v2/values-gu.json&#10;#&#9;app/build/intermediates/merged_res_blame_folder/debug/mergeDebugResources/out/multi-v2/values-h320dp-port-v13.json&#10;#&#9;app/build/intermediates/merged_res_blame_folder/debug/mergeDebugResources/out/multi-v2/values-h360dp-land-v13.json&#10;#&#9;app/build/intermediates/merged_res_blame_folder/debug/mergeDebugResources/out/multi-v2/values-h480dp-land-v13.json&#10;#&#9;app/build/intermediates/merged_res_blame_folder/debug/mergeDebugResources/out/multi-v2/values-h480dp-v13.json&#10;#&#9;app/build/intermediates/merged_res_blame_folder/debug/mergeDebugResources/out/multi-v2/values-h550dp-port-v13.json&#10;#&#9;app/build/intermediates/merged_res_blame_folder/debug/mergeDebugResources/out/multi-v2/values-h720dp-v13.json&#10;#&#9;app/build/intermediates/merged_res_blame_folder/debug/mergeDebugResources/out/multi-v2/values-hdpi-v4.json&#10;#&#9;app/build/intermediates/merged_res_blame_folder/debug/mergeDebugResources/out/multi-v2/values-hi.json&#10;#&#9;app/build/intermediates/merged_res_blame_folder/debug/mergeDebugResources/out/multi-v2/values-hr.json&#10;#&#9;app/build/intermediates/merged_res_blame_folder/debug/mergeDebugResources/out/multi-v2/values-hu.json&#10;#&#9;app/build/intermediates/merged_res_blame_folder/debug/mergeDebugResources/out/multi-v2/values-hy.json&#10;#&#9;app/build/intermediates/merged_res_blame_folder/debug/mergeDebugResources/out/multi-v2/values-in.json&#10;#&#9;app/build/intermediates/merged_res_blame_folder/debug/mergeDebugResources/out/multi-v2/values-is.json&#10;#&#9;app/build/intermediates/merged_res_blame_folder/debug/mergeDebugResources/out/multi-v2/values-it.json&#10;#&#9;app/build/intermediates/merged_res_blame_folder/debug/mergeDebugResources/out/multi-v2/values-iw.json&#10;#&#9;app/build/intermediates/merged_res_blame_folder/debug/mergeDebugResources/out/multi-v2/values-ja.json&#10;#&#9;app/build/intermediates/merged_res_blame_folder/debug/mergeDebugResources/out/multi-v2/values-ka.json&#10;#&#9;app/build/intermediates/merged_res_blame_folder/debug/mergeDebugResources/out/multi-v2/values-kk.json&#10;#&#9;app/build/intermediates/merged_res_blame_folder/debug/mergeDebugResources/out/multi-v2/values-km.json&#10;#&#9;app/build/intermediates/merged_res_blame_folder/debug/mergeDebugResources/out/multi-v2/values-kn.json&#10;#&#9;app/build/intermediates/merged_res_blame_folder/debug/mergeDebugResources/out/multi-v2/values-ko.json&#10;#&#9;app/build/intermediates/merged_res_blame_folder/debug/mergeDebugResources/out/multi-v2/values-ky.json&#10;#&#9;app/build/intermediates/merged_res_blame_folder/debug/mergeDebugResources/out/multi-v2/values-land.json&#10;#&#9;app/build/intermediates/merged_res_blame_folder/debug/mergeDebugResources/out/multi-v2/values-large-v4.json&#10;#&#9;app/build/intermediates/merged_res_blame_folder/debug/mergeDebugResources/out/multi-v2/values-ldltr-v21.json&#10;#&#9;app/build/intermediates/merged_res_blame_folder/debug/mergeDebugResources/out/multi-v2/values-ldrtl-v17.json&#10;#&#9;app/build/intermediates/merged_res_blame_folder/debug/mergeDebugResources/out/multi-v2/values-lo.json&#10;#&#9;app/build/intermediates/merged_res_blame_folder/debug/mergeDebugResources/out/multi-v2/values-lt.json&#10;#&#9;app/build/intermediates/merged_res_blame_folder/debug/mergeDebugResources/out/multi-v2/values-lv.json&#10;#&#9;app/build/intermediates/merged_res_blame_folder/debug/mergeDebugResources/out/multi-v2/values-mk.json&#10;#&#9;app/build/intermediates/merged_res_blame_folder/debug/mergeDebugResources/out/multi-v2/values-ml.json&#10;#&#9;app/build/intermediates/merged_res_blame_folder/debug/mergeDebugResources/out/multi-v2/values-mn.json&#10;#&#9;app/build/intermediates/merged_res_blame_folder/debug/mergeDebugResources/out/multi-v2/values-mr.json&#10;#&#9;app/build/intermediates/merged_res_blame_folder/debug/mergeDebugResources/out/multi-v2/values-ms.json&#10;#&#9;app/build/intermediates/merged_res_blame_folder/debug/mergeDebugResources/out/multi-v2/values-my.json&#10;#&#9;app/build/intermediates/merged_res_blame_folder/debug/mergeDebugResources/out/multi-v2/values-nb.json&#10;#&#9;app/build/intermediates/merged_res_blame_folder/debug/mergeDebugResources/out/multi-v2/values-ne.json&#10;#&#9;app/build/intermediates/merged_res_blame_folder/debug/mergeDebugResources/out/multi-v2/values-night-v8.json&#10;#&#9;app/build/intermediates/merged_res_blame_folder/debug/mergeDebugResources/out/multi-v2/values-nl.json&#10;#&#9;app/build/intermediates/merged_res_blame_folder/debug/mergeDebugResources/out/multi-v2/values-or.json&#10;#&#9;app/build/intermediates/merged_res_blame_folder/debug/mergeDebugResources/out/multi-v2/values-pa.json&#10;#&#9;app/build/intermediates/merged_res_blame_folder/debug/mergeDebugResources/out/multi-v2/values-pl.json&#10;#&#9;app/build/intermediates/merged_res_blame_folder/debug/mergeDebugResources/out/multi-v2/values-port.json&#10;#&#9;app/build/intermediates/merged_res_blame_folder/debug/mergeDebugResources/out/multi-v2/values-pt-rBR.json&#10;#&#9;app/build/intermediates/merged_res_blame_folder/debug/mergeDebugResources/out/multi-v2/values-pt-rPT.json&#10;#&#9;app/build/intermediates/merged_res_blame_folder/debug/mergeDebugResources/out/multi-v2/values-pt.json&#10;#&#9;app/build/intermediates/merged_res_blame_folder/debug/mergeDebugResources/out/multi-v2/values-ro.json&#10;#&#9;app/build/intermediates/merged_res_blame_folder/debug/mergeDebugResources/out/multi-v2/values-ru.json&#10;#&#9;app/build/intermediates/merged_res_blame_folder/debug/mergeDebugResources/out/multi-v2/values-si.json&#10;#&#9;app/build/intermediates/merged_res_blame_folder/debug/mergeDebugResources/out/multi-v2/values-sk.json&#10;#&#9;app/build/intermediates/merged_res_blame_folder/debug/mergeDebugResources/out/multi-v2/values-sl.json&#10;#&#9;app/build/intermediates/merged_res_blame_folder/debug/mergeDebugResources/out/multi-v2/values-sq.json&#10;#&#9;app/build/intermediates/merged_res_blame_folder/debug/mergeDebugResources/out/multi-v2/values-sr.json&#10;#&#9;app/build/intermediates/merged_res_blame_folder/debug/mergeDebugResources/out/multi-v2/values-sv.json&#10;#&#9;app/build/intermediates/merged_res_blame_folder/debug/mergeDebugResources/out/multi-v2/values-sw.json&#10;#&#9;app/build/intermediates/merged_res_blame_folder/debug/mergeDebugResources/out/multi-v2/values-sw600dp-v13.json&#10;#&#9;app/build/intermediates/merged_res_blame_folder/debug/mergeDebugResources/out/multi-v2/values-ta.json&#10;#&#9;app/build/intermediates/merged_res_blame_folder/debug/mergeDebugResources/out/multi-v2/values-te.json&#10;#&#9;app/build/intermediates/merged_res_blame_folder/debug/mergeDebugResources/out/multi-v2/values-th.json&#10;#&#9;app/build/intermediates/merged_res_blame_folder/debug/mergeDebugResources/out/multi-v2/values-tl.json&#10;#&#9;app/build/intermediates/merged_res_blame_folder/debug/mergeDebugResources/out/multi-v2/values-tr.json&#10;#&#9;app/build/intermediates/merged_res_blame_folder/debug/mergeDebugResources/out/multi-v2/values-uk.json&#10;#&#9;app/build/intermediates/merged_res_blame_folder/debug/mergeDebugResources/out/multi-v2/values-ur.json&#10;#&#9;app/build/intermediates/merged_res_blame_folder/debug/mergeDebugResources/out/multi-v2/values-uz.json&#10;#&#9;app/build/intermediates/merged_res_blame_folder/debug/mergeDebugResources/out/multi-v2/values-v16.json&#10;#&#9;app/build/intermediates/merged_res_blame_folder/debug/mergeDebugResources/out/multi-v2/values-v17.json&#10;#&#9;app/build/intermediates/merged_res_blame_folder/debug/mergeDebugResources/out/multi-v2/values-v18.json&#10;#&#9;app/build/intermediates/merged_res_blame_folder/debug/mergeDebugResources/out/multi-v2/values-v21.json&#10;#&#9;app/build/intermediates/merged_res_blame_folder/debug/mergeDebugResources/out/multi-v2/values-v22.json&#10;#&#9;app/build/intermediates/merged_res_blame_folder/debug/mergeDebugResources/out/multi-v2/values-v23.json&#10;#&#9;app/build/intermediates/merged_res_blame_folder/debug/mergeDebugResources/out/multi-v2/values-v24.json&#10;#&#9;app/build/intermediates/merged_res_blame_folder/debug/mergeDebugResources/out/multi-v2/values-v25.json&#10;#&#9;app/build/intermediates/merged_res_blame_folder/debug/mergeDebugResources/out/multi-v2/values-v26.json&#10;#&#9;app/build/intermediates/merged_res_blame_folder/debug/mergeDebugResources/out/multi-v2/values-v28.json&#10;#&#9;app/build/intermediates/merged_res_blame_folder/debug/mergeDebugResources/out/multi-v2/values-v31.json&#10;#&#9;app/build/intermediates/merged_res_blame_folder/debug/mergeDebugResources/out/multi-v2/values-v34.json&#10;#&#9;app/build/intermediates/merged_res_blame_folder/debug/mergeDebugResources/out/multi-v2/values-v35.json&#10;#&#9;app/build/intermediates/merged_res_blame_folder/debug/mergeDebugResources/out/multi-v2/values-vi.json&#10;#&#9;app/build/intermediates/merged_res_blame_folder/debug/mergeDebugResources/out/multi-v2/values-w320dp-land-v13.json&#10;#&#9;app/build/intermediates/merged_res_blame_folder/debug/mergeDebugResources/out/multi-v2/values-w360dp-port-v13.json&#10;#&#9;app/build/intermediates/merged_res_blame_folder/debug/mergeDebugResources/out/multi-v2/values-w400dp-port-v13.json&#10;#&#9;app/build/intermediates/merged_res_blame_folder/debug/mergeDebugResources/out/multi-v2/values-w600dp-land-v13.json&#10;#&#9;app/build/intermediates/merged_res_blame_folder/debug/mergeDebugResources/out/multi-v2/values-watch-v20.json&#10;#&#9;app/build/intermediates/merged_res_blame_folder/debug/mergeDebugResources/out/multi-v2/values-watch-v21.json&#10;#&#9;app/build/intermediates/merged_res_blame_folder/debug/mergeDebugResources/out/multi-v2/values-xlarge-v4.json&#10;#&#9;app/build/intermediates/merged_res_blame_folder/debug/mergeDebugResources/out/multi-v2/values-zh-rCN.json&#10;#&#9;app/build/intermediates/merged_res_blame_folder/debug/mergeDebugResources/out/multi-v2/values-zh-rHK.json&#10;#&#9;app/build/intermediates/merged_res_blame_folder/debug/mergeDebugResources/out/multi-v2/values-zh-rTW.json&#10;#&#9;app/build/intermediates/merged_res_blame_folder/debug/mergeDebugResources/out/multi-v2/values-zu.json&#10;#&#9;app/build/intermediates/merged_res_blame_folder/debug/mergeDebugResources/out/multi-v2/values.json&#10;#&#9;app/build/intermediates/merged_res_blame_folder/debug/mergeDebugResources/out/single/mergeDebugResources.json&#10;#&#9;app/build/intermediates/runtime_symbol_list/debug/processDebugResources/R.txt&#10;#&#9;app/build/intermediates/source_set_path_map/debug/mapDebugSourceSetPaths/file-map.txt&#10;#&#9;app/build/intermediates/stable_resource_ids_file/debug/processDebugResources/stableIds.txt&#10;#&#9;app/build/outputs/logs/manifest-merger-debug-report.txt&#10;#&#9;local.properties" />
+    <MESSAGE value="Notification .." />
+    <MESSAGE value="Navigation Change..." />
+    <MESSAGE value="Navigation Change...." />
+    <MESSAGE value="student Fragment , Classes Fragment Desing , Enroll in new class activity , Clsass Dashboard , Dashboard Activities" />
+    <MESSAGE value="Entry Activity , Signup Activity and Login Activity" />
+    <MESSAGE value="Signup Activity and Login Activity Backend" />
+    <MESSAGE value="commiting" />
+    <MESSAGE value="Commit" />
+    <MESSAGE value="Splash Screen , Entry Activity,Signup Activity and Login Activity Backend" />
+    <MESSAGE value="Stop tracking app/build and ignore build artifacts" />
+    <MESSAGE value="Authentication" />
+    <MESSAGE value="Proper working of Signup , Login and OTP" />
+    <MESSAGE value="COMMIT TITLE: Add complete authentication flow with splash screen, login, signup, and OTP mobile login&#10;&#10;COMMIT DESCRIPTION: Implemented full user authentication module including:&#10;                    - Splash screen with Firebase session check and role-based redirection&#10;                    - Entry activity for navigation&#10;                    - Email/Password login activity&#10;                    - Signup activity with role selection and Realtime Database storage&#10;                    - Mobile number OTP login (send + verify)&#10;                    - Updated AndroidManifest with all required activities&#10;                    Fully tested and working end-to-end." />
+    <option name="LAST_COMMIT_MESSAGE" value="COMMIT TITLE: Add complete authentication flow with splash screen, login, signup, and OTP mobile login&#10;&#10;COMMIT DESCRIPTION: Implemented full user authentication module including:&#10;                    - Splash screen with Firebase session check and role-based redirection&#10;                    - Entry activity for navigation&#10;                    - Email/Password login activity&#10;                    - Signup activity with role selection and Realtime Database storage&#10;                    - Mobile number OTP login (send + verify)&#10;                    - Updated AndroidManifest with all required activities&#10;                    Fully tested and working end-to-end." />
   </component>
   <component name="play_dynamic_filters_status">
     <option name="appIdToCheckInfo">
       <map>
         <entry key="com.example.t_star">
           <value>
-            <CheckInfo lastCheckTimestamp="1765266136074" />
+            <CheckInfo lastCheckTimestamp="1765385463671" />
           </value>
         </entry>
         <entry key="com.example.t_star.test">
           <value>
-            <CheckInfo lastCheckTimestamp="1765266136075" />
+            <CheckInfo lastCheckTimestamp="1765385463671" />
           </value>
         </entry>
       </map>

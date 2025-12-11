@@ -271,12 +271,7 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="68f55fa5-e357-4619-9e9e-b24458d6d83c" name="Changes" comment="Authentication">
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/example/t_star/REAL_TIME_DATABASE/PUT_ON_DATABASE/UserHelper.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/example/t_star/REAL_TIME_DATABASE/PUT_ON_DATABASE/UserModel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/8.11.1/checksums/checksums.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.11.1/checksums/checksums.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/8.11.1/checksums/md5-checksums.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.11.1/checksums/md5-checksums.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/8.11.1/checksums/sha1-checksums.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.11.1/checksums/sha1-checksums.bin" afterDir="false" />
+    <list default="true" id="68f55fa5-e357-4619-9e9e-b24458d6d83c" name="Changes" comment="COMMIT TITLE: Add complete authentication flow with splash screen, login, signup, and OTP mobile login&#10;&#10;COMMIT DESCRIPTION: Implemented full user authentication module including:&#10;                    - Splash screen with Firebase session check and role-based redirection&#10;                    - Entry activity for navigation&#10;                    - Email/Password login activity&#10;                    - Signup activity with role selection and Realtime Database storage&#10;                    - Mobile number OTP login (send + verify)&#10;                    - Updated AndroidManifest with all required activities&#10;                    Fully tested and working end-to-end.">
       <change beforePath="$PROJECT_DIR$/.gradle/8.11.1/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.11.1/executionHistory/executionHistory.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/8.11.1/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.11.1/executionHistory/executionHistory.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/8.11.1/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.11.1/fileHashes/fileHashes.bin" afterDir="false" />
@@ -285,16 +280,8 @@
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/file-system.probe" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/file-system.probe" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/t_star/TSTAR_Entry_Activity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/t_star/TSTAR_Entry_Activity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/t_star/TSTAR_Login_Activity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/t_star/TSTAR_Login_Activity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/t_star/TSTAR_Login_With_Mobile_Part_One.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/t_star/TSTAR_Login_With_Mobile_Part_One.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/t_star/TSTAR_Login_With_Mobile_Part_Two.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/t_star/TSTAR_Login_With_Mobile_Part_Two.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/t_star/TSTAR_Signup_Activity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/t_star/TSTAR_Signup_Activity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/t_star/TSTAR_Splash_Screen.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/t_star/TSTAR_Splash_Screen.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/tstar_signup_activity.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/tstar_signup_activity.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/local.properties" beforeDir="false" afterPath="$PROJECT_DIR$/local.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/tstar_login_with_mobile_part_one_activity.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/tstar_login_with_mobile_part_one_activity.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/tstar_login_with_mobile_part_two_activity.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/tstar_login_with_mobile_part_two_activity.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -633,7 +620,23 @@
       <option name="project" value="LOCAL" />
       <updated>1765298819624</updated>
     </task>
-    <option name="localTasksCounter" value="17" />
+    <task id="LOCAL-00017" summary="Proper working of Signup , Login and OTP">
+      <option name="closed" value="true" />
+      <created>1765387527653</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1765387527653</updated>
+    </task>
+    <task id="LOCAL-00018" summary="COMMIT TITLE: Add complete authentication flow with splash screen, login, signup, and OTP mobile login&#10;&#10;COMMIT DESCRIPTION: Implemented full user authentication module including:&#10;                    - Splash screen with Firebase session check and role-based redirection&#10;                    - Entry activity for navigation&#10;                    - Email/Password login activity&#10;                    - Signup activity with role selection and Realtime Database storage&#10;                    - Mobile number OTP login (send + verify)&#10;                    - Updated AndroidManifest with all required activities&#10;                    Fully tested and working end-to-end.">
+      <option name="closed" value="true" />
+      <created>1765427762842</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1765427762842</updated>
+    </task>
+    <option name="localTasksCounter" value="19" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -678,7 +681,9 @@
     <MESSAGE value="Splash Screen , Entry Activity,Signup Activity and Login Activity Backend" />
     <MESSAGE value="Stop tracking app/build and ignore build artifacts" />
     <MESSAGE value="Authentication" />
-    <option name="LAST_COMMIT_MESSAGE" value="Authentication" />
+    <MESSAGE value="Proper working of Signup , Login and OTP" />
+    <MESSAGE value="COMMIT TITLE: Add complete authentication flow with splash screen, login, signup, and OTP mobile login&#10;&#10;COMMIT DESCRIPTION: Implemented full user authentication module including:&#10;                    - Splash screen with Firebase session check and role-based redirection&#10;                    - Entry activity for navigation&#10;                    - Email/Password login activity&#10;                    - Signup activity with role selection and Realtime Database storage&#10;                    - Mobile number OTP login (send + verify)&#10;                    - Updated AndroidManifest with all required activities&#10;                    Fully tested and working end-to-end." />
+    <option name="LAST_COMMIT_MESSAGE" value="COMMIT TITLE: Add complete authentication flow with splash screen, login, signup, and OTP mobile login&#10;&#10;COMMIT DESCRIPTION: Implemented full user authentication module including:&#10;                    - Splash screen with Firebase session check and role-based redirection&#10;                    - Entry activity for navigation&#10;                    - Email/Password login activity&#10;                    - Signup activity with role selection and Realtime Database storage&#10;                    - Mobile number OTP login (send + verify)&#10;                    - Updated AndroidManifest with all required activities&#10;                    Fully tested and working end-to-end." />
   </component>
   <component name="play_dynamic_filters_status">
     <option name="appIdToCheckInfo">

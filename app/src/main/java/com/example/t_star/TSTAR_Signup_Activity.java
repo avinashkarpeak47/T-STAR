@@ -4,6 +4,7 @@ package com.example.t_star;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.view.View;
 import android.widget.*;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -40,6 +41,7 @@ public class TSTAR_Signup_Activity extends AppCompatActivity {
     RadioGroup rgRole;
     RadioButton rbStudent, rbTeacher;
     Button btnRegister;
+    TextView tvGoToLOginPage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,15 +54,27 @@ public class TSTAR_Signup_Activity extends AppCompatActivity {
         etEmail = findViewById(R.id.et_signup_email);
         etPassword = findViewById(R.id.et_signup_password);
         etMobile = findViewById(R.id.et_signup_mobile);
-
         rgRole = findViewById(R.id.rg_signup_select_role);
         rbStudent = findViewById(R.id.rb_signup_studentrole);
         rbTeacher = findViewById(R.id.rb_signup_teacherrole);
-
         btnRegister = findViewById(R.id.btn_signup);
+        tvGoToLOginPage = findViewById(R.id.tv_login_on_signup_page);
 
         // Register button click
-        btnRegister.setOnClickListener(v -> attemptSignup());
+        btnRegister.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                attemptSignup();
+            }
+        });
+        //Go to Login Page TextView
+        tvGoToLOginPage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(TSTAR_Signup_Activity.this, TSTAR_Login_Activity.class);
+                startActivity(intent);
+            }
+        });
     }
 
     /**
@@ -76,11 +90,22 @@ public class TSTAR_Signup_Activity extends AppCompatActivity {
         String mobile = etMobile.getText().toString().trim();
 
         // Validate fields
-        if (TextUtils.isEmpty(firstname)) { etFirstName.setError("Enter first name"); etFirstName.requestFocus(); return; }
-        if (TextUtils.isEmpty(lastname)) { etLastName.setError("Enter last name"); etLastName.requestFocus(); return; }
-        if (TextUtils.isEmpty(email) || !email.contains("@")) { etEmail.setError("Enter valid email"); etEmail.requestFocus(); return; }
-        if (TextUtils.isEmpty(password) || password.length() < 8) { etPassword.setError("Min 8 characters"); etPassword.requestFocus(); return; }
-        if (TextUtils.isEmpty(mobile) || mobile.length() != 10) { etMobile.setError("Enter 10-digit number"); etMobile.requestFocus(); return; }
+        if (TextUtils.isEmpty(firstname)) {
+            etFirstName.setError("Enter first name"); etFirstName.requestFocus();
+            return;
+        }else if (TextUtils.isEmpty(lastname)) {
+            etLastName.setError("Enter last name"); etLastName.requestFocus();
+            return;
+        }else if (TextUtils.isEmpty(mobile) || mobile.length() != 10) {
+            etMobile.setError("Enter 10-digit number"); etMobile.requestFocus();
+            return;
+        }else if (TextUtils.isEmpty(email) || !email.contains("@") || !email.contains(".")) {
+            etEmail.setError("Enter valid email"); etEmail.requestFocus();
+            return;
+        }else if (TextUtils.isEmpty(password) || password.length() < 8) {
+            etPassword.setError("Min 8 characters"); etPassword.requestFocus();
+            return;
+        }
 
         // Role Selection (Radio Buttons)
         int selectedId = rgRole.getCheckedRadioButtonId();
@@ -106,6 +131,8 @@ public class TSTAR_Signup_Activity extends AppCompatActivity {
     }
 }
 
+
+//Below is also important code of proper working of Signup... Dont Delete or Uncomment it...
 
 /*import android.content.Intent;
 import android.os.Bundle;

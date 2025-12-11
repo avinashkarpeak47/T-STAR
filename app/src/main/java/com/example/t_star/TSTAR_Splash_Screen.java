@@ -7,35 +7,41 @@ import android.os.Handler;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.t_star.REAL_TIME_DATABASE.PUT_ON_DATABASE.UserHelper;
+import com.example.t_star.REAL_TIME_DATABASE.PUT_ON_DATABASE.HelperClasses.User_Authentication_Helper;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
-/**
- * Simple splash that waits briefly, then:
- * - If no authenticated user → open Entry screen
- * - If authenticated → read role and redirect appropriately
- */
 public class TSTAR_Splash_Screen extends AppCompatActivity {
 
-    private static final int SPLASH_DELAY_MS = 1200;
+    private static final int SPLASH_DELAY_MS = 1500;
+    private boolean hasNavigated = false;  // prevents double navigation
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.tstar_splash_screen);
+        // NO LOGIC HERE – only layout inflation
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        if (hasNavigated) return;    // Avoid double redirect if activity restarts
+        hasNavigated = true;
 
         new Handler().postDelayed(() -> {
+
             FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+
             if (user == null) {
-                // Not signed in -> go to entry screen
                 startActivity(new Intent(TSTAR_Splash_Screen.this, TSTAR_Entry_Activity.class));
                 finish();
             } else {
-                // User signed in -> load role from DB and redirect
-                UserHelper.loadRoleAndRedirect(user.getUid(), TSTAR_Splash_Screen.this);
-                finish();
+                User_Authentication_Helper.loadRoleAndRedirect(user.getUid(), TSTAR_Splash_Screen.this);
+                // No finish() here, redirect helper will handle it
             }
+
         }, SPLASH_DELAY_MS);
     }
 }

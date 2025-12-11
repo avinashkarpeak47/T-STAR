@@ -1,5 +1,4 @@
-package com.example.t_star.REAL_TIME_DATABASE.PUT_ON_DATABASE;
-
+package com.example.t_star.REAL_TIME_DATABASE.PUT_ON_DATABASE.HelperClasses;
 
 import android.content.Context;
 import android.content.Intent;
@@ -8,31 +7,30 @@ import androidx.annotation.NonNull;
 
 import com.example.t_star.STUDENTACTIVITIES.S_Mainpage;
 import com.example.t_star.TEACHERACTIVITIES.THomeActivity;
-import com.example.t_star.REAL_TIME_DATABASE.PUT_ON_DATABASE.UserModel;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-
-import com.google.firebase.database.ValueEventListener;
+import com.example.t_star.REAL_TIME_DATABASE.PUT_ON_DATABASE.ModelClasses.User_Authentication_Model;
+import com.google.firebase.database.*;
 
 /**
- * Small helper to centralize Firebase Realtime DB access and role redirection.
+ * Centralized helper class for:
+ * 1. Saving user model in Realtime Database
+ * 2. Fetching roles
+ * 3. Redirecting based on role
  */
-public class UserHelper {
+public class User_Authentication_Helper {
 
+    // Reference: Users/
     private static DatabaseReference usersRef() {
         return FirebaseDatabase.getInstance().getReference("Users");
     }
 
     // Save UserModel under Users/{uid}
-    public static void saveUserModel(String uid, UserModel user, DatabaseSaveCallback cb) {
+    public static void saveUserModel(String uid, User_Authentication_Model user, DatabaseSaveCallback cb) {
         usersRef().child(uid).setValue(user)
                 .addOnSuccessListener(aVoid -> cb.onSuccess())
                 .addOnFailureListener(cb::onFailure);
     }
 
-    // Load role for a uid and then redirect to correct activity
+    // Load role and redirect
     public static void loadRoleAndRedirect(String uid, Context ctx) {
         usersRef().child(uid).child("role")
                 .addListenerForSingleValueEvent(new ValueEventListener() {
@@ -45,13 +43,12 @@ public class UserHelper {
 
                     @Override
                     public void onCancelled(@NonNull DatabaseError error) {
-                        // On DB failure, fallback to student main page
                         redirectToRole(ctx, "Student");
                     }
                 });
     }
 
-    // Redirect to role main activity
+    // Decide destination activity
     public static void redirectToRole(Context ctx, String role) {
         Intent intent;
         if ("Teacher".equalsIgnoreCase(role)) {
@@ -63,7 +60,7 @@ public class UserHelper {
         ctx.startActivity(intent);
     }
 
-    // Callback for save operation
+    // Callback interface
     public interface DatabaseSaveCallback {
         void onSuccess();
         void onFailure(Exception e);

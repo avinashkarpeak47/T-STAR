@@ -10,11 +10,11 @@ public class S_Fragment_Classes_RC_Model {
     public S_Fragment_Classes_RC_Model() {
     }
 
-    public S_Fragment_Classes_RC_Model(String classId, String className, String teacherName, String subjectName) {
+    public S_Fragment_Classes_RC_Model(String classId, String className, String teacherName) {
         this.classId = classId;
         this.className = className;
         this.teacherName = teacherName;
-        this.subjectName = subjectName;
+//        this.subjectName = subjectName;
     }
 
     public String getClassId() {

@@ -39,7 +39,7 @@ public class S_Fragment_Classes_RC_Adapter extends RecyclerView.Adapter<S_Fragme
 
         holder.tvClassName.setText("Class: " + model.getClassName());
         holder.tvTeacherName.setText("Teacher: " + model.getTeacherName());
-        holder.tvSubjectName.setText("Subject: " + model.getSubjectName());
+//        holder.tvSubjectName.setText("Subject: " + model.getSubjectName());
         holder.tvClassId.setText("ID: " + model.getClassId());
 
         holder.itemView.setOnClickListener(v -> listener.onClick(model));
@@ -52,14 +52,14 @@ public class S_Fragment_Classes_RC_Adapter extends RecyclerView.Adapter<S_Fragme
 
     static class VH extends RecyclerView.ViewHolder {
 
-        TextView tvClassName, tvTeacherName, tvSubjectName, tvClassId;
+        TextView tvClassName, tvTeacherName, tvClassId;
 
         public VH(@NonNull View v) {
             super(v);
 
             tvClassName = v.findViewById(R.id.tvClassName);
             tvTeacherName = v.findViewById(R.id.tvTeacherName);
-            tvSubjectName = v.findViewById(R.id.tvSubjectName);
+//            tvSubjectName = v.findViewById(R.id.tvSubjectName);
             tvClassId = v.findViewById(R.id.tvClassId);
         }
     }

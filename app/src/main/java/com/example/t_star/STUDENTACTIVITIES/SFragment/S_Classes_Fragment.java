@@ -124,8 +124,7 @@ public class S_Classes_Fragment extends Fragment {
                                         classList.add(new S_Fragment_Classes_RC_Model(
                                                 classId,
                                                 className,
-                                                teacherName,
-                                                subjectName
+                                                teacherName
                                         ));
 
                                         adapter.notifyDataSetChanged();

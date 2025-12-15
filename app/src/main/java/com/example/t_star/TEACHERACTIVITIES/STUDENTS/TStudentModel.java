@@ -1,6 +1,7 @@
 package com.example.t_star.TEACHERACTIVITIES.STUDENTS;
 
 public class TStudentModel {
+
     private String studentName;
     private String studentId;
     private int imageRes;

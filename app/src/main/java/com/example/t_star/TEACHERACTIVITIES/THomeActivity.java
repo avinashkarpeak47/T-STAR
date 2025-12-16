@@ -15,9 +15,11 @@ import com.example.t_star.TEACHERACTIVITIES.TFragment.TChatFragment;
 import com.example.t_star.TEACHERACTIVITIES.TFragment.THomeFragment;
 import com.example.t_star.TEACHERACTIVITIES.TFragment.TNotificationFragment;
 import com.example.t_star.TEACHERACTIVITIES.TFragment.TProfileFragment;
+import com.example.t_star.TSTAR_Entry_Activity;
 import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
+import com.google.firebase.auth.FirebaseAuth;
 
 public class THomeActivity extends AppCompatActivity {
 
@@ -84,6 +86,11 @@ public class THomeActivity extends AppCompatActivity {
                 Toast.makeText(this, "Feedback", Toast.LENGTH_SHORT).show();
             }
             else if (id == R.id.nav_logout) {
+                Intent intent=new Intent(THomeActivity.this, TSTAR_Entry_Activity.class);
+                FirebaseAuth.getInstance().signOut();  // 🔥 this clears login session
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
+                finish();
                 Toast.makeText(this, "Logged Out", Toast.LENGTH_SHORT).show();
             }
 

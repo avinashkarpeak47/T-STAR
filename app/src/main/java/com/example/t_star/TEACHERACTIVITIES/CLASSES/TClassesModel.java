@@ -4,23 +4,74 @@ public class TClassesModel {
 
     private String className;
     private String classId;
-    private int totalStudents;
+    private String description;
+    private String teacherId;
+    private String teacherName;
+    private int studentsCount;
 
-    public TClassesModel(String className, String classId, int totalStudents) {
+    // 🔥 Mandatory empty constructor for Firebase
+    public TClassesModel() {}
+
+    // 🔥 Full constructor for creating new class
+    public TClassesModel(String className, String classId, String description,
+                         String teacherId, String teacherName, int studentsCount) {
         this.className = className;
         this.classId = classId;
-        this.totalStudents = totalStudents;
+        this.description = description;
+        this.teacherId = teacherId;
+        this.teacherName = teacherName;
+        this.studentsCount = studentsCount;
     }
 
+    // ---------------------- GETTERS ----------------------
+
     public String getClassName() {
-        return className;
+        return className != null ? className : "";
     }
 
     public String getClassId() {
-        return classId;
+        return classId != null ? classId : "";
     }
 
-    public int getTotalStudents() {
-        return totalStudents;
+    public String getDescription() {
+        return description != null ? description : "";
+    }
+
+    public String getTeacherId() {
+        return teacherId != null ? teacherId : "";
+    }
+
+    public String getTeacherName() {
+        return teacherName != null ? teacherName : "";
+    }
+
+    public int getStudentsCount() {
+        return studentsCount;
+    }
+
+    // ---------------------- SETTERS (optional but useful) ----------------------
+
+    public void setClassName(String className) {
+        this.className = className;
+    }
+
+    public void setClassId(String classId) {
+        this.classId = classId;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public void setTeacherId(String teacherId) {
+        this.teacherId = teacherId;
+    }
+
+    public void setTeacherName(String teacherName) {
+        this.teacherName = teacherName;
+    }
+
+    public void setStudentsCount(int studentsCount) {
+        this.studentsCount = studentsCount;
     }
 }

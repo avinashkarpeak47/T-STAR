@@ -1,62 +1,44 @@
 package com.example.t_star.TEACHERACTIVITIES.CLASSES;
 
+import com.google.firebase.database.IgnoreExtraProperties;
+import java.util.HashMap;
+import java.util.Map;
+
+@IgnoreExtraProperties
 public class TClassesModel {
 
-    private String className;
     private String classId;
+    private String className;
     private String description;
     private String teacherId;
     private String teacherName;
     private int studentsCount;
 
-    // 🔥 Mandatory empty constructor for Firebase
-    public TClassesModel() {}
+    // Optional – ignored in getAllClasses()
+    private Map<String, Object> students;
+    private Map<String, Object> joinRequests;
 
-    // 🔥 Full constructor for creating new class
-    public TClassesModel(String className, String classId, String description,
-                         String teacherId, String teacherName, int studentsCount) {
-        this.className = className;
+    // 🔥 Empty constructor required by Firebase
+    public TClassesModel() {
+        students = new HashMap<>();
+        joinRequests = new HashMap<>();
+    }
+
+    // -------------------- GETTERS --------------------
+    public String getClassId() { return classId; }
+    public String getClassName() { return className; }
+    public String getDescription() { return description; }
+    public String getTeacherId() { return teacherId; }
+    public String getTeacherName() { return teacherName; }
+    public int getStudentsCount() { return studentsCount; }
+
+    // -------------------- SETTERS --------------------
+    public void setClassId(String classId) {
         this.classId = classId;
-        this.description = description;
-        this.teacherId = teacherId;
-        this.teacherName = teacherName;
-        this.studentsCount = studentsCount;
     }
-
-    // ---------------------- GETTERS ----------------------
-
-    public String getClassName() {
-        return className != null ? className : "";
-    }
-
-    public String getClassId() {
-        return classId != null ? classId : "";
-    }
-
-    public String getDescription() {
-        return description != null ? description : "";
-    }
-
-    public String getTeacherId() {
-        return teacherId != null ? teacherId : "";
-    }
-
-    public String getTeacherName() {
-        return teacherName != null ? teacherName : "";
-    }
-
-    public int getStudentsCount() {
-        return studentsCount;
-    }
-
-    // ---------------------- SETTERS (optional but useful) ----------------------
 
     public void setClassName(String className) {
         this.className = className;
-    }
-
-    public void setClassId(String classId) {
-        this.classId = classId;
     }
 
     public void setDescription(String description) {
@@ -73,5 +55,14 @@ public class TClassesModel {
 
     public void setStudentsCount(int studentsCount) {
         this.studentsCount = studentsCount;
+    }
+
+    // Optional setters (safe)
+    public void setStudents(Map<String, Object> students) {
+        this.students = students;
+    }
+
+    public void setJoinRequests(Map<String, Object> joinRequests) {
+        this.joinRequests = joinRequests;
     }
 }

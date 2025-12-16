@@ -2,6 +2,7 @@ package com.example.t_star.TEACHERACTIVITIES;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.ImageView;
 import android.widget.SearchView;
 
@@ -18,8 +19,6 @@ import com.google.android.material.appbar.MaterialToolbar;
 import java.util.ArrayList;
 
 public class TStudentsActivity extends AppCompatActivity {
-
-    private static final int REQ_REQUESTS = 101;
 
     ImageView btnNotifications;
     RecyclerView rvStudents;
@@ -43,34 +42,44 @@ public class TStudentsActivity extends AppCompatActivity {
         toolbar.setNavigationOnClickListener(v -> finish());
 
         classId = getIntent().getStringExtra("classId");
+        Log.d("DEBUG_STUDENT", "classId = " + classId);
 
         btnNotifications.setOnClickListener(v -> {
             Intent i = new Intent(this, TStudentRequestActivity.class);
             i.putExtra("classId", classId);
-            startActivityForResult(i, REQ_REQUESTS); // 🔥 IMPORTANT
+            startActivity(i);   // ✅ ONLY THIS
         });
 
         adapter = new TStudentAdapter(this, studentList);
         rvStudents.setLayoutManager(new LinearLayoutManager(this));
         rvStudents.setAdapter(adapter);
 
-        loadStudents();
 
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-            @Override public boolean onQueryTextSubmit(String q) { adapter.filter(q); return false; }
-            @Override public boolean onQueryTextChange(String q) { adapter.filter(q); return false; }
+            @Override public boolean onQueryTextSubmit(String q) {
+                adapter.filter(q);
+                return false;
+            }
+            @Override public boolean onQueryTextChange(String q) {
+                adapter.filter(q);
+                return false;
+            }
         });
     }
 
+    // 🔥 THIS IS THE KEY
     @Override
     protected void onResume() {
         super.onResume();
-        loadStudents();
+        loadStudents();   // always refresh
     }
 
-    // 🚀 STEP 1 — fetch student UIDs
     private void loadStudents() {
+        Log.d("DEBUG_STUDENT", "Loading students for classId = " + classId);
+
         Classes_helper.getClassStudents(classId, uids -> {
+            Log.d("DEBUG_STUDENT", "Fetching students node for " + classId);
+
 
             if (uids == null || uids.isEmpty()) {
                 studentList.clear();
@@ -82,10 +91,15 @@ public class TStudentsActivity extends AppCompatActivity {
         });
     }
 
-    // 🚀 STEP 2 — fetch full user details
     private void loadStudentDetails(ArrayList<String> uids) {
 
         studentList.clear();
+
+        if (uids.isEmpty()) {
+            adapter.updateList(studentList);
+            return;
+        }
+
         final int total = uids.size();
         final int[] loaded = {0};
 
@@ -95,25 +109,22 @@ public class TStudentsActivity extends AppCompatActivity {
 
                 if (user != null) {
                     String name = user.firstname + " " + user.lastname;
-                    studentList.add(new TStudentModel(name, uid, R.drawable.taklogo));
+                    studentList.add(
+                            new TStudentModel(name, uid, R.drawable.taklogo)
+                    );
                 }
 
                 loaded[0]++;
 
+                // 🔥 UPDATE ONLY ONCE (VERY IMPORTANT)
                 if (loaded[0] == total) {
-                    adapter.updateList(studentList); // 🔥 update once
+                    Log.d("DEBUG_STUDENT", "All students loaded = " + studentList.size());
+                    adapter.updateList(studentList);
                 }
             });
         }
     }
 
-    // 🔥 THIS MAKES THE MAGIC HAPPEN
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
 
-        if (requestCode == REQ_REQUESTS && resultCode == RESULT_OK) {
-            loadStudents(); // 🔥 FORCE REFRESH
-        }
-    }
+
 }

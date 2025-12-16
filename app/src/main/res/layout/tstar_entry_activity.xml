@@ -13,11 +13,6 @@
         android:background="@drawable/finalist_entrypage_bg"
         android:gravity="center_horizontal">
 
-
-
-
-
-
         <!-- TITLE -->
         <TextView
             android:id="@+id/txtWelcome"

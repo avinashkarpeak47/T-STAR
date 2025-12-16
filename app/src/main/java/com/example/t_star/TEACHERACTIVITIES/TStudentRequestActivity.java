@@ -1,6 +1,7 @@
 package com.example.t_star.TEACHERACTIVITIES;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -83,21 +84,28 @@ public class TStudentRequestActivity extends AppCompatActivity {
 
     private void acceptStudent(String uid) {
 
+        Log.d("DEBUG_STUDENT", "Accepting student uid = " + uid);
+        Log.d("DEBUG_STUDENT", "Saving to classId = " + classId);
+
         DatabaseReference classRef =
                 FirebaseDatabase.getInstance().getReference("Classes").child(classId);
 
-        classRef.child("students").child(uid).setValue(uid)
+        classRef.child("students").child(uid)
+                .setValue(true)   // 🔥 CHANGE HERE
                 .addOnSuccessListener(a -> {
+
+                    Log.d("DEBUG_STUDENT", "Student SAVED under students node");
 
                     classRef.child("joinRequests").child(uid).removeValue();
                     Classes_helper.updateStudentCount(classId);
-
-                    Toast.makeText(this, "Student Added!", Toast.LENGTH_SHORT).show();
-
-                    // 🔥 THIS IS THE KEY
                     setResult(RESULT_OK);
+                    finish();
+                })
+                .addOnFailureListener(e -> {
+                    Log.e("DEBUG_STUDENT", "FAILED to save student", e);
                 });
     }
+
 
     @Override
     public void onBackPressed() {

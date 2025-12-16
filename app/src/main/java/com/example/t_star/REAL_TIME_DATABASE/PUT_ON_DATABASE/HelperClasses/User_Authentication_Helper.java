@@ -8,6 +8,7 @@ import androidx.annotation.NonNull;
 import com.example.t_star.STUDENTACTIVITIES.S_Mainpage;
 import com.example.t_star.TEACHERACTIVITIES.THomeActivity;
 import com.example.t_star.REAL_TIME_DATABASE.PUT_ON_DATABASE.ModelClasses.User_Authentication_Model;
+import com.example.t_star.TEACHERACTIVITIES.TMainActivity;
 import com.google.firebase.database.*;
 
 /**
@@ -52,7 +53,7 @@ public class User_Authentication_Helper {
     public static void redirectToRole(Context ctx, String role) {
         Intent intent;
         if ("Teacher".equalsIgnoreCase(role)) {
-            intent = new Intent(ctx, THomeActivity.class);
+            intent = new Intent(ctx, TMainActivity.class);
         } else {
             intent = new Intent(ctx, S_Mainpage.class);
         }

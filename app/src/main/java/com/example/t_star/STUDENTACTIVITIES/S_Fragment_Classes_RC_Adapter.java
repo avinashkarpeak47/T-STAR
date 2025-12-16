@@ -4,78 +4,101 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
-
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.example.t_star.R;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.List;
 
-/**
- * RecyclerView adapter for showing list of student classes.
- */
-public class S_Fragment_Classes_RC_Adapter
-        extends RecyclerView.Adapter<S_Fragment_Classes_RC_Adapter.ClassViewHolder> {
-
-    public interface OnItemClickListener {
-        void onItemClick(S_Fragment_Classes_RC_Model model);
-    }
+public class S_Fragment_Classes_RC_Adapter extends RecyclerView.Adapter<S_Fragment_Classes_RC_Adapter.VH> {
 
     private Context context;
-    private List<S_Fragment_Classes_RC_Model> classList;
-    private OnItemClickListener listener;
+    private List<S_Fragment_Classes_RC_Model> list;
+    private OnClick listener;
 
-    public S_Fragment_Classes_RC_Adapter(Context context,
-                                         List<S_Fragment_Classes_RC_Model> classList,
-                                         OnItemClickListener listener) {
+    public interface OnClick {
+        void onClick(S_Fragment_Classes_RC_Model model);
+    }
 
+    public S_Fragment_Classes_RC_Adapter(Context context, List<S_Fragment_Classes_RC_Model> list, OnClick listener) {
         this.context = context;
-        this.classList = classList;
+        this.list = list;
         this.listener = listener;
     }
 
     @NonNull
     @Override
-    public ClassViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(context)
-                .inflate(R.layout.s_item_classes_card, parent, false);
-
-        return new ClassViewHolder(view);
+    public VH onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View v = LayoutInflater.from(context).inflate(R.layout.s_fragment_class_item, parent, false);
+        return new VH(v);
     }
+
+
+    //Rutuja
 
     @Override
-    public void onBindViewHolder(@NonNull ClassViewHolder holder, int position) {
-        S_Fragment_Classes_RC_Model model = classList.get(position);
+    public void onBindViewHolder(@NonNull VH holder, int position) {
 
-        holder.tvClassName.setText(model.getClassName());
-        holder.tvSubjectName.setText("Subject: " + model.getSubjectName());
+        S_Fragment_Classes_RC_Model model = list.get(position);
 
-        // Click listener to notify parent fragment/activity
-        holder.itemView.setOnClickListener(v -> {
-            if (listener != null)
-                listener.onItemClick(model);
-        });
+        holder.tvClassName.setText("Class: " + model.getClassName());
+        holder.tvTeacherName.setText("Teacher: " + model.getTeacherName());
+        holder.tvClassId.setText("ID: " + model.getClassId());
+
+        // RESET
+        holder.tvStatus.setVisibility(View.GONE);
+        holder.itemView.setAlpha(1f);
+        holder.itemView.setClickable(true);
+
+        if ("pending".equals(model.getStatus())) {
+
+            holder.tvStatus.setText("Pending");
+            holder.tvStatus.setBackgroundResource(R.drawable.bg_status_pending);
+            holder.tvStatus.setVisibility(View.VISIBLE);
+
+            holder.itemView.setAlpha(0.6f);
+            holder.itemView.setClickable(false);
+
+        }
+        else if ("approved".equals(model.getStatus())) {
+
+            if (!model.isSeenApproved()) {
+                holder.tvStatus.setText("Approved");
+                holder.tvStatus.setBackgroundResource(R.drawable.bg_status_approved);
+                holder.tvStatus.setVisibility(View.VISIBLE);
+            }
+
+            holder.itemView.setAlpha(1f);
+            holder.itemView.setClickable(true);
+        }
+
+        holder.itemView.setOnClickListener(v -> listener.onClick(model));
     }
+
+
+
 
     @Override
     public int getItemCount() {
-        return classList != null ? classList.size() : 0;
+        return list.size();
     }
 
-    public static class ClassViewHolder extends RecyclerView.ViewHolder {
+    static class VH extends RecyclerView.ViewHolder {
 
-        TextView tvClassName, tvSubjectName;
-        ImageView imgArrow;
+        TextView tvClassName, tvTeacherName, tvClassId ,tvStatus;
 
-        public ClassViewHolder(@NonNull View itemView) {
-            super(itemView);
+        public VH(@NonNull View v) {
+            super(v);
 
-            tvClassName = itemView.findViewById(R.id.tvClassName);
-            tvSubjectName = itemView.findViewById(R.id.tvSubjectName);
-            imgArrow = itemView.findViewById(R.id.imgArrow);
+            tvClassName = v.findViewById(R.id.tvClassName);
+            tvTeacherName = v.findViewById(R.id.tvTeacherName);
+//            tvSubjectName = v.findViewById(R.id.tvSubjectName);
+            tvClassId = v.findViewById(R.id.tvClassId);
+            tvStatus = v.findViewById(R.id.tvStatus);
+
         }
     }
 }

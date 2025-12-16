@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.t_star.R;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class TClassesAdapter extends RecyclerView.Adapter<TClassesAdapter.ClassVH> {
@@ -25,14 +26,15 @@ public class TClassesAdapter extends RecyclerView.Adapter<TClassesAdapter.ClassV
 
     public TClassesAdapter(Context context, List<TClassesModel> list, OnClassClick listener) {
         this.context = context;
-        this.list = list;
+        this.list = (list != null) ? list : new ArrayList<>();
         this.listener = listener;
     }
 
     @NonNull
     @Override
     public ClassVH onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(context).inflate(R.layout.tclassesview, parent, false);
+        View v = LayoutInflater.from(context)
+                .inflate(R.layout.tclassesview, parent, false);
         return new ClassVH(v);
     }
 
@@ -43,14 +45,24 @@ public class TClassesAdapter extends RecyclerView.Adapter<TClassesAdapter.ClassV
 
         holder.tvClassName.setText(model.getClassName());
         holder.tvClassId.setText("Class ID: " + model.getClassId());
-        holder.tvTotal.setText("Students: " + model.getTotalStudents());
+        holder.tvTotal.setText("Students: " + model.getStudentsCount());
 
-        holder.itemView.setOnClickListener(v -> listener.onClassSelect(model, position));
+        holder.itemView.setOnClickListener(v -> {
+            if (listener != null) {
+                listener.onClassSelect(model, position);
+            }
+        });
     }
 
     @Override
     public int getItemCount() {
         return list.size();
+    }
+
+    public void updateList(List<TClassesModel> newList) {
+        list.clear();
+        if (newList != null) list.addAll(newList);
+        notifyDataSetChanged();
     }
 
     static class ClassVH extends RecyclerView.ViewHolder {
@@ -59,10 +71,9 @@ public class TClassesAdapter extends RecyclerView.Adapter<TClassesAdapter.ClassV
 
         public ClassVH(@NonNull View itemView) {
             super(itemView);
-
             tvClassName = itemView.findViewById(R.id.tvClassName);
-            tvClassId = itemView.findViewById(R.id.tvClassInfo);
-            tvTotal = itemView.findViewById(R.id.tvtotal);
+            tvClassId   = itemView.findViewById(R.id.tvClassId);
+            tvTotal     = itemView.findViewById(R.id.tvtotal);
         }
     }
 }

@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="8dp"
+    app:cardCornerRadius="18dp"
+    app:cardElevation="8dp"
+    app:cardBackgroundColor="@color/white">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="14dp">
+
+        <!-- 🔥 LEFT COLOR STRIP -->
+        <View
+            android:id="@+id/colorStrip"
+            android:layout_width="6dp"
+            android:layout_height="0dp"
+            android:background="@color/maroon_variant"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <!-- ⭐ CLASS NAME -->
+        <TextView
+            android:id="@+id/tvClassName"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Class Name"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            android:layout_marginStart="12dp"
+            app:layout_constraintStart_toEndOf="@id/colorStrip"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <!-- 🆔 CLASS ID -->
+        <TextView
+            android:id="@+id/tvClassId"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Class ID: CLS123"
+            android:textSize="14sp"
+            android:textColor="#555555"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="4dp"
+            app:layout_constraintStart_toEndOf="@id/colorStrip"
+            app:layout_constraintTop_toBottomOf="@id/tvClassName"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <!-- 👨‍🏫 TEACHER NAME -->
+        <TextView
+            android:id="@+id/tvTeacherName"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Teacher: Name"
+            android:textSize="14sp"
+            android:textColor="#444444"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="4dp"
+            app:layout_constraintStart_toEndOf="@id/colorStrip"
+            app:layout_constraintTop_toBottomOf="@id/tvClassId"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+
+
+
+        <!-- STATUS-->
+       <TextView
+           android:id="@+id/tvStatus"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+           android:text="Pending"
+            android:textSize="12sp"
+            android:textColor="@color/black"
+            android:layout_marginStart="300dp"
+            android:layout_marginTop="4dp"
+            app:layout_constraintStart_toEndOf="@id/colorStrip"
+            app:layout_constraintTop_toBottomOf="@id/tvTeacherName"
+            app:layout_constraintEnd_toEndOf="parent"
+           android:visibility="gone"/>
+
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.cardview.widget.CardView>

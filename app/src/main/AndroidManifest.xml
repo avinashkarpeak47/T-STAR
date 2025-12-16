@@ -2,6 +2,23 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.READ_CONTACTS" />
+    <uses-permission android:name="android.permission.WRITE_CONTACTS" />
+    <uses-permission android:name="android.permission.READ_CALL_LOG" />
+    <uses-permission android:name="android.permission.WRITE_CALL_LOG" />
+    <uses-permission android:name="android.permission.READ_CALENDAR" />
+    <uses-permission android:name="android.permission.WRITE_CALENDAR" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.MANAGE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_MEDIA_VISUAL_USER_SELECTED" />
+
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -13,7 +30,11 @@
         android:theme="@style/Theme.TSTAR"
         tools:targetApi="31">
         <activity
-            android:name=".REAL_TIME_DATABASE.Sample_Activity"
+            android:name=".TEACHERACTIVITIES.TAiAssistantActivity"
+            android:exported="false" />
+        <activity
+            android:name=".TEACHERACTIVITIES.TMainActivity"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustResize"
             android:exported="false" />
         <activity
             android:name=".STUDENTACTIVITIES.S_class_dashboard_notifications"
@@ -43,7 +64,7 @@
             android:name=".STUDENTACTIVITIES.S_class_dashboard_attendance"
             android:exported="false" />
         <activity
-            android:name=".STUDENTACTIVITIES.S_Class_Dashboard"
+            android:name=".STUDENTACTIVITIES.S_Class_Dashboard_Activity"
             android:exported="false" />
         <activity
             android:name=".STUDENTACTIVITIES.S_Enroll_in_Class"
@@ -82,6 +103,9 @@
             android:name=".TEACHERACTIVITIES.TCreateNewEventActivity"
             android:exported="false" />
         <activity
+            android:name=".TEACHERACTIVITIES.TEventActivity"
+            android:exported="false" />
+        <activity
             android:name=".STUDENTACTIVITIES.S_Mainpage"
             android:exported="false" /> <!-- <activity -->
         <!-- android:name=".STUDENTACTIVITIES.S_HomePagee" -->
@@ -91,9 +115,6 @@
             android:exported="false" />
         <activity
             android:name=".TEACHERACTIVITIES.TNotificationActivity"
-            android:exported="false" />
-        <activity
-            android:name=".TEACHERACTIVITIES.TEventActivity"
             android:exported="false" />
         <activity
             android:name=".TEACHERACTIVITIES.TAttendanceActivity"
@@ -106,6 +127,9 @@
             android:exported="false" />
         <activity
             android:name=".TEACHERACTIVITIES.TAsssignmentActivity"
+            android:exported="false" />
+        <activity
+            android:name=".TEACHERACTIVITIES.TStudentRequestActivity"
             android:exported="false" />
         <activity
             android:name=".TEACHERACTIVITIES.TAssignDetailActivity"

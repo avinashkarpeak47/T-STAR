@@ -1,35 +1,47 @@
 package com.example.t_star.STUDENTACTIVITIES;
 
-/**
- * Model class for storing class details for students.
- * Matches the XML fields: className, subjectName.
- */
 public class S_Fragment_Classes_RC_Model {
 
+    private String classId;
     private String className;
-    private String subjectName;
+    private String teacherName;
+    private String status; // pending / approved
 
-    // Required empty constructor for Firestore
+    private boolean seenApproved;
+
     public S_Fragment_Classes_RC_Model() {}
 
-    public S_Fragment_Classes_RC_Model(String className, String subjectName) {
+    public S_Fragment_Classes_RC_Model(
+            String classId,
+            String className,
+            String teacherName,
+            String status,
+            boolean seenApproved
+    ) {
+        this.classId = classId;
         this.className = className;
-        this.subjectName = subjectName;
+        this.teacherName = teacherName;
+        this.status = status;
+        this.seenApproved = seenApproved;
+    }
+
+    public String getClassId() {
+        return classId;
     }
 
     public String getClassName() {
         return className;
     }
 
-    public void setClassName(String className) {
-        this.className = className;
+    public String getTeacherName() {
+        return teacherName;
     }
 
-    public String getSubjectName() {
-        return subjectName;
+    public String getStatus() {
+        return status;
     }
 
-    public void setSubjectName(String subjectName) {
-        this.subjectName = subjectName;
+    public boolean isSeenApproved(){
+        return seenApproved;
     }
 }

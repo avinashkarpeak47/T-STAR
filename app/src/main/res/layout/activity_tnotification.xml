@@ -38,7 +38,7 @@
             app:cardElevation="4dp"
             android:padding="15dp"
             android:layout_marginTop="10dp"
-            android:backgroundTint="@color/maroon_light">
+            android:backgroundTint="@color/white">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -77,8 +77,11 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="5dp"
+                    android:background="@color/zxing_transparent"
                     android:text="Choose Option"
+                    android:textAlignment="textStart"
                     android:textSize="18dp"
+                    android:textColor="@color/black"
                     android:layout_marginBottom="20dp" />
 
                 <!-- Title -->
@@ -100,7 +103,7 @@
                         android:id="@+id/etTitle"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="Enter title"
+                        android:background="@drawable/s_edittext_border"
                         android:maxLines="2"
                         android:textSize="18dp"
 
@@ -130,12 +133,11 @@
                         android:id="@+id/etMessage"
                         android:layout_width="match_parent"
                         android:layout_height="150dp"
-                        android:hint="Enter message"
                         android:gravity="top"
                         android:textSize="18sp"
+                        android:background="@drawable/s_edittext_border"
                         android:layout_marginLeft="5dp"
                         android:minLines="3"
-                        android:background="#F3E8FF"
                         />
 
 
@@ -143,7 +145,7 @@
 
 
                 <!-- Send Button -->
-                <Button
+                <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/btnSend"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -152,7 +154,7 @@
                     android:layout_marginTop="20sp"
                     android:layout_marginLeft="20dp"
                     android:layout_marginRight="20sp"
-                    android:backgroundTint="@android:color/holo_blue_dark"
+                    android:background="@drawable/s_btn_bg_shape"
                     android:textColor="@android:color/white"/>
 
             </LinearLayout>

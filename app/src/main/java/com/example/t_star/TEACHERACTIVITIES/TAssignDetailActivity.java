@@ -1,35 +1,64 @@
 package com.example.t_star.TEACHERACTIVITIES;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
-import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.t_star.R;
+import com.example.t_star.REAL_TIME_DATABASE.PUT_ON_DATABASE.HelperClasses.Assignment_Helper;
+import com.example.t_star.REAL_TIME_DATABASE.PUT_ON_DATABASE.HelperClasses.Classes_helper;
+import com.example.t_star.TEACHERACTIVITIES.ASSIGNMENTS.STUSTATUS.TAssignStudentStatusAdapter;
+import com.example.t_star.TEACHERACTIVITIES.ASSIGNMENTS.STUSTATUS.TAssignStudentStatusModel;
 import com.google.android.material.appbar.MaterialToolbar;
+
+import java.util.ArrayList;
 
 public class TAssignDetailActivity extends AppCompatActivity {
 
     private TextView tvTitleDetail, tvDescDetail, tvDueDateDetail;
     private TextView tvAttachmentName, tvTotalStudents, tvSubmitted, tvUnsubmitted;
-    private ImageView btnViewAttachment;
+
+    private RecyclerView rvStudentStatus;
+    private ArrayList<TAssignStudentStatusModel> statusList = new ArrayList<>();
+    private TAssignStudentStatusAdapter adapter;
+
+    private LinearLayout attachmentContainer;
+
+    private String classId, assignmentId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tassign_detail);
 
-        // ---------------- TOOLBAR ----------------
         MaterialToolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        if (getSupportActionBar() != null) {
-            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        }
         toolbar.setNavigationOnClickListener(v -> finish());
 
-        // ---------------- FIND VIEWS ----------------
+        // Intent data
+        classId = getIntent().getStringExtra("classId");
+        assignmentId = getIntent().getStringExtra("assignmentId");
+
+        String title = getIntent().getStringExtra("title");
+        String desc = getIntent().getStringExtra("description");
+        String dueDate = getIntent().getStringExtra("dueDate");
+        boolean hasAttachment = getIntent().getBooleanExtra("hasAttachment", false);
+        String attachmentName = getIntent().getStringExtra("attachmentName");
+
+        ArrayList<String> attachmentUrls =
+                getIntent().getStringArrayListExtra("attachmentUrls");
+
+        int total = getIntent().getIntExtra("totalStudents", 0);
+        int submitted = getIntent().getIntExtra("submittedCount", 0);
+
+        // Bind UI
         tvTitleDetail = findViewById(R.id.tvTitleDetail);
         tvDescDetail = findViewById(R.id.tvDescDetail);
         tvDueDateDetail = findViewById(R.id.tvDueDateDetail);
@@ -37,44 +66,84 @@ public class TAssignDetailActivity extends AppCompatActivity {
         tvTotalStudents = findViewById(R.id.tvTotalStudents);
         tvSubmitted = findViewById(R.id.tvSubmitted);
         tvUnsubmitted = findViewById(R.id.tvUnsubmitted);
-        btnViewAttachment = findViewById(R.id.btnViewAttachment);
 
-        // ---------------- GET INTENT DATA ----------------
-        String title = getIntent().getStringExtra("title");
-        String desc = getIntent().getStringExtra("description");
-        String dueDate = getIntent().getStringExtra("dueDate");
-        boolean hasAttachment = getIntent().getBooleanExtra("hasAttachment", false);
-        String attachmentName = getIntent().getStringExtra("attachmentName");
-        int totalStudents = getIntent().getIntExtra("totalStudents", 0);
-        int submittedCount = getIntent().getIntExtra("submittedCount", 0);
+        attachmentContainer = findViewById(R.id.attachmentContainer);
 
-        int unsubmittedCount = totalStudents - submittedCount;
+        // Set data
+        tvTitleDetail.setText(title);
+        tvDescDetail.setText(desc);
+        tvDueDateDetail.setText("Due: " + dueDate);
+        tvAttachmentName.setText(hasAttachment ? attachmentName : "No File Attached");
 
-        // ---------------- SET DATA TO UI ----------------
-        tvTitleDetail.setText(title != null ? title : "No Title");
-        tvDescDetail.setText(desc != null ? desc : "No Description");
-        tvDueDateDetail.setText(dueDate != null ? ("Due: " + dueDate) : "Due: Not Given");
+        tvTotalStudents.setText("Total Students: " + total);
+        tvSubmitted.setText("Submitted: " + submitted);
+        tvUnsubmitted.setText("Unsubmitted: " + (total - submitted));
 
-        tvTotalStudents.setText("Total Students: " + totalStudents);
-        tvSubmitted.setText("Submitted: " + submittedCount);
-        tvUnsubmitted.setText("Unsubmitted: " + unsubmittedCount);
+        // Show attachment list
+        if (attachmentUrls != null && !attachmentUrls.isEmpty()) {
+            attachmentContainer.removeAllViews();
+            for (String url : attachmentUrls) {
 
-        if (hasAttachment && attachmentName != null && !attachmentName.isEmpty()) {
-            tvAttachmentName.setText(attachmentName);
-            btnViewAttachment.setEnabled(true);
-            btnViewAttachment.setAlpha(1f);
-        } else {
-            tvAttachmentName.setText("No file attached");
-            btnViewAttachment.setEnabled(false);
-            btnViewAttachment.setAlpha(0.4f);
+                TextView t = new TextView(this);
+                t.setPadding(10, 12, 10, 12);
+                t.setTextColor(getColor(R.color.white));
+
+                // Extract filename
+                String fname = url.substring(url.lastIndexOf('/') + 1);
+
+                t.setText("📎 " + fname);
+                t.setOnClickListener(v -> {
+                    try {
+                        Intent open = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+                        startActivity(open);
+                    } catch (Exception e) {
+                        Toast.makeText(this, "Cannot open attachment", Toast.LENGTH_SHORT).show();
+                    }
+                });
+                attachmentContainer.addView(t);
+            }
         }
 
-        // ---------------- ATTACHMENT CLICK ----------------
-        btnViewAttachment.setOnClickListener(v -> {
-            if (hasAttachment) {
-                Toast.makeText(this, "Opening: " + attachmentName, Toast.LENGTH_SHORT).show();
-                // TODO: open actual file viewer here
+        // Recycler view
+        rvStudentStatus = findViewById(R.id.rvStudentStatus);
+        rvStudentStatus.setLayoutManager(new LinearLayoutManager(this));
+        adapter = new TAssignStudentStatusAdapter(statusList);
+        rvStudentStatus.setAdapter(adapter);
+
+        loadStudentStatus();
+    }
+
+    private void loadStudentStatus() {
+
+        Classes_helper.getClassStudents(classId, studentUids -> {
+
+            if (studentUids == null || studentUids.isEmpty()) {
+                Toast.makeText(this, "No Students Found!", Toast.LENGTH_SHORT).show();
+                return;
             }
+
+            Assignment_Helper.getAssignmentStudentStatus(classId, assignmentId, submittedUids -> {
+
+                statusList.clear();
+
+                for (String uid : studentUids) {
+
+                    Classes_helper.Users_Helper.getUserDetails(uid, user -> {
+
+                        if (user == null) return;
+
+                        boolean isSubmitted = submittedUids.contains(uid);
+
+                        statusList.add(new TAssignStudentStatusModel(
+                                uid,
+                                user.firstname + " " + user.lastname,
+                                isSubmitted
+                        ));
+
+                        adapter.notifyDataSetChanged();
+                    });
+                }
+            });
         });
     }
 }

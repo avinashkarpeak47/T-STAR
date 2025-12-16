@@ -27,7 +27,7 @@ public class S_Mainpage extends AppCompatActivity {
         // Default fragment
         getSupportFragmentManager()
                 .beginTransaction()
-                .replace(R.id.s_framelayout_mainpage, new com.example.t_star.STUDENTACTIVITIES.S_Classes_Fragment())
+                .replace(R.id.s_framelayout_mainpage, new com.example.t_star.STUDENTACTIVITIES.SFragment.S_Classes_Fragment())
                 .commit();
 
         bottomNavigationView.setOnItemSelectedListener(item -> {
@@ -35,7 +35,7 @@ public class S_Mainpage extends AppCompatActivity {
             Fragment selected = null;
 
             if (item.getItemId() == R.id.nav_s_classes) {
-                selected = new com.example.t_star.STUDENTACTIVITIES.S_Classes_Fragment();
+                selected = new com.example.t_star.STUDENTACTIVITIES.SFragment.S_Classes_Fragment();
             } else if (item.getItemId() == R.id.nav_s_ai_assistant) {
                 selected = new S_Ai_Assistance_Fragment();
             } else if (item.getItemId() == R.id.nav_s_event) {

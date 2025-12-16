@@ -13,7 +13,7 @@ import com.google.firebase.auth.FirebaseUser;
 
 public class TSTAR_Splash_Screen extends AppCompatActivity {
 
-    private static final int SPLASH_DELAY_MS = 1500;
+    private static final int SPLASH_DELAY_MS =1000;
     private boolean hasNavigated = false;  // prevents double navigation
 
     @Override

@@ -1,226 +1,323 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main"
+    android:id="@+id/profile_root"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fitsSystemWindows="true"
     android:background="@color/white"
     tools:context=".TEACHERACTIVITIES.TProfileActivity">
-
-    <com.google.android.material.appbar.MaterialToolbar
-        android:id="@+id/toolbar"
+    <!-- Top header background -->
+    <View
+        android:id="@+id/header_bg"
         android:layout_width="0dp"
-        android:layout_height="52dp"
-        android:background="@drawable/header_gradient"
-        app:navigationIcon="@drawable/arrow_back"
-        app:title="Classes"
-
-        app:titleTextColor="@color/white"
+        android:layout_height="220dp"
+        android:background="@drawable/s_classes_top_background"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
+        app:layout_constraintEnd_toEndOf="parent" />
 
-        <ImageButton
-            android:id="@+id/btnCreate"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:scaleType="centerInside"
-            android:layout_gravity="end|center_vertical"
-            android:background="@android:color/transparent"
-            android:src="@drawable/tlogout"
-            app:tint="@color/white"
-            android:padding="8dp"/>
-    </com.google.android.material.appbar.MaterialToolbar>
+    <!-- Profile Image (starts centered, will move to top-left via code) -->
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/ivProfilePic"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:layout_marginTop="24dp"
+        android:src="@drawable/baseline_person_24"
+        android:scaleType="centerCrop"
+        android:background="@drawable/icon_circle_bg"
+        android:clickable="true"
+        android:focusable="true"
+        app:civ_border_width="2dp"
+        app:civ_border_color="?attr/colorPrimary"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 
-    <ScrollView
+    <!-- Scrollable content -->
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/profileScroll"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:padding="16dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        android:fillViewport="true"
+        app:layout_constraintTop_toBottomOf="@id/ivProfilePic"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/toolbar"
-        app:layout_constraintVertical_bias="0.0">
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent">
 
-        <androidx.cardview.widget.CardView
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="50dp"
-            android:layout_marginEnd="16dp"
-            android:padding="20dp"
-            app:cardBackgroundColor="@color/maroon_dark"
-            app:cardCornerRadius="28dp"
-            app:cardElevation="6dp">
+            android:orientation="vertical"
+            android:layout_marginTop="30dp"
+            android:paddingBottom="16dp"
+            android:padding="6dp">
 
-            <LinearLayout
+            <!-- Main profile info card -->
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cardProfile"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center_horizontal"
-                android:orientation="vertical"
-                android:padding="10dp">
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginTop="16dp"
+                android:backgroundTint="@color/light_lavender_for_cards"
+                app:cardCornerRadius="16dp"
+                app:cardElevation="8dp"
+                app:strokeColor="@color/black">
 
-                <!-- PROFILE IMAGE -->
-                <ImageView
-                    android:id="@+id/imgProfile"
-                    android:layout_width="120dp"
-                    android:layout_height="120dp"
-                    android:layout_gravity="center"
-                    android:background="@drawable/profile_circle"
-                    android:clipToOutline="true"
-                    android:contentDescription="profile"
-                    android:src="@drawable/tprofile"
-                    app:tint="@color/white" />
+                <LinearLayout
+                    android:layout_width="359dp"
+                    android:layout_height="384dp"
+                    android:orientation="vertical"
+                    android:padding="24dp">
 
-                <!-- CARDVIEW FIELD AREA -->
-                <androidx.cardview.widget.CardView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="50dp"
-                    app:cardCornerRadius="36dp"
-                    app:cardElevation="8dp">
-
-                    <LinearLayout
+                    <!-- Full Name -->
+                    <com.google.android.material.textfield.TextInputLayout
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:background="#ECDBC7"
-                        android:orientation="vertical"
-                        android:padding="10dp">
+                        android:hint="Full Name"
+                        app:boxCornerRadiusBottomEnd="20sp"
+                        app:boxCornerRadiusBottomStart="20sp"
+                        app:boxCornerRadiusTopEnd="20sp"
+                        app:boxCornerRadiusTopStart="20sp"
+                        app:boxStrokeColor="@color/black"
+                        app:boxStrokeWidth="3dp">
 
-                        <!-- NAME -->
-                        <TextView
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/etFullName"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:paddingStart="15dp"
-                            android:text="Name"
-                            android:textColor="@color/white"
-                            android:textSize="16sp" />
+                            android:enabled="false"
+                            android:inputType="textCapWords"
+                            android:textColor="@color/black"
+                            android:textSize="18sp" />
+                    </com.google.android.material.textfield.TextInputLayout>
 
-                        <com.google.android.material.textfield.TextInputLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            app:boxBackgroundMode="outline"
-                            app:boxCornerRadiusBottomEnd="12dp"
-                            app:boxCornerRadiusBottomStart="12dp"
-                            app:boxCornerRadiusTopEnd="12dp"
-                            app:boxCornerRadiusTopStart="12dp"
-                            app:startIconDrawable="@drawable/tperson_logo"
-                            app:startIconTint="@color/maroon_dark">
+                    <!-- Student Name / Username -->
 
-                            <com.google.android.material.textfield.TextInputEditText
-                                android:id="@+id/etName"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:textColor="#ffffff" />
-                        </com.google.android.material.textfield.TextInputLayout>
 
-                        <!-- EMAIL -->
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="16dp"
-                            android:paddingStart="15dp"
-                            android:text="Email"
-                            android:textColor="@color/white"
-                            android:textSize="16sp" />
-
-                        <com.google.android.material.textfield.TextInputLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            app:boxBackgroundMode="outline"
-                            app:boxCornerRadiusBottomEnd="12dp"
-                            app:boxCornerRadiusBottomStart="12dp"
-                            app:boxCornerRadiusTopEnd="12dp"
-                            app:boxCornerRadiusTopStart="12dp"
-                            app:startIconDrawable="@drawable/temail_logo"
-                            app:startIconTint="@color/maroon_dark">
-
-                            <com.google.android.material.textfield.TextInputEditText
-                                android:id="@+id/etEmail"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:textColor="#ffffff" />
-                        </com.google.android.material.textfield.TextInputLayout>
-
-                        <!-- PHONE -->
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="16dp"
-                            android:paddingStart="15dp"
-                            android:text="Phone"
-                            android:textColor="@color/white"
-                            android:textSize="16sp" />
-
-                        <com.google.android.material.textfield.TextInputLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            app:boxBackgroundMode="outline"
-                            app:boxCornerRadiusBottomEnd="12dp"
-                            app:boxCornerRadiusBottomStart="12dp"
-                            app:boxCornerRadiusTopEnd="12dp"
-                            app:boxCornerRadiusTopStart="12dp"
-                            app:startIconDrawable="@drawable/tcall_logo"
-                            app:startIconTint="@color/maroon_dark">
-
-                            <com.google.android.material.textfield.TextInputEditText
-                                android:id="@+id/etPhone"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:textColor="#ffffff" />
-                        </com.google.android.material.textfield.TextInputLayout>
-
-                    </LinearLayout>
-                </androidx.cardview.widget.CardView>
-
-                <!-- BUTTONS -->
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
-                    android:gravity="center"
-                    android:orientation="horizontal">
-
-                    <androidx.appcompat.widget.AppCompatButton
-                        android:id="@+id/btprofileSave"
-                        android:layout_width="150sp"
+                    <!-- Email -->
+                    <com.google.android.material.textfield.TextInputLayout
+                        style="?attr/textInputOutlinedStyle"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:backgroundTint="@color/maroon_dark"
-                        android:text="Save"
-                        android:textColor="#15E636"
-                        android:textSize="15sp"
-                        android:textStyle="bold"
-                        android:visibility="gone" />
+                        android:layout_marginTop="12dp"
+                        android:hint="Email"
+                        app:boxCornerRadiusBottomEnd="20sp"
+                        app:boxCornerRadiusBottomStart="20sp"
+                        app:boxCornerRadiusTopEnd="20sp"
+                        app:boxCornerRadiusTopStart="20sp"
+                        app:boxStrokeColor="@color/black"
+                        app:boxStrokeWidth="3dp">
 
-                    <androidx.appcompat.widget.AppCompatButton
-                        android:id="@+id/btprofileEDP"
-                        android:layout_width="150sp"
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/etEmail"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:enabled="false"
+                            android:inputType="textEmailAddress"
+                            android:textColor="@color/black"
+                            android:textSize="18sp" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <!-- Mobile Number -->
+                    <com.google.android.material.textfield.TextInputLayout
+                        style="?attr/textInputOutlinedStyle"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginRight="4dp"
-                        android:backgroundTint="@color/maroon_dark"
-                        android:text="Edit profile"
-                        android:textColor="@color/white"
-                        android:textSize="15sp"
+                        android:layout_marginTop="12dp"
+                        android:hint="Mobile Number"
+                        app:boxCornerRadiusBottomEnd="20sp"
+                        app:boxCornerRadiusBottomStart="20sp"
+                        app:boxCornerRadiusTopEnd="20sp"
+                        app:boxCornerRadiusTopStart="20sp"
+                        app:boxStrokeColor="@color/black"
+                        app:boxStrokeWidth="3dp">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/etMobile"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:enabled="false"
+                            android:inputType="phone"
+                            android:maxLength="10"
+                            android:textColor="@color/black"
+                            android:textSize="18sp" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+
+                    <!-- Edit Profile Button -->
+                    <androidx.appcompat.widget.AppCompatButton
+                        android:id="@+id/btnEditProfile"
+                        android:layout_width="200dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="24dp"
+                        android:background="@drawable/s_btn_bg_shape"
+                        android:text="Edit Profile"
+                        android:textColor="@color/black"
+                        android:textSize="14.5dp"
                         android:textStyle="bold" />
 
-                    <androidx.appcompat.widget.AppCompatButton
-                        android:id="@+id/btprofileDEP"
-                        android:layout_width="150sp"
+                    <TextView
+                        android:id="@+id/tvlogout"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="4dp"
-                        android:backgroundTint="@color/maroon_dark"
-                        android:text="Delete profile"
-                        android:textColor="#FF5555"
-                        android:textSize="15sp"
-                        android:textStyle="bold" />
-
+                        android:layout_gravity="center"
+                        android:layout_marginStart="12dp"
+                        android:layout_marginTop="10sp"
+                        android:text="Logout"
+                        android:textColor="@android:color/holo_red_dark"
+                        android:textSize="16sp" />
                 </LinearLayout>
 
-            </LinearLayout>
-        </androidx.cardview.widget.CardView>
-    </ScrollView>
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- Account & Settings card -->
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cardAccount"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="16dp"
+                android:backgroundTint="@color/light_lavender_for_cards"
+                app:cardCornerRadius="16dp"
+                app:cardElevation="6dp"
+                app:strokeColor="@color/black">
+
+            </com.google.android.material.card.MaterialCardView>
+
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+
+    <!--                <LinearLayout-->
+    <!--                    android:layout_width="match_parent"-->
+    <!--                    android:layout_height="wrap_content"-->
+    <!--                    android:orientation="vertical"-->
+    <!--                    android:padding="20dp">-->
+
+    <!--                    <TextView-->
+    <!--                        android:id="@+id/tvAccountTitle"-->
+    <!--                        android:layout_width="wrap_content"-->
+    <!--                        android:layout_height="wrap_content"-->
+    <!--                        android:text="Account and Settings"-->
+    <!--                        android:textStyle="bold"-->
+    <!--                        android:textSize="16sp"-->
+    <!--                        android:textColor="@color/black" />-->
+
+    <!--                    &lt;!&ndash; Change Password &ndash;&gt;-->
+    <!--                    <LinearLayout-->
+    <!--                        android:id="@+id/rowChangePassword"-->
+    <!--                        android:layout_width="match_parent"-->
+    <!--                        android:layout_height="wrap_content"-->
+    <!--                        android:layout_marginTop="16dp"-->
+    <!--                        android:gravity="center_vertical"-->
+    <!--                        android:paddingVertical="4dp"-->
+    <!--                        android:clickable="true"-->
+    <!--                        android:foreground="?attr/selectableItemBackground"-->
+    <!--                        android:orientation="horizontal">-->
+
+    <!--                        <ImageView-->
+    <!--                            android:layout_width="24dp"-->
+    <!--                            android:layout_height="24dp"-->
+    <!--                            android:src="@drawable/s_lock_password" />-->
+
+    <!--                        <TextView-->
+    <!--                            android:layout_width="wrap_content"-->
+    <!--                            android:layout_height="wrap_content"-->
+    <!--                            android:layout_marginStart="12dp"-->
+    <!--                            android:text="Change Password"-->
+    <!--                            android:textSize="14sp"-->
+    <!--                            android:textColor="@color/black" />-->
+    <!--                    </LinearLayout>-->
+
+    <!--                    &lt;!&ndash; Settings &ndash;&gt;-->
+    <!--                    <LinearLayout-->
+    <!--                        android:id="@+id/rowSettings"-->
+    <!--                        android:layout_width="match_parent"-->
+    <!--                        android:layout_height="wrap_content"-->
+    <!--                        android:layout_marginTop="8dp"-->
+    <!--                        android:gravity="center_vertical"-->
+    <!--                        android:paddingVertical="4dp"-->
+    <!--                        android:clickable="true"-->
+    <!--                        android:foreground="?attr/selectableItemBackground"-->
+    <!--                        android:orientation="horizontal">-->
+
+    <!--                        <ImageView-->
+    <!--                            android:layout_width="24dp"-->
+    <!--                            android:layout_height="24dp"-->
+    <!--                            android:src="@drawable/s_setting" />-->
+
+    <!--                        <TextView-->
+    <!--                            android:layout_width="wrap_content"-->
+    <!--                            android:layout_height="wrap_content"-->
+    <!--                            android:layout_marginStart="12dp"-->
+    <!--                            android:text="Settings"-->
+    <!--                            android:textSize="14sp"-->
+    <!--                            android:textColor="@color/black" />-->
+    <!--                    </LinearLayout>-->
+
+    <!--                    &lt;!&ndash; Delete Account &ndash;&gt;-->
+    <!--                    <LinearLayout-->
+    <!--                        android:id="@+id/rowDeleteAccount"-->
+    <!--                        android:layout_width="match_parent"-->
+    <!--                        android:layout_height="wrap_content"-->
+    <!--                        android:layout_marginTop="8dp"-->
+    <!--                        android:gravity="center_vertical"-->
+    <!--                        android:paddingVertical="4dp"-->
+    <!--                        android:clickable="true"-->
+    <!--                        android:foreground="?attr/selectableItemBackground"-->
+    <!--                        android:orientation="horizontal">-->
+
+    <!--                        <ImageView-->
+    <!--                            android:layout_width="24dp"-->
+    <!--                            android:layout_height="24dp"-->
+    <!--                            android:src="@drawable/s_delete_account" />-->
+
+    <!--                        <TextView-->
+    <!--                            android:layout_width="wrap_content"-->
+    <!--                            android:layout_height="wrap_content"-->
+    <!--                            android:layout_marginStart="12dp"-->
+    <!--                            android:text="Delete Account"-->
+    <!--                            android:textSize="14sp"-->
+    <!--                            android:textColor="@android:color/holo_red_dark" />-->
+    <!--                    </LinearLayout>-->
+
+    <!--                    &lt;!&ndash; Logout &ndash;&gt;-->
+    <!--                    <LinearLayout-->
+    <!--                        android:id="@+id/rowLogout"-->
+    <!--                        android:layout_width="match_parent"-->
+    <!--                        android:layout_height="wrap_content"-->
+    <!--                        android:layout_marginTop="8dp"-->
+    <!--                        android:gravity="center_vertical"-->
+    <!--                        android:paddingVertical="4dp"-->
+    <!--                        android:clickable="true"-->
+    <!--                        android:foreground="?attr/selectableItemBackground"-->
+    <!--                        android:orientation="horizontal">-->
+
+    <!--                        <ImageView-->
+    <!--                            android:layout_width="24dp"-->
+    <!--                            android:layout_height="24dp"-->
+    <!--                            android:src="@drawable/s_logout_account" />-->
+
+    <!--                        <TextView-->
+    <!--                            android:layout_width="wrap_content"-->
+    <!--                            android:layout_height="wrap_content"-->
+    <!--                            android:layout_marginStart="12dp"-->
+    <!--                            android:text="Logout"-->
+    <!--                            android:textSize="14sp"-->
+    <!--                            android:textColor="@android:color/holo_red_dark" />-->
+    <!--                    </LinearLayout>-->
+
+    <!--                </LinearLayout>-->
+

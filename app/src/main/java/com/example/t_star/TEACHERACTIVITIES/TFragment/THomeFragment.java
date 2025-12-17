@@ -2,60 +2,109 @@ package com.example.t_star.TEACHERACTIVITIES.TFragment;
 
 import android.content.Intent;
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.core.view.GravityCompat;
-import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.fragment.app.Fragment;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.widget.SearchView;
 import androidx.cardview.widget.CardView;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.fragment.app.Fragment;
 
 import com.example.t_star.R;
-import com.example.t_star.TEACHERACTIVITIES.TClassesAssignActivity;
-import com.example.t_star.TEACHERACTIVITIES.TClassesAttendActivity;
-import com.example.t_star.TEACHERACTIVITIES.TClassesChatStudActivity;
-import com.example.t_star.TEACHERACTIVITIES.TClassesEventActivity;
-import com.example.t_star.TEACHERACTIVITIES.TClassesNotiActivity;
-import com.example.t_star.TEACHERACTIVITIES.TClassesResourcesActivity;
-import com.example.t_star.TEACHERACTIVITIES.TClassesStudentsActivity;
+import com.example.t_star.TEACHERACTIVITIES.*;
 import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.navigation.NavigationView;
 
+import androidx.gridlayout.widget.GridLayout;
+
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
+
 public class THomeFragment extends Fragment {
 
+    private static final String ARG_CLASS_ID = "classId";
+
+    private String classId;
+    private String className;
+
     MaterialToolbar toolbar;
-    DrawerLayout drawerLayout;
     NavigationView navigationView;
+    SearchView searchView;
 
-    CardView cardCreateAssignment, cardAttendance, cardCreateEvent, cardChat, cardStudents, cardResources, cardNotifications;
+    GridLayout gridLayout;
 
-    public THomeFragment() {
-        // Required empty constructor
+    CardView cardCreateAssignment, cardAttendance, cardCreateEvent,
+            cardChat, cardStudents, cardResources, cardNotifications;
+
+    // 🔥 ORDER PRESERVED MAP
+    private Map<CardView, String> cardMap = new LinkedHashMap<>();
+    private List<CardView> originalOrder = new ArrayList<>();
+
+    public THomeFragment() {}
+
+    public static THomeFragment newInstance(String classId) {
+        THomeFragment fragment = new THomeFragment();
+        Bundle args = new Bundle();
+        args.putString(ARG_CLASS_ID, classId);
+        fragment.setArguments(args);
+        return fragment;
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
 
-        // Inflate the layout for this fragment
+        if (getArguments() != null) {
+            classId = getArguments().getString(ARG_CLASS_ID);
+        }
+
+        if (getActivity() != null) {
+            className = getActivity().getIntent().getStringExtra("className");
+        }
+
+        if (className == null) className = "Class";
+    }
+
+    @Override
+    public View onCreateView(
+            LayoutInflater inflater,
+            ViewGroup container,
+            Bundle savedInstanceState
+    ) {
+
         View view = inflater.inflate(R.layout.fragment_t_home, container, false);
 
-        // Toolbar from fragment layout
         toolbar = view.findViewById(R.id.toolbar);
+        searchView = view.findViewById(R.id.searchViewGrid);
+        gridLayout = view.findViewById(R.id.gridActions);
 
-        // Cards from fragment layout
         cardCreateAssignment = view.findViewById(R.id.cardCreateAssignment);
-        cardAttendance = view.findViewById(R.id.cardAttendance);
-        cardCreateEvent = view.findViewById(R.id.cardCreateEvent);
-        cardChat = view.findViewById(R.id.cardChat);
-        cardStudents = view.findViewById(R.id.cardStudents);
-        cardResources = view.findViewById(R.id.cardResources);
-        cardNotifications = view.findViewById(R.id.cardNotifications);
+        cardAttendance       = view.findViewById(R.id.cardAttendance);
+        cardCreateEvent      = view.findViewById(R.id.cardCreateEvent);
+        cardChat             = view.findViewById(R.id.cardChat);
+        cardStudents         = view.findViewById(R.id.cardStudents);
+        cardResources        = view.findViewById(R.id.cardResources);
+        cardNotifications    = view.findViewById(R.id.cardNotifications);
+
+        // 🔥 MAP WITH KEYWORDS
+        cardMap.put(cardCreateAssignment, "assignment");
+        cardMap.put(cardAttendance, "attendance");
+        cardMap.put(cardCreateEvent, "event");
+        cardMap.put(cardChat, "chat");
+        cardMap.put(cardStudents, "students");
+        cardMap.put(cardResources, "resources");
+        cardMap.put(cardNotifications, "notification");
+
+        // 🔥 STORE ORIGINAL ORDER
+        originalOrder.addAll(cardMap.keySet());
+
+        setupSearch();
 
         return view;
     }
@@ -64,33 +113,93 @@ public class THomeFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        // Drawer & Navigation from Parent Activity
-        drawerLayout = requireActivity().findViewById(R.id.drawerLayout);
+
         navigationView = requireActivity().findViewById(R.id.navigationView);
 
-        // Toolbar navigation (hamburger icon) opens drawer
-        toolbar.setNavigationOnClickListener(v -> drawerLayout.openDrawer(GravityCompat.START));
+        cardCreateAssignment.setOnClickListener(v -> open(TAsssignmentActivity.class));
+        cardAttendance.setOnClickListener(v -> open(TAttendanceActivity.class));
+        cardCreateEvent.setOnClickListener(v -> open(TEventActivity.class));
+        cardChat.setOnClickListener(v -> open(TChatActivity.class));
+        cardStudents.setOnClickListener(v -> open(TStudentsActivity.class));
+        cardResources.setOnClickListener(v -> open(TResourcesActivity.class));
+        cardNotifications.setOnClickListener(v -> open(TNotificationActivity.class));
+    }
 
-        // ---------- CARD CLICK FUNCTIONS ----------
-        cardCreateAssignment.setOnClickListener(v ->
-                startActivity(new Intent(getActivity(), TClassesAssignActivity.class)));
+    private void open(Class<?> cls) {
+        Intent i = new Intent(getActivity(), cls);
+        i.putExtra("classId", classId);
+        i.putExtra("className", className);
+        startActivity(i);
+    }
 
-        cardAttendance.setOnClickListener(v ->
-                startActivity(new Intent(getActivity(), TClassesAttendActivity.class)));
+    // ================= SEARCH =================
+    private void setupSearch() {
 
-        cardCreateEvent.setOnClickListener(v ->
-                startActivity(new Intent(getActivity(), TClassesEventActivity.class)));
+        searchView.setOnQueryTextFocusChangeListener((v, hasFocus) -> {
+            if (getActivity() == null) return;
+            TMainActivity.bottomNav.setVisibility(hasFocus ? View.GONE : View.VISIBLE);
+        });
 
-        cardChat.setOnClickListener(v ->
-                startActivity(new Intent(getActivity(), TClassesChatStudActivity.class)));
+        searchView.setOnCloseListener(() -> {
+            restoreOriginalOrder();
+            TMainActivity.bottomNav.setVisibility(View.VISIBLE);
+            return false;
+        });
 
-        cardStudents.setOnClickListener(v ->
-                startActivity(new Intent(getActivity(), TClassesStudentsActivity.class)));
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
 
-        cardResources.setOnClickListener(v ->
-                startActivity(new Intent(getActivity(), TClassesResourcesActivity.class)));
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                reorderGrid(query);
+                return true;
+            }
 
-        cardNotifications.setOnClickListener(v ->
-                startActivity(new Intent(getActivity(), TClassesNotiActivity.class)));
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                reorderGrid(newText);
+                return true;
+            }
+        });
+    }
+
+    // 🔥 CORRECT LOGIC
+    private void reorderGrid(String text) {
+
+        if (text == null || text.trim().isEmpty()) {
+            restoreOriginalOrder();
+            return;
+        }
+
+        text = text.toLowerCase();
+
+        List<CardView> matched = new ArrayList<>();
+        List<CardView> others = new ArrayList<>();
+
+        for (Map.Entry<CardView, String> entry : cardMap.entrySet()) {
+            if (entry.getValue().contains(text)) {
+                matched.add(entry.getKey());
+            } else {
+                others.add(entry.getKey());
+            }
+        }
+
+        gridLayout.removeAllViews();
+
+        // 🔥 ADD MATCHED FIRST
+        for (CardView card : matched) {
+            gridLayout.addView(card);
+        }
+
+        // 🔥 ADD OTHERS AFTER
+        for (CardView card : others) {
+            gridLayout.addView(card);
+        }
+    }
+
+    private void restoreOriginalOrder() {
+        gridLayout.removeAllViews();
+        for (CardView card : originalOrder) {
+            gridLayout.addView(card);
+        }
     }
 }

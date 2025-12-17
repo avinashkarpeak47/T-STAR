@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
@@ -9,7 +10,7 @@
     android:fitsSystemWindows="true"
     tools:context=".TEACHERACTIVITIES.TAsssignmentActivity">
 
-    <!-- TOP TOOLBAR -->
+    <!-- ================= TOOLBAR ================= -->
     <com.google.android.material.appbar.MaterialToolbar
         android:id="@+id/toolbar"
         android:layout_width="0dp"
@@ -34,7 +35,7 @@
             app:tint="@color/white" />
     </com.google.android.material.appbar.MaterialToolbar>
 
-    <!-- CONTENT SCROLL -->
+    <!-- ================= CONTENT ================= -->
     <androidx.core.widget.NestedScrollView
         android:id="@+id/scrollView"
         android:layout_width="0dp"
@@ -51,6 +52,33 @@
             android:orientation="vertical"
             android:padding="12dp">
 
+            <!-- ========== SEARCH BAR ========== -->
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/searchLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="12dp"
+                app:boxBackgroundMode="outline"
+                app:boxCornerRadiusTopStart="12dp"
+                app:boxCornerRadiusTopEnd="12dp"
+                app:boxCornerRadiusBottomStart="12dp"
+                app:boxCornerRadiusBottomEnd="12dp"
+                app:boxStrokeColor="@color/light_lavender_for_cards"
+                app:boxBackgroundColor="@color/white"
+                app:endIconMode="custom"
+                app:endIconDrawable="@drawable/mic"
+                app:endIconTint="@color/black">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etSearch"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="text"
+                    android:singleLine="true"
+                    android:textColor="@color/black"/>
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!-- ========== TITLE ========== -->
             <TextView
                 android:id="@+id/tvInfo"
                 android:layout_width="match_parent"
@@ -60,16 +88,16 @@
                 android:textStyle="bold"
                 android:textSize="18sp"
                 android:alpha="0.85"
-                android:paddingBottom="8dp" />
+                android:paddingBottom="8dp"/>
 
-            <!-- RECYCLER VIEW -->
+            <!-- ========== ASSIGNMENT LIST ========== -->
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rvAssignments"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:nestedScrollingEnabled="false"
                 android:clipToPadding="false"
-                android:paddingBottom="80dp" />
+                android:paddingBottom="80dp"/>
 
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>

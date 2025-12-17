@@ -1,4 +1,4 @@
-package com.example.t_star.TEACHERACTIVITIES.TFragment;
+package com.example.t_star.TEACHERACTIVITIES.TMainFragment;
 
 import android.os.Bundle;
 
@@ -12,10 +12,10 @@ import com.example.t_star.R;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link TChatFragment#newInstance} factory method to
+ * Use the {@link TAiFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class TChatFragment extends Fragment {
+public class TAiFragment extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -26,7 +26,7 @@ public class TChatFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    public TChatFragment() {
+    public TAiFragment() {
         // Required empty public constructor
     }
 
@@ -36,11 +36,11 @@ public class TChatFragment extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment TChatFragment.
+     * @return A new instance of fragment TAiFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static TChatFragment newInstance(String param1, String param2) {
-        TChatFragment fragment = new TChatFragment();
+    public static TAiFragment newInstance(String param1, String param2) {
+        TAiFragment fragment = new TAiFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -61,6 +61,6 @@ public class TChatFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_t_chat, container, false);
+        return inflater.inflate(R.layout.fragment_t_ai, container, false);
     }
 }

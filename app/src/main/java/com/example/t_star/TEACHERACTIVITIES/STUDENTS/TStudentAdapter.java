@@ -6,71 +6,79 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
 import com.example.t_star.R;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class TStudentAdapter extends RecyclerView.Adapter<TStudentAdapter.StudentVH> {
 
     private final Context context;
-    private List<TStudentModel> students;
-    private final List<TStudentModel> fullList;
+    private List<TStudentModel> originalList;
+    private List<TStudentModel> filteredList;
 
-    public TStudentAdapter(Context context, List<TStudentModel> students) {
+    public TStudentAdapter(Context context, List<TStudentModel> list) {
         this.context = context;
-        this.students = students;
-        this.fullList = new ArrayList<>(students);
+        this.originalList = list;
+        this.filteredList = new ArrayList<>(list);
     }
 
-    @NonNull
-    @Override
+    public void updateList(List<TStudentModel> newList) {
+        this.originalList = newList;
+        this.filteredList = new ArrayList<>(newList);
+        notifyDataSetChanged();
+    }
+
+    @NonNull @Override
     public StudentVH onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(context).inflate(R.layout.tstudentsview, parent, false);
         return new StudentVH(v);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull StudentVH holder, int position) {
-        TStudentModel model = students.get(position);
-        holder.tvName.setText(model.getName());
-        holder.tvRoll.setText("Roll No: " + model.getRollNo());
-        holder.img.setImageResource(model.getImageRes());
+    public void onBindViewHolder(@NonNull StudentVH holder, int pos) {
+        TStudentModel m = filteredList.get(pos);
+        holder.tvName.setText(m.getStudentName());
+        holder.tvID.setText("ID: " + m.getStudentId());
+        holder.ivImage.setImageResource(m.getImageRes());
     }
 
     @Override
     public int getItemCount() {
-        return students.size();
+        return filteredList.size();
     }
 
-    // 🔍 Search Filter
-    public void filter(String text) {
-        text = text.toLowerCase();
-        students.clear();
+    public void filter(String q) {
+        q = q.toLowerCase().trim();
+        filteredList.clear();
 
-        if (text.isEmpty()) {
-            students.addAll(fullList);
+        if (q.isEmpty()) {
+            filteredList.addAll(originalList);
         } else {
-            for (TStudentModel item : fullList) {
-                if (item.getName().toLowerCase().contains(text) ||
-                        item.getRollNo().toLowerCase().contains(text)) {
-                    students.add(item);
+            for (TStudentModel s : originalList) {
+                if (s.getStudentName().toLowerCase().contains(q) ||
+                        s.getStudentId().toLowerCase().contains(q)) {
+                    filteredList.add(s);
                 }
             }
         }
+
         notifyDataSetChanged();
     }
 
     static class StudentVH extends RecyclerView.ViewHolder {
-        ImageView img;
-        TextView tvName, tvRoll;
+        ImageView ivImage;
+        TextView tvName, tvID;
 
-        public StudentVH(@NonNull View itemView) {
-            super(itemView);
-            img = itemView.findViewById(R.id.imgStudent);
-            tvName = itemView.findViewById(R.id.tvStudentName);
-            tvRoll = itemView.findViewById(R.id.tvStudentRoll);
+        public StudentVH(@NonNull View v) {
+            super(v);
+            ivImage = v.findViewById(R.id.imgStudent);
+            tvName = v.findViewById(R.id.tvStudentName);
+            tvID = v.findViewById(R.id.tvStudentID);
         }
     }
 }

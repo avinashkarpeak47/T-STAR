@@ -1,17 +1,18 @@
 package com.example.t_star.TEACHERACTIVITIES.STUDENTS;
 
 public class TStudentModel {
-    private String name;
-    private String rollNo;
+
+    private String studentName;
+    private String studentId;
     private int imageRes;
 
-    public TStudentModel(String name, String rollNo, int imageRes) {
-        this.name = name;
-        this.rollNo = rollNo;
+    public TStudentModel(String studentName, String studentId, int imageRes) {
+        this.studentName = studentName;
+        this.studentId = studentId;
         this.imageRes = imageRes;
     }
 
-    public String getName() { return name; }
-    public String getRollNo() { return rollNo; }
+    public String getStudentName() { return studentName; }
+    public String getStudentId() { return studentId; }
     public int getImageRes() { return imageRes; }
 }

@@ -11,112 +11,69 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 
 import com.example.t_star.R;
-import com.example.t_star.TEACHERACTIVITIES.TFragment.TChatFragment;
 import com.example.t_star.TEACHERACTIVITIES.TFragment.THomeFragment;
 import com.example.t_star.TEACHERACTIVITIES.TFragment.TNotificationFragment;
-import com.example.t_star.TEACHERACTIVITIES.TFragment.TProfileFragment;
-import com.google.android.material.appbar.MaterialToolbar;
+import com.example.t_star.TSTAR_Entry_Activity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
+import com.google.firebase.auth.FirebaseAuth;
 
 public class THomeActivity extends AppCompatActivity {
 
     BottomNavigationView bottomNav;
     DrawerLayout drawerLayout;
     NavigationView navigationView;
-    MaterialToolbar toolbar;
+
+
+    // 🔥 CLASS SESSION DATA
+    public String classId;
+    public String className;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_thome);
 
-        // Drawer + Toolbar
-        drawerLayout = findViewById(R.id.drawerLayout);
-        navigationView = findViewById(R.id.navigationView);
-        toolbar = findViewById(R.id.toolbar);
+        // ================= GET CLASS DATA =================
+        classId = getIntent().getStringExtra("classId");
+        className = getIntent().getStringExtra("className");
 
-        // Bottom Navigation
+        if (classId == null || className == null) {
+            Toast.makeText(this, "Class data missing!", Toast.LENGTH_SHORT).show();
+            finish();
+            return;
+        }
+
         bottomNav = findViewById(R.id.bottomNav);
 
-        // Load Home Fragment by default
-        loadFragment(new THomeFragment());
+//        setSupportActionBar(toolbar);
+//        toolbar.setTitle(className); // 🔥 show class name
 
-        // ============ DRAWER TOGGLE (Hamburger Icon) ============
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this,
-                drawerLayout,
-                toolbar,
-                R.string.open_drawer,
-                R.string.close_drawer
-        );
-        drawerLayout.addDrawerListener(toggle);
-        toggle.syncState();
+        // ================= LOAD HOME FRAGMENT =================
+        loadFragment(THomeFragment.newInstance(classId));
 
-        // ============ DRAWER MENU CLICK LISTENER ============
-        navigationView.setNavigationItemSelectedListener(item -> {
 
-            int id = item.getItemId();
 
-            if (id == R.id.nav_home) {
-                loadFragment(new THomeFragment());
-            }
-            else if (id == R.id.nav_share) {
-                Toast.makeText(this, "Share", Toast.LENGTH_SHORT).show();
-            }
-            else if (id == R.id.nav_setting) {
-                Toast.makeText(this, "Setting", Toast.LENGTH_SHORT).show();
-            }
-            else if (id == R.id.nav_download) {
-                Toast.makeText(this, "Download", Toast.LENGTH_SHORT).show();
-            }
-            else if (id == R.id.nav_editprofile) {
-                Intent intent=new Intent(THomeActivity.this, TProfileActivity.class);
-                startActivity(intent);
-            }
-            else if (id == R.id.nav_contactus) {
-                Toast.makeText(this, "Contact Us", Toast.LENGTH_SHORT).show();
-            }
-            else if (id == R.id.nav_aboutus) {
-                Toast.makeText(this, "About Us", Toast.LENGTH_SHORT).show();
-            }
-            else if (id == R.id.nav_feedback) {
-                Toast.makeText(this, "Feedback", Toast.LENGTH_SHORT).show();
-            }
-            else if (id == R.id.nav_logout) {
-                Toast.makeText(this, "Logged Out", Toast.LENGTH_SHORT).show();
-            }
-
-            drawerLayout.closeDrawer(GravityCompat.START);
-            return true;
-        });
-
-        // ============ BOTTOM NAVIGATION CLICK ============
-
+        // ================= BOTTOM NAVIGATION =================
         bottomNav.setOnItemSelectedListener(item -> {
+
             Fragment selectedFragment = null;
             int id = item.getItemId();
 
             if (id == R.id.nav_home) {
-                selectedFragment = new THomeFragment();
-            }
-            else if (id == R.id.nav_chat) {
-                selectedFragment = new TChatFragment();
+                selectedFragment = THomeFragment.newInstance(classId);
             }
             else if (id == R.id.nav_notifications) {
-                selectedFragment = new TNotificationFragment();
+                selectedFragment = TNotificationFragment.newInstance(classId);
             }
-            else if (id == R.id.nav_profile) {
-                selectedFragment = new TProfileFragment();
+            if (selectedFragment != null) {
+                loadFragment(selectedFragment);
             }
-
-            loadFragment(selectedFragment);
             return true;
         });
-
     }
 
-    // ============ LOAD FRAGMENTS ============
+    // ================= LOAD FRAGMENT =================
     private void loadFragment(Fragment fragment) {
         getSupportFragmentManager()
                 .beginTransaction()

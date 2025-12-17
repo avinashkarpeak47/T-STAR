@@ -33,15 +33,15 @@
         <LinearLayout
             android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="match_parent">
 
             <!-- CARD VIEW -->
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
-                android:layout_height="611dp"
+                android:layout_height="match_parent"
                 android:layout_margin="5dp"
                 android:background="@color/white"
-                app:cardBackgroundColor="@color/maroon_variant"
+                app:cardBackgroundColor="@color/light_lavender_for_cards"
                 app:cardCornerRadius="20dp"
                 app:cardElevation="7dp"
                 app:cardPreventCornerOverlap="true"
@@ -51,6 +51,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
+                    android:background="@drawable/bg_main"
                     android:padding="20dp">
 
                     <!-- EVENT TITLE -->
@@ -68,6 +69,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="6dp"
+                        android:background="@drawable/s_edittext_border"
                         android:hint="Enter Event Title"
                         android:maxLines="3"
                         android:padding="12dp" />
@@ -87,7 +89,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="6dp"
-
+                        android:background="@drawable/s_edittext_border"
                         android:focusable="false"
                         android:hint="Select Event Date"
                         android:padding="12dp" />
@@ -105,25 +107,27 @@
                     <EditText
                         android:id="@+id/etEventDescription"
                         android:layout_width="match_parent"
-                        android:layout_height="120dp"
+                        android:layout_height="wrap_content"
                         android:layout_marginTop="6dp"
-                        android:background="#ffffff"
                         android:gravity="top"
+                        android:background="@drawable/s_edittext_border"
                         android:minLines="4"
+                        android:backgroundTint="@color/white"
                         android:hint="Enter Event Details"
                         android:textColor="@color/black"
                         android:padding="12dp" />
 
                     <!-- SAVE BUTTON -->
-                    <com.google.android.material.button.MaterialButton
+                    <androidx.appcompat.widget.AppCompatButton
                         android:id="@+id/btnSaveEvent"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="50dp"
+                        android:layout_margin="50dp"
                         android:padding="14dp"
                         android:text="Add Event"
                         android:textAllCaps="false"
-                        android:textColor="@color/white" />
+                        android:background="@drawable/s_btn_bg_shape"
+                        android:textColor="@color/black" />
 
                 </LinearLayout>
 

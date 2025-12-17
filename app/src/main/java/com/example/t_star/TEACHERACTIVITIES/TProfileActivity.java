@@ -1,52 +1,55 @@
 package com.example.t_star.TEACHERACTIVITIES;
 
-import android.annotation.SuppressLint;
-import android.content.Intent;
 import android.os.Bundle;
-import android.widget.ImageView;
+import android.widget.TextView;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
 
 import com.example.t_star.R;
-import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.textfield.TextInputEditText;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 public class TProfileActivity extends AppCompatActivity {
 
-    ImageView imgProfile;
-    TextInputEditText etName, etEmail, etPhone;
-    AppCompatButton btprofileSave, btprofileEDP, btprofileDEP;
+    CircleImageView ivProfilePic;
+    TextInputEditText etFullName, etEmail, etMobile;
+    AppCompatButton btnEditProfile;
+    TextView tvLogout;
 
-    @SuppressLint({"WrongViewCast", "MissingInflatedId"})
+    boolean isEditMode = false;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tprofile);
 
-        imgProfile = findViewById(R.id.imgProfile);
-        etName = findViewById(R.id.etName);
-        etEmail = findViewById(R.id.etEmail);
-        etPhone = findViewById(R.id.etPhone);
+        // ---- Bind views (MATCH XML IDs) ----
+        ivProfilePic = findViewById(R.id.ivProfilePic);
+        etFullName   = findViewById(R.id.etFullName);
+        etEmail      = findViewById(R.id.etEmail);
+        etMobile     = findViewById(R.id.etMobile);
+        btnEditProfile = findViewById(R.id.btnEditProfile);
 
-        btprofileSave = findViewById(R.id.btprofileSave);
-        btprofileEDP = findViewById(R.id.btprofileEDP);
-        btprofileDEP = findViewById(R.id.btprofileDEP);
+        // Logout TextView (add id in XML)
+        tvLogout = findViewById(R.id.tvlogout);
 
-        MaterialToolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+        // ---- Edit Profile Button ----
+        btnEditProfile.setOnClickListener(v -> {
+            isEditMode = !isEditMode;
 
-        // Back button
-        toolbar.setNavigationOnClickListener(v -> finish());
+            etFullName.setEnabled(isEditMode);
+            etMobile.setEnabled(isEditMode);
 
-        // Menu handling (logout)
-        toolbar.setOnMenuItemClickListener(item -> {
-            if (item.getItemId() == R.id.action_logout) {
-                Intent intent = new Intent(TProfileActivity.this, THomeActivity.class);
-                startActivity(intent);
-                finish();
-                return true;
-            }
-            return false;
+            btnEditProfile.setText(
+                    isEditMode ? "Save Profile" : "Edit Profile"
+            );
+        });
+
+        // ---- Logout ----
+        tvLogout.setOnClickListener(v -> {
+            finish(); // later add FirebaseAuth.getInstance().signOut();
         });
     }
 }

@@ -74,9 +74,9 @@
                             android:id="@+id/showClassName"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:hint="Class 10 A"
                             android:maxLines="2"
                             android:textColor="@color/black"
+                            android:background="@drawable/s_edittext_border"
                             android:textColorHint="@color/light_greay" />
                     </com.google.android.material.textfield.TextInputLayout>
 
@@ -99,9 +99,9 @@
                             android:id="@+id/showDescription"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:hint="Description"
                             android:minLines="3"
                             android:maxLines="3"
+                            android:background="@drawable/s_edittext_border"
                             android:textColor="@color/black"
                             android:textColorHint="@color/light_greay" />
                     </com.google.android.material.textfield.TextInputLayout>
@@ -125,9 +125,9 @@
                             android:id="@+id/showTeacherName"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:hint="Ankita Madam"
                             android:maxLines="1"
                             android:textColor="@color/black"
+                            android:background="@drawable/s_edittext_border"
                             android:textColorHint="@color/light_greay" />
                     </com.google.android.material.textfield.TextInputLayout>
 
@@ -150,20 +150,20 @@
                             android:id="@+id/edtClassId"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:hint="Ex. CL1001"
                             android:textColor="@color/black"
+                            android:background="@drawable/s_edittext_border"
                             android:textColorHint="@color/light_greay" />
                     </com.google.android.material.textfield.TextInputLayout>
 
                     <!-- BUTTON -->
-                    <Button
+                    <androidx.appcompat.widget.AppCompatButton
                         android:id="@+id/btnSend"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="24dp"
-                        android:backgroundTint="@color/maroon_dark"
+                        android:background="@drawable/s_btn_bg_shape"
                         android:text="CREATE CLASS"
-                        android:textColor="@android:color/white" />
+                        android:textColor="@color/white" />
 
                     <TextView
                         android:id="@+id/txtCheck"
@@ -172,9 +172,9 @@
                         android:layout_gravity="center"
                         android:layout_marginTop="10dp"
                         android:text="Check Availability"
-                        android:textColor="@color/black"
+                        android:textColor="@color/red"
                         android:textStyle="bold"
-                        android:visibility="visible" />
+                        android:visibility="gone" />
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
 

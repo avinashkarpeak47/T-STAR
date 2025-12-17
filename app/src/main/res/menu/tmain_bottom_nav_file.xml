@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/nav_t_classes"
+        android:icon="@drawable/s_classes"
+        android:title="Classes" />
+
+    <item
+        android:id="@+id/nav_t_ai_assistant"
+        android:icon="@drawable/s_ai"
+        android:title="Ai Assistant" />
+
+    <!--    <item-->
+    <!--        android:id="@+id/nav_chat"-->
+    <!--        android:icon="@drawable/tgroupchat"-->
+    <!--        android:title="" />-->
+
+    <item
+        android:id="@+id/nav_tprofile"
+        android:icon="@drawable/tprofile"
+        android:title="Profile" />
+</menu>

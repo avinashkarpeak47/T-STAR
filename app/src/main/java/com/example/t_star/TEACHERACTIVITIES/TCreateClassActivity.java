@@ -112,14 +112,14 @@ public class TCreateClassActivity extends AppCompatActivity {
             return;
         }
 
-        TClassesModel model = new TClassesModel(
-                className,
-                classId,
-                description,
-                teacherId,
-                teacherName,
-                0
-        );
+        TClassesModel model = new TClassesModel();
+        model.setClassName(className);
+        model.setClassId(classId);
+        model.setDescription(description);
+        model.setTeacherId(teacherId);
+        model.setTeacherName(teacherName);
+        model.setStudentsCount(0);
+
 
         Classes_helper.createClass(model, new Classes_helper.DatabaseCallback() {
             @Override

@@ -72,7 +72,9 @@
                 android:inputType="textPassword"
                 android:textColor="#000000"
                 android:textColorHint="#8A8A8A"
-                android:layout_marginTop="6dp"/>
+                android:layout_marginTop="6dp"
+                android:drawableEnd="@drawable/baseline_visibility_24"
+                android:paddingEnd="12dp"/>
 
             <!-- Forgot Password -->
             <TextView

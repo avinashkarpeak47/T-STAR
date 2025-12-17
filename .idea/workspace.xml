@@ -100,11 +100,6 @@
           <theme>@style/Theme.TSTAR</theme>
         </config>
       </layout>
-      <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/activity_tassign_detail.xml">
-        <config>
-          <theme>@style/Theme.TSTAR</theme>
-        </config>
-      </layout>
       <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/activity_tasssignment.xml">
         <config>
           <theme>@style/Theme.TSTAR</theme>
@@ -120,7 +115,7 @@
           <theme>@style/Theme.TSTAR</theme>
         </config>
       </layout>
-      <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/activity_tcreate_class.xml">
+      <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/activity_tclasses_noti.xml">
         <config>
           <theme>@style/Theme.TSTAR</theme>
         </config>
@@ -155,16 +150,6 @@
           <theme>@style/Theme.TSTAR</theme>
         </config>
       </layout>
-      <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/activity_tstudent_request.xml">
-        <config>
-          <theme>@style/Theme.TSTAR</theme>
-        </config>
-      </layout>
-      <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/activity_tstudents.xml">
-        <config>
-          <theme>@style/Theme.TSTAR</theme>
-        </config>
-      </layout>
       <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_s__ai_assistant_.xml">
         <config>
           <theme>@style/Theme.TSTAR</theme>
@@ -180,7 +165,12 @@
           <theme>@style/Theme.TSTAR</theme>
         </config>
       </layout>
-      <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_s__profile_.xml">
+      <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_s_profile_.xml">
+        <config>
+          <theme>@style/Theme.TSTAR</theme>
+        </config>
+      </layout>
+      <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_t_chat.xml">
         <config>
           <theme>@style/Theme.TSTAR</theme>
         </config>
@@ -206,16 +196,6 @@
         </config>
       </layout>
       <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/s_mainpage.xml">
-        <config>
-          <theme>@style/Theme.TSTAR</theme>
-        </config>
-      </layout>
-      <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/tassign_student_status.xml">
-        <config>
-          <theme>@style/Theme.TSTAR</theme>
-        </config>
-      </layout>
-      <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/tassignmentsview.xml">
         <config>
           <theme>@style/Theme.TSTAR</theme>
         </config>
@@ -260,11 +240,6 @@
           <theme>@style/Theme.TSTAR</theme>
         </config>
       </layout>
-      <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/tstudentreqview.xml">
-        <config>
-          <theme>@style/Theme.TSTAR</theme>
-        </config>
-      </layout>
       <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/tstudentsview.xml">
         <config>
           <theme>@style/Theme.TSTAR</theme>
@@ -296,7 +271,10 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="68f55fa5-e357-4619-9e9e-b24458d6d83c" name="Changes" comment="Change Activity.">
+    <list default="true" id="68f55fa5-e357-4619-9e9e-b24458d6d83c" name="Changes" comment="COMMIT TITLE: Add complete authentication flow with splash screen, login, signup, and OTP mobile login&#10;&#10;COMMIT DESCRIPTION: Implemented full user authentication module including:&#10;                    - Splash screen with Firebase session check and role-based redirection&#10;                    - Entry activity for navigation&#10;                    - Email/Password login activity&#10;                    - Signup activity with role selection and Realtime Database storage&#10;                    - Mobile number OTP login (send + verify)&#10;                    - Updated AndroidManifest with all required activities&#10;                    Fully tested and working end-to-end.">
+      <change beforePath="$PROJECT_DIR$/.gradle/8.11.1/checksums/checksums.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.11.1/checksums/checksums.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/8.11.1/checksums/md5-checksums.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.11.1/checksums/md5-checksums.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/8.11.1/checksums/sha1-checksums.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.11.1/checksums/sha1-checksums.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/8.11.1/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.11.1/executionHistory/executionHistory.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/8.11.1/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.11.1/executionHistory/executionHistory.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/8.11.1/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.11.1/fileHashes/fileHashes.bin" afterDir="false" />
@@ -306,13 +284,10 @@
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/file-system.probe" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/file-system.probe" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/t_star/REAL_TIME_DATABASE/PUT_ON_DATABASE/HelperClasses/Classes_helper.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/t_star/REAL_TIME_DATABASE/PUT_ON_DATABASE/HelperClasses/Classes_helper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/t_star/TEACHERACTIVITIES/CLASSES/TClassesModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/t_star/TEACHERACTIVITIES/CLASSES/TClassesModel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/t_star/TEACHERACTIVITIES/TCreateClassActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/t_star/TEACHERACTIVITIES/TCreateClassActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/t_star/TEACHERACTIVITIES/TStudentRequestActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/t_star/TEACHERACTIVITIES/TStudentRequestActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/t_star/TEACHERACTIVITIES/TStudentsActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/t_star/TEACHERACTIVITIES/TStudentsActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/tstar_entry_activity.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/tstar_entry_activity.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/app/build.gradle.kts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/t_star/STUDENTACTIVITIES/SFragment/S_Profile_Fragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/t_star/STUDENTACTIVITIES/SFragment/S_Profile_Fragment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_s_profile_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_s_profile_.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/local.properties" beforeDir="false" afterPath="$PROJECT_DIR$/local.properties" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -322,49 +297,18 @@
   <component name="ClangdSettings">
     <option name="formatViaClangd" value="false" />
   </component>
-  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[DeviceId(pluginId=LocalEmulator, isTemplate=false, identifier=path=C:\Users\Hp\.android\avd\Pixel_7_Pro.avd)]" />
+  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[DeviceId(pluginId=LocalEmulator, isTemplate=false, identifier=path=/Users/architkulkarni/.android/avd/Pixel_9_Pro.avd)]" />
   <component name="ExternalProjectsData">
     <projectState path="$PROJECT_DIR$">
       <ProjectState />
     </projectState>
   </component>
-  <component name="ExternalProjectsManager">
-    <system id="GRADLE">
-      <state>
-        <task path="$PROJECT_DIR$">
-          <activation />
-        </task>
-        <projects_view>
-          <tree_state>
-            <expand>
-              <path>
-                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
-                <item name="T-STAR" type="f1a62948:ProjectNode" />
-              </path>
-              <path>
-                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
-                <item name="T-STAR" type="f1a62948:ProjectNode" />
-                <item name="Tasks" type="e4a08cd1:TasksNode" />
-              </path>
-              <path>
-                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
-                <item name="T-STAR" type="f1a62948:ProjectNode" />
-                <item name="Tasks" type="e4a08cd1:TasksNode" />
-                <item name="build" type="c8890929:TasksNode$1" />
-              </path>
-            </expand>
-            <select />
-          </tree_state>
-        </projects_view>
-      </state>
-    </system>
-  </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="valueResourceFile" />
-        <option value="resourceFile" />
         <option value="layoutResourceFile" />
+        <option value="resourceFile" />
         <option value="Class" />
       </list>
     </option>
@@ -393,17 +337,17 @@
   <component name="GithubPullRequestsUISettings">{
   &quot;selectedUrlAndAccountId&quot;: {
     &quot;url&quot;: &quot;https://github.com/rutujanage/T-STAR.git&quot;,
-    &quot;accountId&quot;: &quot;40e4b791-8859-4905-885f-aa668b939681&quot;
+    &quot;accountId&quot;: &quot;383b70b4-c5e8-405b-ab68-38e68ab53fe2&quot;
   }
 }</component>
   <component name="ProblemsViewState">
-    <option name="selectedTabId" value="ProjectErrors" />
+    <option name="selectedTabId" value="CurrentFile" />
   </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 5
 }</component>
   <component name="ProjectId" id="366bEdXwYRro5A7D7PHbCMiVRkA" />
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+  <component name="ProjectLevelVcsManager">
     <ConfirmationsSetting value="2" id="Add" />
   </component>
   <component name="ProjectReloadState">
@@ -413,27 +357,27 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Android App..executor&quot;: &quot;Run&quot;,
-    &quot;Android App.app.executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.T-STAR [build].executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.cidr.known.project.marker&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.readMode.enableVisualFormatting&quot;: &quot;true&quot;,
-    &quot;cf.first.check.clang-format&quot;: &quot;false&quot;,
-    &quot;cidr.known.project.marker&quot;: &quot;true&quot;,
-    &quot;com.google.services.firebase.aqiPopupShown&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/HP-JS/AndroidStudioProjects/TSTAR/app/src/main/res/drawable&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;SDK Location&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.17&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;com.android.studio.ml.bot.mainConfigurable&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Android App..executor": "Run",
+    "Android App.app.executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.cidr.known.project.marker": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "RunOnceActivity.readMode.enableVisualFormatting": "true",
+    "ScreenRecorder.SavePath": "/Users/architkulkarni",
+    "cf.first.check.clang-format": "false",
+    "cidr.known.project.marker": "true",
+    "com.google.services.firebase.aqiPopupShown": "true",
+    "git-widget-placeholder": "master",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "C:/Users/HP-JS/AndroidStudioProjects/TSTAR/app/src/main/res/drawable",
+    "project.structure.last.edited": "SDK Location",
+    "project.structure.proportion": "0.17",
+    "project.structure.side.proportion": "0.2",
+    "settings.editor.selected.configurable": "AndroidSdkUpdater"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CreateClassDialog.RecentsKey">
       <recent name="com.example.t_star.STUDENTACTIVITIES" />
@@ -754,12 +698,12 @@
       <map>
         <entry key="com.example.t_star">
           <value>
-            <CheckInfo lastCheckTimestamp="1765944868014" />
+            <CheckInfo lastCheckTimestamp="1765472289287" />
           </value>
         </entry>
         <entry key="com.example.t_star.test">
           <value>
-            <CheckInfo lastCheckTimestamp="1765944868029" />
+            <CheckInfo lastCheckTimestamp="1765472289286" />
           </value>
         </entry>
       </map>

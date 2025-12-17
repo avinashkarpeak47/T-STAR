@@ -1,6 +1,8 @@
 package com.example.t_star.STUDENTACTIVITIES;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
@@ -26,6 +28,8 @@ public class S_Enroll_in_Class extends AppCompatActivity {
         tvEnrollStatus = findViewById(R.id.tvEnrollStatus);
 
         btnSubmitEnroll.setOnClickListener(v -> enrollClass());
+
+
     }
 
     //Rutuja Created Method
@@ -85,36 +89,5 @@ public class S_Enroll_in_Class extends AppCompatActivity {
         );
     }
 
-    //Avinash Created Method
-    /*private void enrollClass() {
 
-        String classId = etClassId.getText().toString().trim();
-        String uid = FirebaseAuth.getInstance().getUid();
-
-        if (classId.isEmpty()) {
-            tvEnrollStatus.setText("Please enter Class ID");
-            return;
-        }
-
-        DatabaseReference classRef = FirebaseDatabase.getInstance()
-                .getReference("Classes").child(classId);
-
-        classRef.get().addOnSuccessListener(snap -> {
-
-            if (!snap.exists()) {
-                tvEnrollStatus.setText("Invalid Class ID!");
-                return;
-            }
-
-            // add join request
-            classRef.child("joinRequests").child(uid).setValue(uid)
-                    .addOnSuccessListener(a -> {
-                        tvEnrollStatus.setText("Request sent to teacher!");
-                        etClassId.setText("");
-                    });
-
-        }).addOnFailureListener(e ->
-                tvEnrollStatus.setText("Error: " + e.getMessage())
-        );
-    }*/
 }

@@ -1,15 +1,13 @@
-<?xml version="1.0" encoding="utf-8"?>
 <androidx.coordinatorlayout.widget.CoordinatorLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/white">
 
-    <!-- AppBar -->
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:theme="@style/ThemeOverlay.MaterialComponents.Dark.ActionBar">
+        android:layout_height="wrap_content">
 
         <com.google.android.material.appbar.MaterialToolbar
             android:id="@+id/toolbarAttendance"
@@ -17,25 +15,31 @@
             android:layout_height="?attr/actionBarSize"
             android:background="@color/Lavender"
             app:title="Attendance"
-            app:titleTextColor="@color/light_lavender_for_cards"/>
+            app:titleTextColor="@color/white"
+            app:navigationIcon="@drawable/s_arrowback"/>
 
-        <!-- Tabs: All / Present / Absent / Leave -->
         <com.google.android.material.tabs.TabLayout
-            android:id="@+id/tabLayoutAttendanceStatus"
+            android:id="@+id/tabLayoutAttendance"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:tabMode="fixed"
-            app:tabGravity="fill"
-            app:tabIndicatorFullWidth="false"/>
+            app:tabMode="fixed"/>
 
     </com.google.android.material.appbar.AppBarLayout>
 
-    <!-- RecyclerView for all attendance records -->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvAttendance"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior"
-        android:padding="8dp"/>
+        android:padding="8dp"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
+
+    <TextView
+        android:id="@+id/tvEmpty"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="No attendance records found"
+        android:textStyle="bold"
+        android:visibility="gone"
+        android:layout_gravity="center"/>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

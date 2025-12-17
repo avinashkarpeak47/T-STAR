@@ -3,6 +3,7 @@ package com.example.t_star.STUDENTACTIVITIES;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -35,6 +36,7 @@ public class S_Class_Dashboard_Activity extends AppCompatActivity {
         classId = getIntent().getStringExtra("classId");
 
         if (classId == null || classId.isEmpty()) {
+            Toast.makeText(this, "Class not found", Toast.LENGTH_SHORT).show();
             finish(); // Safety: dashboard must open with class context
             return;
         }
@@ -56,7 +58,7 @@ public class S_Class_Dashboard_Activity extends AppCompatActivity {
         tv_TeacherName = findViewById(R.id.tvTeacher);
 
         // Click Listeners with classId propagation
-        cardAttendance.setOnClickListener(v -> openFeature(S_class_dashboard_attendance.class));
+        cardAttendance.setOnClickListener(v -> openFeature(S_Class_Dashboard_Attendance.class));
         cardStudy.setOnClickListener(v -> openFeature(S_class_dashboard_studymaterial.class));
         cardTranslator.setOnClickListener(v -> openFeature(S_class_dashboard_translator.class));
         cardNotes.setOnClickListener(v -> openFeature(S_class_dashboard_notes.class));

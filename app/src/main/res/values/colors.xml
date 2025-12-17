@@ -18,8 +18,10 @@
     <color name="status_submitted">#4CAF50</color> <!-- green -->
     <color name="status_checked">#2196F3</color> <!-- blue -->
 
-    <color name="red">#F44336</color> <!-- red -->
+    <color name="red">#F44336</color><!-- red -->
     <color name="green">#4CAF50</color> <!-- green -->
+
+    <color name="orange">#F49F14</color>
 
 
     <color name="soft_greay">#E0E0E0</color>

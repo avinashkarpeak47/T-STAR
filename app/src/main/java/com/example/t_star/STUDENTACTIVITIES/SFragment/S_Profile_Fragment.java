@@ -2,6 +2,7 @@ package com.example.t_star.STUDENTACTIVITIES.SFragment;
 
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -18,8 +19,10 @@ import com.example.t_star.R;
 import com.example.t_star.REAL_TIME_DATABASE.GET_FROM_DATABASE.User_Data_Fetcher;
 import com.example.t_star.REAL_TIME_DATABASE.PUT_ON_DATABASE.ModelClasses.Updated_User_Model;
 import com.example.t_star.REAL_TIME_DATABASE.Validation.User_Input_Validator;
+import com.example.t_star.TSTAR_Login_Activity;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -50,6 +53,7 @@ public class S_Profile_Fragment extends Fragment {
     private FirebaseUser currentUser;
     private String uid;
 
+    private LinearLayout setting,changepassword,logout,deleteaccount;
     private Uri selectedImageUri;
     private boolean inEditMode = false;
 
@@ -61,7 +65,7 @@ public class S_Profile_Fragment extends Fragment {
                              @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
 
-        View view = inflater.inflate(R.layout.fragment_s__profile_, container, false);
+        View view = inflater.inflate(R.layout.fragment_s_profile_, container, false);
 
         // Bind views (IDs from your XML)
         ivProfilePic = view.findViewById(R.id.ivProfilePic);
@@ -71,6 +75,11 @@ public class S_Profile_Fragment extends Fragment {
         etMobile = view.findViewById(R.id.etMobile);
         etRollNo = view.findViewById(R.id.etRollNo);
         btnEditProfile = view.findViewById(R.id.btnEditProfile);
+        setting = view.findViewById(R.id.rowSettings);
+        changepassword=view.findViewById(R.id.rowChangePassword);
+        logout=view.findViewById(R.id.rowLogout);
+        deleteaccount=view.findViewById(R.id.rowDeleteAccount);
+
 
         // Optional: if your layout doesn't include a ProgressBar, we add a simple one programmatically
         progressBar = new ProgressBar(requireContext());
@@ -87,6 +96,11 @@ public class S_Profile_Fragment extends Fragment {
             return view;
         }
         uid = currentUser.getUid();
+
+
+        //trigger setting and account actions
+        setupAccountActions();
+
 
         // Load user data
         loadUserData();
@@ -264,6 +278,113 @@ public class S_Profile_Fragment extends Fragment {
             }
         });
     }
+    private void setupAccountActions() {
+
+        // 1) CHANGE / FORGET PASSWORD
+        changepassword.setOnClickListener(v -> {
+            new AlertDialog.Builder(requireContext())
+                    .setTitle("Reset Password")
+                    .setMessage("A password reset link will be sent to your registered email address. Continue?")
+                    .setPositiveButton("Send Link", (dialog, which) -> {
+                        if (currentUser == null || currentUser.getEmail() == null) {
+                            Toast.makeText(getContext(), "No email associated with this account", Toast.LENGTH_SHORT).show();
+                            return;
+                        }
+
+                        FirebaseAuth.getInstance()
+                                .sendPasswordResetEmail(currentUser.getEmail())
+                                .addOnSuccessListener(unused ->
+                                        Toast.makeText(getContext(),
+                                                "Password reset email sent",
+                                                Toast.LENGTH_LONG).show()
+                                )
+                                .addOnFailureListener(e ->
+                                        Toast.makeText(getContext(),
+                                                "Failed: " + e.getMessage(),
+                                                Toast.LENGTH_LONG).show()
+                                );
+                    })
+                    .setNegativeButton("Cancel", null)
+                    .show();
+        });
+
+
+        // 2) LOGOUT
+        logout.setOnClickListener(v -> {
+            new AlertDialog.Builder(requireContext())
+                    .setTitle("Logout")
+                    .setMessage("Are you sure you want to logout?")
+                    .setPositiveButton("Logout", (dialog, which) -> {
+
+                        FirebaseAuth.getInstance().signOut();
+
+                        Intent intent = new Intent(requireContext(), TSTAR_Login_Activity.class);
+                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                        startActivity(intent);
+                        requireActivity().finish();
+
+                    })
+                    .setNegativeButton("Cancel", null)
+                    .show();
+        });
+
+
+        // 3) DELETE ACCOUNT (AUTH + DATABASE)
+        deleteaccount.setOnClickListener(v -> {
+            new AlertDialog.Builder(requireContext())
+                    .setTitle("Delete Account")
+                    .setMessage("This action is permanent.\nAll your data will be deleted.\nAre you absolutely sure?")
+                    .setPositiveButton("Delete", (dialog, which) -> {
+
+                        if (currentUser == null) return;
+
+                        showLoading(true);
+
+                        String userId = currentUser.getUid();
+
+                        // 1) Delete user data from Realtime Database
+                        FirebaseDatabase.getInstance()
+                                .getReference("Users")
+                                .child(userId)
+                                .removeValue()
+                                .addOnCompleteListener(task -> {
+
+                                    if (!task.isSuccessful()) {
+                                        showLoading(false);
+                                        Toast.makeText(getContext(),
+                                                "Database delete failed",
+                                                Toast.LENGTH_LONG).show();
+                                        return;
+                                    }
+
+                                    // 2) Delete authentication account
+                                    currentUser.delete()
+                                            .addOnSuccessListener(unused -> {
+                                                showLoading(false);
+
+                                                Toast.makeText(getContext(),
+                                                        "Account deleted successfully",
+                                                        Toast.LENGTH_LONG).show();
+
+                                                Intent intent = new Intent(requireContext(), TSTAR_Login_Activity.class);
+                                                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                                                startActivity(intent);
+                                                requireActivity().finish();
+                                            })
+                                            .addOnFailureListener(e -> {
+                                                showLoading(false);
+                                                Toast.makeText(getContext(),
+                                                        "Re-authentication required",
+                                                        Toast.LENGTH_LONG).show();
+                                            });
+                                });
+
+                    })
+                    .setNegativeButton("Cancel", null)
+                    .show();
+        });
+    }
+
 }
 
 

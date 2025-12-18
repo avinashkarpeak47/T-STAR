@@ -80,38 +80,13 @@
                             android:textColorHint="@color/light_greay" />
                     </com.google.android.material.textfield.TextInputLayout>
 
-                    <!-- DESCRIPTION -->
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="16dp"
-                        android:text="Description"
-                        android:textColor="@color/black"
-                        android:textSize="20sp"
-                        android:textStyle="bold" />
-
-                    <com.google.android.material.textfield.TextInputLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        app:boxBackgroundMode="outline">
-
-                        <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/showDescription"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:minLines="3"
-                            android:maxLines="3"
-                            android:background="@drawable/s_edittext_border"
-                            android:textColor="@color/black"
-                            android:textColorHint="@color/light_greay" />
-                    </com.google.android.material.textfield.TextInputLayout>
 
                     <!-- TEACHER NAME -->
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="16dp"
-                        android:text="Teacher Name"
+                        android:text="Subject "
                         android:textColor="@color/black"
                         android:textSize="20sp"
                         android:textStyle="bold" />

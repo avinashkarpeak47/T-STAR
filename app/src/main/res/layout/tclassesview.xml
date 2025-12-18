@@ -4,28 +4,27 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="6dp"
-    android:background="@color/white"
-    app:cardCornerRadius="16dp"
-    app:cardBackgroundColor="@color/maroon_variant"
-    app:cardElevation="6dp">
+    android:layout_margin="8dp"
+    app:cardCornerRadius="18dp"
+    app:cardElevation="8dp"
+    app:cardBackgroundColor="@color/white">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="12dp">
+        android:padding="14dp">
 
-        <!-- Left colored strip / icon -->
+        <!-- 🔥 LEFT COLOR STRIP (same as top) -->
         <View
             android:id="@+id/colorStrip"
-            android:layout_width="0dp"
+            android:layout_width="6dp"
             android:layout_height="0dp"
-            android:background="@color/maroon_dark"
+            android:background="@color/maroon_variant"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"/>
 
-        <!-- Class Name -->
+        <!-- ⭐ CLASS NAME -->
         <TextView
             android:id="@+id/tvClassName"
             android:layout_width="0dp"
@@ -39,12 +38,12 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintEnd_toEndOf="parent"/>
 
-        <!-- Extra info (section / strength) -->
+        <!-- 🆔 CLASS ID -->
         <TextView
             android:id="@+id/tvClassId"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="Class ID "
+            android:text="Class ID"
             android:textSize="14sp"
             android:textColor="#555555"
             android:layout_marginStart="12dp"
@@ -53,11 +52,12 @@
             app:layout_constraintStart_toEndOf="@id/colorStrip"
             app:layout_constraintEnd_toEndOf="parent"/>
 
+        <!-- 👥 TOTAL STUDENTS -->
         <TextView
             android:id="@+id/tvtotal"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text=" Total Student"
+            android:text="Total Students"
             android:textSize="14sp"
             android:textColor="#555555"
             android:layout_marginStart="12dp"

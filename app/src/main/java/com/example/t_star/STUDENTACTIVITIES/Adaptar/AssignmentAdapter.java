@@ -107,7 +107,7 @@ public class AssignmentAdapter extends RecyclerView.Adapter<AssignmentAdapter.As
             tvDescription = itemView.findViewById(R.id.tvDescription);
             tvExtra = itemView.findViewById(R.id.tvExtra);
             tvStatusText = itemView.findViewById(R.id.tvStatusText);
-            viewStatus = itemView.findViewById(R.id.viewStatus);
+
         }
     }
 }

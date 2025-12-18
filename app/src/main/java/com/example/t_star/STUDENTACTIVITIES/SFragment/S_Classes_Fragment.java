@@ -94,13 +94,13 @@ public class S_Classes_Fragment extends Fragment {
     private void setGreetingMessage() {
         int hour = Calendar.getInstance().get(Calendar.HOUR_OF_DAY);
         if (hour >= 4 && hour < 12)
-            tvGreeting.setText("Good Morning");
+            tvGreeting.setText("Good Morning \uD83C\uDF05");
         else if (hour >= 12 && hour < 16)
-            tvGreeting.setText("Good Afternoon");
+            tvGreeting.setText("Good Afternoon ☀\uFE0F");
         else if (hour >= 16 && hour < 20)
-            tvGreeting.setText("Good Evening");
+            tvGreeting.setText("Good Evening \uD83C\uDF07");
         else
-            tvGreeting.setText("Good Night");
+            tvGreeting.setText("Good Night \uD83C\uDF19");
     }
 
     //RUTUJA CODE

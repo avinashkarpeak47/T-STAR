@@ -45,9 +45,9 @@ public class Classes_helper {
                     TClassesModel model = new TClassesModel();
                     model.setClassId(data.child("classId").getValue(String.class));
                     model.setClassName(data.child("className").getValue(String.class));
-                    model.setDescription(data.child("description").getValue(String.class));
+                   // model.setDescription(data.child("description").getValue(String.class));
                     model.setTeacherId(data.child("teacherId").getValue(String.class));
-                    model.setTeacherName(data.child("teacherName").getValue(String.class));
+                   // model.setTeacherName(data.child("teacherName").getValue(String.class));
 
                     Long count = data.child("studentsCount").getValue(Long.class);
                     model.setStudentsCount(count != null ? count.intValue() : 0);

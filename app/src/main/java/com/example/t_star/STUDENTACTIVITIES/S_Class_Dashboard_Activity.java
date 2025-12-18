@@ -65,7 +65,7 @@ public class S_Class_Dashboard_Activity extends AppCompatActivity {
         cardQuiz.setOnClickListener(v -> openFeature(S_class_dashboard_quiz.class));
         cardChat.setOnClickListener(v -> openFeature(S_class_dashboard_chat.class));
         cardEvents.setOnClickListener(v -> openFeature(S_class_dashboard_events.class));
-        cardAssignment.setOnClickListener(v -> openFeature(S_class_dashboard_assignment.class));
+        cardAssignment.setOnClickListener(v -> openFeature(S_Class_Dashboard_Assignment.class));
         cardNotification.setOnClickListener(v -> openFeature(S_class_dashboard_notifications.class));
 
 

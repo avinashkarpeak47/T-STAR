@@ -43,37 +43,46 @@ public class TStudentsActivity extends AppCompatActivity {
         toolbar.setNavigationOnClickListener(v -> finish());
 
         classId = getIntent().getStringExtra("classId");
-
-        btnNotifications.setOnClickListener(v -> {
-            Intent i = new Intent(this, TStudentRequestActivity.class);
-            i.putExtra("classId", classId);
-            startActivityForResult(i, REQ_REQUESTS); // 🔥 IMPORTANT
-        });
+        if (classId == null) {
+            finish();
+            return;
+        }
 
         adapter = new TStudentAdapter(this, studentList);
         rvStudents.setLayoutManager(new LinearLayoutManager(this));
         rvStudents.setAdapter(adapter);
 
+        btnNotifications.setOnClickListener(v -> {
+            Intent i = new Intent(this, TStudentRequestActivity.class);
+            i.putExtra("classId", classId);
+            startActivityForResult(i, REQ_REQUESTS);
+        });
+
         loadStudents();
 
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-            @Override public boolean onQueryTextSubmit(String q) { adapter.filter(q); return false; }
-            @Override public boolean onQueryTextChange(String q) { adapter.filter(q); return false; }
-        });
-    }
+            @Override public boolean onQueryTextSubmit(String q) {
+                adapter.filter(q);
+                return false;
+            }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-        loadStudents();
+            @Override public boolean onQueryTextChange(String q) {
+                adapter.filter(q);
+                return false;
+            }
+        });
     }
 
     // 🚀 STEP 1 — fetch student UIDs
     private void loadStudents() {
+
+        // 🔥 Clear UI immediately (prevents blank / loading confusion)
+        studentList.clear();
+        adapter.updateList(studentList);
+
         Classes_helper.getClassStudents(classId, uids -> {
 
             if (uids == null || uids.isEmpty()) {
-                studentList.clear();
                 adapter.updateList(studentList);
                 return;
             }
@@ -95,25 +104,28 @@ public class TStudentsActivity extends AppCompatActivity {
 
                 if (user != null) {
                     String name = user.firstname + " " + user.lastname;
-                    studentList.add(new TStudentModel(name, uid, R.drawable.taklogo));
+                    studentList.add(
+                            new TStudentModel(name, uid, R.drawable.taklogo)
+                    );
                 }
 
                 loaded[0]++;
 
+                // 🔥 update ONCE when all done
                 if (loaded[0] == total) {
-                    adapter.updateList(studentList); // 🔥 update once
+                    adapter.updateList(studentList);
                 }
             });
         }
     }
 
-    // 🔥 THIS MAKES THE MAGIC HAPPEN
+    // 🔥 refresh after accepting student
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
         if (requestCode == REQ_REQUESTS && resultCode == RESULT_OK) {
-            loadStudents(); // 🔥 FORCE REFRESH
+            loadStudents();
         }
     }
 }

@@ -16,9 +16,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class TStudentRequestAdapter extends RecyclerView.Adapter<TStudentRequestAdapter.VH> {
+public class TStudentRequestAdapter
+        extends RecyclerView.Adapter<TStudentRequestAdapter.VH> {
 
-    public interface OnAcceptClick { void onAccept(String uid); }
+    public interface OnAcceptClick {
+        void onAccept(String uid);
+    }
 
     private final Context context;
     private final List<String> uidList;
@@ -26,22 +29,29 @@ public class TStudentRequestAdapter extends RecyclerView.Adapter<TStudentRequest
 
     private final Map<String, String> nameMap = new HashMap<>();
 
-    public TStudentRequestAdapter(Context c, List<String> list, OnAcceptClick l) {
+    public TStudentRequestAdapter(Context c,
+                                  List<String> list,
+                                  OnAcceptClick l) {
         context = c;
         uidList = list;
         listener = l;
     }
 
+    // 🔥 called when name loaded from Firebase
     public void updateStudentName(String uid, String name) {
         nameMap.put(uid, name);
+
         int index = uidList.indexOf(uid);
-        if (index != -1) notifyItemChanged(index);
+        if (index != -1) {
+            notifyItemChanged(index);
+        }
     }
 
     @NonNull
     @Override
     public VH onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(context).inflate(R.layout.tstudentreqview, parent, false);
+        View v = LayoutInflater.from(context)
+                .inflate(R.layout.tstudentreqview, parent, false);
         return new VH(v);
     }
 
@@ -54,11 +64,15 @@ public class TStudentRequestAdapter extends RecyclerView.Adapter<TStudentRequest
         h.tvName.setText(name != null ? name : "Loading...");
         h.tvID.setText("UID: " + uid);
 
-        h.btnAccept.setOnClickListener(v -> listener.onAccept(uid));
+        h.btnAccept.setOnClickListener(v ->
+                listener.onAccept(uid)
+        );
     }
 
     @Override
-    public int getItemCount() { return uidList.size(); }
+    public int getItemCount() {
+        return uidList.size();
+    }
 
     static class VH extends RecyclerView.ViewHolder {
 

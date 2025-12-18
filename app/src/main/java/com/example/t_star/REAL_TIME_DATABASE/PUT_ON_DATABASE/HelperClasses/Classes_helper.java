@@ -43,11 +43,11 @@ public class Classes_helper {
                 for (DataSnapshot data : snapshot.getChildren()) {
 
                     TClassesModel model = new TClassesModel();
+
                     model.setClassId(data.child("classId").getValue(String.class));
                     model.setClassName(data.child("className").getValue(String.class));
-                    model.setDescription(data.child("description").getValue(String.class));
+                    model.setSubject(data.child("subject").getValue(String.class)); // ✅ SUBJECT
                     model.setTeacherId(data.child("teacherId").getValue(String.class));
-                    model.setTeacherName(data.child("teacherName").getValue(String.class));
 
                     Long count = data.child("studentsCount").getValue(Long.class);
                     model.setStudentsCount(count != null ? count.intValue() : 0);
@@ -97,6 +97,7 @@ public class Classes_helper {
     // ADD STUDENT TO CLASS
     // ------------------------------------------------------------
     public static void addStudentToClass(String classId, String uid) {
+
         classesRef().child(classId)
                 .child("students")
                 .child(uid)
@@ -109,6 +110,7 @@ public class Classes_helper {
     // REMOVE STUDENT FROM CLASS
     // ------------------------------------------------------------
     public static void removeStudentFromClass(String classId, String uid) {
+
         classesRef().child(classId)
                 .child("students")
                 .child(uid)
@@ -121,10 +123,12 @@ public class Classes_helper {
     // UPDATE STUDENT COUNT
     // ------------------------------------------------------------
     public static void updateStudentCount(String classId) {
+
         classesRef().child(classId).child("students")
                 .addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
+
                         classesRef().child(classId)
                                 .child("studentsCount")
                                 .setValue(snapshot.getChildrenCount());
@@ -141,9 +145,12 @@ public class Classes_helper {
     public static class Users_Helper {
 
         public static void getUserDetails(String uid, UserCallback cb) {
-            FirebaseDatabase.getInstance().getReference("Users")
+
+            FirebaseDatabase.getInstance()
+                    .getReference("Users")
                     .child(uid)
                     .addListenerForSingleValueEvent(new ValueEventListener() {
+
                         @Override
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
                             cb.onUserLoaded(

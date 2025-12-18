@@ -9,12 +9,11 @@ public class TClassesModel {
 
     private String classId;
     private String className;
-    private String description;
+    private String subject;      // ✅ NEW FIELD
     private String teacherId;
-    private String teacherName;
     private int studentsCount;
 
-    // Optional – ignored in getAllClasses()
+    // Optional Firebase nodes
     private Map<String, Object> students;
     private Map<String, Object> joinRequests;
 
@@ -25,14 +24,37 @@ public class TClassesModel {
     }
 
     // -------------------- GETTERS --------------------
-    public String getClassId() { return classId; }
-    public String getClassName() { return className; }
-    public String getDescription() { return description; }
-    public String getTeacherId() { return teacherId; }
-    public String getTeacherName() { return teacherName; }
-    public int getStudentsCount() { return studentsCount; }
+
+    public String getClassId() {
+        return classId != null ? classId : "";
+    }
+
+    public String getClassName() {
+        return className != null ? className : "";
+    }
+
+    public String getSubject() {
+        return subject != null ? subject : "";
+    }
+
+    public String getTeacherId() {
+        return teacherId != null ? teacherId : "";
+    }
+
+    public int getStudentsCount() {
+        return studentsCount;
+    }
+
+    public Map<String, Object> getStudents() {
+        return students;
+    }
+
+    public Map<String, Object> getJoinRequests() {
+        return joinRequests;
+    }
 
     // -------------------- SETTERS --------------------
+
     public void setClassId(String classId) {
         this.classId = classId;
     }
@@ -41,23 +63,19 @@ public class TClassesModel {
         this.className = className;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setSubject(String subject) {   // ✅ NEW
+        this.subject = subject;
     }
 
     public void setTeacherId(String teacherId) {
         this.teacherId = teacherId;
     }
 
-    public void setTeacherName(String teacherName) {
-        this.teacherName = teacherName;
-    }
-
     public void setStudentsCount(int studentsCount) {
         this.studentsCount = studentsCount;
     }
 
-    // Optional setters (safe)
+    // Optional setters (safe for Firebase)
     public void setStudents(Map<String, Object> students) {
         this.students = students;
     }

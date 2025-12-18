@@ -18,30 +18,41 @@ import java.util.List;
 public class TStudentAdapter extends RecyclerView.Adapter<TStudentAdapter.StudentVH> {
 
     private final Context context;
-    private List<TStudentModel> originalList;
-    private List<TStudentModel> filteredList;
+    private final List<TStudentModel> originalList = new ArrayList<>();
+    private final List<TStudentModel> filteredList = new ArrayList<>();
 
     public TStudentAdapter(Context context, List<TStudentModel> list) {
         this.context = context;
-        this.originalList = list;
-        this.filteredList = new ArrayList<>(list);
+        updateList(list); // 🔥 initial load
     }
 
+    // 🔥 MOST IMPORTANT FIX
     public void updateList(List<TStudentModel> newList) {
-        this.originalList = newList;
-        this.filteredList = new ArrayList<>(newList);
-        notifyDataSetChanged();
+
+        originalList.clear();
+        filteredList.clear();
+
+        if (newList != null) {
+            originalList.addAll(newList);
+            filteredList.addAll(newList);
+        }
+
+        notifyDataSetChanged(); // 🔥 force UI refresh
     }
 
-    @NonNull @Override
+    @NonNull
+    @Override
     public StudentVH onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(context).inflate(R.layout.tstudentsview, parent, false);
+        View v = LayoutInflater.from(context)
+                .inflate(R.layout.tstudentsview, parent, false);
         return new StudentVH(v);
     }
 
     @Override
     public void onBindViewHolder(@NonNull StudentVH holder, int pos) {
+
         TStudentModel m = filteredList.get(pos);
+
         holder.tvName.setText(m.getStudentName());
         holder.tvID.setText("ID: " + m.getStudentId());
         holder.ivImage.setImageResource(m.getImageRes());
@@ -52,13 +63,15 @@ public class TStudentAdapter extends RecyclerView.Adapter<TStudentAdapter.Studen
         return filteredList.size();
     }
 
+    // 🔍 Search support
     public void filter(String q) {
-        q = q.toLowerCase().trim();
+
         filteredList.clear();
 
-        if (q.isEmpty()) {
+        if (q == null || q.trim().isEmpty()) {
             filteredList.addAll(originalList);
         } else {
+            q = q.toLowerCase().trim();
             for (TStudentModel s : originalList) {
                 if (s.getStudentName().toLowerCase().contains(q) ||
                         s.getStudentId().toLowerCase().contains(q)) {
@@ -71,6 +84,7 @@ public class TStudentAdapter extends RecyclerView.Adapter<TStudentAdapter.Studen
     }
 
     static class StudentVH extends RecyclerView.ViewHolder {
+
         ImageView ivImage;
         TextView tvName, tvID;
 

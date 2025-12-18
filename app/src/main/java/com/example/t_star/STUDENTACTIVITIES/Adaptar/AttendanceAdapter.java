@@ -7,94 +7,81 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.cardview.widget.CardView;
-import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.t_star.R;
 import com.example.t_star.STUDENTACTIVITIES.Models.Attendance;
 
-import java.util.ArrayList;
 import java.util.List;
 
-public class AttendanceAdapter extends RecyclerView.Adapter<AttendanceAdapter.AttendanceViewHolder> {
+public class AttendanceAdapter
+        extends RecyclerView.Adapter<AttendanceAdapter.VH> {
 
     private final Context context;
-    private List<Attendance> attendanceList = new ArrayList<>();
+    private List<Attendance> list;
 
-    public AttendanceAdapter(Context context, List<Attendance> attendanceList) {
+    public AttendanceAdapter(Context context, List<Attendance> list) {
         this.context = context;
-        this.attendanceList = attendanceList;
+        this.list = list;
     }
 
     public void updateList(List<Attendance> newList) {
-        this.attendanceList = newList;
+        this.list = newList;
         notifyDataSetChanged();
     }
 
     @NonNull
     @Override
-    public AttendanceViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(context).inflate(R.layout.item_attendance, parent, false);
-        return new AttendanceViewHolder(view);
+    public VH onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View v = LayoutInflater.from(context)
+                .inflate(R.layout.item_attendance, parent, false);
+        return new VH(v);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull AttendanceViewHolder holder, int position) {
-        Attendance item = attendanceList.get(position);
+    public void onBindViewHolder(@NonNull VH holder, int position) {
+        Attendance attendance = list.get(position);
 
-        holder.tvStudentName.setText(item.getStudentName());
-        holder.tvRollNo.setText("Roll: " + item.getRollNo());
-        holder.tvDateSubject.setText(item.getDate() + " · " + item.getSubject());
+        holder.tvDate.setText(attendance.getDate());
+        holder.tvSubject.setText(attendance.getSubject());
 
-        String status = item.getStatus();
-        holder.tvStatusText.setText(statusText(status));
-        setStatusColor(holder.viewStatus, status);
+        String status = attendance.getStatus();
+        holder.tvStatus.setText(capitalize(status));
+
+        switch (status) {
+            case Attendance.STATUS_PRESENT:
+                holder.tvStatus.setBackgroundResource(R.drawable.bg_status_present);
+                break;
+
+            case Attendance.STATUS_ABSENT:
+                holder.tvStatus.setBackgroundResource(R.drawable.bg_status_absent);
+                break;
+
+            case Attendance.STATUS_LEAVE:
+                holder.tvStatus.setBackgroundResource(R.drawable.bg_status_leave);
+                break;
+        }
     }
 
     @Override
     public int getItemCount() {
-        return attendanceList == null ? 0 : attendanceList.size();
+        return list.size();
     }
 
-    private String statusText(String status) {
-        if (Attendance.STATUS_PRESENT.equals(status)) return "Present";
-        if (Attendance.STATUS_ABSENT.equals(status)) return "Absent";
-        if (Attendance.STATUS_LEAVE.equals(status)) return "Leave";
-        return "";
-    }
+    static class VH extends RecyclerView.ViewHolder {
 
-    private void setStatusColor(View viewStatus, String status) {
-        int colorRes;
-        if (Attendance.STATUS_PRESENT.equals(status)) {
-            colorRes = R.color.status_submitted;
-        } else if (Attendance.STATUS_ABSENT.equals(status)) {
-            colorRes = R.color.status_pending;
-        } else if (Attendance.STATUS_LEAVE.equals(status)) {
-            colorRes = R.color.status_checked;
-        } else {
-            colorRes = android.R.color.darker_gray;
-        }
+        TextView tvDate, tvSubject, tvStatus;
 
-        viewStatus.setBackgroundTintList(
-                ContextCompat.getColorStateList(context, colorRes)
-        );
-    }
-
-    static class AttendanceViewHolder extends RecyclerView.ViewHolder {
-
-        TextView tvStudentName, tvRollNo, tvDateSubject, tvStatusText;
-        View viewStatus;
-        CardView cardRoot;
-
-        public AttendanceViewHolder(@NonNull View itemView) {
+        VH(@NonNull View itemView) {
             super(itemView);
-            cardRoot = (CardView) itemView;
-            tvStudentName = itemView.findViewById(R.id.tvStudentName);
-            tvRollNo = itemView.findViewById(R.id.tvRollNo);
-            tvDateSubject = itemView.findViewById(R.id.tvDateSubject);
-            tvStatusText = itemView.findViewById(R.id.tvStatusText);
-            viewStatus = itemView.findViewById(R.id.viewStatus);
+            tvDate = itemView.findViewById(R.id.tvDate);
+            tvSubject = itemView.findViewById(R.id.tvSubject);
+            tvStatus = itemView.findViewById(R.id.tvStatus);
         }
+    }
+
+    private String capitalize(String text) {
+        if (text == null || text.isEmpty()) return "";
+        return text.substring(0,1).toUpperCase() + text.substring(1);
     }
 }

@@ -3,6 +3,7 @@ package com.example.t_star.TEACHERACTIVITIES;
 import android.os.Bundle;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -81,22 +82,57 @@ public class TStudentRequestActivity extends AppCompatActivity {
                 });
     }
 
-    private void acceptStudent(String uid) {
+    private void acceptStudent(String studentUid) {
 
-        DatabaseReference classRef =
-                FirebaseDatabase.getInstance().getReference("Classes").child(classId);
+        DatabaseReference rootRef = FirebaseDatabase.getInstance().getReference();
+        DatabaseReference classRef = rootRef.child("Classes").child(classId);
 
-        classRef.child("students").child(uid).setValue(uid)
-                .addOnSuccessListener(a -> {
+        // 1️⃣ Teacher side
+        classRef.child("students")
+                .child(studentUid)
+                .setValue("approved");
 
-                    classRef.child("joinRequests").child(uid).removeValue();
-                    Classes_helper.updateStudentCount(classId);
+        // 2️⃣ Student side (MOST IMPORTANT)
+        DatabaseReference studentClassRef =
+                rootRef.child("StudentClasses")
+                        .child(studentUid)
+                        .child(classId);
 
-                    Toast.makeText(this, "Student Added!", Toast.LENGTH_SHORT).show();
+        studentClassRef.child("classId").setValue(classId);
+        studentClassRef.child("status").setValue("approved");
+        studentClassRef.child("seenApproved").setValue(false);
 
-                    // 🔥 THIS IS THE KEY
-                    setResult(RESULT_OK);
-                });
+        // Class info fetch
+        classRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+
+                String className = snapshot.child("className").getValue(String.class);
+                String teacherId = snapshot.child("teacherId").getValue(String.class);
+
+                studentClassRef.child("className").setValue(className);
+                studentClassRef.child("teacherId").setValue(teacherId);
+
+                // 3️⃣ remove request
+                classRef.child("joinRequests").child(studentUid).removeValue();
+
+                // 4️⃣ update count
+                Classes_helper.updateStudentCount(classId);
+
+                Toast.makeText(TStudentRequestActivity.this,
+                        "Student Approved Successfully",
+                        Toast.LENGTH_SHORT).show();
+
+                setResult(RESULT_OK);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Toast.makeText(TStudentRequestActivity.this,
+                        error.getMessage(),
+                        Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     @Override

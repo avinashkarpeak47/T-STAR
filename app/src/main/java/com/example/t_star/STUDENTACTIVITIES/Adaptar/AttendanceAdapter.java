@@ -94,7 +94,6 @@ public class AttendanceAdapter extends RecyclerView.Adapter<AttendanceAdapter.At
             tvRollNo = itemView.findViewById(R.id.tvRollNo);
             tvDateSubject = itemView.findViewById(R.id.tvDateSubject);
             tvStatusText = itemView.findViewById(R.id.tvStatusText);
-            viewStatus = itemView.findViewById(R.id.viewStatus);
         }
     }
 }

@@ -4,38 +4,45 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="8dp"
+    android:layout_marginBottom="12dp"
     app:cardCornerRadius="12dp"
-    app:cardUseCompatPadding="true"
-    android:background="@color/white"
-    app:cardElevation="4dp">
+    app:cardElevation="4dp"
+    app:cardBackgroundColor="@color/white">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/light_lavender_for_cards"
-        android:padding="12dp">
+        android:padding="14dp">
 
-        <!-- Small colored circle for status -->
+        <!-- SIMPLE LEFT LINE -->
         <View
-            android:id="@+id/viewStatus"
-            android:layout_width="12dp"
-            android:layout_height="12dp"
-            android:background="@drawable/bg_status_circle"
-            android:layout_marginEnd="8dp"
-            app:layout_constraintStart_toStartOf="parent"
+            android:id="@+id/leftLine"
+            android:layout_width="4dp"
+            android:layout_height="0dp"
+            android:background="@color/maroon_variant"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="@+id/tvStudentName"/>
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"/>
+
+        <!-- CONTENT -->
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            app:layout_constraintStart_toEndOf="@id/leftLine"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
         <!-- Student name -->
         <TextView
             android:id="@+id/tvStudentName"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Student Name"
             android:textStyle="bold"
             android:textSize="16sp"
-            app:layout_constraintStart_toEndOf="@id/viewStatus"
+            app:layout_constraintStart_toEndOf="@id/leftLine"
             app:layout_constraintEnd_toStartOf="@+id/tvStatusText"
             app:layout_constraintTop_toTopOf="parent"/>
 
@@ -76,6 +83,7 @@
             app:layout_constraintTop_toBottomOf="@id/tvRollNo"
             app:layout_constraintStart_toStartOf="@id/tvStudentName"
             app:layout_constraintBottom_toBottomOf="parent"/>
+        </LinearLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

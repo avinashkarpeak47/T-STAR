@@ -12,16 +12,11 @@ import java.util.ArrayList;
 
 public class Classes_helper {
 
-    // ------------------------------------------------------------
-    // DATABASE REFERENCE
-    // ------------------------------------------------------------
     private static DatabaseReference classesRef() {
         return FirebaseDatabase.getInstance().getReference("Classes");
     }
 
-    // ------------------------------------------------------------
-    // CREATE CLASS
-    // ------------------------------------------------------------
+    // ================= CREATE CLASS =================
     public static void createClass(TClassesModel model, DatabaseCallback cb) {
         classesRef().child(model.getClassId())
                 .setValue(model)
@@ -29,9 +24,7 @@ public class Classes_helper {
                 .addOnFailureListener(cb::onFailure);
     }
 
-    // ------------------------------------------------------------
-    // GET ALL CLASSES
-    // ------------------------------------------------------------
+    // ================= GET ALL CLASSES =================
     public static void getAllClasses(AllClassesCallback cb) {
 
         classesRef().addListenerForSingleValueEvent(new ValueEventListener() {
@@ -45,16 +38,14 @@ public class Classes_helper {
                     TClassesModel model = new TClassesModel();
                     model.setClassId(data.child("classId").getValue(String.class));
                     model.setClassName(data.child("className").getValue(String.class));
-                    model.setDescription(data.child("description").getValue(String.class));
+                    model.setSubject(data.child("subject").getValue(String.class));
                     model.setTeacherId(data.child("teacherId").getValue(String.class));
-                    model.setTeacherName(data.child("teacherName").getValue(String.class));
 
                     Long count = data.child("studentsCount").getValue(Long.class);
                     model.setStudentsCount(count != null ? count.intValue() : 0);
 
                     list.add(model);
                 }
-
                 cb.onLoaded(list);
             }
 
@@ -65,24 +56,21 @@ public class Classes_helper {
         });
     }
 
-    // ------------------------------------------------------------
-    // GET STUDENTS OF A CLASS (UID LIST)
-    // ------------------------------------------------------------
+    // ================= GET CLASS STUDENTS (UIDS) =================
     public static void getClassStudents(String classId, StudentListCallback cb) {
 
         Log.d("DEBUG_STUDENT", "Fetching students for classId = " + classId);
 
-        classesRef().child(classId).child("students")
+        classesRef().child(classId)
+                .child("students")
                 .addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
 
                         ArrayList<String> uids = new ArrayList<>();
-
                         for (DataSnapshot s : snapshot.getChildren()) {
-                            uids.add(s.getKey()); // UID is KEY
+                            uids.add(s.getKey());
                         }
-
                         cb.onLoaded(uids);
                     }
 
@@ -93,34 +81,9 @@ public class Classes_helper {
                 });
     }
 
-    // ------------------------------------------------------------
-    // ADD STUDENT TO CLASS
-    // ------------------------------------------------------------
-    public static void addStudentToClass(String classId, String uid) {
-        classesRef().child(classId)
-                .child("students")
-                .child(uid)
-                .setValue(true);
-
-        updateStudentCount(classId);
-    }
-
-    // ------------------------------------------------------------
-    // REMOVE STUDENT FROM CLASS
-    // ------------------------------------------------------------
-    public static void removeStudentFromClass(String classId, String uid) {
-        classesRef().child(classId)
-                .child("students")
-                .child(uid)
-                .removeValue();
-
-        updateStudentCount(classId);
-    }
-
-    // ------------------------------------------------------------
-    // UPDATE STUDENT COUNT
-    // ------------------------------------------------------------
+    // ================= UPDATE STUDENT COUNT =================
     public static void updateStudentCount(String classId) {
+
         classesRef().child(classId).child("students")
                 .addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
@@ -130,20 +93,20 @@ public class Classes_helper {
                                 .setValue(snapshot.getChildrenCount());
                     }
 
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError error) { }
+                    @Override public void onCancelled(@NonNull DatabaseError error) {}
                 });
     }
 
-    // ------------------------------------------------------------
-    // USER DETAILS FETCH
-    // ------------------------------------------------------------
+    // ================= USER DETAILS =================
     public static class Users_Helper {
 
         public static void getUserDetails(String uid, UserCallback cb) {
-            FirebaseDatabase.getInstance().getReference("Users")
+
+            FirebaseDatabase.getInstance()
+                    .getReference("Users")
                     .child(uid)
                     .addListenerForSingleValueEvent(new ValueEventListener() {
+
                         @Override
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
                             cb.onUserLoaded(
@@ -163,9 +126,7 @@ public class Classes_helper {
         }
     }
 
-    // ------------------------------------------------------------
-    // CALLBACK INTERFACES
-    // ------------------------------------------------------------
+    // ================= CALLBACKS =================
     public interface DatabaseCallback {
         void onSuccess();
         void onFailure(Exception e);

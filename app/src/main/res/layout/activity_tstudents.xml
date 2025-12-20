@@ -56,15 +56,26 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/toolbar" />
 
+        <!-- Tabs: All / Pending / Submit / Checked -->
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/tabLayoutStudents"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            app:tabMode="fixed"
+            app:tabGravity="fill"
+            app:layout_constraintTop_toBottomOf="@+id/searchViewStudents"
+            app:tabIndicatorFullWidth="false"/>
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvStudents"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:paddingTop="10sp"
-        app:layout_constraintTop_toBottomOf="@id/searchViewStudents"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/tabLayoutStudents" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 

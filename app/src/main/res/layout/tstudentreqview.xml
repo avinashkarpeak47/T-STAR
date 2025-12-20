@@ -43,8 +43,9 @@
             app:layout_constraintStart_toEndOf="@id/imgStudent"
             app:layout_constraintTop_toTopOf="parent" />
 
+
         <TextView
-            android:id="@+id/tvStudentID"
+            android:id="@+id/tvStudentEmail"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
@@ -55,13 +56,26 @@
             app:layout_constraintStart_toStartOf="@id/tvStudentName"
             app:layout_constraintTop_toBottomOf="@id/tvStudentName" />
 
+        <TextView
+            android:id="@+id/tvStudentID"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text=""
+            android:textColor="@color/black"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@id/tvStudentName"
+            app:layout_constraintStart_toEndOf="@+id/imgStudent"
+            app:layout_constraintTop_toBottomOf="@+id/tvStudentEmail" />
+
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btnRemove"
             android:layout_width="140dp"
             android:layout_height="41dp"
             android:layout_gravity="center"
             android:layout_marginStart="48dp"
-            android:layout_marginTop="32dp"
+            android:layout_marginTop="20dp"
             android:text="Remove"
             android:textColor="@color/white"
             app:layout_constraintStart_toStartOf="parent"
@@ -73,7 +87,7 @@
             android:layout_height="41dp"
             android:layout_gravity="center"
             android:layout_marginStart="212dp"
-            android:layout_marginTop="32dp"
+            android:layout_marginTop="20dp"
             android:text="Accept"
             android:textColor="@color/white"
             app:layout_constraintStart_toStartOf="parent"

@@ -151,9 +151,6 @@
             android:name=".TEACHERACTIVITIES.TAsssignmentActivity"
             android:exported="false" />
         <activity
-            android:name=".TEACHERACTIVITIES.TStudentRequestActivity"
-            android:exported="false" />
-        <activity
             android:name=".TEACHERACTIVITIES.TAssignDetailActivity"
             android:exported="false" />
         <activity

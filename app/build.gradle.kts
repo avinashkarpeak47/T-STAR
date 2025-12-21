@@ -61,7 +61,9 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
+    implementation ("com.cloudinary:cloudinary-android:2.5.0")
 
+    implementation ("de.hdodenhof:circleimageview:3.1.0")
     // ---------- ANDROID CORE ----------
     implementation("androidx.appcompat:appcompat:1.6.1")
     implementation("androidx.activity:activity:1.9.2")

@@ -3,7 +3,6 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
@@ -37,6 +36,7 @@
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
 
     <application
+        android:name=".MyApp"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
@@ -46,20 +46,18 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.TSTAR"
         tools:targetApi="31">
+
         <activity
             android:name=".STUDENTACTIVITIES.S_Assignment_Submit_Activity"
             android:exported="false" />
-        <activity
-            android:name=".TEACHERACTIVITIES.TAiAssistantActivity"
-            android:exported="false" />
-        <activity
-            android:name=".TEACHERACTIVITIES.TMainActivity"
-            android:exported="false"
-            android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
+
+
+
         <activity
             android:name=".TEACHERACTIVITIES.TMainActivity"
             android:exported="false"
             android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
+
         <activity
             android:name=".STUDENTACTIVITIES.S_class_dashboard_notifications"
             android:exported="false" />
@@ -93,27 +91,7 @@
         <activity
             android:name=".STUDENTACTIVITIES.S_Enroll_in_Class"
             android:exported="false" />
-        <activity
-            android:name=".TEACHERACTIVITIES.TClassesAssignActivity"
-            android:exported="false" />
-        <activity
-            android:name=".TEACHERACTIVITIES.TClassesAttendActivity"
-            android:exported="false" />
-        <activity
-            android:name=".TEACHERACTIVITIES.TClassesEventActivity"
-            android:exported="false" />
-        <activity
-            android:name=".TEACHERACTIVITIES.TClassesChatStudActivity"
-            android:exported="false" />
-        <activity
-            android:name=".TEACHERACTIVITIES.TClassesStudentsActivity"
-            android:exported="false" />
-        <activity
-            android:name=".TEACHERACTIVITIES.TClassesResourcesActivity"
-            android:exported="false" />
-        <activity
-            android:name=".TEACHERACTIVITIES.TClassesNotiActivity"
-            android:exported="false" />
+
         <activity
             android:name=".TEACHERACTIVITIES.TCreateClassActivity"
             android:exported="false" />
@@ -143,9 +121,7 @@
         <activity
             android:name=".TEACHERACTIVITIES.TAttendanceActivity"
             android:exported="false" />
-        <activity
-            android:name=".TEACHERACTIVITIES.TProfileActivity"
-            android:exported="false" />
+
         <activity
             android:name=".TEACHERACTIVITIES.TCreateNewAssignActivity"
             android:exported="false" />

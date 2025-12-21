@@ -4,6 +4,7 @@ import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -18,6 +19,7 @@ import com.example.t_star.R;
 import com.example.t_star.STUDENTACTIVITIES.Models.Assignment;
 import com.example.t_star.utils.FileUtils;
 import com.google.android.gms.auth.api.signin.*;
+import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.common.api.Scope;
 import com.google.android.material.appbar.MaterialToolbar;
 import com.google.firebase.auth.FirebaseAuth;
@@ -272,20 +274,44 @@ public class S_Assignment_Submit_Activity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
+        // FILE PICK
         if (requestCode == RC_PICK_FILE && resultCode == RESULT_OK && data != null) {
+
             selectedFileUri = data.getData();
 
-            getContentResolver().takePersistableUriPermission(selectedFileUri,Intent.FLAG_GRANT_READ_URI_PERMISSION);
+            try {
+                getContentResolver().takePersistableUriPermission(
+                        selectedFileUri,
+                        Intent.FLAG_GRANT_READ_URI_PERMISSION
+                );
+            } catch (Exception ignored) {}
 
             selectedFileName = FileUtils.getFileName(this, selectedFileUri);
             txtSubmittedFile.setText(selectedFileName);
             setFileIcon(selectedFileName);
         }
 
-        if (requestCode == RC_SIGN_IN && data != null) {
-            driveAccount =
-                    GoogleSignIn.getSignedInAccountFromIntent(data).getResult();
-            uploadToDrive();
+        // GOOGLE SIGN-IN RESULT (🔥 FIXED)
+        if (requestCode == RC_SIGN_IN) {
+
+            try {
+                driveAccount =
+                        GoogleSignIn
+                                .getSignedInAccountFromIntent(data)
+                                .getResult(ApiException.class);
+
+                uploadToDrive();
+
+            } catch (ApiException e) {
+
+                Toast.makeText(
+                        this,
+                        "Google sign-in failed. Please try again.",
+                        Toast.LENGTH_LONG
+                ).show();
+
+                Log.e("DRIVE_SIGN_IN", "Error code = " + e.getStatusCode());
+            }
         }
     }
 

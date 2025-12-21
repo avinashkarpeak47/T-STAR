@@ -19,6 +19,8 @@ public class AttendanceAdapter
     private ArrayList<Attendacemodel> studentList;
     private boolean isHoliday = false;
     private boolean isLocked = false;
+    private boolean showMonthly = true; // teacher screen
+
 
     public AttendanceAdapter(ArrayList<Attendacemodel> studentList) {
         this.studentList = studentList;
@@ -49,7 +51,6 @@ public class AttendanceAdapter
                 .inflate(R.layout.tattendanceview, parent, false);
         return new AttendanceViewHolder(view);
     }
-
     @Override
     public void onBindViewHolder(
             @NonNull AttendanceViewHolder holder, int position) {
@@ -58,6 +59,13 @@ public class AttendanceAdapter
 
         holder.tvRoll.setText(String.valueOf(student.rollNo));
         holder.tvName.setText(student.name);
+
+        // ✅ PERCENTAGE DISPLAY (SAFE, NO MIX)
+        if (showMonthly) {
+            holder.tvPercentage.setText(student.monthlyPercentage + "%");
+        } else {
+            holder.tvPercentage.setText(student.percentage + "%");
+        }
 
         holder.toggleAttendance.setOnCheckedChangeListener(null);
 
@@ -79,14 +87,16 @@ public class AttendanceAdapter
 
     static class AttendanceViewHolder extends RecyclerView.ViewHolder {
 
-        TextView tvRoll, tvName;
+        TextView tvRoll, tvName,tvPercentage;
         ToggleButton toggleAttendance;
 
         AttendanceViewHolder(@NonNull View itemView) {
             super(itemView);
             tvRoll = itemView.findViewById(R.id.tvRoll);
             tvName = itemView.findViewById(R.id.tvName);
+            tvPercentage = itemView.findViewById(R.id.tvPercentage);
             toggleAttendance = itemView.findViewById(R.id.toggleAttendance);
         }
     }
+
 }

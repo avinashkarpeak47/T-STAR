@@ -40,6 +40,8 @@ public class TAttendanceActivity extends AppCompatActivity {
     TextView tvclass, tvsubject, tvdate, tvSummary;
     CheckBox cbHoliday;
     AppCompatButton btnSave;
+
+
     String classId, subjectId, selectedDate;
     boolean isHoliday = false;
     boolean isDateLocked = false;
@@ -74,6 +76,7 @@ public class TAttendanceActivity extends AppCompatActivity {
 
         if (classId == null) classId = "class";
         if (subjectId == null) subjectId = "";
+        fetchClassAndSubject();
 
         tvclass.setText("Class: " + classId);
         tvsubject.setText("Subject:" + subjectId);
@@ -403,10 +406,12 @@ public class TAttendanceActivity extends AppCompatActivity {
                     }
 
                     if (workingDays > 0) {
-                        s.percentage = (presentDays * 100) / workingDays;
-                    } else {
-                        s.percentage = 0;
+                        s.monthlyPercentage = (presentDays * 100) / workingDays;
+
+                    }else {
+                        s.monthlyPercentage = 0;
                     }
+
                 }
 
                 adapter.notifyDataSetChanged();
@@ -414,6 +419,39 @@ public class TAttendanceActivity extends AppCompatActivity {
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {}
+        });
+    }
+
+    private void fetchClassAndSubject() {
+
+        if (classId == null) return;
+
+        DatabaseReference ref = FirebaseDatabase.getInstance()
+                .getReference("Classes")
+                .child(classId);
+
+        ref.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+
+                if (!snapshot.exists()) return;
+
+                String className = snapshot.child("className").getValue(String.class);
+                String subject   = snapshot.child("subject").getValue(String.class);
+
+                tvclass.setText("Class: " + (className != null ? className : "-"));
+                tvsubject.setText("Subject: " + (subject != null ? subject : "-"));
+
+                // 🔥 VERY IMPORTANT
+                subjectId = subject;
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Toast.makeText(TAttendanceActivity.this,
+                        "Failed to load class data",
+                        Toast.LENGTH_SHORT).show();
+            }
         });
     }
 

@@ -16,39 +16,35 @@ public class Assignment_Helper {
     private static final String TAG = "ASSIGNMENT_HELPER";
 
     // ---------------------------------------------------------------------
-    // GET SUBMITTED STUDENT LIST FOR ONE ASSIGNMENT
-    // Path:
-    // AssignmentSubmissions
+    // GET SUBMITTED STUDENT UID LIST (FINAL PATH)
+    //
+    // Assignments
     //   └── classId
     //        └── assignmentId
-    //              └── studentUid : true
+    //              └── submissions
+    //                    └── studentUid
     // ---------------------------------------------------------------------
     public static void getAssignmentStudentStatus(
             String classId,
             String assignmentId,
             AssignmentStatusCallback cb) {
 
-        // 🔴 SAFETY CHECK (VERY IMPORTANT)
+        // ✅ SAFETY CHECK
         if (classId == null || assignmentId == null) {
-            Log.e(TAG,
-                    "❌ Null detected → " +
-                            "classId=" + classId +
-                            ", assignmentId=" + assignmentId);
-
-            // Return empty list instead of crashing
+            Log.e(TAG, "❌ Null detected → classId=" + classId
+                    + ", assignmentId=" + assignmentId);
             cb.onLoaded(new ArrayList<>());
             return;
         }
 
-        Log.d(TAG,
-                "✅ Fetching submission list → " +
-                        "classId=" + classId +
-                        ", assignmentId=" + assignmentId);
+        Log.d(TAG, "✅ Fetching submissions → classId="
+                + classId + ", assignmentId=" + assignmentId);
 
         FirebaseDatabase.getInstance()
-                .getReference("AssignmentSubmissions")
+                .getReference("Assignments")
                 .child(classId)
                 .child(assignmentId)
+                .child("submissions")
                 .addListenerForSingleValueEvent(new ValueEventListener() {
 
                     @Override
@@ -66,8 +62,7 @@ public class Assignment_Helper {
                         }
 
                         Log.d(TAG,
-                                "📌 Students submitted count = " +
-                                        submittedList.size());
+                                "📌 Submitted students = " + submittedList.size());
 
                         cb.onLoaded(submittedList);
                     }
@@ -75,16 +70,14 @@ public class Assignment_Helper {
                     @Override
                     public void onCancelled(@NonNull DatabaseError error) {
                         Log.e(TAG,
-                                "❌ Firebase error: " +
-                                        error.getMessage());
-
+                                "❌ Firebase error: " + error.getMessage());
                         cb.onLoaded(new ArrayList<>());
                     }
                 });
     }
 
     // ---------------------------------------------------------------------
-    // CALLBACK INTERFACE
+    // CALLBACK
     // ---------------------------------------------------------------------
     public interface AssignmentStatusCallback {
         void onLoaded(ArrayList<String> submittedList);

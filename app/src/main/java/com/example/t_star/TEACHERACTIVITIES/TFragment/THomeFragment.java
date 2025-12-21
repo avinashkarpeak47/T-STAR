@@ -2,9 +2,12 @@ package com.example.t_star.TEACHERACTIVITIES.TFragment;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -18,6 +21,11 @@ import com.example.t_star.R;
 import com.example.t_star.TEACHERACTIVITIES.*;
 import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.navigation.NavigationView;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import androidx.gridlayout.widget.GridLayout;
 
@@ -35,6 +43,8 @@ public class THomeFragment extends Fragment {
 
     MaterialToolbar toolbar;
     NavigationView navigationView;
+    TextView tvClassID, tvClassName, tvSubject, tvTeacher;
+
     SearchView searchView;
 
     GridLayout gridLayout;
@@ -91,6 +101,11 @@ public class THomeFragment extends Fragment {
         cardStudents         = view.findViewById(R.id.cardStudents);
         cardResources        = view.findViewById(R.id.cardResources);
         cardNotifications    = view.findViewById(R.id.cardNotifications);
+        tvClassID   = view.findViewById(R.id.tvClassID);
+        tvClassName = view.findViewById(R.id.tvClassName);
+        tvSubject   = view.findViewById(R.id.tvSubject);
+        tvTeacher   = view.findViewById(R.id.tvTeacher);
+
 
 
         // 🔥 MAP WITH KEYWORDS
@@ -106,9 +121,79 @@ public class THomeFragment extends Fragment {
         originalOrder.addAll(cardMap.keySet());
 
         setupSearch();
+        fetchClassDetails();
 
         return view;
     }
+
+    private void fetchClassDetails() {
+
+        if (classId == null) return;
+
+        DatabaseReference ref =
+                FirebaseDatabase.getInstance()
+                        .getReference("Classes")
+                        .child(classId);
+
+        ref.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+
+                Log.d("CLASS_DATA", snapshot.getValue().toString());
+
+
+                if (!snapshot.exists()) return;
+
+                String id      = snapshot.child("classId").getValue(String.class);
+                String name    = snapshot.child("className").getValue(String.class);
+                String subject = snapshot.child("subject").getValue(String.class);
+
+                tvClassID.setText(id != null ? id : "-");
+                tvClassName.setText(name != null ? name : "-");
+                tvSubject.setText(subject != null ? subject : "-");
+                String teacherId = snapshot.child("teacherId").getValue(String.class);
+
+                if (teacherId != null) {
+                    FirebaseDatabase.getInstance()
+                            .getReference("Users")
+                            .child(teacherId)
+                            .addListenerForSingleValueEvent(new ValueEventListener() {
+                                @Override
+                                public void onDataChange(@NonNull DataSnapshot snap) {
+
+                                    String firstName = snap.child("firstname").getValue(String.class);
+                                    String lastName  = snap.child("lastname").getValue(String.class);
+
+                                    String fullName = "";
+
+                                    if (firstName != null) fullName += firstName;
+                                    if (lastName != null) fullName += " " + lastName;
+
+                                    tvTeacher.setText(
+                                            fullName.trim().isEmpty() ? "-" : fullName
+                                    );
+                                }
+
+                                @Override
+                                public void onCancelled(@NonNull DatabaseError error) {
+                                    tvTeacher.setText("-");
+                                }
+                            });
+                } else {
+                    tvTeacher.setText("-");
+                }
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Toast.makeText(getContext(),
+                        "Failed to load class data",
+                        Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {

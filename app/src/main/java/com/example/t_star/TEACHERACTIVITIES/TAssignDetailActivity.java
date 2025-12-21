@@ -16,6 +16,7 @@ import com.example.t_star.REAL_TIME_DATABASE.PUT_ON_DATABASE.HelperClasses.Assig
 import com.example.t_star.REAL_TIME_DATABASE.PUT_ON_DATABASE.HelperClasses.Classes_helper;
 import com.example.t_star.TEACHERACTIVITIES.ASSIGNMENTS.STUSTATUS.TAssignStudentStatusAdapter;
 import com.example.t_star.TEACHERACTIVITIES.ASSIGNMENTS.STUSTATUS.TAssignStudentStatusModel;
+import com.example.t_star.TEACHERACTIVITIES.CLASSES.SubmissionModel;
 import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.textfield.TextInputEditText;
 
@@ -80,6 +81,7 @@ public class TAssignDetailActivity extends AppCompatActivity {
         tvSubmitted.setText("Submitted: " + submitted);
         tvUnsubmitted.setText("Unsubmitted: " + (total - submitted));
 
+
         // Show attachment list
         if (attachmentUrls != null && !attachmentUrls.isEmpty()) {
             attachmentContainer.removeAllViews();
@@ -118,33 +120,39 @@ public class TAssignDetailActivity extends AppCompatActivity {
 
         Classes_helper.getClassStudents(classId, studentUids -> {
 
-            if (studentUids == null || studentUids.isEmpty()) {
-                Toast.makeText(this, "No Students Found!", Toast.LENGTH_SHORT).show();
-                return;
-            }
+            Assignment_Helper.getAssignmentStudentStatus(
+                    classId,
+                    assignmentId,
+                    submittedUids -> {
 
-            Assignment_Helper.getAssignmentStudentStatus(classId, assignmentId, submittedUids -> {
+                        statusList.clear();
 
-                statusList.clear();
+                        for (String uid : studentUids) {
 
-                for (String uid : studentUids) {
+                            Classes_helper.Users_Helper.getUserDetails(uid, user -> {
 
-                    Classes_helper.Users_Helper.getUserDetails(uid, user -> {
+                                if (user == null) return;
+                                String driveUrl=null;
+                                boolean isSubmitted =
+                                        submittedUids.contains(uid);
 
-                        if (user == null) return;
+                                statusList.add(
+                                        new TAssignStudentStatusModel(
+                                                uid,
+                                                user.firstname + " " + user.lastname,
+                                                isSubmitted,
+                                                driveUrl
+                                        )
+                                );
 
-                        boolean isSubmitted = submittedUids.contains(uid);
+                                adapter.notifyDataSetChanged();
+                            });
+                        }
+                    }
+            );
 
-                        statusList.add(new TAssignStudentStatusModel(
-                                uid,
-                                user.firstname + " " + user.lastname,
-                                isSubmitted
-                        ));
 
-                        adapter.notifyDataSetChanged();
-                    });
-                }
-            });
         });
     }
 }
+

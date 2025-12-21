@@ -2,6 +2,7 @@ package com.example.t_star.TEACHERACTIVITIES.TMainFragment;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -34,6 +35,8 @@ public class TProfileFragment extends Fragment {
     private EditText etFullName, etEmail, etMobile;
     private TextView tvHeaderTeacherId;
     private Button btnEditProfile;
+
+    private String profileImageUrl;   // 🔥 long click साठी
 
     private LinearLayout rowChangePassword, rowSettings, rowLogout, rowDeleteAccount;
 
@@ -90,6 +93,21 @@ public class TProfileFragment extends Fragment {
             }
         });
 
+        ivProfilePic.setOnLongClickListener(v -> {
+
+            if (profileImageUrl != null && !profileImageUrl.isEmpty()) {
+                showFullImageDialog(profileImageUrl);
+            } else {
+                Toast.makeText(getContext(),
+                        "Profile image not available",
+                        Toast.LENGTH_SHORT).show();
+            }
+
+            return true;
+        });
+
+
+
         // ---------- KEYBOARD FIX (KEEP BOTTOM NAV VISIBLE) ----------
         view.getViewTreeObserver().addOnGlobalLayoutListener(() -> {
 
@@ -108,6 +126,26 @@ public class TProfileFragment extends Fragment {
 
         return view;
     }
+
+    private void showFullImageDialog(String imageUrl) {
+
+        Dialog dialog = new Dialog(requireContext(),
+                android.R.style.Theme_Black_NoTitleBar_Fullscreen);
+
+        dialog.setContentView(R.layout.dialog_full_image);
+
+        ImageView ivFull = dialog.findViewById(R.id.ivFullImage);
+
+        Glide.with(requireContext())
+                .load(imageUrl)
+                .into(ivFull);
+
+        // tap anywhere to close
+        ivFull.setOnClickListener(v -> dialog.dismiss());
+
+        dialog.show();
+    }
+
 
     // ---------------- ENABLE / DISABLE ----------------
     private void setEditingEnabled(boolean enabled) {
@@ -129,11 +167,27 @@ public class TProfileFragment extends Fragment {
 
                 tvHeaderTeacherId.setText("Teacher ID: " + uid.substring(0, 28));
 
+                profileImageUrl = user.profileImageUrl;   // 🔥 ADD THIS
+
                 if (user.profileImageUrl != null && !user.profileImageUrl.isEmpty()) {
                     Glide.with(requireContext())
                             .load(user.profileImageUrl)
                             .placeholder(R.drawable.baseline_person_24)
+                            .error(R.drawable.baseline_person_24)
+                            .centerCrop()
+                            .circleCrop()
                             .into(ivProfilePic);
+                }
+
+                if (user.profileImageUrl != null && !user.profileImageUrl.isEmpty()) {
+                    Glide.with(requireContext())
+                            .load(user.profileImageUrl)
+                            .placeholder(R.drawable.baseline_person_24)
+                            .error(R.drawable.baseline_person_24)
+                            .centerCrop()
+                            .circleCrop()
+                            .into(ivProfilePic);
+
                 } else {
                     ivProfilePic.setImageResource(R.drawable.baseline_person_24);
                 }
@@ -180,6 +234,7 @@ public class TProfileFragment extends Fragment {
 
                         Map<String, Object> map = new HashMap<>();
                         map.put("profileImageUrl", downloadUrl);
+
 
                         User_Data_Fetcher.updateUserFields(uid, map,
                                 new User_Data_Fetcher.SimpleCallback() {
@@ -266,12 +321,23 @@ public class TProfileFragment extends Fragment {
         });
 
         rowLogout.setOnClickListener(v -> {
-            FirebaseAuth.getInstance().signOut();
-            Intent i = new Intent(requireContext(), TSTAR_Login_Activity.class);
-            i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-            startActivity(i);
-            requireActivity().finish();
+            new AlertDialog.Builder(requireContext())
+                    .setTitle("Logout")
+                    .setMessage("Are you really sure you want to logout?")
+                    .setCancelable(false)
+                    .setPositiveButton("Yes", (dialog, which) -> {
+
+                        FirebaseAuth.getInstance().signOut();
+
+                        Intent i = new Intent(requireContext(), TSTAR_Login_Activity.class);
+                        i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                        startActivity(i);
+                        requireActivity().finish();
+                    })
+                    .setNegativeButton("No", (dialog, which) -> dialog.dismiss())
+                    .show();
         });
+
 
         rowDeleteAccount.setOnClickListener(v -> {
             new AlertDialog.Builder(requireContext())

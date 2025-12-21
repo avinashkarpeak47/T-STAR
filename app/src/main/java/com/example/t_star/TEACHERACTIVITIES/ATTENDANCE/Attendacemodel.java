@@ -7,7 +7,7 @@ public class Attendacemodel {
     public String name;
     public String status;   // present / absent / leave
     public int percentage;
-
+    public int monthlyPercentage;   // ⭐ NEW – Teacher/Student same logic
     public Attendacemodel() {}
 
     public Attendacemodel(int rollNo, String studentId, String name) {

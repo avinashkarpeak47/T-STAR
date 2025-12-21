@@ -18,6 +18,7 @@
         android:layout_height="55dp"
         app:title="Welcome"
         app:titleTextColor="@color/white"
+        app:navigationIcon="@drawable/arrow_back"
         android:background="@color/Lavender"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"

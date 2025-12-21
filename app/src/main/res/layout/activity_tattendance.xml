@@ -1,17 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main"
-    android:layout_width="match_parent"
+<androidx.constraintlayout.widget.ConstraintLayout android:layout_width="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    android:background="@color/white"
-    tools:context=".TEACHERACTIVITIES.TAttendanceActivity">
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
+<LinearLayout
+    android:orientation="vertical"
+    android:background="#ffffff"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!-- ================= TOOLBAR ================= -->
     <com.google.android.material.appbar.MaterialToolbar
         android:id="@+id/toolbar"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="52dp"
         android:background="@drawable/header_gradient"
         app:navigationIcon="@drawable/arrow_back"
@@ -19,18 +22,73 @@
         app:titleTextColor="@color/white"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
+        app:layout_constraintEnd_toEndOf="parent"/>
 
-<!--        <ImageButton-->
-<!--            android:id="@+id/btnCreate"-->
-<!--            android:layout_width="50dp"-->
-<!--            android:layout_height="50dp"-->
-<!--            android:scaleType="centerInside"-->
-<!--            android:layout_gravity="end|center_vertical"-->
-<!--            android:background="@android:color/transparent"-->
-<!--            android:src="@drawable/tnewassign"-->
-<!--            app:tint="@color/white"-->
-<!--            android:padding="8dp"/>-->
-    </com.google.android.material.appbar.MaterialToolbar>
+    <!-- INFO -->
+    <TextView
+        android:id="@+id/tvclass"
+        android:text="Class: "
+        android:padding="12dp"
+        android:textStyle="bold"
+        android:layout_margin="8dp"
+        android:textSize="16dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
 
+    <TextView
+        android:id="@+id/tvsubject"
+       android:text="Subject: "
+        android:padding="12dp"
+        android:textStyle="bold"
+        android:layout_margin="8dp"
+        android:textSize="16dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <!-- INFO -->
+    <TextView
+        android:id="@+id/tvdate"
+        android:text="Date:"
+        android:layout_margin="8dp"
+        android:padding="12dp"
+        android:textStyle="bold"
+        android:textSize="16dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+    <!-- HOLIDAY -->
+    <CheckBox
+        android:id="@+id/cbHoliday"
+        android:text="Mark this day as Holiday"
+        android:layout_margin="8dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <!-- LIST -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvAttendance"
+        android:layout_width="match_parent"
+        android:layout_margin="8dp"
+        android:layout_height="0dp"
+        android:layout_weight="1"/>
+
+    <!-- SUMMARY -->
+    <TextView
+        android:id="@+id/tvSummary"
+        android:text="Total Present: 0              Absent: 0"
+        android:textStyle="bold"
+        android:padding="12dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <!-- SAVE -->
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnSave"
+        android:text="Save Attendance"
+        android:textColor="#FFFFFF"
+        android:background="@drawable/s_btn_bg_shape"
+        android:layout_margin="12dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+</LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

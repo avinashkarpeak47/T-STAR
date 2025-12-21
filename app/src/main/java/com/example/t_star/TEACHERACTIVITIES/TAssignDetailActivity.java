@@ -17,12 +17,13 @@ import com.example.t_star.REAL_TIME_DATABASE.PUT_ON_DATABASE.HelperClasses.Class
 import com.example.t_star.TEACHERACTIVITIES.ASSIGNMENTS.STUSTATUS.TAssignStudentStatusAdapter;
 import com.example.t_star.TEACHERACTIVITIES.ASSIGNMENTS.STUSTATUS.TAssignStudentStatusModel;
 import com.google.android.material.appbar.MaterialToolbar;
+import com.google.android.material.textfield.TextInputEditText;
 
 import java.util.ArrayList;
 
 public class TAssignDetailActivity extends AppCompatActivity {
 
-    private TextView tvTitleDetail, tvDescDetail, tvDueDateDetail;
+    private TextInputEditText tvTitleDetail, tvDescDetail, tvDueDateDetail;
     private TextView tvAttachmentName, tvTotalStudents, tvSubmitted, tvUnsubmitted;
 
     private RecyclerView rvStudentStatus;

@@ -31,7 +31,6 @@ public class TMainActivity extends AppCompatActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this);
         setContentView(R.layout.activity_tmain);
 
         // ================= FIND VIEWS =================
@@ -86,7 +85,7 @@ public class TMainActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_editprofile) {
-            startActivity(new Intent(this, TProfileActivity.class));
+           loadFragment(new TProfileFragment());
         }
         else if (id == R.id.nav_logout) {
 

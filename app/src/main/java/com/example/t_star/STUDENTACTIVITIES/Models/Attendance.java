@@ -2,35 +2,23 @@ package com.example.t_star.STUDENTACTIVITIES.Models;
 
 public class Attendance {
 
-    public static final String STATUS_PRESENT = "PRESENT";
-    public static final String STATUS_ABSENT = "ABSENT";
-    public static final String STATUS_LEAVE = "LEAVE";
+    public static final String STATUS_PRESENT = "present";
+    public static final String STATUS_ABSENT = "absent";
+    public static final String STATUS_LEAVE = "leave";
 
-    private String studentName;
-    private String rollNo;
-    private String date;      // e.g. "12 Dec 2025"
-    private String subject;   // e.g. "Java"
-    private String status;    // PRESENT / ABSENT / LEAVE
+    private String date;        // e.g. 09 Dec 2025
+    private String subject;     // e.g. Java
+    private String status;      // present / absent / leave
+    private long timestamp;     // for sorting (optional)
 
-    public Attendance() {
-        // empty constructor needed for Firebase
-    }
+    // Required empty constructor for Firebase
+    public Attendance() {}
 
-    public Attendance(String studentName, String rollNo,
-                      String date, String subject, String status) {
-        this.studentName = studentName;
-        this.rollNo = rollNo;
+    public Attendance(String date, String subject, String status, long timestamp) {
         this.date = date;
         this.subject = subject;
         this.status = status;
-    }
-
-    public String getStudentName() {
-        return studentName;
-    }
-
-    public String getRollNo() {
-        return rollNo;
+        this.timestamp = timestamp;
     }
 
     public String getDate() {
@@ -45,23 +33,7 @@ public class Attendance {
         return status;
     }
 
-    public void setStudentName(String studentName) {
-        this.studentName = studentName;
-    }
-
-    public void setRollNo(String rollNo) {
-        this.rollNo = rollNo;
-    }
-
-    public void setDate(String date) {
-        this.date = date;
-    }
-
-    public void setSubject(String subject) {
-        this.subject = subject;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
+    public long getTimestamp() {
+        return timestamp;
     }
 }

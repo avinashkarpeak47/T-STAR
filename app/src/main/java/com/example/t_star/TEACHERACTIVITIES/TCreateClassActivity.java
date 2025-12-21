@@ -19,7 +19,7 @@ import com.google.firebase.database.FirebaseDatabase;
 
 public class TCreateClassActivity extends AppCompatActivity {
 
-    private TextInputEditText edtClassName, edtDescription, edtTeacherName, edtClassId;
+    private TextInputEditText edtClassName, edtSubject, edtClassId;
     private Button btnSend;
     private TextView txtCheck;
 
@@ -34,16 +34,17 @@ public class TCreateClassActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         toolbar.setNavigationOnClickListener(v -> finish());
 
+        // 🔹 Bind views
         edtClassName = findViewById(R.id.showClassName);
-        edtDescription = findViewById(R.id.showDescription);
-        edtTeacherName = findViewById(R.id.showTeacherName);
-        edtClassId = findViewById(R.id.edtClassId);
-        btnSend = findViewById(R.id.btnSend);
-        txtCheck = findViewById(R.id.txtCheck);
+        edtSubject   = findViewById(R.id.showTeacherName); // SUBJECT
+        edtClassId   = findViewById(R.id.edtClassId);
+        btnSend      = findViewById(R.id.btnSend);
+        txtCheck     = findViewById(R.id.txtCheck);
 
         txtCheck.setVisibility(TextView.GONE);
         btnSend.setEnabled(false);
 
+        // 🔹 Check Class ID availability
         edtClassId.addTextChangedListener(new TextWatcher() {
             @Override public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
             @Override public void afterTextChanged(Editable s) {}
@@ -57,6 +58,9 @@ public class TCreateClassActivity extends AppCompatActivity {
         btnSend.setOnClickListener(v -> createClassInDatabase());
     }
 
+    // --------------------------------------------------
+    // CHECK CLASS ID
+    // --------------------------------------------------
     private void checkClassIdAvailability(String classId) {
 
         if (classId.isEmpty()) {
@@ -67,7 +71,8 @@ public class TCreateClassActivity extends AppCompatActivity {
             return;
         }
 
-        FirebaseDatabase.getInstance().getReference("Classes")
+        FirebaseDatabase.getInstance()
+                .getReference("Classes")
                 .child(classId)
                 .get()
                 .addOnSuccessListener(snapshot -> {
@@ -87,16 +92,17 @@ public class TCreateClassActivity extends AppCompatActivity {
                 });
     }
 
+    // --------------------------------------------------
+    // CREATE CLASS
+    // --------------------------------------------------
     private void createClassInDatabase() {
 
         String className = edtClassName.getText().toString().trim();
-        String description = edtDescription.getText().toString().trim();
-        String teacherName = edtTeacherName.getText().toString().trim();
-        String classId = edtClassId.getText().toString().trim();
+        String subject   = edtSubject.getText().toString().trim();
+        String classId   = edtClassId.getText().toString().trim();
 
         String teacherId = FirebaseAuth.getInstance().getUid();
 
-        // 🔥 IMPORTANT FIX
         if (teacherId == null) {
             Toast.makeText(this, "User not logged in!", Toast.LENGTH_SHORT).show();
             return;
@@ -107,19 +113,18 @@ public class TCreateClassActivity extends AppCompatActivity {
             return;
         }
 
-        if (className.isEmpty() || teacherName.isEmpty()) {
-            Toast.makeText(this, "Please enter all required fields", Toast.LENGTH_SHORT).show();
+        if (className.isEmpty() || subject.isEmpty()) {
+            Toast.makeText(this, "Please fill all fields", Toast.LENGTH_SHORT).show();
             return;
         }
 
-        TClassesModel model = new TClassesModel(
-                className,
-                classId,
-                description,
-                teacherId,
-                teacherName,
-                0
-        );
+        // 🔥 Model updated usage
+        TClassesModel model = new TClassesModel();
+        model.setClassName(className);
+        model.setClassId(classId);
+        model.setTeacherId(teacherId);
+        model.setSubject(subject);      // ✅ SUBJECT
+        model.setStudentsCount(0);
 
         Classes_helper.createClass(model, new Classes_helper.DatabaseCallback() {
             @Override

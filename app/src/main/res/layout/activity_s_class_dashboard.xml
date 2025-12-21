@@ -2,7 +2,8 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/white">
 
     <!-- Toolbar -->
 
@@ -19,8 +20,7 @@
         app:navigationIcon="@drawable/s_arrowback"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:menu="@menu/s_class_dashboard_delete_menu"/>
+        app:layout_constraintEnd_toEndOf="parent" />
 
 
     <!-- Scrollable page -->
@@ -44,8 +44,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:cardElevation="8dp"
-                app:cardCornerRadius="16dp"
-                android:layout_marginBottom="20dp">
+                app:cardCornerRadius="20dp"
+                android:layout_marginBottom="20dp"
+                android:layout_marginTop="18dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -66,6 +67,7 @@
                         <TextView
                             android:text="Class ID:"
                             android:textStyle="bold"
+                            android:textColor="@color/black"
                             android:textSize="16sp"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
@@ -73,7 +75,8 @@
 
                         <TextView
                             android:id="@+id/tvClassID"
-                            android:text="123456"
+                            android:text=""
+                            android:textColor="@color/dark_greay"
                             android:textSize="16sp"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"/>
@@ -91,13 +94,15 @@
                             android:text="Class Name:"
                             android:textStyle="bold"
                             android:textSize="16sp"
+                            android:textColor="@color/black"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"/>
 
                         <TextView
                             android:id="@+id/tvClassName"
-                            android:text="Physics Batch A"
+                            android:text=""
+                            android:textColor="@color/dark_greay"
                             android:textSize="16sp"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"/>
@@ -115,13 +120,15 @@
                             android:text="Subject:"
                             android:textStyle="bold"
                             android:textSize="16sp"
+                            android:textColor="@color/black"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"/>
 
                         <TextView
                             android:id="@+id/tvSubject"
-                            android:text="Physics"
+                            android:text=""
+                            android:textColor="@color/dark_greay"
                             android:textSize="16sp"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"/>
@@ -138,13 +145,15 @@
                             android:text="Teacher:"
                             android:textStyle="bold"
                             android:textSize="16sp"
+                            android:textColor="@color/black"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"/>
 
                         <TextView
                             android:id="@+id/tvTeacher"
-                            android:text="Dr. Sharma"
+                            android:text=""
+                            android:textColor="@color/dark_greay"
                             android:textSize="16sp"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"/>
@@ -171,7 +180,7 @@
                 android:layout_height="wrap_content"
                 android:columnCount="3"
                 android:rowCount="3"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="22dp"
                 android:alignmentMode="alignMargins"
                 android:rowOrderPreserved="false">
 
@@ -199,7 +208,7 @@
                         <ImageView
                             android:layout_width="48dp"
                             android:layout_height="48dp"
-                            android:src="@drawable/s_attendance"/>
+                            android:src="@drawable/s_attendance" />
 
                         <TextView
                             android:text="Attendance"

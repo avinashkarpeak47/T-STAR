@@ -2,17 +2,12 @@ package com.example.t_star;
 
 
 import android.content.Intent;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.text.method.HideReturnsTransformationMethod;
-import android.text.method.PasswordTransformationMethod;
-import android.view.MotionEvent;
 import android.view.View;
 import android.widget.*;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.ContextCompat;
 
 import java.util.Locale;
 
@@ -80,7 +75,6 @@ public class TSTAR_Signup_Activity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-        setPasswordToggle(etPassword);
     }
 
     /**
@@ -135,61 +129,6 @@ public class TSTAR_Signup_Activity extends AppCompatActivity {
 
         startActivity(otpIntent);
     }
-
-    private void setPasswordToggle(EditText passwordField) {
-
-        Drawable eyeOpen = ContextCompat.getDrawable(this, R.drawable.baseline_visibility_24);
-        Drawable eyeClosed = ContextCompat.getDrawable(this, R.drawable.baseline_visibility_off_24);
-
-        // Set drawable bounds
-        if (eyeOpen != null)
-            eyeOpen.setBounds(0, 0, eyeOpen.getIntrinsicWidth(), eyeOpen.getIntrinsicHeight());
-
-        if (eyeClosed != null)
-            eyeClosed.setBounds(0, 0, eyeClosed.getIntrinsicWidth(), eyeClosed.getIntrinsicHeight());
-
-        // Initial state: password hidden
-        passwordField.setTransformationMethod(PasswordTransformationMethod.getInstance());
-        passwordField.setCompoundDrawables(null, null, eyeClosed, null);
-
-        passwordField.setOnTouchListener((v, event) -> {
-            if (event.getAction() == MotionEvent.ACTION_UP) {
-
-                Drawable endDrawable = passwordField.getCompoundDrawables()[2];
-                if (endDrawable == null) return false;
-
-                int drawableWidth = endDrawable.getBounds().width();
-
-                if (event.getX() >= (passwordField.getWidth()
-                        - passwordField.getPaddingRight()
-                        - drawableWidth)) {
-
-                    boolean isVisible =
-                            !(passwordField.getTransformationMethod()
-                                    instanceof PasswordTransformationMethod);
-
-                    if (isVisible) {
-                        // Hide password
-                        passwordField.setTransformationMethod(
-                                PasswordTransformationMethod.getInstance());
-                        passwordField.setCompoundDrawables(null, null, eyeClosed, null);
-                    } else {
-                        // Show password
-                        passwordField.setTransformationMethod(
-                                HideReturnsTransformationMethod.getInstance());
-                        passwordField.setCompoundDrawables(null, null, eyeOpen, null);
-                    }
-
-                    // Keep cursor at end
-                    passwordField.setSelection(passwordField.getText().length());
-                    return true;
-                }
-            }
-            return false;
-        });
-    }
-
-
 }
 
 

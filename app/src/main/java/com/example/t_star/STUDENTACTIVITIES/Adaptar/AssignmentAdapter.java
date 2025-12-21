@@ -1,114 +1,147 @@
 package com.example.t_star.STUDENTACTIVITIES.Adaptar;
 
-
-
 import android.content.Context;
+import android.content.Intent;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.cardview.widget.CardView;
-import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.t_star.R;
 import com.example.t_star.STUDENTACTIVITIES.Models.Assignment;
+import com.example.t_star.STUDENTACTIVITIES.S_Assignment_Submit_Activity;
 
-import java.util.ArrayList;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
+public class AssignmentAdapter
+        extends RecyclerView.Adapter<AssignmentAdapter.ViewHolder> {
 
+    private final Context context;
+    private List<Assignment> list;
+    private final String classId;
 
-public class AssignmentAdapter extends RecyclerView.Adapter<AssignmentAdapter.AssignmentViewHolder> {
-
-    private Context context;
-    private List<Assignment> assignmentList = new ArrayList<>();
-
-    public AssignmentAdapter(Context context, List<Assignment> assignmentList) {
+    public AssignmentAdapter(Context context,
+                             List<Assignment> assignmentList,
+                             String classId) {
         this.context = context;
-        this.assignmentList = assignmentList;
+        this.list = assignmentList;
+        this.classId = classId;
     }
 
     public void updateList(List<Assignment> newList) {
-        this.assignmentList = newList;
+        this.list = newList;
         notifyDataSetChanged();
     }
 
     @NonNull
     @Override
-    public AssignmentViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(context).inflate(R.layout.item_assignment, parent, false);
-        return new AssignmentViewHolder(view);
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent,
+                                         int viewType) {
+        View view = LayoutInflater.from(context)
+                .inflate(R.layout.s_item_assignment, parent, false);
+        return new ViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull AssignmentViewHolder holder, int position) {
-        Assignment assignment = assignmentList.get(position);
+    public void onBindViewHolder(@NonNull ViewHolder holder,
+                                 int position) {
 
-        holder.tvTitle.setText(assignment.getTitle());
-        holder.tvDescription.setText(assignment.getDescription());
-        holder.tvExtra.setText(assignment.getExtraInfo());
+        Assignment a = list.get(position);
 
-        String status = assignment.getStatus();
-        holder.tvStatusText.setText(statusText(status));
-        setStatusColor(holder.viewStatus, status);
+        holder.tvTitle.setText(a.getTitle());
+        holder.tvSubject.setText(a.getSubject());
+
+        // ---- Due date formatting ----
+        holder.tvDueDate.setText(
+                "Due: " + formatDate(a.getDueDateMillis())
+        );
+
+        holder.tvMarks.setVisibility(View.GONE);
+
+        // ---- DERIVE STATUS SAFELY ----
+        String status = a.getStatus();
+        if (status == null) {
+            status = Assignment.STATUS_PENDING;
+        }
+
+        // ---- STATUS UI ----
+        switch (status) {
+
+            case Assignment.STATUS_PENDING:
+                holder.tvStatus.setText("Pending");
+                holder.tvStatus.setTextColor(Color.parseColor("#F57C00"));
+                break;
+
+            case Assignment.STATUS_SUBMITTED:
+                holder.tvStatus.setText("Submitted");
+                holder.tvStatus.setTextColor(Color.parseColor("#1976D2"));
+                break;
+
+            case Assignment.STATUS_EVALUATED:
+                holder.tvStatus.setText("Evaluated");
+                holder.tvStatus.setTextColor(Color.parseColor("#388E3C"));
+
+                holder.tvMarks.setVisibility(View.VISIBLE);
+                holder.tvMarks.setText(
+                        "Marks: " + a.getMarksObtained()
+                                + " / " + a.getTotalMarks()
+                );
+                break;
+        }
+
+        // ---- CLICK BEHAVIOR ----
+        holder.itemView.setOnClickListener(v -> {
+
+            int pos = holder.getAdapterPosition();
+            if (pos == RecyclerView.NO_POSITION) return;
+
+            Assignment clicked = list.get(pos);
+
+            Intent intent =
+                    new Intent(context,
+                            S_Assignment_Submit_Activity.class);
+
+            intent.putExtra("classId", classId);
+            intent.putExtra("assignmentId",
+                    clicked.getAssignmentId());
+
+            context.startActivity(intent);
+        });
     }
 
     @Override
     public int getItemCount() {
-        return assignmentList == null ? 0 : assignmentList.size();
+        return list == null ? 0 : list.size();
     }
 
-    private String statusText(String status) {
-        switch (status) {
-            case Assignment.STATUS_PENDING:
-                return "Pending";
-            case Assignment.STATUS_SUBMITTED:
-                return "Submitted";
-            case Assignment.STATUS_CHECKED:
-                return "Checked";
-            default:
-                return "";
-        }
-    }
+    static class ViewHolder extends RecyclerView.ViewHolder {
 
-    private void setStatusColor(View viewStatus, String status) {
-        int colorRes;
-        switch (status) {
-            case Assignment.STATUS_PENDING:
-                colorRes = R.color.status_pending;
-                break;
-            case Assignment.STATUS_SUBMITTED:
-                colorRes = R.color.status_submitted;
-                break;
-            case Assignment.STATUS_CHECKED:
-                colorRes = R.color.status_checked;
-                break;
-            default:
-                colorRes = android.R.color.darker_gray;
-        }
-        viewStatus.setBackgroundTintList(
-                ContextCompat.getColorStateList(context, colorRes)
-        );
-    }
+        TextView tvTitle, tvSubject, tvDueDate, tvStatus, tvMarks;
 
-    static class AssignmentViewHolder extends RecyclerView.ViewHolder {
-
-        TextView tvTitle, tvDescription, tvExtra, tvStatusText;
-        View viewStatus;
-        CardView cardRoot;
-
-        public AssignmentViewHolder(@NonNull View itemView) {
+        ViewHolder(@NonNull View itemView) {
             super(itemView);
-            cardRoot = (CardView) itemView;
-            tvTitle = itemView.findViewById(R.id.tvTitle);
-            tvDescription = itemView.findViewById(R.id.tvDescription);
-            tvExtra = itemView.findViewById(R.id.tvExtra);
-            tvStatusText = itemView.findViewById(R.id.tvStatusText);
-            viewStatus = itemView.findViewById(R.id.viewStatus);
+
+            tvTitle = itemView.findViewById(R.id.tvAssignmentTitle);
+            tvSubject = itemView.findViewById(R.id.tvAssignmentSubject);
+            tvDueDate = itemView.findViewById(R.id.tvDueDate);
+            tvStatus = itemView.findViewById(R.id.tvStatus);
+            tvMarks = itemView.findViewById(R.id.tvMarks);
         }
+    }
+
+    // ---- DATE FORMATTER ----
+    private String formatDate(long millis) {
+        if (millis <= 0) return "N/A";
+        return new SimpleDateFormat(
+                "dd MMM yyyy", Locale.getDefault()
+        ).format(new Date(millis));
+
     }
 }
-

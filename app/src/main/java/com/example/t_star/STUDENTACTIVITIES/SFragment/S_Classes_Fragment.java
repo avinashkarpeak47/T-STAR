@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.t_star.R;
+import com.example.t_star.STUDENTACTIVITIES.S_Class_Dashboard_Activity;
 import com.example.t_star.STUDENTACTIVITIES.S_Enroll_in_Class;
 import com.example.t_star.STUDENTACTIVITIES.S_Fragment_Classes_RC_Adapter;
 import com.example.t_star.STUDENTACTIVITIES.S_Fragment_Classes_RC_Model;
@@ -28,6 +29,9 @@ public class S_Classes_Fragment extends Fragment {
     private RecyclerView recyclerView;
     private ProgressBar progressBar;
     private AppCompatButton btnEnrollClass;
+
+    private TextView tvEmptyState;
+
 
     private ArrayList<S_Fragment_Classes_RC_Model> classList = new ArrayList<>();
     private S_Fragment_Classes_RC_Adapter adapter;
@@ -48,10 +52,32 @@ public class S_Classes_Fragment extends Fragment {
         recyclerView = view.findViewById(R.id.recyclerViewClasses);
         progressBar = view.findViewById(R.id.progressBarClasses);
         btnEnrollClass = view.findViewById(R.id.btnEnrollNewClass);
+        tvEmptyState = view.findViewById(R.id.tvEmptyState);
+
 
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
-        adapter = new S_Fragment_Classes_RC_Adapter(getContext(), classList, model -> {});
+        adapter = new S_Fragment_Classes_RC_Adapter(
+                getContext(),
+                classList,
+                model -> {
+
+                    // Allow only approved classes
+                    if (!"approved".equals(model.getStatus())) {
+                        Toast.makeText(getContext(),
+                                "Class request not approved yet",
+                                Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+
+                    markApprovedAsSeen(model);
+                    Intent intent = new Intent(getContext(), S_Class_Dashboard_Activity.class);
+                    intent.putExtra("classId", model.getClassId());
+                    startActivity(intent);
+
+                }
+        );
+
         recyclerView.setAdapter(adapter);
 
         setGreetingMessage();
@@ -68,17 +94,144 @@ public class S_Classes_Fragment extends Fragment {
     private void setGreetingMessage() {
         int hour = Calendar.getInstance().get(Calendar.HOUR_OF_DAY);
         if (hour >= 4 && hour < 12)
-            tvGreeting.setText("Good Morning");
+            tvGreeting.setText("Good Morning \uD83C\uDF05");
         else if (hour >= 12 && hour < 16)
-            tvGreeting.setText("Good Afternoon");
+            tvGreeting.setText("Good Afternoon ☀\uFE0F");
         else if (hour >= 16 && hour < 20)
-            tvGreeting.setText("Good Evening");
+            tvGreeting.setText("Good Evening \uD83C\uDF07");
         else
-            tvGreeting.setText("Good Night");
+            tvGreeting.setText("Good Night \uD83C\uDF19");
     }
 
-    // Load classes student is enrolled in
+    //RUTUJA CODE
     private void loadEnrolledClasses() {
+
+        progressBar.setVisibility(View.VISIBLE);
+        tvEmptyState.setVisibility(View.GONE);
+        recyclerView.setVisibility(View.GONE);
+
+        classList.clear();
+        adapter.notifyDataSetChanged();
+
+        String uid = FirebaseAuth.getInstance().getUid();
+        if (uid == null) return;
+
+        DatabaseReference ref = FirebaseDatabase.getInstance()
+                .getReference("StudentClasses")
+                .child(uid);
+
+        ref.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+
+                if (!snapshot.exists()) {
+                    showEmptyState();
+                    return;
+                }
+
+                final int totalClasses = (int) snapshot.getChildrenCount();
+                final int[] loadedCount = {0};
+
+                for (DataSnapshot classSnap : snapshot.getChildren()) {
+
+                    String classId = classSnap.getKey();
+                    String className = classSnap.child("className").getValue(String.class);
+                    String teacherId = classSnap.child("teacherId").getValue(String.class);
+                    String status = classSnap.child("status").getValue(String.class);
+                    boolean seenApproved = Boolean.TRUE.equals(
+                            classSnap.child("seenApproved").getValue(Boolean.class)
+                    );
+
+                    if (classId == null || teacherId == null) {
+                        loadedCount[0]++;
+                        continue;
+                    }
+
+                    FirebaseDatabase.getInstance().getReference("Users")
+                            .child(teacherId)
+                            .addListenerForSingleValueEvent(new ValueEventListener() {
+                                @Override
+                                public void onDataChange(@NonNull DataSnapshot snap) {
+
+                                    String teacherName = "Teacher";
+                                    if (snap.exists()) {
+                                        String fname = snap.child("firstname").getValue(String.class);
+                                        String lname = snap.child("lastname").getValue(String.class);
+                                        teacherName = fname + " " + lname;
+                                    }
+
+                                    classList.add(new S_Fragment_Classes_RC_Model(
+                                            classId,
+                                            className,
+                                            teacherName,
+                                            status,
+                                            seenApproved
+                                    ));
+
+                                    adapter.notifyDataSetChanged();
+
+                                    loadedCount[0]++;
+
+                                    if (loadedCount[0] == totalClasses) {
+                                        finalizeUI();
+                                    }
+                                }
+
+                                @Override
+                                public void onCancelled(@NonNull DatabaseError error) {
+                                    loadedCount[0]++;
+                                    if (loadedCount[0] == totalClasses) {
+                                        finalizeUI();
+                                    }
+                                }
+                            });
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                showEmptyState();
+            }
+        });
+    }
+
+    private void finalizeUI() {
+        progressBar.setVisibility(View.GONE);
+
+        if (classList.isEmpty()) {
+            showEmptyState();
+        } else {
+            recyclerView.setVisibility(View.VISIBLE);
+            tvEmptyState.setVisibility(View.GONE);
+        }
+    }
+
+    private void showEmptyState() {
+        progressBar.setVisibility(View.GONE);
+        recyclerView.setVisibility(View.GONE);
+        tvEmptyState.setVisibility(View.VISIBLE);
+    }
+
+    private void markApprovedAsSeen(S_Fragment_Classes_RC_Model model) {
+
+        if (!"approved".equals(model.getStatus())) return;
+        if (model.isSeenApproved()) return;
+
+        String uid = FirebaseAuth.getInstance().getUid();
+        if (uid == null) return;
+
+        FirebaseDatabase.getInstance()
+                .getReference("StudentClasses")
+                .child(uid)
+                .child(model.getClassId())
+                .child("seenApproved")
+                .setValue(true);
+    }
+
+
+
+    // Load classes student is enrolled in -- AVINASH CODE
+    /*private void loadEnrolledClasses() {
 
         progressBar.setVisibility(View.VISIBLE);
         classList.clear();
@@ -148,5 +301,5 @@ public class S_Classes_Fragment extends Fragment {
                 progressBar.setVisibility(View.GONE);
             }
         });
-    }
+    }*/
 }

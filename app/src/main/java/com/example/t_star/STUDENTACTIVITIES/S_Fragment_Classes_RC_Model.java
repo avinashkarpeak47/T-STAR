@@ -5,47 +5,43 @@ public class S_Fragment_Classes_RC_Model {
     private String classId;
     private String className;
     private String teacherName;
-    private String subjectName;
+    private String status; // pending / approved
 
-    public S_Fragment_Classes_RC_Model() {
-    }
+    private boolean seenApproved;
 
-    public S_Fragment_Classes_RC_Model(String classId, String className, String teacherName) {
+    public S_Fragment_Classes_RC_Model() {}
+
+    public S_Fragment_Classes_RC_Model(
+            String classId,
+            String className,
+            String teacherName,
+            String status,
+            boolean seenApproved
+    ) {
         this.classId = classId;
         this.className = className;
         this.teacherName = teacherName;
-//        this.subjectName = subjectName;
+        this.status = status;
+        this.seenApproved = seenApproved;
     }
 
     public String getClassId() {
         return classId;
     }
 
-    public void setClassId(String classId) {
-        this.classId = classId;
-    }
-
     public String getClassName() {
         return className;
-    }
-
-    public void setClassName(String className) {
-        this.className = className;
     }
 
     public String getTeacherName() {
         return teacherName;
     }
 
-    public void setTeacherName(String teacherName) {
-        this.teacherName = teacherName;
+    public String getStatus() {
+        return status;
     }
 
-    public String getSubjectName() {
-        return subjectName;
-    }
-
-    public void setSubjectName(String subjectName) {
-        this.subjectName = subjectName;
+    public boolean isSeenApproved(){
+        return seenApproved;
     }
 }

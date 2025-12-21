@@ -65,19 +65,23 @@
             app:layout_constraintTop_toBottomOf="@id/tvClassId"
             app:layout_constraintEnd_toEndOf="parent" />
 
-        <!-- 📘 SUBJECT NAME -->
-<!--        <TextView-->
-<!--            android:id="@+id/tvSubjectName"-->
-<!--            android:layout_width="0dp"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:text="Subject: Mathematics"-->
-<!--            android:textSize="14sp"-->
-<!--            android:textColor="#444444"-->
-<!--            android:layout_marginStart="12dp"-->
-<!--            android:layout_marginTop="4dp"-->
-<!--            app:layout_constraintStart_toEndOf="@id/colorStrip"-->
-<!--            app:layout_constraintTop_toBottomOf="@id/tvTeacherName"-->
-<!--            app:layout_constraintEnd_toEndOf="parent" />-->
+
+
+
+        <!-- STATUS-->
+       <TextView
+           android:id="@+id/tvStatus"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+           android:text="Pending"
+            android:textSize="12sp"
+            android:textColor="@color/black"
+            android:layout_marginStart="300dp"
+            android:layout_marginTop="4dp"
+            app:layout_constraintStart_toEndOf="@id/colorStrip"
+            app:layout_constraintTop_toBottomOf="@id/tvTeacherName"
+            app:layout_constraintEnd_toEndOf="parent"
+           android:visibility="gone"/>
 
 
 

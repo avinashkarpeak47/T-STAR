@@ -21,6 +21,7 @@ dependencyResolutionManagement {
     }
 }
 
+
 rootProject.name = "T-STAR"
 include(":app")
  

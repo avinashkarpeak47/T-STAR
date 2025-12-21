@@ -8,6 +8,9 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import com.example.t_star.R;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.FirebaseDatabase;
+
 import java.util.List;
 
 public class S_Fragment_Classes_RC_Adapter extends RecyclerView.Adapter<S_Fragment_Classes_RC_Adapter.VH> {
@@ -33,17 +36,50 @@ public class S_Fragment_Classes_RC_Adapter extends RecyclerView.Adapter<S_Fragme
         return new VH(v);
     }
 
+
+    //Rutuja
+
     @Override
     public void onBindViewHolder(@NonNull VH holder, int position) {
+
         S_Fragment_Classes_RC_Model model = list.get(position);
 
         holder.tvClassName.setText("Class: " + model.getClassName());
         holder.tvTeacherName.setText("Teacher: " + model.getTeacherName());
-//        holder.tvSubjectName.setText("Subject: " + model.getSubjectName());
         holder.tvClassId.setText("ID: " + model.getClassId());
+
+        // RESET
+        holder.tvStatus.setVisibility(View.GONE);
+        holder.itemView.setAlpha(1f);
+        holder.itemView.setClickable(true);
+
+        if ("pending".equals(model.getStatus())) {
+
+            holder.tvStatus.setText("Pending");
+            holder.tvStatus.setBackgroundResource(R.drawable.bg_status_pending);
+            holder.tvStatus.setVisibility(View.VISIBLE);
+
+            holder.itemView.setAlpha(0.6f);
+            holder.itemView.setClickable(false);
+
+        }
+        else if ("approved".equals(model.getStatus())) {
+
+            if (!model.isSeenApproved()) {
+                holder.tvStatus.setText("Approved");
+                holder.tvStatus.setBackgroundResource(R.drawable.bg_status_approved);
+                holder.tvStatus.setVisibility(View.VISIBLE);
+            }
+
+            holder.itemView.setAlpha(1f);
+            holder.itemView.setClickable(true);
+        }
 
         holder.itemView.setOnClickListener(v -> listener.onClick(model));
     }
+
+
+
 
     @Override
     public int getItemCount() {
@@ -52,7 +88,7 @@ public class S_Fragment_Classes_RC_Adapter extends RecyclerView.Adapter<S_Fragme
 
     static class VH extends RecyclerView.ViewHolder {
 
-        TextView tvClassName, tvTeacherName, tvClassId;
+        TextView tvClassName, tvTeacherName, tvClassId ,tvStatus;
 
         public VH(@NonNull View v) {
             super(v);
@@ -61,6 +97,8 @@ public class S_Fragment_Classes_RC_Adapter extends RecyclerView.Adapter<S_Fragme
             tvTeacherName = v.findViewById(R.id.tvTeacherName);
 //            tvSubjectName = v.findViewById(R.id.tvSubjectName);
             tvClassId = v.findViewById(R.id.tvClassId);
+            tvStatus = v.findViewById(R.id.tvStatus);
+
         }
     }
 }

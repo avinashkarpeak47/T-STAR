@@ -92,6 +92,7 @@ public class THomeFragment extends Fragment {
         cardResources        = view.findViewById(R.id.cardResources);
         cardNotifications    = view.findViewById(R.id.cardNotifications);
 
+
         // 🔥 MAP WITH KEYWORDS
         cardMap.put(cardCreateAssignment, "assignment");
         cardMap.put(cardAttendance, "attendance");
@@ -116,6 +117,11 @@ public class THomeFragment extends Fragment {
 
         navigationView = requireActivity().findViewById(R.id.navigationView);
 
+        // 🔥 Add back arrow click action
+        toolbar.setNavigationOnClickListener(v -> {
+            requireActivity().onBackPressed(); // or requireActivity().finish();
+        });
+
         cardCreateAssignment.setOnClickListener(v -> open(TAsssignmentActivity.class));
         cardAttendance.setOnClickListener(v -> open(TAttendanceActivity.class));
         cardCreateEvent.setOnClickListener(v -> open(TEventActivity.class));
@@ -123,6 +129,8 @@ public class THomeFragment extends Fragment {
         cardStudents.setOnClickListener(v -> open(TStudentsActivity.class));
         cardResources.setOnClickListener(v -> open(TResourcesActivity.class));
         cardNotifications.setOnClickListener(v -> open(TNotificationActivity.class));
+
+
     }
 
     private void open(Class<?> cls) {

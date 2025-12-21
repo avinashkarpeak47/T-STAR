@@ -89,7 +89,7 @@
                 android:layout_height="24dp"
                 android:layout_marginStart="8dp"
                 android:src="@drawable/s_dropdown_icon"
-                android:tint="@color/black"/>
+                app:tint="@color/black" />
         </LinearLayout>
 
         <com.google.android.material.tabs.TabLayout

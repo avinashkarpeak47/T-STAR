@@ -86,7 +86,7 @@ public class TMainActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_editprofile) {
-            startActivity(new Intent(this, TProfileActivity.class));
+           loadFragment(new TProfileFragment());
         }
         else if (id == R.id.nav_logout) {
 

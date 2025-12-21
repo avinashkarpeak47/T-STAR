@@ -18,17 +18,17 @@
             android:id="@+id/s_framelayout_mainpage"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_marginBottom="70dp"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toTopOf="@id/s_bottom_nav"/>
 
+
         <!-- Bottom Navigation -->
         <com.google.android.material.bottomnavigation.BottomNavigationView
             android:id="@+id/s_bottom_nav"
             android:layout_width="0dp"
-            android:layout_height="70dp"
+            android:layout_height="80dp"
             app:menu="@menu/s_bottom_navigation_bar"
             android:background="@color/Lavender"
             app:itemIconTint="@color/white"

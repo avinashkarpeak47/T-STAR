@@ -12,7 +12,7 @@ public class MyApp extends Application {
         super.onCreate();
 
         Map<String, Object> config = new HashMap<>();
-        config.put("cloud_name", "dxgl7lgyb");
+        config.put("cloud_name", "dr2qe01vj");
 
         MediaManager.init(this, config);
     }

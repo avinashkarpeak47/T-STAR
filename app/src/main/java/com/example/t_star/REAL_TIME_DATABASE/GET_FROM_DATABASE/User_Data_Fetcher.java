@@ -108,8 +108,8 @@ public class User_Data_Fetcher {
             UploadCallback callback) {
 
         MediaManager.get().upload(imageUri)
-                .unsigned("profile_unsigned")
-                .option("folder", "profile_photos")
+                .unsigned("t_star")
+                .option("folder", "app uploads")
                 .callback(new com.cloudinary.android.callback.UploadCallback() {
 
                     @Override

@@ -61,6 +61,9 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
+
+
+    //CLoudnary Dependency
     implementation ("com.cloudinary:cloudinary-android:2.5.0")
 
     implementation ("de.hdodenhof:circleimageview:3.1.0")

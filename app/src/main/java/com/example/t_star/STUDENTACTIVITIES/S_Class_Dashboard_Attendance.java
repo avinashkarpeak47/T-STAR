@@ -107,41 +107,51 @@ public class S_Class_Dashboard_Attendance extends AppCompatActivity {
             public void onTabSelected(TabLayout.Tab tab) {
                 filterByTab(tab.getPosition());
             }
-            @Override public void onTabUnselected(TabLayout.Tab tab) {}
-            @Override public void onTabReselected(TabLayout.Tab tab) {}
+
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {
+            }
+
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {
+            }
         });
     }
 
     private void loadAttendanceFromFirebase() {
+
         DatabaseReference ref = FirebaseDatabase.getInstance()
                 .getReference("Attendance")
                 .child(classId)
                 .child(studentId);
 
-        ref.orderByChild("timestamp")
-                .addListenerForSingleValueEvent(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        fullList.clear();
+        ref.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
 
-                        for (DataSnapshot snap : snapshot.getChildren()) {
-                            Attendance a = snap.getValue(Attendance.class);
-                            if (a != null) fullList.add(a);
-                        }
+                fullList.clear();
 
-                        applyMonthFilter();
+                for (DataSnapshot snap : snapshot.getChildren()) {
+                    Attendance a = snap.getValue(Attendance.class);
+                    if (a != null) {
+                        fullList.add(a);
                     }
+                }
 
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError error) {
-                        Toast.makeText(
-                                S_Class_Dashboard_Attendance.this,
-                                "Failed to load attendance",
-                                Toast.LENGTH_SHORT
-                        ).show();
-                    }
-                });
-    }
+                applyMonthFilter();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Toast.makeText(
+                        S_Class_Dashboard_Attendance.this,
+                        "Attendance load failed",
+                        Toast.LENGTH_SHORT
+                ).show();
+            }
+        });
+
+}
 
     private void applyMonthFilter() {
 

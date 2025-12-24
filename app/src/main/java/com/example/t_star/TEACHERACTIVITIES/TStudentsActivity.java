@@ -23,7 +23,7 @@ import java.util.ArrayList;
 public class TStudentsActivity extends AppCompatActivity {
 
     private RecyclerView rvStudents;
-    private SearchView searchView;
+    private androidx.appcompat.widget.SearchView searchView;
     private TabLayout tabLayout;
 
     private TStudentAdapter studentAdapter;
@@ -99,7 +99,7 @@ public class TStudentsActivity extends AppCompatActivity {
             @Override public void onTabReselected(TabLayout.Tab tab) {}
         });
 
-        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+        searchView.setOnQueryTextListener(new androidx.appcompat.widget.SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String q) {
                 if (rvStudents.getAdapter() == studentAdapter)

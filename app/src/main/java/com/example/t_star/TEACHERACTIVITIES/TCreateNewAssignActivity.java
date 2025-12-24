@@ -13,6 +13,7 @@ import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.AppCompatButton;
 
 import com.example.t_star.R;
 import com.example.t_star.TEACHERACTIVITIES.ASSIGNMENTS.TAssignmentModel;
@@ -33,7 +34,7 @@ public class TCreateNewAssignActivity extends AppCompatActivity {
     private static final int REQ_PICK = 1010;
 
     TextInputEditText etTitle, etDescription, etDueDate;
-    MaterialButton btnSave;
+    AppCompatButton btnSave;
     ImageView btnViewAttachment;
     TextView tvAttachmentName;
 

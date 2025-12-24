@@ -127,31 +127,6 @@
                                 android:textSize="16sp"/>
                         </com.google.android.material.textfield.TextInputLayout>
 
-                        <!-- Student Name / Username -->
-                        <com.google.android.material.textfield.TextInputLayout
-                            android:id="@+id/tilUserName"
-                            style="?attr/textInputOutlinedStyle"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="12dp"
-                            android:hint="Student Name"
-                            app:startIconTint="@color/black"
-                            app:boxStrokeColor="@color/black"
-                            app:boxStrokeWidth="1.2dp"
-                            app:boxCornerRadiusTopStart="20sp"
-                            app:boxCornerRadiusTopEnd="20sp"
-                            app:boxCornerRadiusBottomStart="20sp"
-                            app:boxCornerRadiusBottomEnd="20sp">
-
-                            <com.google.android.material.textfield.TextInputEditText
-                                android:id="@+id/etUserName"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:enabled="false"
-                                android:inputType="text"
-                                android:textColor="@color/black"
-                                android:textSize="16sp"/>
-                        </com.google.android.material.textfield.TextInputLayout>
 
                         <!-- Email -->
                         <com.google.android.material.textfield.TextInputLayout

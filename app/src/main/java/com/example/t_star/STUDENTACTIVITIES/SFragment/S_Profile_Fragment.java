@@ -46,7 +46,7 @@ public class S_Profile_Fragment extends Fragment {
     private static final int PICK_IMAGE_REQUEST = 1001;
 
     private ImageView ivProfilePic;
-    private EditText etFullName, etUserName, etEmail, etMobile, etRollNo;
+    private EditText etFullName, etEmail, etMobile, etRollNo;
     private Button btnEditProfile;
     private ProgressBar progressBar; // optional progress (we'll create one programmatically if missing)
 
@@ -70,7 +70,7 @@ public class S_Profile_Fragment extends Fragment {
         // Bind views (IDs from your XML)
         ivProfilePic = view.findViewById(R.id.ivProfilePic);
         etFullName = view.findViewById(R.id.etFullName);
-        etUserName = view.findViewById(R.id.etUserName);
+//        etUserName = view.findViewById(R.id.etUserName);
         etEmail = view.findViewById(R.id.etEmail);
         etMobile = view.findViewById(R.id.etMobile);
         etRollNo = view.findViewById(R.id.etRollNo);
@@ -126,8 +126,6 @@ public class S_Profile_Fragment extends Fragment {
 
     private void setEditingEnabled(boolean enabled) {
         etFullName.setEnabled(enabled);
-        // etUserName not used for primary save (we populate with firstname), but allow editing if desired
-        etUserName.setEnabled(enabled);
         // Email and mobile are usually not editable; keep them disabled for safety
         etEmail.setEnabled(false);
         etMobile.setEnabled(false);
@@ -152,7 +150,6 @@ public class S_Profile_Fragment extends Fragment {
                 // Populate fields
                 String fullName = user.getFullName();
                 etFullName.setText(fullName);
-                etUserName.setText(user.firstname != null ? user.firstname : "");
                 etEmail.setText(user.email != null ? user.email : "");
                 etMobile.setText(user.mobile != null ? user.mobile : "");
                 etRollNo.setText(user.rollno != null ? user.rollno : "Not Assigned");

@@ -24,7 +24,6 @@ public class TAsssignmentActivity extends AppCompatActivity {
     private RecyclerView rvAssignments;
     private TAssignmentAdapter adapter;
     private final List<TAssignmentModel> list = new ArrayList<>();
-
     private String classId, className;
     private DatabaseReference ref;
 

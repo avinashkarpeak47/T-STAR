@@ -17,6 +17,7 @@ import com.example.t_star.R;
 import com.example.t_star.REAL_TIME_DATABASE.GET_FROM_DATABASE.User_Data_Fetcher;
 import com.example.t_star.REAL_TIME_DATABASE.PUT_ON_DATABASE.ModelClasses.Updated_User_Model;
 import com.example.t_star.REAL_TIME_DATABASE.Validation.User_Input_Validator;
+import com.example.t_star.TEACHERACTIVITIES.TMainActivity;
 import com.example.t_star.TSTAR_Login_Activity;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -88,6 +89,22 @@ public class TProfileFragment extends Fragment {
                 attemptSaveProfile();
             }
         });
+
+        // ---------- KEYBOARD FIX (KEEP BOTTOM NAV VISIBLE) ----------
+        view.getViewTreeObserver().addOnGlobalLayoutListener(() -> {
+
+            if (getActivity() == null) return;
+
+            int heightDiff = view.getRootView().getHeight() - view.getHeight();
+
+            // keyboard visible condition
+            boolean isKeyboardOpen = heightDiff > 200;
+
+            if (TMainActivity.bottomNav != null) {
+                TMainActivity.bottomNav.setTranslationY(0);
+            }
+        });
+
 
         return view;
     }

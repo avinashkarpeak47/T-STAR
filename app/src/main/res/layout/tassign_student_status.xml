@@ -28,9 +28,11 @@
             android:id="@+id/tvStatus"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="SUBMITTED"
-            android:textSize="14sp"
-            android:textStyle="bold" />
+            android:text="Submitted"
+            android:padding="6dp"
+            android:textColor="@android:color/black"
+        />
+
 
     </LinearLayout>
 

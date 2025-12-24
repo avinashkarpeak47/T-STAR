@@ -1,5 +1,7 @@
 package com.example.t_star.TEACHERACTIVITIES;
 
+import static com.example.t_star.REAL_TIME_DATABASE.PUT_ON_DATABASE.HelperClasses.ChatHelper.addStudentToClassChat;
+
 import android.os.Bundle;
 import android.widget.SearchView;
 import android.widget.Toast;
@@ -210,11 +212,16 @@ public class TStudentsActivity extends AppCompatActivity {
 
                 studentClass.child("className")
                         .setValue(s.child("className").getValue(String.class));
+
                 studentClass.child("teacherId")
                         .setValue(s.child("teacherId").getValue(String.class));
 
                 classRef.child("joinRequests").child(uid).removeValue();
+
                 Classes_helper.updateStudentCount(classId);
+
+                // ✅ ADD STUDENT TO CHAT TABLE
+                addStudentToClassChat(classId, uid);
 
                 Toast.makeText(
                         TStudentsActivity.this,
@@ -224,6 +231,7 @@ public class TStudentsActivity extends AppCompatActivity {
 
                 loadPendingRequests();
             }
+
 
             @Override public void onCancelled(@NonNull DatabaseError error) {}
         });
@@ -244,6 +252,8 @@ public class TStudentsActivity extends AppCompatActivity {
                 .child(uid)
                 .child(classId)
                 .removeValue();
+
+
 
 
         Toast.makeText(this,

@@ -13,8 +13,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.SearchView;
 import androidx.cardview.widget.CardView;
-import androidx.core.view.GravityCompat;
-import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 
 import com.example.t_star.R;
@@ -210,7 +208,7 @@ public class THomeFragment extends Fragment {
         cardCreateAssignment.setOnClickListener(v -> open(TAsssignmentActivity.class));
         cardAttendance.setOnClickListener(v -> open(TAttendanceActivity.class));
         cardCreateEvent.setOnClickListener(v -> open(TEventActivity.class));
-        cardChat.setOnClickListener(v -> open(TChatActivity.class));
+        cardChat.setOnClickListener(v -> open(TChatsActivity.class));
         cardStudents.setOnClickListener(v -> open(TStudentsActivity.class));
         cardResources.setOnClickListener(v -> open(TResourcesActivity.class));
         cardNotifications.setOnClickListener(v -> open(TNotificationActivity.class));

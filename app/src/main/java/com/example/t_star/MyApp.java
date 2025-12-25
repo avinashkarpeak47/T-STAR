@@ -13,7 +13,8 @@ public class MyApp extends Application {
 
         Map<String, Object> config = new HashMap<>();
         config.put("cloud_name", "dr2qe01vj");
-
+        config.put("api_key", "114975574521965");
+        config.put("api_secret", "vUNQuK00sdTiNTZ01qnZe6vTq1c");
         MediaManager.init(this, config);
     }
 

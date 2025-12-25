@@ -1,8 +1,10 @@
 package com.example.t_star.TEACHERACTIVITIES.Resources;
 
+import android.app.DownloadManager;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Environment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -63,7 +65,7 @@ public class Adapter extends RecyclerView.Adapter<Adapter.VH> {
         }
 
         // open file
-        h.itemView.setOnClickListener(v -> openFile(context, url));
+        h.itemView.setOnClickListener(v -> openFile(context, model.getFileUrl()));
 
         // delete on long click
         h.itemView.setOnLongClickListener(v -> {
@@ -124,20 +126,39 @@ public class Adapter extends RecyclerView.Adapter<Adapter.VH> {
     }
 
     // ================= FILE OPEN LOGIC =================
+    // ================= DOWNLOAD + OPEN =================
     private void openFile(Context context, String url) {
 
-        Uri uri = Uri.parse(url);
-        String mimeType = getMimeType(url);
-
-        Intent intent = new Intent(Intent.ACTION_VIEW);
-        intent.setDataAndType(uri, mimeType);
-        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-
         try {
-            context.startActivity(Intent.createChooser(intent, "Open with"));
-        } catch (Exception e) {
-            Toast.makeText(context, "No app found", Toast.LENGTH_LONG).show();
+            // Try direct open first
+            Intent i = new Intent(Intent.ACTION_VIEW);
+            i.setDataAndType(Uri.parse(url), "*/*");
+            i.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+            context.startActivity(i);
+
+        } catch(Exception ex) {
+
+            DownloadManager dm =
+                    (DownloadManager) context.getSystemService(Context.DOWNLOAD_SERVICE);
+
+            DownloadManager.Request req =
+                    new DownloadManager.Request(Uri.parse(url));
+
+            req.setTitle("Downloading file...");
+            req.setNotificationVisibility(
+                    DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
+
+            req.setDestinationInExternalFilesDir(
+                    context,
+                    Environment.DIRECTORY_DOWNLOADS,
+                    "study_material.pdf"
+            );
+
+            dm.enqueue(req);
+
+            Toast.makeText(context,
+                    "Downloading... Open from notification",
+                    Toast.LENGTH_LONG).show();
         }
     }
 

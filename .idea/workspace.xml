@@ -5,6 +5,11 @@
       <config />
     </shared>
     <layouts>
+      <layout url="file://$PROJECT_DIR$/app/src/main/res/drawable/arrow_back.xml">
+        <config>
+          <theme>@style/Theme.TSTAR</theme>
+        </config>
+      </layout>
       <layout url="file://$PROJECT_DIR$/app/src/main/res/drawable/baseline_person_24.xml">
         <config>
           <theme>@style/Theme.TSTAR</theme>
@@ -180,17 +185,17 @@
           <theme>@style/Theme.TSTAR</theme>
         </config>
       </layout>
-      <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/activity_tevent.xml">
-        <config>
-          <theme>@style/Theme.TSTAR</theme>
-        </config>
-      </layout>
       <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/activity_thome.xml">
         <config>
           <theme>@style/Theme.TSTAR</theme>
         </config>
       </layout>
       <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/activity_tmain.xml">
+        <config>
+          <theme>@style/Theme.TSTAR</theme>
+        </config>
+      </layout>
+      <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/activity_tnotes.xml">
         <config>
           <theme>@style/Theme.TSTAR</theme>
         </config>
@@ -211,6 +216,16 @@
         </config>
       </layout>
       <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/dialog_month_year_picker.xml">
+        <config>
+          <theme>@style/Theme.TSTAR</theme>
+        </config>
+      </layout>
+      <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_edit_notes.xml">
+        <config>
+          <theme>@style/Theme.TSTAR</theme>
+        </config>
+      </layout>
+      <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_notes_list2.xml">
         <config>
           <theme>@style/Theme.TSTAR</theme>
         </config>
@@ -245,22 +260,17 @@
           <theme>@style/Theme.TSTAR</theme>
         </config>
       </layout>
-      <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_t_home.xml">
-        <config>
-          <theme>@style/Theme.TSTAR</theme>
-        </config>
-      </layout>
-      <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_t_notification.xml">
-        <config>
-          <theme>@style/Theme.TSTAR</theme>
-        </config>
-      </layout>
       <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_t_profile.xml">
         <config>
           <theme>@style/Theme.TSTAR</theme>
         </config>
       </layout>
       <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/item_attendance.xml">
+        <config>
+          <theme>@style/Theme.TSTAR</theme>
+        </config>
+      </layout>
+      <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/row_notes.xml">
         <config>
           <theme>@style/Theme.TSTAR</theme>
         </config>
@@ -396,18 +406,21 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="68f55fa5-e357-4619-9e9e-b24458d6d83c" name="Changes" comment="Assignment FInal using Cloudinary">
-      <change beforePath="$PROJECT_DIR$/.gradle/8.11.1/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.11.1/executionHistory/executionHistory.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/8.11.1/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.11.1/executionHistory/executionHistory.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/8.11.1/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.11.1/fileHashes/fileHashes.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/8.11.1/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.11.1/fileHashes/fileHashes.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/8.11.1/fileHashes/resourceHashesCache.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.11.1/fileHashes/resourceHashesCache.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/file-system.probe" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/file-system.probe" afterDir="false" />
+    <list default="true" id="68f55fa5-e357-4619-9e9e-b24458d6d83c" name="Changes" comment="Assignment work done.">
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/example/t_star/TEACHERACTIVITIES/EditNotesFragment.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/example/t_star/TEACHERACTIVITIES/Notes/NotesAdapter.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/example/t_star/TEACHERACTIVITIES/Notes/NotesDao.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/example/t_star/TEACHERACTIVITIES/Notes/NotesDatabase.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/example/t_star/TEACHERACTIVITIES/Notes/NotesModel.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/example/t_star/TEACHERACTIVITIES/NotesListFragment.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_edit_notes.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_notes_list2.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/layout/row_notes.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/t_star/STUDENTACTIVITIES/S_Assignment_Submit_Activity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/t_star/STUDENTACTIVITIES/S_Assignment_Submit_Activity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/t_star/utils/FileUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/t_star/utils/FileUtils.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_s_class_dashboard_translator.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_s_class_dashboard_translator.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/app/build.gradle.kts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/t_star/MyApp.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/t_star/MyApp.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/t_star/TEACHERACTIVITIES/TNoteActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/t_star/TEACHERACTIVITIES/TNoteActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_tnotes.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_tnotes.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -417,7 +430,7 @@
   <component name="ClangdSettings">
     <option name="formatViaClangd" value="false" />
   </component>
-  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[]" />
+  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[DeviceId(pluginId=LocalEmulator, isTemplate=false, identifier=path=C:\Users\Hp\.android\avd\Pixel_7_Pro.avd)]" />
   <component name="ExternalProjectsData">
     <projectState path="$PROJECT_DIR$">
       <ProjectState />
@@ -428,16 +441,16 @@
       <list>
         <option value="valueResourceFile" />
         <option value="resourceFile" />
-        <option value="layoutResourceFile" />
         <option value="Class" />
+        <option value="layoutResourceFile" />
       </list>
     </option>
   </component>
   <component name="Git.Settings">
     <option name="PREVIOUS_COMMIT_AUTHORS">
       <list>
-        <option value="sawantankita23 &lt;sawantashok7558&gt;" />
         <option value="Rutuja Nage &lt;rutujanage979@gmail.com&gt;" />
+        <option value="sawantankita23 &lt;sawantashok7558&gt;" />
       </list>
     </option>
     <option name="PUSH_TAGS">
@@ -457,7 +470,7 @@
   <component name="GithubPullRequestsUISettings">{
   &quot;selectedUrlAndAccountId&quot;: {
     &quot;url&quot;: &quot;https://github.com/rutujanage/T-STAR.git&quot;,
-    &quot;accountId&quot;: &quot;383b70b4-c5e8-405b-ab68-38e68ab53fe2&quot;
+    &quot;accountId&quot;: &quot;40e4b791-8859-4905-885f-aa668b939681&quot;
   }
 }</component>
   <component name="ProblemsViewState">
@@ -494,7 +507,7 @@
     &quot;project.structure.last.edited&quot;: &quot;SDK Location&quot;,
     &quot;project.structure.proportion&quot;: &quot;0.17&quot;,
     &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;editor.preferences.import&quot;
+    &quot;settings.editor.selected.configurable&quot;: &quot;gradle.compiler&quot;
   }
 }</component>
   <component name="RecentsManager">
@@ -874,7 +887,15 @@
       <option name="project" value="LOCAL" />
       <updated>1766644320083</updated>
     </task>
-    <option name="localTasksCounter" value="32" />
+    <task id="LOCAL-00032" summary="Assignment work done.">
+      <option name="closed" value="true" />
+      <created>1766664699070</created>
+      <option name="number" value="00032" />
+      <option name="presentableId" value="LOCAL-00032" />
+      <option name="project" value="LOCAL" />
+      <updated>1766664699070</updated>
+    </task>
+    <option name="localTasksCounter" value="33" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -901,8 +922,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Signup Activity and Login Activity Backend" />
-    <MESSAGE value="commiting" />
     <MESSAGE value="Commit" />
     <MESSAGE value="Splash Screen , Entry Activity,Signup Activity and Login Activity Backend" />
     <MESSAGE value="Stop tracking app/build and ignore build artifacts" />
@@ -926,7 +945,9 @@
     <MESSAGE value="build.gradle.kts" />
     <MESSAGE value="Merge remote-tracking branch 'origin/master'" />
     <MESSAGE value="Assignment FInal using Cloudinary" />
-    <option name="LAST_COMMIT_MESSAGE" value="Assignment FInal using Cloudinary" />
+    <MESSAGE value="Merge remote-tracking branch 'origin/master'&#10;&#10;# Conflicts:&#10;#&#9;.gradle/8.11.1/executionHistory/executionHistory.bin&#10;#&#9;.gradle/8.11.1/executionHistory/executionHistory.lock&#10;#&#9;.gradle/8.11.1/fileHashes/fileHashes.bin&#10;#&#9;.gradle/8.11.1/fileHashes/fileHashes.lock&#10;#&#9;.gradle/8.11.1/fileHashes/resourceHashesCache.bin&#10;#&#9;.gradle/buildOutputCleanup/buildOutputCleanup.lock&#10;#&#9;.gradle/file-system.probe" />
+    <MESSAGE value="Assignment work done." />
+    <option name="LAST_COMMIT_MESSAGE" value="Assignment work done." />
   </component>
   <component name="play_dynamic_filters_status">
     <option name="appIdToCheckInfo">

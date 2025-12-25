@@ -26,4 +26,7 @@ public class TAssignmentModel {
     public String getDueDate() { return dueDate; }
     public int getTotalStudents() { return totalStudents; }
     public int getSubmittedCount() { return submittedCount; }
+
+    public void setSubmittedCount(int submitted) {
+    }
 }

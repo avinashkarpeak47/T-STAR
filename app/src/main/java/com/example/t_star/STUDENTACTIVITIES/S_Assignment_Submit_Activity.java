@@ -247,7 +247,7 @@ public class S_Assignment_Submit_Activity extends AppCompatActivity {
                 String originalFileName = getFileName(selectedFileUri);
 
                 Map<String, Object> options = new HashMap<>();
-                options.put("resource_type", "raw"); // 🔥 VERY IMPORTANT
+                options.put("resources_type", "raw"); // 🔥 VERY IMPORTANT
                 options.put("folder", "assignments");
                 options.put("public_id",originalFileName);
                 options.put("use_filename",true);

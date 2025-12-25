@@ -2,38 +2,430 @@
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:fitsSystemWindows="true"
+    android:layout_height="match_parent"
     android:background="@color/white"
-    android:layout_height="match_parent">
+    android:fitsSystemWindows="true">
 
-
-        <!-- Fragment Container -->
-        <FrameLayout
-            android:id="@+id/fragmentContainer"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toTopOf="@+id/bottomNav">
-
-        </FrameLayout>
-
-        <!-- Bottom Navigation -->
-        <com.google.android.material.bottomnavigation.BottomNavigationView
-            android:id="@+id/bottomNav"
+        <!-- ================= TOOLBAR ================= -->
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/toolbar"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:background="@drawable/header_gradient"
-            app:itemIconTint="@color/white"
-            app:itemTextColor="@color/white"
+            android:layout_height="56dp"
+            android:background="@color/Lavender"
+            app:title="Welcome"
+            app:titleTextColor="@color/white"
+            app:navigationIcon="@drawable/arrow_back"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+        <!-- ================= SCROLL CONTENT ================= -->
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:fillViewport="true"
+            android:padding="12dp"
+            app:layout_constraintTop_toBottomOf="@id/toolbar"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:menu="@menu/tbottom_nav_file">
+            app:layout_constraintEnd_toEndOf="parent">
 
-        </com.google.android.material.bottomnavigation.BottomNavigationView>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+                        <!-- ================= CLASS DETAILS CARD ================= -->
+                        <androidx.cardview.widget.CardView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="16dp"
+                            android:background="@drawable/s_edittext_border"
+                            app:cardCornerRadius="18dp"
+                            app:cardElevation="6dp">
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="vertical"
+                                    android:background="@drawable/s_edittext_border"
+                                    android:padding="16dp">
+
+                                        <LinearLayout
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:orientation="horizontal"
+                                            android:layout_marginBottom="8dp">
+
+                                                <TextView
+                                                    android:layout_width="0dp"
+                                                    android:layout_height="wrap_content"
+                                                    android:layout_weight="1"
+                                                    android:text="Class ID:"
+                                                    android:textColor="@color/black"
+                                                    android:textStyle="bold"
+                                                    android:textSize="16sp"/>
+
+                                                <TextView
+                                                    android:id="@+id/tvClassID"
+                                                    android:layout_width="wrap_content"
+                                                    android:layout_height="wrap_content"
+                                                    android:textColor="@color/black"/>
+                                        </LinearLayout>
+
+                                        <LinearLayout
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:orientation="horizontal"
+                                            android:layout_marginBottom="8dp">
+
+                                                <TextView
+                                                    android:layout_width="0dp"
+                                                    android:layout_height="wrap_content"
+                                                    android:layout_weight="1"
+                                                    android:text="Class Name:"
+                                                    android:textStyle="bold"/>
+
+                                                <TextView
+                                                    android:id="@+id/tvClassName"
+                                                    android:layout_width="wrap_content"
+                                                    android:layout_height="wrap_content"/>
+                                        </LinearLayout>
+
+                                        <LinearLayout
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:orientation="horizontal"
+                                            android:layout_marginBottom="8dp">
+
+                                                <TextView
+                                                    android:layout_width="0dp"
+                                                    android:layout_height="wrap_content"
+                                                    android:layout_weight="1"
+                                                    android:text="Subject:"
+                                                    android:textStyle="bold"/>
+
+                                                <TextView
+                                                    android:id="@+id/tvSubject"
+                                                    android:layout_width="wrap_content"
+                                                    android:layout_height="wrap_content"/>
+                                        </LinearLayout>
+
+                                        <LinearLayout
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:orientation="horizontal">
+
+                                                <TextView
+                                                    android:layout_width="0dp"
+                                                    android:layout_height="wrap_content"
+                                                    android:layout_weight="1"
+                                                    android:text="Teacher:"
+                                                    android:textStyle="bold"/>
+
+                                                <TextView
+                                                    android:id="@+id/tvTeacher"
+                                                    android:layout_width="wrap_content"
+                                                    android:layout_height="wrap_content"/>
+                                        </LinearLayout>
+
+                                </LinearLayout>
+                        </androidx.cardview.widget.CardView>
 
 
+                        <!-- SEARCH VIEW -->
+                        <androidx.appcompat.widget.SearchView
+                            android:id="@+id/searchViewGrid"
+                            android:layout_width="match_parent"
+                            android:layout_height="48dp"
+                            app:queryHint="Search here..."
+                            android:iconifiedByDefault="false"
+                            android:background="@drawable/s_edittext_border"
+                            android:layout_margin="8dp" />
+
+                        <!-- ===================================================== -->
+                        <androidx.gridlayout.widget.GridLayout
+                            android:id="@+id/gridActions"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            app:columnCount="2"
+                            app:useDefaultMargins="true"
+                            android:layout_marginTop="10dp"
+                            app:alignmentMode="alignMargins">
+
+                                <!-- ==== ALL YOUR CARDS AS-IS (UNCHANGED) ==== -->
+
+                                <!-- Assignment -->
+                                <androidx.cardview.widget.CardView
+                                    android:id="@+id/cardCreateAssignment"
+                                    android:layout_width="1dp"
+                                    android:layout_height="120dp"
+                                    app:layout_columnWeight="1"
+                                    app:cardCornerRadius="20dp"
+                                    app:cardElevation="6dp"
+                                    android:foreground="?attr/selectableItemBackground">
+
+                                        <LinearLayout
+                                            android:orientation="vertical"
+                                            android:gravity="center"
+                                            android:background="@drawable/s_edittext_border"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="match_parent">
+
+                                                <ImageView
+                                                    android:layout_width="48dp"
+                                                    android:layout_height="48dp"
+                                                    android:src="@drawable/s_assignment_check"
+                                                    app:tint="@color/black"/>
+
+                                                <TextView
+                                                    android:layout_width="wrap_content"
+                                                    android:layout_height="wrap_content"
+                                                    android:text="Assignment"
+                                                    android:textSize="15sp"
+                                                    android:textColor="@color/black"
+                                                    android:layout_marginTop="8dp"/>
+                                        </LinearLayout>
+                                </androidx.cardview.widget.CardView>
+
+                                <!-- Attendance -->
+                                <androidx.cardview.widget.CardView
+                                    android:id="@+id/cardAttendance"
+                                    android:layout_width="0dp"
+                                    android:layout_height="120dp"
+                                    app:layout_columnWeight="1"
+                                    app:cardCornerRadius="20dp"
+                                    app:cardElevation="6dp"
+                                    android:foreground="?attr/selectableItemBackground">
+
+                                        <LinearLayout
+                                            android:orientation="vertical"
+                                            android:gravity="center"
+                                            android:background="@drawable/s_edittext_border"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="match_parent">
+
+                                                <ImageView
+                                                    android:layout_width="48dp"
+                                                    android:layout_height="48dp"
+                                                    android:src="@drawable/s_attendance"
+                                                    app:tint="@color/black"/>
+
+                                                <TextView
+                                                    android:layout_width="wrap_content"
+                                                    android:layout_height="wrap_content"
+                                                    android:text="Attendance"
+                                                    android:textSize="15sp"
+                                                    android:textColor="@color/black"
+                                                    android:layout_marginTop="8dp"/>
+                                        </LinearLayout>
+                                </androidx.cardview.widget.CardView>
+
+                                <!-- Notes -->
+                                <androidx.cardview.widget.CardView
+                                    android:id="@+id/cardNotes"
+                                    android:layout_width="0dp"
+                                    android:layout_height="120dp"
+                                    app:layout_columnWeight="1"
+                                    app:cardCornerRadius="20dp"
+                                    app:cardElevation="6dp"
+                                    android:foreground="?attr/selectableItemBackground">
+
+                                        <LinearLayout
+                                            android:orientation="vertical"
+                                            android:gravity="center"
+                                            android:background="@drawable/s_edittext_border"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="match_parent">
+
+                                                <ImageView
+                                                    android:layout_width="48dp"
+                                                    android:layout_height="48dp"
+                                                    android:src="@drawable/s_notes"
+                                                    app:tint="@color/black"/>
+
+                                                <TextView
+                                                    android:layout_width="wrap_content"
+                                                    android:layout_height="wrap_content"
+                                                    android:text="Notes"
+                                                    android:textSize="15sp"
+                                                    android:textColor="@color/black"
+                                                    android:layout_marginTop="8dp"/>
+                                        </LinearLayout>
+                                </androidx.cardview.widget.CardView>
+
+                                <!-- Chat -->
+                                <androidx.cardview.widget.CardView
+                                    android:id="@+id/cardChat"
+                                    android:layout_width="0dp"
+                                    android:layout_height="120dp"
+                                    app:layout_columnWeight="1"
+                                    app:cardCornerRadius="20dp"
+                                    app:cardElevation="6dp"
+                                    android:foreground="?attr/selectableItemBackground">
+
+                                        <LinearLayout
+                                            android:orientation="vertical"
+                                            android:gravity="center"
+                                            android:background="@drawable/s_edittext_border"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="match_parent">
+
+                                                <ImageView
+                                                    android:layout_width="48dp"
+                                                    android:layout_height="48dp"
+                                                    android:src="@drawable/s_chat"
+                                                    app:tint="@color/black"/>
+
+                                                <TextView
+                                                    android:layout_width="wrap_content"
+                                                    android:layout_height="wrap_content"
+                                                    android:text="Chat with Student"
+                                                    android:textSize="15sp"
+                                                    android:textColor="@color/black"
+                                                    android:layout_marginTop="8dp"/>
+                                        </LinearLayout>
+                                </androidx.cardview.widget.CardView>
+
+                                <!-- Students -->
+                                <androidx.cardview.widget.CardView
+                                    android:id="@+id/cardStudents"
+                                    android:layout_width="0dp"
+                                    android:layout_height="120dp"
+                                    app:layout_columnWeight="1"
+                                    app:cardCornerRadius="20dp"
+                                    app:cardElevation="6dp"
+                                    android:foreground="?attr/selectableItemBackground">
+
+                                        <LinearLayout
+                                            android:orientation="vertical"
+                                            android:gravity="center"
+                                            android:background="@drawable/s_edittext_border"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="match_parent">
+
+                                                <ImageView
+                                                    android:layout_width="48dp"
+                                                    android:layout_height="48dp"
+                                                    android:src="@drawable/tstudent"
+                                                    app:tint="@color/black"/>
+
+                                                <TextView
+                                                    android:layout_width="wrap_content"
+                                                    android:layout_height="wrap_content"
+                                                    android:text="Students"
+                                                    android:textSize="15sp"
+                                                    android:textColor="@color/black"
+                                                    android:layout_marginTop="8dp"/>
+                                        </LinearLayout>
+                                </androidx.cardview.widget.CardView>
+
+                                <!-- Resources -->
+                                <androidx.cardview.widget.CardView
+                                    android:id="@+id/cardResources"
+                                    android:layout_width="0dp"
+                                    android:layout_height="120dp"
+                                    app:layout_columnWeight="1"
+                                    app:cardCornerRadius="20dp"
+                                    app:cardElevation="6dp"
+                                    android:foreground="?attr/selectableItemBackground">
+
+                                        <LinearLayout
+                                            android:orientation="vertical"
+                                            android:gravity="center"
+                                            android:background="@drawable/s_edittext_border"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="match_parent">
+
+                                                <ImageView
+                                                    android:layout_width="48dp"
+                                                    android:layout_height="48dp"
+                                                    android:src="@drawable/s_studymaterial"
+                                                    app:tint="@color/black"/>
+
+                                                <TextView
+                                                    android:layout_width="wrap_content"
+                                                    android:layout_height="wrap_content"
+                                                    android:text="Resources"
+                                                    android:textSize="15sp"
+                                                    android:textColor="@color/black"
+                                                    android:layout_marginTop="8dp"/>
+                                        </LinearLayout>
+                                </androidx.cardview.widget.CardView>
+
+                                <!-- Quiz -->
+                                <androidx.cardview.widget.CardView
+                                    android:id="@+id/cardQuiz"
+                                    android:layout_width="0dp"
+                                    android:layout_height="120dp"
+                                    app:layout_columnWeight="1"
+                                    app:cardCornerRadius="20dp"
+                                    app:cardElevation="6dp"
+                                    android:foreground="?attr/selectableItemBackground">
+
+                                        <LinearLayout
+                                            android:orientation="vertical"
+                                            android:gravity="center"
+                                            android:background="@drawable/s_edittext_border"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="match_parent">
+
+                                                <ImageView
+                                                    android:layout_width="48dp"
+                                                    android:layout_height="48dp"
+                                                    android:src="@drawable/s_quiz"
+                                                    app:tint="@color/black"/>
+
+                                                <TextView
+                                                    android:layout_width="wrap_content"
+                                                    android:layout_height="wrap_content"
+                                                    android:text="Quiz"
+                                                    android:textSize="15sp"
+                                                    android:textColor="@color/black"
+                                                    android:layout_marginTop="8dp"/>
+                                        </LinearLayout>
+                                </androidx.cardview.widget.CardView>
+
+                                <!-- Notification-->
+                                <androidx.cardview.widget.CardView
+                                    android:id="@+id/cardNotifications"
+                                    android:layout_width="0dp"
+                                    android:layout_height="120dp"
+                                    app:layout_columnWeight="1"
+                                    app:cardCornerRadius="20dp"
+                                    app:cardElevation="6dp"
+                                    android:foreground="?attr/selectableItemBackground">
+
+                                        <LinearLayout
+                                            android:orientation="vertical"
+                                            android:gravity="center"
+                                            android:background="@drawable/s_edittext_border"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="match_parent">
+
+                                                <ImageView
+                                                    android:layout_width="48dp"
+                                                    android:layout_height="48dp"
+                                                    android:src="@drawable/s_notification"
+                                                    app:tint="@color/black"/>
+
+                                                <TextView
+                                                    android:layout_width="wrap_content"
+                                                    android:layout_height="wrap_content"
+                                                    android:text="Notification"
+                                                    android:textSize="15sp"
+                                                    android:textColor="@color/black"
+                                                    android:layout_marginTop="8dp"/>
+                                        </LinearLayout>
+                                </androidx.cardview.widget.CardView>
+
+
+
+                        </androidx.gridlayout.widget.GridLayout>
+
+                </LinearLayout>
+
+        </androidx.core.widget.NestedScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

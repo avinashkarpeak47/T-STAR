@@ -15,6 +15,7 @@ import com.example.t_star.CHATDATA.*;
 import com.example.t_star.R;
 import com.example.t_star.REAL_TIME_DATABASE.GET_FROM_DATABASE.User_Data_Fetcher;
 import com.example.t_star.REAL_TIME_DATABASE.PUT_ON_DATABASE.ModelClasses.Updated_User_Model;
+import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.tabs.TabLayout;
 import com.google.firebase.database.*;
 
@@ -38,6 +39,11 @@ public class TChatsActivity extends AppCompatActivity {
     protected void onCreate(Bundle b) {
         super.onCreate(b);
         setContentView(R.layout.activity_tchats);
+
+        // Toolbar
+        MaterialToolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        toolbar.setNavigationOnClickListener(v -> finish());
 
         classId = getIntent().getStringExtra("classId");
         if (classId == null) {
@@ -84,21 +90,35 @@ public class TChatsActivity extends AppCompatActivity {
                     m.setLastTimestamp(ts != null ? ts : 0);
                     m.setUnreadCount(uc != null ? uc : 0);
 
-                    FirebaseDatabase.getInstance().getReference("Users")
+                    FirebaseDatabase.getInstance()
+                            .getReference("Users")
                             .child(studentUid)
                             .addListenerForSingleValueEvent(new ValueEventListener() {
                                 @Override
                                 public void onDataChange(@NonNull DataSnapshot u) {
+
+                                    String fname = u.child("firstname").getValue(String.class);
+                                    String lname = u.child("lastname").getValue(String.class);
+
                                     m.setName(
-                                            u.child("firstname").getValue(String.class) + " " +
-                                                    u.child("lastname").getValue(String.class)
+                                            (fname != null ? fname : "") + " " +
+                                                    (lname != null ? lname : "")
                                     );
+
                                     m.setEmail(u.child("email").getValue(String.class));
+
+                                    // ✅ FETCH PROFILE IMAGE
+                                    m.setProfileImageUrl(
+                                            u.child("profileImageUrl").getValue(String.class)
+                                    );
+
                                     adapter.notifyDataSetChanged();
                                 }
 
-                                @Override public void onCancelled(@NonNull DatabaseError e) {}
+                                @Override
+                                public void onCancelled(@NonNull DatabaseError e) {}
                             });
+
 
                     all.add(m);
                 }

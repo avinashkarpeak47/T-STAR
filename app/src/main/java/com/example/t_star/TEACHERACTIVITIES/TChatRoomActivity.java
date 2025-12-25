@@ -14,6 +14,7 @@ import com.example.t_star.R;
 import com.example.t_star.REAL_TIME_DATABASE.GET_FROM_DATABASE.User_Data_Fetcher;
 import com.example.t_star.REAL_TIME_DATABASE.PUT_ON_DATABASE.HelperClasses.ChatHelper;
 import com.example.t_star.REAL_TIME_DATABASE.PUT_ON_DATABASE.ModelClasses.Updated_User_Model;
+import com.google.android.material.appbar.MaterialToolbar;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.*;
 import java.util.*;
@@ -38,6 +39,11 @@ public class TChatRoomActivity extends AppCompatActivity {
     protected void onCreate(Bundle b) {
         super.onCreate(b);
         setContentView(R.layout.activity_tchat_room);
+
+        // Toolbar
+        MaterialToolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        toolbar.setNavigationOnClickListener(v -> finish());
 
         classId = getIntent().getStringExtra("classId");
         studentUid = getIntent().getStringExtra("studentUid");
@@ -88,39 +94,45 @@ public class TChatRoomActivity extends AppCompatActivity {
         FirebaseDatabase.getInstance()
                 .getReference("Users")
                 .child(studentUid)
-                .get()
-                .addOnSuccessListener(u -> {
-                    tvUsername.setText(
-                            u.child("firstname").getValue(String.class) + " " +
-                                    u.child("lastname").getValue(String.class)
-                    );
-                    tvEmailid.setText(u.child("email").getValue(String.class));
+                .addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot u) {
+
+                        // -------- NAME --------
+                        String fname = u.child("firstname").getValue(String.class);
+                        String lname = u.child("lastname").getValue(String.class);
+                        tvUsername.setText(
+                                (fname != null ? fname : "") + " " +
+                                        (lname != null ? lname : "")
+                        );
+
+                        // -------- EMAIL --------
+                        tvEmailid.setText(
+                                u.child("email").getValue(String.class)
+                        );
+
+                        // -------- PROFILE IMAGE --------
+                        profileImageUrl = u.child("profileImageUrl").getValue(String.class);
+
+                        if (!TextUtils.isEmpty(profileImageUrl)) {
+                            Glide.with(TChatRoomActivity.this)
+                                    .load(profileImageUrl)
+                                    .placeholder(R.drawable.taklogo)   // default image
+                                    .error(R.drawable.taklogo)
+                                    .circleCrop()
+                                    .into(ivProfilePic);
+                        } else {
+                            ivProfilePic.setImageResource(R.drawable.taklogo);
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+                        ivProfilePic.setImageResource(R.drawable.taklogo);
+                    }
                 });
-
-        // Load Student Profile photo
-
-        User_Data_Fetcher.getUserData(studentUid, new User_Data_Fetcher.UserDataCallback() {
-            @Override
-            public void onSuccess(Updated_User_Model user) {
-
-                profileImageUrl = user.profileImageUrl;   // 🔥 ADD THIS
-
-                if (user.profileImageUrl != null && !user.profileImageUrl.isEmpty()) {
-                    Glide.with(TChatRoomActivity.this)
-                            .load(user.profileImageUrl)
-                            .centerCrop()
-                            .circleCrop()
-                            .into(ivProfilePic);
-                }
-            }
-            @Override
-            public void onFailure(Exception e) {
-                Toast.makeText(TChatRoomActivity.this,
-                        "Failed to load profile: " + e.getMessage(),
-                        Toast.LENGTH_LONG).show();
-            }
-        });
     }
+
 
     private void sendMessage() {
         String text = et.getText().toString().trim();

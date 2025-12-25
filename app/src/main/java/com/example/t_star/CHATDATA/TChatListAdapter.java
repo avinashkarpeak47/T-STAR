@@ -12,6 +12,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.example.t_star.R;
 import com.example.t_star.TEACHERACTIVITIES.TChatRoomActivity;
 import com.google.firebase.auth.FirebaseAuth;
@@ -114,6 +115,21 @@ public class TChatListAdapter extends RecyclerView.Adapter<TChatListAdapter.VH> 
             i.putExtra("studentUid", m.getStudentUid());
             context.startActivity(i);
         });
+
+        // ---------------- PROFILE IMAGE ----------------
+        if (!TextUtils.isEmpty(m.getProfileImageUrl())) {
+
+            Glide.with(context)
+                    .load(m.getProfileImageUrl())
+                    .placeholder(R.drawable.taklogo)   // default image
+                    .error(R.drawable.taklogo)
+                    .circleCrop()
+                    .into(h.imgStudent);
+
+        } else {
+            h.imgStudent.setImageResource(R.drawable.taklogo);
+        }
+
     }
 
     private int dp(int v) {

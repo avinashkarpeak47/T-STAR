@@ -18,8 +18,8 @@
         <!-- Student Image -->
         <ImageView
             android:id="@+id/imgStudent"
-            android:layout_width="52dp"
-            android:layout_height="52dp"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
             android:background="@drawable/tcircle_shape"
             android:clipToOutline="true"
             android:scaleType="centerCrop"

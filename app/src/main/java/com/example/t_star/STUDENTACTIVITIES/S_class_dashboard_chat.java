@@ -7,9 +7,12 @@ import android.widget.*;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.*;
+
+import com.bumptech.glide.Glide;
 import com.example.t_star.CHATDATA.*;
 import com.example.t_star.R;
 import com.example.t_star.REAL_TIME_DATABASE.PUT_ON_DATABASE.HelperClasses.ChatHelper;
+import com.google.android.material.appbar.MaterialToolbar;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.*;
 import java.util.*;
@@ -18,14 +21,13 @@ public class S_class_dashboard_chat extends AppCompatActivity {
 
     RecyclerView rv;
     EditText et;
-    ImageView send;
+    ImageView send, ivProfilePic;
     TextView tvName, tvEmail;
     LinearLayout empty;
-
     List<MessageModel> list = new ArrayList<>();
     MessageAdapter adapter;
 
-    String classId, myUid;
+    String classId, myUid , profileImageUrl;
     DatabaseReference msgRef;
     boolean isOpen = false;
 
@@ -33,6 +35,11 @@ public class S_class_dashboard_chat extends AppCompatActivity {
     protected void onCreate(Bundle b) {
         super.onCreate(b);
         setContentView(R.layout.activity_s_class_dashboard_chat);
+
+        // Toolbar
+        MaterialToolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        toolbar.setNavigationOnClickListener(v -> finish());
 
         classId = getIntent().getStringExtra("classId");
         myUid = FirebaseAuth.getInstance().getUid();
@@ -43,6 +50,8 @@ public class S_class_dashboard_chat extends AppCompatActivity {
         tvName = findViewById(R.id.tvUserName);
         tvEmail = findViewById(R.id.tvEmailID);
         empty = findViewById(R.id.layoutEmpty);
+        ivProfilePic = findViewById(R.id.imgProfile);
+
 
         rv.setLayoutManager(new LinearLayoutManager(this));
         adapter = new MessageAdapter(this, list, myUid);
@@ -74,18 +83,59 @@ public class S_class_dashboard_chat extends AppCompatActivity {
     }
 
     private void loadTeacher() {
-        FirebaseDatabase.getInstance().getReference("Classes")
-                .child(classId).child("teacherId")
-                .get().addOnSuccessListener(t -> {
-                    FirebaseDatabase.getInstance().getReference("Users")
-                            .child(t.getValue(String.class))
-                            .get().addOnSuccessListener(u -> {
-                                tvName.setText(u.child("firstname").getValue(String.class));
-                                tvEmail.setText(u.child("email").getValue(String.class));
+        FirebaseDatabase.getInstance()
+                .getReference("Classes")
+                .child(classId)
+                .child("teacherId")
+                .get()
+                .addOnSuccessListener(t -> {
+
+                    String teacherId = t.getValue(String.class);
+                    if (TextUtils.isEmpty(teacherId)) return;
+
+                    FirebaseDatabase.getInstance()
+                            .getReference("Users")
+                            .child(teacherId)
+                            .get()
+                            .addOnSuccessListener(u -> {
+
+                                // ---------- NAME ----------
+                                String firstName = u.child("firstname").getValue(String.class);
+                                String lastName  = u.child("lastname").getValue(String.class);
+
+                                String fullName =
+                                        (firstName != null ? firstName : "") +
+                                                " " +
+                                                (lastName != null ? lastName : "");
+
+                                tvName.setText(
+                                        !fullName.trim().isEmpty()
+                                                ? fullName
+                                                : "Teacher"
+                                );
+
+                                // ---------- EMAIL ----------
+                                String email = u.child("email").getValue(String.class);
+                                tvEmail.setText(email != null ? email : "");
+
+                                // ---------- PROFILE IMAGE ----------
+                                String profileImageUrl =
+                                        u.child("profileImageUrl").getValue(String.class);
+
+                                if (!TextUtils.isEmpty(profileImageUrl)) {
+                                    Glide.with(S_class_dashboard_chat.this)
+                                            .load(profileImageUrl)
+                                            .placeholder(R.drawable.taklogo)
+                                            .error(R.drawable.taklogo)
+                                            .circleCrop()
+                                            .into(ivProfilePic);
+                                } else {
+                                    ivProfilePic.setImageResource(R.drawable.taklogo);
+                                }
                             });
                 });
-
     }
+
 
     private void send() {
         String text = et.getText().toString().trim();

@@ -1,8 +1,10 @@
 package com.example.t_star.STUDENTACTIVITIES;
 
 import android.content.Intent;
+import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
+import android.provider.OpenableColumns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -78,7 +80,13 @@ public class S_Assignment_Submit_Activity extends AppCompatActivity {
 
         btnChooseFile.setOnClickListener(v -> openFilePicker());
         btnSubmit.setOnClickListener(v -> submitAssignment());
-        btnViewSubmission.setOnClickListener(v -> openSubmittedFile());
+
+        btnViewSubmission.setOnClickListener(v -> {
+            if (submittedFileUrl != null) {
+                openSubmittedFile(submittedFileUrl, txtSubmittedFile.getText().toString());
+
+            }
+        });
 
         loadAssignmentInfo();
         loadSubmissionState();
@@ -202,13 +210,14 @@ public class S_Assignment_Submit_Activity extends AppCompatActivity {
         uploadToCloudinary();
     }
 
-    private void uploadToCloudinary() {
+
+    /*private void uploadToCloudinary() {
         new Thread(() -> {
             try {
                 InputStream inputStream = getContentResolver().openInputStream(selectedFileUri);
 
                 Map<String , Object>options = new HashMap<>();
-                options.put("resources_type","raw");
+                options.put("resources_type","auto");
                 options.put("folder","assignment");
 
                 Map uploadResult = CloudinaryConfig.getInstance()
@@ -226,8 +235,61 @@ public class S_Assignment_Submit_Activity extends AppCompatActivity {
                 });
             }
         }).start();
+    }*/
+
+    private void uploadToCloudinary() {
+
+        new Thread(() -> {
+            try {
+                InputStream inputStream =
+                        getContentResolver().openInputStream(selectedFileUri);
+
+                String originalFileName = getFileName(selectedFileUri);
+
+                Map<String, Object> options = new HashMap<>();
+                options.put("resource_type", "raw"); // 🔥 VERY IMPORTANT
+                options.put("folder", "assignments");
+                options.put("public_id",originalFileName);
+                options.put("use_filename",true);
+                options.put("unique_filename",false);
+                options.put("overwrite",true);
+
+                Map uploadResult = CloudinaryConfig.getInstance()
+                        .uploader()
+                        .upload(inputStream, options);
+
+                String fileUrl = uploadResult.get("secure_url").toString();
+
+                runOnUiThread(() -> saveSubmission(fileUrl));
+
+            } catch (Exception e) {
+                runOnUiThread(() -> {
+                    btnSubmit.setEnabled(true);
+                    Toast.makeText(
+                            this,
+                            "Upload failed: " + e.getMessage(),
+                            Toast.LENGTH_LONG
+                    ).show();
+                });
+            }
+
+        }).start();
     }
 
+    private String getFileName(Uri uri) {
+        String result = "assignment_file";
+        Cursor cursor = getContentResolver()
+                .query(uri, null, null, null, null);
+
+        if (cursor != null) {
+            int nameIndex = cursor.getColumnIndex(OpenableColumns.DISPLAY_NAME);
+            if (cursor.moveToFirst()) {
+                result = cursor.getString(nameIndex);
+            }
+            cursor.close();
+        }
+        return result;
+    }
     private void saveSubmission(String fileUrl) {
         Map<String, Object> map = new HashMap<>();
         map.put("fileName", selectedFileName);
@@ -237,14 +299,61 @@ public class S_Assignment_Submit_Activity extends AppCompatActivity {
         map.put("marksObtained", 0);
 
         submissionRef.setValue(map)
-                .addOnSuccessListener(v ->
-                        Toast.makeText(this, "Assignment submitted", Toast.LENGTH_SHORT).show()
-                );
+                .addOnSuccessListener(v -> {
+
+                    Toast.makeText(this, "Assignment submitted", Toast.LENGTH_SHORT).show();
+
+                    // 🔹 Update local state immediately
+                    submittedFileUrl = fileUrl;
+
+                    // 🔹 Update UI immediately (NO refresh needed)
+                    txtStatus.setText("Submitted");
+                    btnSubmit.setVisibility(View.GONE);
+                    btnViewSubmission.setVisibility(View.VISIBLE);
+                    btnChooseFile.setEnabled(allowResubmission);
+
+                    // 🔹 Late badge check
+                    if (dueDateMillis > 0 && System.currentTimeMillis() > dueDateMillis) {
+                        txtLateBadge.setVisibility(View.VISIBLE);
+                    } else {
+                        txtLateBadge.setVisibility(View.GONE);
+                    }
+                })
+                .addOnFailureListener(e -> {
+                    btnSubmit.setEnabled(true);
+                    Toast.makeText(this, "Submission failed", Toast.LENGTH_SHORT).show();
+
+                });
     }
 
-    private void openSubmittedFile() {
+    /*private void openSubmittedFile() {
         if (submittedFileUrl != null)
             startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(submittedFileUrl)));
+    }*/
+
+    private void openSubmittedFile(String fileUrl, String fileName) {
+
+        Uri uri = Uri.parse(fileUrl);
+
+        String mimeType = FileUtils.getMimeType(fileName);
+
+        Intent intent = new Intent(Intent.ACTION_VIEW);
+        intent.setDataAndType(uri, mimeType);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+
+        Intent chooser = Intent.createChooser(intent, "Open assignment using");
+
+        try {
+            startActivity(chooser);
+        } catch (Exception e) {
+            Toast.makeText(
+                    this,
+                    "No application found to open this file type",
+                    Toast.LENGTH_LONG
+            ).show();
+
+        }
     }
 
     private void setFileIcon(String name) {

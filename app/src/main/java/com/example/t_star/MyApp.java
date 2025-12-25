@@ -22,7 +22,7 @@ public class MyApp extends Application implements Application.ActivityLifecycleC
         registerActivityLifecycleCallbacks(this);
 
         Map<String, Object> config = new HashMap<>();
-        config.put("cloud_name", "dxgl7lgyb");
+        config.put("cloud_name", "dr2qe01vj");
 
         MediaManager.init(this, config);
     }

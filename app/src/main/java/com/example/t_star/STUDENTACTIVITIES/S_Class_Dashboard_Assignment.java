@@ -55,7 +55,9 @@ public class S_Class_Dashboard_Assignment extends AppCompatActivity {
                 .child(classId);
 
         submissionRef = FirebaseDatabase.getInstance()
-                .getReference("Assignments_Submissions");
+                .getReference("Assignments_Submissions")
+                .child(classId);
+
 
         setupToolbar();
         setupViews();
@@ -115,8 +117,11 @@ public class S_Class_Dashboard_Assignment extends AppCompatActivity {
                             String subject = aSnap.child("subject")
                                     .getValue(String.class);
 
-                            Long dueDateMillis = aSnap.child("dueDateMillis")
-                                    .getValue(Long.class) != null ? aSnap.child("dueDateMillis").getValue(Long.class):0L;
+                            long dueDateMillis = aSnap.child("dueDateMillis")
+                                    .getValue(Long.class) != null
+                                    ? aSnap.child("dueDateMillis").getValue(Long.class)
+                                    : 0L;
+
 
                             int totalMarks =
                                     aSnap.child("totalMarks")
@@ -129,8 +134,7 @@ public class S_Class_Dashboard_Assignment extends AppCompatActivity {
                                     assignmentId,
                                     title,
                                     subject,
-                                    dueDateMillis != null
-                                            ? dueDateMillis : 0,
+                                    dueDateMillis,
                                     totalMarks
                             );
                         }

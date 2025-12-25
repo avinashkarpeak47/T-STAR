@@ -7,10 +7,7 @@ import android.provider.OpenableColumns;
 
 public class FileUtils {
 
-    /**
-     * Safely returns display file name from a content URI.
-     * Works with ACTION_OPEN_DOCUMENT and scoped storage.
-     */
+
     public static String getFileName(Context context, Uri uri) {
 
         if (uri == null) return "unknown_file";
@@ -53,5 +50,30 @@ public class FileUtils {
 
         return result;
 
+    }
+
+
+    public static String getMimeType(String fileName) {
+
+        fileName = fileName.toLowerCase();
+
+        if (fileName.endsWith(".pdf")) return "application/pdf";
+        if (fileName.endsWith(".doc")) return "application/msword";
+        if (fileName.endsWith(".docx"))
+            return "application/vnd.openxmlformats-officedocument.wordprocessingml.document";
+        if (fileName.endsWith(".ppt")) return "application/vnd.ms-powerpoint";
+        if (fileName.endsWith(".pptx"))
+            return "application/vnd.openxmlformats-officedocument.presentationml.presentation";
+        if (fileName.endsWith(".xls")) return "application/vnd.ms-excel";
+        if (fileName.endsWith(".xlsx"))
+            return "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
+        if (fileName.endsWith(".txt")) return "text/plain";
+        if (fileName.endsWith(".jpg") || fileName.endsWith(".jpeg"))
+            return "image/jpeg";
+        if (fileName.endsWith(".png")) return "image/png";
+        if (fileName.endsWith(".zip")) return "application/zip";
+
+
+        return"*/*";
     }
 }

@@ -150,19 +150,17 @@ public class TChatListAdapter extends RecyclerView.Adapter<TChatListAdapter.VH> 
             context.startActivity(i);
         });
 
-        // ---------------- PROFILE IMAGE ----------------
         if (!TextUtils.isEmpty(m.getProfileImageUrl())) {
-
             Glide.with(context)
                     .load(m.getProfileImageUrl())
-                    .placeholder(R.drawable.taklogo)   // default image
+                    .placeholder(R.drawable.taklogo)
                     .error(R.drawable.taklogo)
                     .circleCrop()
                     .into(h.imgStudent);
-
         } else {
             h.imgStudent.setImageResource(R.drawable.taklogo);
         }
+
 
     }
 

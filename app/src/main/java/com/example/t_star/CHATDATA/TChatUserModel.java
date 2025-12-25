@@ -39,6 +39,7 @@ public class TChatUserModel {
         this.profileImageUrl = profileImageUrl;
     }
 
+
     public void setLastMessage(String lastMessage) { this.lastMessage = lastMessage; }
     public void setLastSenderId(String lastSenderId) { this.lastSenderId = lastSenderId; }
     public void setLastDelivered(boolean lastDelivered) { this.lastDelivered = lastDelivered; }

@@ -1,5 +1,6 @@
 package com.example.t_star.TEACHERACTIVITIES;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -7,6 +8,8 @@ import android.widget.*;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.*;
+
+import com.bumptech.glide.Glide;
 import com.example.t_star.CHATDATA.*;
 import com.example.t_star.R;
 import com.example.t_star.REAL_TIME_DATABASE.PUT_ON_DATABASE.HelperClasses.ChatHelper;
@@ -17,7 +20,7 @@ public class TChatRoomActivity extends AppCompatActivity {
 
     RecyclerView rv;
     EditText et;
-    ImageView send;
+    ImageView send, ivProfilePic;
     TextView tvUsername, tvEmailid;
     LinearLayout layoutEmpty;
 
@@ -29,6 +32,7 @@ public class TChatRoomActivity extends AppCompatActivity {
 
     boolean isChatOpen = false;
 
+    @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle b) {
         super.onCreate(b);
@@ -44,6 +48,8 @@ public class TChatRoomActivity extends AppCompatActivity {
         tvUsername = findViewById(R.id.tvUserName);
         tvEmailid = findViewById(R.id.tvEmailID);
         layoutEmpty = findViewById(R.id.layoutEmpty);
+        ivProfilePic = findViewById(R.id.imgProfile);
+
 
         rv.setLayoutManager(new LinearLayoutManager(this));
         adapter = new MessageAdapter(this, list, myUid);
@@ -81,13 +87,34 @@ public class TChatRoomActivity extends AppCompatActivity {
                 .child(studentUid)
                 .get()
                 .addOnSuccessListener(u -> {
+
+                    String fname = u.child("firstname").getValue(String.class);
+                    String lname = u.child("lastname").getValue(String.class);
+                    String email = u.child("email").getValue(String.class);
+
                     tvUsername.setText(
-                            u.child("firstname").getValue(String.class) + " " +
-                                    u.child("lastname").getValue(String.class)
+                            (fname != null ? fname : "") + " " +
+                                    (lname != null ? lname : "")
                     );
-                    tvEmailid.setText(u.child("email").getValue(String.class));
+                    tvEmailid.setText(email != null ? email : "");
+
+                    // -------- PROFILE IMAGE --------
+                    String profileImageUrl =
+                            u.child("profileImageUrl").getValue(String.class);
+
+                    if (!TextUtils.isEmpty(profileImageUrl)) {
+                        Glide.with(TChatRoomActivity.this)
+                                .load(profileImageUrl)
+                                .placeholder(R.drawable.taklogo)
+                                .error(R.drawable.taklogo)
+                                .circleCrop()
+                                .into(ivProfilePic);
+                    } else {
+                        ivProfilePic.setImageResource(R.drawable.taklogo);
+                    }
                 });
     }
+
 
     private void sendMessage() {
         String text = et.getText().toString().trim();

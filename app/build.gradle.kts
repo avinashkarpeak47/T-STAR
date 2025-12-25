@@ -65,6 +65,7 @@ dependencies {
 
     //CLoudnary Dependency
     implementation ("com.cloudinary:cloudinary-android:2.5.0")
+    implementation ("com.cloudinary:cloudinary-android:2.3.1")
 
     implementation ("de.hdodenhof:circleimageview:3.1.0")
     // ---------- ANDROID CORE ----------

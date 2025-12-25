@@ -46,18 +46,16 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.TSTAR"
         tools:targetApi="31">
-
+        <activity
+            android:name=".TEACHERACTIVITIES.ResourcesUploadActivity"
+            android:exported="false" />
         <activity
             android:name=".STUDENTACTIVITIES.S_Assignment_Submit_Activity"
             android:exported="false" />
-
-
-
         <activity
             android:name=".TEACHERACTIVITIES.TMainActivity"
             android:exported="false"
             android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
-
         <activity
             android:name=".STUDENTACTIVITIES.S_class_dashboard_notifications"
             android:exported="false" />
@@ -91,7 +89,6 @@
         <activity
             android:name=".STUDENTACTIVITIES.S_Enroll_in_Class"
             android:exported="false" />
-
         <activity
             android:name=".TEACHERACTIVITIES.TCreateClassActivity"
             android:exported="false" />
@@ -121,7 +118,6 @@
         <activity
             android:name=".TEACHERACTIVITIES.TAttendanceActivity"
             android:exported="false" />
-
         <activity
             android:name=".TEACHERACTIVITIES.TCreateNewAssignActivity"
             android:exported="false" />

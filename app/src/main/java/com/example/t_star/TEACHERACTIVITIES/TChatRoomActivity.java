@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.*;
 
 import com.bumptech.glide.Glide;
 import com.example.t_star.CHATDATA.*;
+import com.example.t_star.MyApp;
 import com.example.t_star.R;
 import com.example.t_star.REAL_TIME_DATABASE.GET_FROM_DATABASE.User_Data_Fetcher;
 import com.example.t_star.REAL_TIME_DATABASE.PUT_ON_DATABASE.HelperClasses.ChatHelper;
@@ -133,7 +134,6 @@ public class TChatRoomActivity extends AppCompatActivity {
                 });
     }
 
-
     private void sendMessage() {
         String text = et.getText().toString().trim();
         if (TextUtils.isEmpty(text)) return;
@@ -170,13 +170,18 @@ public class TChatRoomActivity extends AppCompatActivity {
 
                     // 🔥 ONLY incoming (student → teacher)
                     if (!m.getSenderId().equals(myUid)) {
-                        if (!m.isDelivered()) {
+
+                        // 🔥 DELIVERED: app open anywhere
+                        if (MyApp.isAppInForeground && !m.isDelivered()) {
                             ChatHelper.markDelivered(classId, studentUid, d.getKey());
                         }
+
+                        // 🔥 SEEN: only when chat open
                         if (isChatOpen && !m.isSeen()) {
                             ChatHelper.markSeen(classId, studentUid, d.getKey());
                         }
                     }
+
                 }
 
                 adapter.notifyDataSetChanged();

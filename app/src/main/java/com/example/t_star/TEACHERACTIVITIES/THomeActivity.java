@@ -10,6 +10,7 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 
+import com.example.t_star.CHATDATA.MessageDeliveryObserver;
 import com.example.t_star.R;
 import com.example.t_star.TEACHERACTIVITIES.TFragment.THomeFragment;
 import com.example.t_star.TEACHERACTIVITIES.TFragment.TNotificationFragment;
@@ -17,12 +18,16 @@ import com.example.t_star.TSTAR_Entry_Activity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 public class THomeActivity extends AppCompatActivity {
 
     BottomNavigationView bottomNav;
     DrawerLayout drawerLayout;
     NavigationView navigationView;
+
+    private FirebaseUser currentUser;
+    private String myUid;
 
 
     // 🔥 CLASS SESSION DATA
@@ -34,6 +39,16 @@ public class THomeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_thome);
 
+        // user id fetch
+        currentUser = FirebaseAuth.getInstance().getCurrentUser();
+        if (currentUser == null) {
+            Toast.makeText(THomeActivity.this, "No authenticated user", Toast.LENGTH_SHORT).show();
+            return ;
+        }
+        myUid = currentUser.getUid();
+
+
+
         // ================= GET CLASS DATA =================
         classId = getIntent().getStringExtra("classId");
         className = getIntent().getStringExtra("className");
@@ -43,6 +58,9 @@ public class THomeActivity extends AppCompatActivity {
             finish();
             return;
         }
+
+        MessageDeliveryObserver.start(classId, myUid); //msg delevered tick
+
 
         bottomNav = findViewById(R.id.bottomNav);
 
@@ -71,6 +89,10 @@ public class THomeActivity extends AppCompatActivity {
             }
             return true;
         });
+    }
+    protected void onStart() {
+        super.onStart();
+        MessageDeliveryObserver.start(classId, myUid); //msg delevered tick
     }
 
     // ================= LOAD FRAGMENT =================

@@ -2,9 +2,29 @@
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:padding="6dp">
+
+    <TextView
+        android:id="@+id/tvDateHeader"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:background="@drawable/tbg_msg_date"
+        android:paddingLeft="10dp"
+        android:paddingTop="5dp"
+        android:paddingRight="10dp"
+        android:paddingBottom="5dp"
+        android:text="hii akn"
+        android:textColor="@color/dark_greay"
+        android:textSize="12sp"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="@+id/layoutSent"
+        app:layout_constraintStart_toStartOf="@+id/layoutReceived"
+        app:layout_constraintTop_toTopOf="parent" />
+
 
     <!-- ================= RECEIVED MESSAGE (LEFT) ================= -->
     <LinearLayout
@@ -16,7 +36,7 @@
         android:padding="5dp"
         android:visibility="visible"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toBottomOf="@+id/tvDateHeader">
 
         <TextView
             android:id="@+id/tvRecvMsg"
@@ -31,11 +51,12 @@
             android:id="@+id/tvRecvTime"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
             android:layout_gravity="end"
+            android:layout_marginTop="4dp"
             android:text="10:45 AM"
-            android:textSize="11sp"
-            android:textColor="#777777" />
+            android:textColor="#777777"
+            android:textSize="11sp" />
+
     </LinearLayout>
 
     <!-- ================= SENT MESSAGE (RIGHT) ================= -->
@@ -48,42 +69,45 @@
         android:padding="5dp"
         android:visibility="visible"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toBottomOf="@+id/tvDateHeader">
 
         <TextView
             android:id="@+id/tvSendMsg"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Sent message"
             android:maxWidth="330dp"
+            android:text="Sent message"
             android:textColor="@color/black"
             android:textSize="15sp" />
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
             android:layout_gravity="end"
-            android:orientation="horizontal"
-            android:gravity="center_vertical">
+            android:layout_marginTop="4dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
 
             <TextView
                 android:id="@+id/tvSendTime"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="10:46 AM"
-                android:textSize="11sp"
-                android:textColor="#777777" />
-<!--state show : single tick greay - send , double tick - reach receiver devaice , double tick green colour - seen -->
+                android:textColor="#777777"
+                android:textSize="11sp" />
+            <!--state show : single tick greay - send , double tick - reach receiver devaice , double tick green colour - seen -->
             <ImageView
                 android:id="@+id/imgTick"
                 android:layout_width="16dp"
                 android:layout_height="16dp"
                 android:layout_marginStart="4dp"
                 android:src="@drawable/tsingle_tick"
-                app:tint="@color/dark_greay"
-                />
+                app:tint="@color/dark_greay" />
         </LinearLayout>
+
+
     </LinearLayout>
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

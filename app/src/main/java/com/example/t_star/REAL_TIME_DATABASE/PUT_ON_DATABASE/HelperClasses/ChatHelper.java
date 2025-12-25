@@ -6,6 +6,7 @@ import com.google.firebase.database.*;
 import java.util.HashMap;
 import java.util.Map;
 
+
 public class ChatHelper {
 
     private static DatabaseReference root() {
@@ -71,39 +72,31 @@ public class ChatHelper {
     }
 
     // ================= MESSAGE STATUS =================
-    public static void markDelivered(
-            @NonNull String classId,
-            @NonNull String studentUid,
-            @NonNull String msgId
-    ) {
-        root().child(classId)
-                .child(studentUid)
-                .child("messages")
-                .child(msgId)
-                .child("delivered")
-                .setValue(true);
-
-        root().child(classId)
-                .child(studentUid)
-                .child("lastDelivered")
-                .setValue(true);
+    public static void markDelivered(String classId, String studentUid, String msgId) {
+        DatabaseReference ref = root().child(classId).child(studentUid);
+        ref.child("messages").child(msgId).child("delivered").setValue(true);
+        ref.child("lastDelivered").setValue(true);
     }
 
-    public static void markSeen(
-            @NonNull String classId,
-            @NonNull String studentUid,
-            @NonNull String msgId
-    ) {
-        root().child(classId)
-                .child(studentUid)
-                .child("messages")
-                .child(msgId)
-                .child("seen")
-                .setValue(true);
-
-        root().child(classId)
-                .child(studentUid)
-                .child("lastSeen")
-                .setValue(true);
+    public static void markSeen(String classId, String studentUid, String msgId) {
+        DatabaseReference ref = root().child(classId).child(studentUid);
+        ref.child("messages").child(msgId).child("seen").setValue(true);
+        ref.child("lastSeen").setValue(true);
     }
+
+    /*
+    // ================= MESSAGE STATUS =================
+    public static void markDelivered(String classId, String studentUid, String msgId) {
+        DatabaseReference ref = root().child(classId).child(studentUid);
+        ref.child("messages").child(msgId).child("delivered").setValue(true);
+        ref.child("lastDelivered").setValue(true);
+    }
+
+    public static void markSeen(String classId, String studentUid, String msgId) {
+        DatabaseReference ref = root().child(classId).child(studentUid);
+        ref.child("messages").child(msgId).child("seen").setValue(true);
+        ref.child("lastSeen").setValue(true);
+    }
+    */
+
 }

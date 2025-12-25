@@ -119,7 +119,6 @@ public class TChatsActivity extends AppCompatActivity {
                                 public void onCancelled(@NonNull DatabaseError e) {}
                             });
 
-
                     all.add(m);
                 }
 

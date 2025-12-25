@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.*;
 
 import com.bumptech.glide.Glide;
 import com.example.t_star.CHATDATA.*;
+import com.example.t_star.MyApp;
 import com.example.t_star.R;
 import com.example.t_star.REAL_TIME_DATABASE.PUT_ON_DATABASE.HelperClasses.ChatHelper;
 import com.google.android.material.appbar.MaterialToolbar;
@@ -79,7 +80,7 @@ public class S_class_dashboard_chat extends AppCompatActivity {
     @Override protected void onPause() {
         super.onPause();
         isOpen = false;
-        ChatHelper.resetUnreadCount(classId, myUid); // ✅
+//        ChatHelper.resetUnreadCount(classId, myUid); // ✅
     }
 
     private void loadTeacher() {
@@ -113,6 +114,7 @@ public class S_class_dashboard_chat extends AppCompatActivity {
                                                 ? fullName
                                                 : "Teacher"
                                 );
+
 
                                 // ---------- EMAIL ----------
                                 String email = u.child("email").getValue(String.class);
@@ -172,12 +174,16 @@ public class S_class_dashboard_chat extends AppCompatActivity {
                     list.add(m);
 
                     if (!m.getSenderId().equals(myUid)) {
-                        if (!m.isDelivered())
-                            ChatHelper.markDelivered(classId, myUid, d.getKey());
 
-                        if (isOpen && !m.isSeen())
+                        if (MyApp.isAppInForeground && !m.isDelivered()) {
+                            ChatHelper.markDelivered(classId, myUid, d.getKey());
+                        }
+
+                        if (isOpen && !m.isSeen()) {
                             ChatHelper.markSeen(classId, myUid, d.getKey());
+                        }
                     }
+
                 }
                 adapter.notifyDataSetChanged();
                 rv.scrollToPosition(list.size() - 1);

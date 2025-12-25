@@ -9,12 +9,8 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 
-import com.example.t_star.CHATDATA.MessageDeliveryObserver;
 import com.example.t_star.R;
-import com.example.t_star.TEACHERACTIVITIES.THomeActivity;
 import com.google.android.material.appbar.MaterialToolbar;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -28,8 +24,6 @@ public class S_Class_Dashboard_Activity extends AppCompatActivity {
             cardChat, cardEvents, cardAssignment, cardNotification;
 
     private String classId;
-    private FirebaseUser currentUser;
-    private String myUid;
 
     TextView tv_ClassId , tv_ClassName , tv_Subject , tv_TeacherName;
 
@@ -37,16 +31,6 @@ public class S_Class_Dashboard_Activity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_s_class_dashboard);
-
-
-        // user id fetch
-        currentUser = FirebaseAuth.getInstance().getCurrentUser();
-        if (currentUser == null) {
-            Toast.makeText(S_Class_Dashboard_Activity.this, "No authenticated user", Toast.LENGTH_SHORT).show();
-            return ;
-        }
-        myUid = currentUser.getUid();
-        MessageDeliveryObserver.start(classId, myUid); //msg delevered tick
 
         // Receive classId
         classId = getIntent().getStringExtra("classId");
@@ -90,10 +74,6 @@ public class S_Class_Dashboard_Activity extends AppCompatActivity {
         toolbar.setNavigationOnClickListener(v -> finish());
 
         loadClassHeader();
-    }
-    protected void onStart() {
-        super.onStart();
-        MessageDeliveryObserver.start(classId, myUid); //msg delevered tick
     }
 
     private void openFeature(Class<?> activityClass) {
@@ -151,5 +131,7 @@ public class S_Class_Dashboard_Activity extends AppCompatActivity {
                     public void onCancelled(@NonNull DatabaseError error) {}
                 });
     }
+
+
 
 }

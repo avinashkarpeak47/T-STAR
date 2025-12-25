@@ -50,7 +50,7 @@ public class TChatListAdapter extends RecyclerView.Adapter<TChatListAdapter.VH> 
         h.tvName.setText(m.getName());
         h.tvEmail.setText(m.getEmail());
 
-        // ---------------- NO LAST MESSAGE ----------------
+        /*// ---------------- NO LAST MESSAGE ----------------
         if (TextUtils.isEmpty(m.getLastMessage())) {
             h.tvLastMsg.setText("");
             h.tvTime.setText("");
@@ -97,6 +97,40 @@ public class TChatListAdapter extends RecyclerView.Adapter<TChatListAdapter.VH> 
                 // ✔ sent
                 h.imgTick.setImageResource(R.drawable.tsingle_tick);
                 h.imgTick.setColorFilter(context.getColor(R.color.dark_greay));
+            }
+        }
+*/
+        // ---------------- NO LAST MESSAGE ----------------
+        if (TextUtils.isEmpty(m.getLastMessage())) {
+            h.tvTime.setText("");
+            h.tvLastMsg.setText("");
+            h.imgTick.setVisibility(View.GONE);
+            h.tvMsgNo.setVisibility(View.GONE);
+        } else {
+            // ---------------- LAST MESSAGE ----------------
+            h.tvLastMsg.setText(m.getLastMessage());
+            h.tvTime.setText(
+                    m.getLastTimestamp() > 0 ? TimeUtil.format(m.getLastTimestamp()) : ""
+            );
+
+            boolean isLastFromMe = myUid.equals(m.getLastSenderId());
+            if (!isLastFromMe) {
+                h.imgTick.setVisibility(View.GONE);
+                h.tvLastMsg.setPadding(dp(10), 0, 0, 0);
+            } else {
+                h.imgTick.setVisibility(View.VISIBLE);
+                h.tvLastMsg.setPadding(0, 0, 0, 0);
+
+                if (m.isLastSeen()) {
+                    h.imgTick.setImageResource(R.drawable.tdouble_tick);
+                    h.imgTick.setColorFilter(context.getColor(R.color.green));
+                } else if (m.isLastDelivered()) {
+                    h.imgTick.setImageResource(R.drawable.tdouble_tick);
+                    h.imgTick.setColorFilter(context.getColor(R.color.dark_greay));
+                } else {
+                    h.imgTick.setImageResource(R.drawable.tsingle_tick);
+                    h.imgTick.setColorFilter(context.getColor(R.color.dark_greay));
+                }
             }
         }
 

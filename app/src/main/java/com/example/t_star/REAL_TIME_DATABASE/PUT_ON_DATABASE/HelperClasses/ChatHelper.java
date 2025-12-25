@@ -22,6 +22,12 @@ public class ChatHelper {
             @NonNull String classId,
             @NonNull String studentUid
     ) {
+        DatabaseReference ref =
+                FirebaseDatabase.getInstance()
+                        .getReference("Chats")
+                        .child(classId)
+                        .child(studentUid);
+
         Map<String, Object> init = new HashMap<>();
         init.put("lastMessage", "");
         init.put("lastTimestamp", 0);
@@ -30,8 +36,12 @@ public class ChatHelper {
         init.put("lastDelivered", false);
         init.put("lastSeen", false);
 
-        root().child(classId).child(studentUid).updateChildren(init);
+        ref.updateChildren(init);
+
+        // ✅ VERY IMPORTANT
+        ref.child("messages").setValue(""); // create messages node
     }
+
 
     // ================= CHAT LIST META =================
     public static void updateLastMessage(
@@ -71,6 +81,7 @@ public class ChatHelper {
                 .setValue(0);
     }
 
+
     // ================= MESSAGE STATUS =================
     public static void markDelivered(String classId, String studentUid, String msgId) {
         DatabaseReference ref = root().child(classId).child(studentUid);
@@ -84,19 +95,5 @@ public class ChatHelper {
         ref.child("lastSeen").setValue(true);
     }
 
-    /*
-    // ================= MESSAGE STATUS =================
-    public static void markDelivered(String classId, String studentUid, String msgId) {
-        DatabaseReference ref = root().child(classId).child(studentUid);
-        ref.child("messages").child(msgId).child("delivered").setValue(true);
-        ref.child("lastDelivered").setValue(true);
-    }
-
-    public static void markSeen(String classId, String studentUid, String msgId) {
-        DatabaseReference ref = root().child(classId).child(studentUid);
-        ref.child("messages").child(msgId).child("seen").setValue(true);
-        ref.child("lastSeen").setValue(true);
-    }
-    */
 
 }

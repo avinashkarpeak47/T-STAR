@@ -15,7 +15,6 @@ import com.example.t_star.CHATDATA.*;
 import com.example.t_star.R;
 import com.example.t_star.REAL_TIME_DATABASE.GET_FROM_DATABASE.User_Data_Fetcher;
 import com.example.t_star.REAL_TIME_DATABASE.PUT_ON_DATABASE.ModelClasses.Updated_User_Model;
-import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.tabs.TabLayout;
 import com.google.firebase.database.*;
 
@@ -40,10 +39,7 @@ public class TChatsActivity extends AppCompatActivity {
         super.onCreate(b);
         setContentView(R.layout.activity_tchats);
 
-        // Toolbar
-        MaterialToolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        toolbar.setNavigationOnClickListener(v -> finish());
+
 
         classId = getIntent().getStringExtra("classId");
         if (classId == null) {
@@ -118,6 +114,7 @@ public class TChatsActivity extends AppCompatActivity {
                                 @Override
                                 public void onCancelled(@NonNull DatabaseError e) {}
                             });
+
 
                     all.add(m);
                 }

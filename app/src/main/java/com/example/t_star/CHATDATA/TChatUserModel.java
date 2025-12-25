@@ -6,6 +6,7 @@ public class TChatUserModel {
     private String name;
     private String email;
 
+
     // chat meta
     private String lastMessage;
     private long lastTimestamp;

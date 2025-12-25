@@ -2,6 +2,7 @@ package com.example.t_star.TEACHERACTIVITIES;
 
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -9,12 +10,16 @@ import androidx.appcompat.widget.SearchView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.example.t_star.CHATDATA.*;
 import com.example.t_star.R;
+import com.example.t_star.REAL_TIME_DATABASE.GET_FROM_DATABASE.User_Data_Fetcher;
+import com.example.t_star.REAL_TIME_DATABASE.PUT_ON_DATABASE.ModelClasses.Updated_User_Model;
 import com.google.android.material.tabs.TabLayout;
 import com.google.firebase.database.*;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class TChatsActivity extends AppCompatActivity {
@@ -53,7 +58,6 @@ public class TChatsActivity extends AppCompatActivity {
         setupSearch();
         loadChats();
     }
-
     private void loadChats() {
         DatabaseReference chatRef =
                 FirebaseDatabase.getInstance().getReference("Chats").child(classId);
@@ -67,43 +71,55 @@ public class TChatsActivity extends AppCompatActivity {
                     String studentUid = d.getKey();
                     if (studentUid == null) continue;
 
-                    TChatUserModel model = new TChatUserModel();
-                    model.setStudentUid(studentUid);
+                    TChatUserModel m = new TChatUserModel();
+                    m.setStudentUid(studentUid);
+                    m.setLastMessage(d.child("lastMessage").getValue(String.class));
+                    m.setLastSenderId(d.child("lastSenderId").getValue(String.class));
+                    m.setLastDelivered(Boolean.TRUE.equals(d.child("lastDelivered").getValue(Boolean.class)));
+                    m.setLastSeen(Boolean.TRUE.equals(d.child("lastSeen").getValue(Boolean.class)));
 
-                    model.setLastMessage(d.child("lastMessage").getValue(String.class));
                     Long ts = d.child("lastTimestamp").getValue(Long.class);
                     Integer uc = d.child("unreadCount").getValue(Integer.class);
 
-                    if (ts != null) model.setLastTimestamp(ts);
-                    if (uc != null) model.setUnreadCount(uc);
+                    m.setLastTimestamp(ts != null ? ts : 0);
+                    m.setUnreadCount(uc != null ? uc : 0);
 
-                    // 🔥 FETCH STUDENT NAME & EMAIL
-                    FirebaseDatabase.getInstance()
-                            .getReference("Users")
+                    FirebaseDatabase.getInstance().getReference("Users")
                             .child(studentUid)
                             .addListenerForSingleValueEvent(new ValueEventListener() {
                                 @Override
                                 public void onDataChange(@NonNull DataSnapshot u) {
-                                    model.setName(
+                                    m.setName(
                                             u.child("firstname").getValue(String.class) + " " +
                                                     u.child("lastname").getValue(String.class)
                                     );
-                                    model.setEmail(u.child("email").getValue(String.class));
+                                    m.setEmail(u.child("email").getValue(String.class));
                                     adapter.notifyDataSetChanged();
                                 }
 
-                                @Override
-                                public void onCancelled(@NonNull DatabaseError error) {}
+                                @Override public void onCancelled(@NonNull DatabaseError e) {}
                             });
 
-                    all.add(model);
+                    all.add(m);
                 }
+
+                // ✅ SORT: latest message first, empty chats last
+                Collections.sort(all, (a, b) -> {
+                    if (a.getLastTimestamp() == 0 && b.getLastTimestamp() == 0) return 0;
+                    if (a.getLastTimestamp() == 0) return 1;
+                    if (b.getLastTimestamp() == 0) return -1;
+                    return Long.compare(b.getLastTimestamp(), a.getLastTimestamp());
+                });
+
                 applyFilters();
             }
 
             @Override public void onCancelled(@NonNull DatabaseError error) {}
         });
     }
+
+
+
 
 
     private void setupSearch() {

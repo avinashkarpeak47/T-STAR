@@ -3,39 +3,34 @@ package com.example.t_star.TEACHERACTIVITIES;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
-import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.TextView;
-
+import android.widget.*;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.*;
 
-import com.example.t_star.CHATDATA.MessageAdapter;
-import com.example.t_star.CHATDATA.MessageModel;
+import com.bumptech.glide.Glide;
+import com.example.t_star.CHATDATA.*;
 import com.example.t_star.R;
+import com.example.t_star.REAL_TIME_DATABASE.GET_FROM_DATABASE.User_Data_Fetcher;
 import com.example.t_star.REAL_TIME_DATABASE.PUT_ON_DATABASE.HelperClasses.ChatHelper;
+import com.example.t_star.REAL_TIME_DATABASE.PUT_ON_DATABASE.ModelClasses.Updated_User_Model;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.*;
-
-import java.util.ArrayList;
-import java.util.List;
-
+import java.util.*;
 public class TChatRoomActivity extends AppCompatActivity {
 
     RecyclerView rv;
     EditText et;
-    ImageView send;
+    ImageView send , ivProfilePic;
     TextView tvUsername, tvEmailid;
-    LinearLayout linearLayoutEmpty;
+    LinearLayout layoutEmpty;
 
     List<MessageModel> list = new ArrayList<>();
     MessageAdapter adapter;
 
     String classId, studentUid, myUid;
     DatabaseReference msgRef;
+    String profileImageUrl;
 
     boolean isChatOpen = false;
 
@@ -48,13 +43,16 @@ public class TChatRoomActivity extends AppCompatActivity {
         studentUid = getIntent().getStringExtra("studentUid");
         myUid = FirebaseAuth.getInstance().getUid();
 
+
         rv = findViewById(R.id.rvMessages);
         et = findViewById(R.id.etMessage);
         send = findViewById(R.id.btnSend);
         tvUsername = findViewById(R.id.tvUserName);
         tvEmailid = findViewById(R.id.tvEmailID);
+        layoutEmpty = findViewById(R.id.layoutEmpty);
+        ivProfilePic = findViewById(R.id.imgProfile);
 
-        linearLayoutEmpty = findViewById(R.id.layoutEmpty);
+
 
         rv.setLayoutManager(new LinearLayoutManager(this));
         adapter = new MessageAdapter(this, list, myUid);
@@ -66,12 +64,7 @@ public class TChatRoomActivity extends AppCompatActivity {
                 .child(studentUid)
                 .child("messages");
 
-        // 🔥 Load current student info
         loadStudentInfo();
-
-        // 🔥 Teacher opened chat → reset unread (NOT seen)
-        ChatHelper.resetUnreadCount(classId, studentUid);
-
         listenMessages();
 
         send.setOnClickListener(v -> sendMessage());
@@ -87,91 +80,89 @@ public class TChatRoomActivity extends AppCompatActivity {
     protected void onPause() {
         super.onPause();
         isChatOpen = false;
+        ChatHelper.resetUnreadCount(classId, studentUid);
+
     }
 
-    // =====================================================
-    // LOAD STUDENT NAME & EMAIL (CHAT HEADER)
-    // =====================================================
     private void loadStudentInfo() {
         FirebaseDatabase.getInstance()
                 .getReference("Users")
                 .child(studentUid)
-                .addListenerForSingleValueEvent(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot s) {
-                        String fname = s.child("firstname").getValue(String.class);
-                        String lname = s.child("lastname").getValue(String.class);
-                        String email = s.child("email").getValue(String.class);
-
-                        tvUsername.setText(
-                                (fname != null ? fname : "Student") + " " +
-                                        (lname != null ? lname : "")
-                        );
-
-                        tvEmailid.setText(email != null ? email : "");
-                    }
-
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError e) { }
+                .get()
+                .addOnSuccessListener(u -> {
+                    tvUsername.setText(
+                            u.child("firstname").getValue(String.class) + " " +
+                                    u.child("lastname").getValue(String.class)
+                    );
+                    tvEmailid.setText(u.child("email").getValue(String.class));
                 });
+
+        // Load Student Profile photo
+
+        User_Data_Fetcher.getUserData(studentUid, new User_Data_Fetcher.UserDataCallback() {
+            @Override
+            public void onSuccess(Updated_User_Model user) {
+
+                profileImageUrl = user.profileImageUrl;   // 🔥 ADD THIS
+
+                if (user.profileImageUrl != null && !user.profileImageUrl.isEmpty()) {
+                    Glide.with(TChatRoomActivity.this)
+                            .load(user.profileImageUrl)
+                            .centerCrop()
+                            .circleCrop()
+                            .into(ivProfilePic);
+                }
+            }
+            @Override
+            public void onFailure(Exception e) {
+                Toast.makeText(TChatRoomActivity.this,
+                        "Failed to load profile: " + e.getMessage(),
+                        Toast.LENGTH_LONG).show();
+            }
+        });
     }
 
-    // =====================================================
-    // SEND MESSAGE (TEACHER → STUDENT)
-    // =====================================================
     private void sendMessage() {
         String text = et.getText().toString().trim();
         if (TextUtils.isEmpty(text)) return;
 
         String id = msgRef.push().getKey();
-        if (id == null) return;
-
         MessageModel m = new MessageModel(myUid, text);
+
         msgRef.child(id).setValue(m);
         msgRef.child(id).child("timestamp").setValue(ServerValue.TIMESTAMP);
 
-        // 🔥 Update chat meta only
-        ChatHelper.updateLastMessage(classId, studentUid, text);
-
+        ChatHelper.updateLastMessage(classId, studentUid, text, myUid);
         et.setText("");
     }
 
-    // =====================================================
-    // LISTEN MESSAGES (CORRECT WHATSAPP LOGIC)
-    // =====================================================
     private void listenMessages() {
         msgRef.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-
+            @Override public void onDataChange(@NonNull DataSnapshot snap) {
                 list.clear();
-                if (!snapshot.exists() || snapshot.getChildrenCount() == 0) {
-                    linearLayoutEmpty.setVisibility(View.VISIBLE);
+
+                if (!snap.exists()) {
+                    layoutEmpty.setVisibility(View.VISIBLE);
                     rv.setVisibility(View.GONE);
-                    adapter.notifyDataSetChanged();
                     return;
                 }
 
-                // 🔥 CHAT EXISTS
-                linearLayoutEmpty.setVisibility(View.GONE);
+                layoutEmpty.setVisibility(View.GONE);
                 rv.setVisibility(View.VISIBLE);
-                for (DataSnapshot d : snapshot.getChildren()) {
+
+                for (DataSnapshot d : snap.getChildren()) {
                     MessageModel m = d.getValue(MessageModel.class);
                     if (m == null) continue;
 
                     list.add(m);
 
-                    // 🔥 ONLY messages SENT BY STUDENT
+                    // 🔥 ONLY incoming (student → teacher)
                     if (!m.getSenderId().equals(myUid)) {
-
-                        // 1️⃣ delivered → when message reaches device
                         if (!m.isDelivered()) {
-                            d.getRef().child("delivered").setValue(true);
+                            ChatHelper.markDelivered(classId, studentUid, d.getKey());
                         }
-
-                        // 2️⃣ seen → ONLY when chat is open
                         if (isChatOpen && !m.isSeen()) {
-                            d.getRef().child("seen").setValue(true);
+                            ChatHelper.markSeen(classId, studentUid, d.getKey());
                         }
                     }
                 }
@@ -180,8 +171,10 @@ public class TChatRoomActivity extends AppCompatActivity {
                 rv.scrollToPosition(list.size() - 1);
             }
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError e) { }
+            @Override public void onCancelled(@NonNull DatabaseError e) {}
         });
     }
+
+
+
 }

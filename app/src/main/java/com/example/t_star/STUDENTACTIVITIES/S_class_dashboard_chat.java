@@ -16,181 +16,123 @@ import java.util.*;
 
 public class S_class_dashboard_chat extends AppCompatActivity {
 
-    RecyclerView rvMessages;
-    EditText etMessage;
-    ImageView btnSend;
-    TextView tvUsername, tvEmailid;
-    LinearLayout linearLayoutEmpty;
+    RecyclerView rv;
+    EditText et;
+    ImageView send;
+    TextView tvName, tvEmail;
+    LinearLayout empty;
 
     List<MessageModel> list = new ArrayList<>();
     MessageAdapter adapter;
 
-    String classId, studentUid;
+    String classId, myUid;
     DatabaseReference msgRef;
-
-    boolean isChatOpen = false; // 🔥 important for seen logic
+    boolean isOpen = false;
 
     @Override
     protected void onCreate(Bundle b) {
         super.onCreate(b);
         setContentView(R.layout.activity_s_class_dashboard_chat);
 
-        // ================= DATA =================
         classId = getIntent().getStringExtra("classId");
-        studentUid = FirebaseAuth.getInstance().getUid();
+        myUid = FirebaseAuth.getInstance().getUid();
 
-        if (classId == null || studentUid == null) {
-            finish();
-            return;
-        }
+        rv = findViewById(R.id.rvMessages);
+        et = findViewById(R.id.etMessage);
+        send = findViewById(R.id.btnSend);
+        tvName = findViewById(R.id.tvUserName);
+        tvEmail = findViewById(R.id.tvEmailID);
+        empty = findViewById(R.id.layoutEmpty);
 
-        // ================= VIEWS =================
-        rvMessages = findViewById(R.id.rvMessages);
-        etMessage = findViewById(R.id.etMessage);
-        btnSend = findViewById(R.id.btnSend);
-        tvUsername = findViewById(R.id.tvUserName);
-        tvEmailid = findViewById(R.id.tvEmailID);
-        linearLayoutEmpty = findViewById(R.id.layoutEmpty);
+        rv.setLayoutManager(new LinearLayoutManager(this));
+        adapter = new MessageAdapter(this, list, myUid);
+        rv.setAdapter(adapter);
 
-        // ================= RECYCLER =================
-        rvMessages.setLayoutManager(new LinearLayoutManager(this));
-        adapter = new MessageAdapter(this, list, studentUid);
-        rvMessages.setAdapter(adapter);
-
-        // ================= FIREBASE =================
         msgRef = FirebaseDatabase.getInstance()
                 .getReference("Chats")
                 .child(classId)
-                .child(studentUid)
+                .child(myUid)
                 .child("messages");
 
-        // ================= LOAD TEACHER INFO =================
-        loadTeacherInfo();
+        loadTeacher();
+        listen();
 
-        // ================= LISTEN MESSAGES =================
-        listenMessages();
-
-        // 🔥 student opened chat → ONLY reset unread (NO seen here)
-        ChatHelper.resetUnreadCount(classId, studentUid);
-
-        btnSend.setOnClickListener(v -> sendMessage());
+        send.setOnClickListener(v -> send());
     }
 
-    @Override
-    protected void onResume() {
+    @Override protected void onResume() {
         super.onResume();
-        isChatOpen = true;
+        isOpen = true;
+
+
     }
 
-    @Override
-    protected void onPause() {
+    @Override protected void onPause() {
         super.onPause();
-        isChatOpen = false;
+        isOpen = false;
+        ChatHelper.resetUnreadCount(classId, myUid); // ✅
     }
 
-    // =====================================================
-    // LOAD TEACHER NAME & EMAIL
-    // =====================================================
-    private void loadTeacherInfo() {
-        FirebaseDatabase.getInstance()
-                .getReference("Classes")
-                .child(classId)
-                .child("teacherId")
-                .get()
-                .addOnSuccessListener(snapshot -> {
-                    String teacherId = snapshot.getValue(String.class);
-                    if (teacherId == null) return;
-
-                    FirebaseDatabase.getInstance()
-                            .getReference("Users")
-                            .child(teacherId)
-                            .get()
-                            .addOnSuccessListener(u -> {
-                                String fname = u.child("firstname").getValue(String.class);
-                                String lname = u.child("lastname").getValue(String.class);
-                                String email = u.child("email").getValue(String.class);
-
-                                String name = (fname != null ? fname : "") + " " +
-                                        (lname != null ? lname : "");
-
-                                tvUsername.setText(!name.trim().isEmpty() ? name : "Teacher");
-                                tvEmailid.setText(email != null ? email : "");
+    private void loadTeacher() {
+        FirebaseDatabase.getInstance().getReference("Classes")
+                .child(classId).child("teacherId")
+                .get().addOnSuccessListener(t -> {
+                    FirebaseDatabase.getInstance().getReference("Users")
+                            .child(t.getValue(String.class))
+                            .get().addOnSuccessListener(u -> {
+                                tvName.setText(u.child("firstname").getValue(String.class));
+                                tvEmail.setText(u.child("email").getValue(String.class));
                             });
                 });
+
     }
 
-    // =====================================================
-    // SEND MESSAGE (STUDENT → TEACHER)
-    // =====================================================
-    private void sendMessage() {
-        String text = etMessage.getText().toString().trim();
+    private void send() {
+        String text = et.getText().toString().trim();
         if (TextUtils.isEmpty(text)) return;
 
         String id = msgRef.push().getKey();
-        if (id == null) return;
-
-        MessageModel m = new MessageModel(studentUid, text);
+        MessageModel m = new MessageModel(myUid, text);
         msgRef.child(id).setValue(m);
         msgRef.child(id).child("timestamp").setValue(ServerValue.TIMESTAMP);
 
-        // 🔥 update chat list meta
-        ChatHelper.updateLastMessage(classId, studentUid, text);
+        ChatHelper.updateLastMessage(classId, myUid, text, myUid);
+        ChatHelper.incrementUnreadCount(classId, myUid);
 
-        // 🔥 increment unread for teacher
-        ChatHelper.incrementUnreadCount(classId, studentUid);
 
-        etMessage.setText("");
+        et.setText("");
     }
 
-    // =====================================================
-    // LISTEN MESSAGES (WITH EMPTY LAYOUT + TICK LOGIC)
-    // =====================================================
-    private void listenMessages() {
+    private void listen() {
         msgRef.addValueEventListener(new ValueEventListener() {
-
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
+            public void onDataChange(@NonNull DataSnapshot s) {
                 list.clear();
 
-                // 🔥 NO CHAT EXISTS
-                if (!snapshot.exists() || snapshot.getChildrenCount() == 0) {
-                    linearLayoutEmpty.setVisibility(View.VISIBLE);
-                    rvMessages.setVisibility(View.GONE);
-                    adapter.notifyDataSetChanged();
+                if (!s.exists()) {
+                    empty.setVisibility(View.VISIBLE);
+                    rv.setVisibility(View.GONE);
                     return;
                 }
 
-                // 🔥 CHAT EXISTS
-                linearLayoutEmpty.setVisibility(View.GONE);
-                rvMessages.setVisibility(View.VISIBLE);
+                empty.setVisibility(View.GONE);
+                rv.setVisibility(View.VISIBLE);
 
-                for (DataSnapshot d : snapshot.getChildren()) {
+                for (DataSnapshot d : s.getChildren()) {
                     MessageModel m = d.getValue(MessageModel.class);
-                    if (m == null) continue;
-
                     list.add(m);
 
-                    // 🔥 ONLY messages SENT BY TEACHER
-                    if (!m.getSenderId().equals(studentUid)) {
+                    if (!m.getSenderId().equals(myUid)) {
+                        if (!m.isDelivered())
+                            ChatHelper.markDelivered(classId, myUid, d.getKey());
 
-                        // 1️⃣ delivered when reaches device
-                        if (!m.isDelivered()) {
-                            d.getRef().child("delivered").setValue(true);
-                        }
-
-                        // 2️⃣ seen ONLY if chat is OPEN
-                        if (isChatOpen && !m.isSeen()) {
-                            d.getRef().child("seen").setValue(true);
-                        }
+                        if (isOpen && !m.isSeen())
+                            ChatHelper.markSeen(classId, myUid, d.getKey());
                     }
                 }
-
                 adapter.notifyDataSetChanged();
-                rvMessages.scrollToPosition(list.size() - 1);
+                rv.scrollToPosition(list.size() - 1);
             }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError e) { }
+            public void onCancelled(@NonNull DatabaseError e) {}
         });
     }
 }

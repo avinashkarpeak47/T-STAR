@@ -17,6 +17,21 @@
     android:fitsSystemWindows="true"
     android:background="@color/white">
 
+    <!--Drawer Menu-->
+    <com.google.android.material.appbar.MaterialToolbar
+        android:id="@+id/toolbar"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:background="@android:color/transparent"
+        app:navigationIcon="@drawable/drawer_menu"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="8dp"
+        android:elevation="10dp"
+        android:clickable="true"
+        android:focusable="true"/>
+
     <!-- Header background -->
     <View
         android:id="@+id/header_bg"

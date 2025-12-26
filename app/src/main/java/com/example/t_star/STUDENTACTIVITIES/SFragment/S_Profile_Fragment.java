@@ -31,7 +31,7 @@ public class S_Profile_Fragment extends Fragment {
     private static final int PICK_IMAGE_REQUEST = 1001;
 
     private ImageView ivProfilePic;
-    private EditText etFullName, etEmail, etMobile, etRollNo;
+    private EditText etFullName, etEmail, etMobile;
     private Button btnEditProfile;
 
     private LinearLayout rowSettings, rowChangePassword, rowLogout, rowDeleteAccount;
@@ -44,7 +44,8 @@ public class S_Profile_Fragment extends Fragment {
 
     private String profileImageUrl = "";   // ⭐ Cloudinary URL holder
 
-    public S_Profile_Fragment() {}
+    public S_Profile_Fragment() {
+    }
 
     @Nullable
     @Override
@@ -55,10 +56,10 @@ public class S_Profile_Fragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_s_profile_, container, false);
 
         ivProfilePic = view.findViewById(R.id.ivProfilePic);
-        etFullName   = view.findViewById(R.id.etFullName);
-        etEmail      = view.findViewById(R.id.etEmail);
-        etMobile     = view.findViewById(R.id.etMobile);
-        etRollNo     = view.findViewById(R.id.etRollNo);
+        etFullName = view.findViewById(R.id.etFullName);
+        etEmail = view.findViewById(R.id.etEmail);
+        etMobile = view.findViewById(R.id.etMobile);
+       // etRollNo = view.findViewById(R.id.etRollNo);
         btnEditProfile = view.findViewById(R.id.btnEditProfile);
 
         rowSettings = view.findViewById(R.id.rowSettings);
@@ -84,7 +85,7 @@ public class S_Profile_Fragment extends Fragment {
             if (profileImageUrl != null && !profileImageUrl.isEmpty()) {
                 showFullImageDialog(profileImageUrl);
             } else {
-                Toast.makeText(getContext(),"Profile image not available",Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), "Profile image not available", Toast.LENGTH_SHORT).show();
             }
             return true;
         });
@@ -126,7 +127,7 @@ public class S_Profile_Fragment extends Fragment {
                 etFullName.setText(user.getFullName());
                 etEmail.setText(user.email);
                 etMobile.setText(user.mobile);
-                etRollNo.setText(user.rollno != null ? user.rollno : "");
+                //etRollNo.setText(user.rollno != null ? user.rollno : "");
             }
 
             @Override
@@ -141,7 +142,7 @@ public class S_Profile_Fragment extends Fragment {
     // ---------------- ENABLE / DISABLE EDITING ----------------
     private void setEditingEnabled(boolean enabled) {
         etFullName.setEnabled(enabled);
-        etRollNo.setEnabled(enabled);
+       // etRollNo.setEnabled(enabled);
 
         etEmail.setEnabled(false);
         etMobile.setEnabled(false);
@@ -157,7 +158,7 @@ public class S_Profile_Fragment extends Fragment {
 
     @Override
     public void onActivityResult(int req, int res, @Nullable Intent data) {
-        super.onActivityResult(req,res,data);
+        super.onActivityResult(req, res, data);
 
         if (req == PICK_IMAGE_REQUEST && res == Activity.RESULT_OK && data != null) {
 
@@ -180,10 +181,10 @@ public class S_Profile_Fragment extends Fragment {
 
                         profileImageUrl = downloadUrl; // refresh url
 
-                        Map<String,Object> map = new HashMap<>();
+                        Map<String, Object> map = new HashMap<>();
                         map.put("profileImageUrl", downloadUrl);
 
-                        User_Data_Fetcher.updateUserFields(uid,map,
+                        User_Data_Fetcher.updateUserFields(uid, map,
                                 new User_Data_Fetcher.SimpleCallback() {
                                     @Override
                                     public void onSuccess() {
@@ -204,7 +205,7 @@ public class S_Profile_Fragment extends Fragment {
                     @Override
                     public void onFailure(Exception e) {
                         Toast.makeText(getContext(),
-                                "Upload failed: "+e.getMessage(),
+                                "Upload failed: " + e.getMessage(),
                                 Toast.LENGTH_LONG).show();
                     }
                 });
@@ -234,7 +235,7 @@ public class S_Profile_Fragment extends Fragment {
     private void attemptSaveProfile() {
 
         String fullName = etFullName.getText().toString().trim();
-        String roll = etRollNo.getText().toString().trim();
+        //String roll = etRollNo.getText().toString().trim();
 
         if (!User_Input_Validator.isValidFullName(fullName)) {
             etFullName.setError("Enter valid name");
@@ -242,20 +243,20 @@ public class S_Profile_Fragment extends Fragment {
             return;
         }
 
-        if (!User_Input_Validator.isValidRollNo(roll)) {
+        /*if (!User_Input_Validator.isValidRollNo(roll)) {
             etRollNo.setError("Enter roll number");
             etRollNo.requestFocus();
             return;
-        }
+        }*/
 
         String[] parts = User_Input_Validator.splitFullName(fullName);
 
-        Map<String,Object> map = new HashMap<>();
+        Map<String, Object> map = new HashMap<>();
         map.put("firstname", parts[0]);
         map.put("lastname", parts[1]);
-        map.put("rollno", roll);
+       // map.put("rollno", roll);
 
-        User_Data_Fetcher.updateUserFields(uid,map,
+        User_Data_Fetcher.updateUserFields(uid, map,
                 new User_Data_Fetcher.SimpleCallback() {
                     @Override
                     public void onSuccess() {
@@ -285,11 +286,11 @@ public class S_Profile_Fragment extends Fragment {
             new AlertDialog.Builder(requireContext())
                     .setTitle("Reset Password")
                     .setMessage("Send reset link to your email?")
-                    .setPositiveButton("Send",(d,w)->{
+                    .setPositiveButton("Send", (d, w) -> {
                         FirebaseAuth.getInstance()
                                 .sendPasswordResetEmail(currentUser.getEmail());
-                        Toast.makeText(getContext(),"Reset link sent",Toast.LENGTH_SHORT).show();
-                    }).setNegativeButton("Cancel",null).show();
+                        Toast.makeText(getContext(), "Reset link sent", Toast.LENGTH_SHORT).show();
+                    }).setNegativeButton("Cancel", null).show();
         });
 
         rowLogout.setOnClickListener(v -> {
@@ -304,7 +305,7 @@ public class S_Profile_Fragment extends Fragment {
             new AlertDialog.Builder(requireContext())
                     .setTitle("Delete Account")
                     .setMessage("This action is permanent. Continue?")
-                    .setPositiveButton("Delete",(d,w)->{
+                    .setPositiveButton("Delete", (d, w) -> {
 
                         FirebaseDatabase.getInstance()
                                 .getReference("Users")
@@ -318,7 +319,26 @@ public class S_Profile_Fragment extends Fragment {
                         startActivity(i);
                         requireActivity().finish();
                     })
-                    .setNegativeButton("Cancel",null).show();
+                    .setNegativeButton("Cancel", null).show();
         });
+        rowLogout.setOnClickListener(v -> {
+
+            new AlertDialog.Builder(requireContext())
+                    .setTitle("Logout")
+                    .setMessage("Are you sure you want to logout?")
+                    .setPositiveButton("Logout", (d, w) -> {
+
+                        FirebaseAuth.getInstance().signOut();
+
+                        Intent i = new Intent(requireContext(), TSTAR_Login_Activity.class);
+                        i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                        startActivity(i);
+
+                        requireActivity().finish();
+                    })
+                    .setNegativeButton("Cancel", null)
+                    .show();
+        });
+
     }
 }

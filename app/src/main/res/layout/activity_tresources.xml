@@ -11,7 +11,7 @@
     <com.google.android.material.appbar.MaterialToolbar
         android:id="@+id/toolbarStudyMaterial"
         android:layout_width="0dp"
-        android:layout_height="52dp"
+        android:layout_height="?attr/actionBarSize"
         android:background="@color/Lavender"
         app:title="Study Material"
         app:titleTextColor="@color/white"

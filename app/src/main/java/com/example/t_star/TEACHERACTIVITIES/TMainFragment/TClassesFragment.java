@@ -25,6 +25,7 @@ import com.example.t_star.R;
 import com.example.t_star.REAL_TIME_DATABASE.PUT_ON_DATABASE.HelperClasses.Classes_helper;
 import com.example.t_star.TEACHERACTIVITIES.CLASSES.TClassesAdapter;
 import com.example.t_star.TEACHERACTIVITIES.CLASSES.TClassesModel;
+import com.example.t_star.TEACHERACTIVITIES.Drawer.TFeedbakActivity;
 import com.example.t_star.TEACHERACTIVITIES.TCreateClassActivity;
 import com.example.t_star.TEACHERACTIVITIES.THomeActivity;
 import com.example.t_star.TSTAR_Entry_Activity;
@@ -96,12 +97,13 @@ public class TClassesFragment extends Fragment {
                         .addToBackStack(null)
                         .commit();
             }
-
+            if (id == R.id.nav_feedback) {
+                startActivity(new Intent(getActivity(), TFeedbakActivity.class));
+            }
 
            else if (id == R.id.nav_logout) {
                showLogoutDialog();
            }
-
 
             drawerLayout.closeDrawer(GravityCompat.START);
             return true;
@@ -279,13 +281,13 @@ public class TClassesFragment extends Fragment {
         int hour = Calendar.getInstance().get(Calendar.HOUR_OF_DAY);
 
         if (hour >= 4 && hour < 12)
-            tvTimestamp.setText("Good Morning ,");
+            tvTimestamp.setText("Good Morning ☀️");
         else if (hour >= 12 && hour < 16)
-            tvTimestamp.setText("Good Afternoon ,");
+            tvTimestamp.setText("Good Afternoon 🌤️");
         else if (hour >= 16 && hour < 20)
-            tvTimestamp.setText("Good Evening ,");
+            tvTimestamp.setText("Good Evening \uD83C\uDF06");
         else
-            tvTimestamp.setText("Good Night ,");
+            tvTimestamp.setText("Good Night 🌙");
     }
 
     // ================= TEACHER NAME =================

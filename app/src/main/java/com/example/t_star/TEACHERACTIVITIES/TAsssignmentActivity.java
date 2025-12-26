@@ -62,6 +62,10 @@ public class TAsssignmentActivity extends AppCompatActivity {
             i.putExtra("dueDate", model.getDueDate());
             i.putExtra("totalStudents", model.getTotalStudents());
             i.putExtra("submittedCount", model.getSubmittedCount());
+
+            // 🔹 NEW — pass dueDateMillis if available
+            i.putExtra("dueDateMillis", model.getDueDateMillis());
+
             startActivity(i);
         });
 
@@ -75,17 +79,20 @@ public class TAsssignmentActivity extends AppCompatActivity {
             @Override
             public void onDataChange(DataSnapshot snap) {
 
-                list.clear();
-
-                List<TAssignmentModel> temp = new ArrayList<>();
+                list.clear();   // 🔹 reset clean list
 
                 for (DataSnapshot ds : snap.getChildren()) {
 
                     TAssignmentModel m = ds.getValue(TAssignmentModel.class);
                     if (m == null) continue;
 
-                    temp.add(m);
+                    // 🔹 Read dueDateMillis safely
+                    Long dueMillis = ds.child("dueDateMillis").getValue(Long.class);
+                    m.setDueDateMillis(dueMillis == null ? 0L : dueMillis);
 
+                    // ===========================
+                    // 🔹 FETCH SUBMISSION COUNT
+                    // ===========================
                     DatabaseReference subRef = FirebaseDatabase.getInstance()
                             .getReference("Assignments_Submissions")
                             .child(classId)
@@ -98,9 +105,21 @@ public class TAsssignmentActivity extends AppCompatActivity {
                             int submitted = (int) subSnap.getChildrenCount();
                             m.setSubmittedCount(submitted);
 
-                            // update after all fetched
-                            if (!list.contains(m))
-                                list.add(m);
+                            // ===========================
+                            // 🔥 ADD / REPLACE (NO DUPLICATE)
+                            // ===========================
+                            boolean updated = false;
+
+                            for (int i = 0; i < list.size(); i++) {
+                                if (list.get(i).getId().equals(m.getId())) {
+                                    list.set(i, m);   // replace old instance
+                                    updated = true;
+                                    break;
+                                }
+                            }
+
+                            if (!updated)
+                                list.add(m);  // add first time only
 
                             adapter.notifyDataSetChanged();
                         }

@@ -2,20 +2,13 @@ package com.example.t_star.STUDENTACTIVITIES.SFragment;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.Gravity;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.ProgressBar;
-import android.widget.TextView;
-import android.widget.Toast;
+import android.view.*;
+import android.widget.*;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.widget.AppCompatButton;
-import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -29,7 +22,6 @@ import com.example.t_star.STUDENTACTIVITIES.S_Class_Dashboard_Activity;
 import com.example.t_star.STUDENTACTIVITIES.S_Enroll_in_Class;
 import com.example.t_star.STUDENTACTIVITIES.S_Fragment_Classes_RC_Adapter;
 import com.example.t_star.STUDENTACTIVITIES.S_Fragment_Classes_RC_Model;
-import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.*;
@@ -39,18 +31,15 @@ import java.util.Calendar;
 
 public class S_Classes_Fragment extends Fragment {
 
-    // Drawer
+    // UI
     DrawerLayout drawerLayout;
     NavigationView navigationView;
-    MaterialToolbar toolbar;
 
-    // Header + Profile
     ImageView imgUserProfile, drawerImgProfile;
     TextView tvGreeting, tvUserName, drawerUserName, drawerUserEmail;
 
-    // Classes UI
     RecyclerView recyclerView;
-    ProgressBar progressBar;
+   // ProgressBar progressBar;
     AppCompatButton btnEnrollClass;
     TextView tvEmptyState;
 
@@ -73,40 +62,22 @@ public class S_Classes_Fragment extends Fragment {
 
         uid = FirebaseAuth.getInstance().getUid();
 
-        // ---------- Drawer + Toolbar ----------
+        // Drawer
         drawerLayout = view.findViewById(R.id.s_drawerLayout);
         navigationView = view.findViewById(R.id.s_navigationView);
-        toolbar = view.findViewById(R.id.toolbar);
 
-        ActionBarDrawerToggle toggle =
-                new ActionBarDrawerToggle(
-                        requireActivity(),
-                        drawerLayout,
-                        toolbar,
-                        R.string.open_drawer,
-                        R.string.close_drawer
-                );
-
-        drawerLayout.addDrawerListener(toggle);
-        toggle.syncState();
-
-        toolbar.setNavigationOnClickListener(v ->
-                drawerLayout.openDrawer(GravityCompat.START)
-        );
-
-        // Drawer Header
         View header = navigationView.getHeaderView(0);
         drawerImgProfile = header.findViewById(R.id.imgProfile);
         drawerUserName = header.findViewById(R.id.tvTeacherName);
         drawerUserEmail = header.findViewById(R.id.tvTeacherEmail);
 
-        // ---------- Top UI ----------
+        // Top UI
         tvGreeting = view.findViewById(R.id.tvGreeting);
         tvUserName = view.findViewById(R.id.tvUserName);
         imgUserProfile = view.findViewById(R.id.ivUserProfile);
 
         recyclerView = view.findViewById(R.id.recyclerViewClasses);
-        progressBar = view.findViewById(R.id.progressBarClasses);
+        //progressBar = view.findViewById(R.id.progressBarClasses);
         btnEnrollClass = view.findViewById(R.id.btnEnrollNewClass);
         tvEmptyState = view.findViewById(R.id.tvEmptyState);
 
@@ -118,9 +89,7 @@ public class S_Classes_Fragment extends Fragment {
                 model -> {
 
                     if (!"approved".equals(model.getStatus())) {
-                        Toast.makeText(getContext(),
-                                "Class request not approved yet",
-                                Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getContext(),"Class request not approved yet",Toast.LENGTH_SHORT).show();
                         return;
                     }
 
@@ -134,10 +103,9 @@ public class S_Classes_Fragment extends Fragment {
 
         recyclerView.setAdapter(adapter);
 
-        // ---------- Load Data ----------
         setGreetingMessage();
-        loadStudentProfile();
-        loadEnrolledClasses();
+        loadStudentProfile();   // 🔥 profile + drawer data fetch
+        loadEnrolledClasses();  // 🔥 classes fetch
 
         btnEnrollClass.setOnClickListener(v ->
                 startActivity(new Intent(getActivity(), S_Enroll_in_Class.class))
@@ -151,10 +119,17 @@ public class S_Classes_Fragment extends Fragment {
     // ---------- Greeting ----------
     private void setGreetingMessage() {
         int hour = Calendar.getInstance().get(Calendar.HOUR_OF_DAY);
-        if (hour < 12) tvGreeting.setText("Good Morning ☀️");
-        else if (hour < 17) tvGreeting.setText("Good Afternoon 🌤️");
-        else tvGreeting.setText("Good Evening 🌙");
+        if (hour >= 4 && hour < 12)
+            tvGreeting.setText("Good Morning ☀");
+        else if (hour >= 12 && hour < 16)
+            tvGreeting.setText("Good Afternoon \uD83C\uDF24");
+        else if (hour >= 16 && hour < 20)
+            tvGreeting.setText("Good Evening \uD83C\uDF06");
+        else
+            tvGreeting.setText("Good Night \uD83C\uDF19");
     }
+
+
 
     // ---------- Load Profile + Drawer Header ----------
     private void loadStudentProfile() {
@@ -171,7 +146,7 @@ public class S_Classes_Fragment extends Fragment {
 
                 profileUrl = user.profileImageUrl;
 
-                if (profileUrl != null && !profileUrl.isEmpty()) {
+                if(profileUrl != null && !profileUrl.isEmpty()) {
 
                     Glide.with(requireContext())
                             .load(profileUrl)
@@ -198,7 +173,7 @@ public class S_Classes_Fragment extends Fragment {
     // ---------- Load Enrolled Classes ----------
     private void loadEnrolledClasses() {
 
-        progressBar.setVisibility(View.VISIBLE);
+       // progressBar.setVisibility(View.VISIBLE);
         recyclerView.setVisibility(View.GONE);
         tvEmptyState.setVisibility(View.GONE);
 
@@ -231,43 +206,40 @@ public class S_Classes_Fragment extends Fragment {
                             s.child("seenApproved").getValue(Boolean.class)
                     );
 
-                    FirebaseDatabase.getInstance()
-                            .getReference("Users")
+                    FirebaseDatabase.getInstance().getReference("Users")
                             .child(teacherId)
-                            .addListenerForSingleValueEvent(
-                                    new ValueEventListener() {
-                                        @Override
-                                        public void onDataChange(@NonNull DataSnapshot snap) {
+                            .addListenerForSingleValueEvent(new ValueEventListener() {
+                                @Override
+                                public void onDataChange(@NonNull DataSnapshot snap) {
 
-                                            String teacherName = "Teacher";
+                                    String teacherName = "Teacher";
+                                    if (snap.exists()) {
+                                        teacherName =
+                                                snap.child("firstname").getValue(String.class)
+                                                        + " " +
+                                                        snap.child("lastname").getValue(String.class);
+                                    }
 
-                                            if (snap.exists()) {
-                                                teacherName =
-                                                        snap.child("firstname").getValue(String.class)
-                                                                + " " +
-                                                                snap.child("lastname").getValue(String.class);
-                                            }
+                                    classList.add(new S_Fragment_Classes_RC_Model(
+                                            classId,
+                                            className,
+                                            teacherName,
+                                            status,
+                                            seenApproved
+                                    ));
 
-                                            classList.add(new S_Fragment_Classes_RC_Model(
-                                                    classId,
-                                                    className,
-                                                    teacherName,
-                                                    status,
-                                                    seenApproved
-                                            ));
+                                    adapter.notifyDataSetChanged();
 
-                                            adapter.notifyDataSetChanged();
+                                    count[0]++;
+                                    if(count[0] == total) finalizeUI();
+                                }
 
-                                            count[0]++;
-                                            if (count[0] == total) finalizeUI();
-                                        }
-
-                                        @Override
-                                        public void onCancelled(@NonNull DatabaseError error) {
-                                            count[0]++;
-                                            if (count[0] == total) finalizeUI();
-                                        }
-                                    });
+                                @Override
+                                public void onCancelled(@NonNull DatabaseError error) {
+                                    count[0]++;
+                                    if(count[0] == total) finalizeUI();
+                                }
+                            });
                 }
             }
 
@@ -279,9 +251,9 @@ public class S_Classes_Fragment extends Fragment {
     }
 
     private void finalizeUI() {
-        progressBar.setVisibility(View.GONE);
+       // progressBar.setVisibility(View.GONE);
 
-        if (classList.isEmpty()) showEmpty();
+        if(classList.isEmpty()) showEmpty();
         else {
             recyclerView.setVisibility(View.VISIBLE);
             tvEmptyState.setVisibility(View.GONE);
@@ -289,7 +261,7 @@ public class S_Classes_Fragment extends Fragment {
     }
 
     private void showEmpty() {
-        progressBar.setVisibility(View.GONE);
+       // progressBar.setVisibility(View.GONE);
         recyclerView.setVisibility(View.GONE);
         tvEmptyState.setVisibility(View.VISIBLE);
     }
@@ -312,11 +284,10 @@ public class S_Classes_Fragment extends Fragment {
 
             int id = item.getItemId();
 
-            if (id == R.id.nav_editprofile) {
-                Toast.makeText(getContext(),
-                        "Profile screen coming soon", Toast.LENGTH_SHORT).show();
+            if(id == R.id.nav_editprofile) {
+                Toast.makeText(getContext(),"Profile Coming Soon",Toast.LENGTH_SHORT).show();
             }
-            else if (id == R.id.nav_logout) {
+            else if(id == R.id.nav_logout){
                 FirebaseAuth.getInstance().signOut();
                 Toast.makeText(getContext(),"Logged out",Toast.LENGTH_SHORT).show();
             }

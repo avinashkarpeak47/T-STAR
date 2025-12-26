@@ -23,6 +23,8 @@ import java.util.ArrayList;
 public class SStudyMaterialAdapter
         extends RecyclerView.Adapter<SStudyMaterialAdapter.VH> {
 
+    //comment
+
     private Context context;
     private ArrayList<SStudyMaterialModel> list;
 

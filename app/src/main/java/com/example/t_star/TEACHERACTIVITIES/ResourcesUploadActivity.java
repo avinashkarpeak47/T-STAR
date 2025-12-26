@@ -131,9 +131,9 @@ public class ResourcesUploadActivity extends AppCompatActivity {
     private void saveToFirebase(String fileUrl) {
 
         DatabaseReference ref = FirebaseDatabase.getInstance()
-                .getReference("Classes")
+                .getReference("StudyMaterial")
                 .child(classId)
-                .child("StudyMaterial")
+                .child("Resources")
                 .push();
 
         String uploadDate = new SimpleDateFormat(

@@ -69,9 +69,9 @@ public class TResourcesActivity extends AppCompatActivity {
     private void loadStudyMaterial() {
 
         FirebaseDatabase.getInstance()
-                .getReference("Classes")
+                .getReference("StudyMaterial")
                 .child(classId)
-                .child("StudyMaterial")
+                .child("Resources")
                 .addValueEventListener(new ValueEventListener() {
 
                     @Override

@@ -2,6 +2,7 @@ package com.example.t_star.STUDENTACTIVITIES;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -185,6 +186,7 @@ public class S_Class_Dashboard_Activity extends AppCompatActivity {
                 });
     }
     private void listenUnreadIndicator() {
+
         DatabaseReference unreadRef = FirebaseDatabase.getInstance()
                 .getReference("Chats")
                 .child(classId)
@@ -195,21 +197,32 @@ public class S_Class_Dashboard_Activity extends AppCompatActivity {
         unreadRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
+
                 Integer count = snapshot.getValue(Integer.class);
 
                 if (count != null && count > 0) {
-                    tv_MsgIndicator.setVisibility(TextView.VISIBLE);
+                    tv_MsgIndicator.setVisibility(View.VISIBLE);
+
+                   /* // 🔥 SET NUMBER
+                    if (count > 99) {
+                        tv_MsgIndicator.setText("99+");   // WhatsApp style
+                    } else {
+                        tv_MsgIndicator.setText(String.valueOf(count));
+                    }
+                    */
+
                 } else {
-                    tv_MsgIndicator.setVisibility(TextView.GONE);
+                    tv_MsgIndicator.setVisibility(View.GONE);
                 }
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-                tv_MsgIndicator.setVisibility(TextView.GONE);
+                tv_MsgIndicator.setVisibility(View.GONE);
             }
         });
     }
+
 
 
 

@@ -70,6 +70,9 @@ dependencies {
     implementation ("com.google.firebase:firebase-bom:33.5.1")
     implementation ("com.google.firebase:firebase-firestore")
 
+    //Translator ML Kit
+    implementation ("com.google.mlkit:translate:17.0.2")
+
 
     //CLoudnary Dependency
     implementation ("com.cloudinary:cloudinary-android:2.5.0")

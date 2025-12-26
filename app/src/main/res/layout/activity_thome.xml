@@ -421,6 +421,41 @@
                                 </androidx.cardview.widget.CardView>
 
 
+                                <!-- Translator-->
+                                <androidx.cardview.widget.CardView
+                                    android:id="@+id/cardTransalator"
+                                    android:layout_width="0dp"
+                                    android:layout_height="120dp"
+                                    app:layout_columnWeight="1"
+                                    app:cardCornerRadius="20dp"
+                                    app:cardElevation="6dp"
+                                    android:foreground="?attr/selectableItemBackground">
+
+                                        <LinearLayout
+                                            android:orientation="vertical"
+                                            android:gravity="center"
+                                            android:background="@drawable/s_edittext_border"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="match_parent">
+
+                                                <ImageView
+                                                    android:layout_width="48dp"
+                                                    android:layout_height="48dp"
+                                                    android:src="@drawable/s_translator"
+                                                    app:tint="@color/black"/>
+
+                                                <TextView
+                                                    android:layout_width="wrap_content"
+                                                    android:layout_height="wrap_content"
+                                                    android:text="Translator"
+                                                    android:textSize="15sp"
+                                                    android:textColor="@color/black"
+                                                    android:layout_marginTop="8dp"/>
+                                        </LinearLayout>
+                                </androidx.cardview.widget.CardView>
+
+
+
 
                         </androidx.gridlayout.widget.GridLayout>
 

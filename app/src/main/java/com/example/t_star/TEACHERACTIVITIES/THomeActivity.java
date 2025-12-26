@@ -34,7 +34,7 @@ public class THomeActivity extends AppCompatActivity {
     GridLayout gridLayout;
 
     CardView cardCreateAssignment, cardAttendance, cardNotes,
-            cardChat, cardStudents, cardResources, cardNotifications, cardQuiz;
+            cardChat, cardStudents, cardResources, cardNotifications, cardQuiz,cardTranslator;
 
     Map<CardView, String> cardMap = new LinkedHashMap<>();
     List<CardView> originalOrder = new ArrayList<>();
@@ -81,6 +81,7 @@ public class THomeActivity extends AppCompatActivity {
         cardResources        = findViewById(R.id.cardResources);
         cardNotifications    = findViewById(R.id.cardNotifications);
         cardQuiz             = findViewById(R.id.cardQuiz);
+        cardTranslator       = findViewById(R.id.cardTransalator);
 
         toolbar.setNavigationOnClickListener(v -> onBackPressed());
     }
@@ -95,6 +96,7 @@ public class THomeActivity extends AppCompatActivity {
         cardMap.put(cardResources, "resources");
         cardMap.put(cardQuiz, "quiz");
         cardMap.put(cardNotifications, "notification");
+        cardMap.put(cardTranslator, "translator");
 
         originalOrder.addAll(cardMap.keySet());
     }
@@ -162,6 +164,7 @@ public class THomeActivity extends AppCompatActivity {
         open(cardResources,       TResourcesActivity.class);
         open(cardNotifications,   TNotificationActivity.class);
         open(cardQuiz,            TQuizActivity.class);
+        open(cardTranslator,       TTranslatorActivity.class);
     }
 
     private void open(CardView card, Class<?> cls) {

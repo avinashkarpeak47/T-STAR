@@ -11,10 +11,6 @@
         android:icon="@drawable/s_ai"
         android:title="Ai Assistant" />
 
-    <item
-        android:id="@+id/nav_s_event"
-        android:icon="@drawable/s_event"
-        android:title="Event" />
 
     <item
         android:id="@+id/nav_s_offline_download"

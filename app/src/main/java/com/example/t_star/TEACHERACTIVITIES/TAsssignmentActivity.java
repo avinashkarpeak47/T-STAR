@@ -70,20 +70,50 @@ public class TAsssignmentActivity extends AppCompatActivity {
     }
 
     private void loadAssignments() {
+
         ref.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot snap) {
+
                 list.clear();
+
+                List<TAssignmentModel> temp = new ArrayList<>();
+
                 for (DataSnapshot ds : snap.getChildren()) {
+
                     TAssignmentModel m = ds.getValue(TAssignmentModel.class);
-                    if (m != null) list.add(m);
+                    if (m == null) continue;
+
+                    temp.add(m);
+
+                    DatabaseReference subRef = FirebaseDatabase.getInstance()
+                            .getReference("Assignments_Submissions")
+                            .child(classId)
+                            .child(m.getId());
+
+                    subRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(DataSnapshot subSnap) {
+
+                            int submitted = (int) subSnap.getChildrenCount();
+                            m.setSubmittedCount(submitted);
+
+                            // update after all fetched
+                            if (!list.contains(m))
+                                list.add(m);
+
+                            adapter.notifyDataSetChanged();
+                        }
+
+                        @Override
+                        public void onCancelled(DatabaseError e) {
+                        }
+                    });
                 }
-                adapter.notifyDataSetChanged();
             }
 
             @Override
             public void onCancelled(DatabaseError e) {
-                Toast.makeText(TAsssignmentActivity.this,"Error loading",Toast.LENGTH_SHORT).show();
             }
         });
     }

@@ -61,6 +61,17 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
+    annotationProcessor("androidx.room:room-compiler:2.6.1")
+    implementation ("androidx.room:room-runtime:2.6.1")
+
+
+    implementation ("com.google.firebase:firebase-firestore:24.11.1")
+    implementation ("com.google.firebase:firebase-analytics:22.0.2")
+    implementation ("com.google.firebase:firebase-bom:33.5.1")
+    implementation ("com.google.firebase:firebase-firestore")
+
+    //Translator ML Kit
+    implementation ("com.google.mlkit:translate:17.0.2")
 
 
     //CLoudnary Dependency

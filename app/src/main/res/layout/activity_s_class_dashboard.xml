@@ -165,22 +165,32 @@
 
             <!-- SEARCH VIEW -->
             <androidx.appcompat.widget.SearchView
-                android:id="@+id/searchViewGrid"
+                android:id="@+id/searchDashboard"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
-                app:queryHint="Search here..."
+                android:queryHint="Search here..."
                 android:iconifiedByDefault="false"
                 android:background="@drawable/s_edittext_border"
                 android:layout_margin="8dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="What do you need?"
+                android:layout_marginTop="12dp"
+                android:padding="8dp"
+                android:textStyle="bold"
+                android:textColor="@color/black"
+                android:layout_marginLeft="8dp"
+                android:textSize="16dp"/>
 
             <!-- GRID DASHBOARD -->
             <GridLayout
                 android:id="@+id/gridDashboard"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:columnCount="3"
-                android:rowCount="3"
-                android:layout_marginTop="22dp"
+                android:columnCount="2"
+                android:layout_marginTop="6dp"
                 android:alignmentMode="alignMargins"
                 android:rowOrderPreserved="false">
 
@@ -388,7 +398,7 @@
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
 
-                <!-- Events -->
+                <!-- Events
                 <androidx.cardview.widget.CardView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -419,7 +429,7 @@
                             android:layout_height="wrap_content"
                             android:textColor="@color/black"/>
                     </LinearLayout>
-                </androidx.cardview.widget.CardView>
+                </androidx.cardview.widget.CardView>-->
 
                 <!-- Assignment -->
                 <androidx.cardview.widget.CardView

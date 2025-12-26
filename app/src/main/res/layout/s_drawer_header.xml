@@ -17,7 +17,7 @@
         android:layout_gravity="center"
         android:scaleType="centerCrop"
         android:src="@drawable/tprofile"
-        app:tint="@color/white" />
+        />
 
     <TextView
         android:id="@+id/tvTeacherName"

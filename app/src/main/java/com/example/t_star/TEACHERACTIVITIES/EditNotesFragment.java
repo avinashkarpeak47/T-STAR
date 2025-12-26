@@ -90,11 +90,12 @@ public class EditNotesFragment extends Fragment {
 
         // SAVE → REALTIME DATABASE
         FirebaseDatabase.getInstance()
-                .getReference("Classes")
+                .getReference("Notes")
                 .child(classId)
-                .child("Notes")
+                .child("TeacherNotes")
                 .child(note.id)
                 .setValue(note)
+
                 .addOnSuccessListener(unused ->
                         Log.d("RTDB_NOTES", "Saved to Realtime DB"))
                 .addOnFailureListener(e ->
@@ -114,9 +115,9 @@ public class EditNotesFragment extends Fragment {
 
         // DELETE realtime
         FirebaseDatabase.getInstance()
-                .getReference("Classes")
+                .getReference("Notes")
                 .child(classId)
-                .child("Notes")
+                .child("TeacherNotes")
                 .child(note.id)
                 .removeValue();
 

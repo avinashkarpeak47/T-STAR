@@ -71,11 +71,11 @@ public class TAssignDetailActivity extends AppCompatActivity {
                 .getReference("Users");
 
         DatabaseReference subRef = FirebaseDatabase.getInstance()
-                .getReference("Submissions")
+                .getReference("Assignments_Submissions")
                 .child(classId)
                 .child(assignmentId);
 
-        // 🔹 REALTIME LISTENER
+        // realtime submissions listener
         subRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot subSnap) {
@@ -86,50 +86,61 @@ public class TAssignDetailActivity extends AppCompatActivity {
 
                         list.clear();
 
+                        // ✅ Total students from DB (correct)
+                        int totalStudents = (int) studentSnap.getChildrenCount();
+                        tvTotalStudents.setText("Total: " + totalStudents);
+
                         for (DataSnapshot s : studentSnap.getChildren()) {
 
                             String uid = s.getKey();
 
-                            userRef.child(uid).addListenerForSingleValueEvent(
-                                    new ValueEventListener() {
+                            userRef.child(uid)
+                                    .addListenerForSingleValueEvent(new ValueEventListener() {
                                         @Override
                                         public void onDataChange(DataSnapshot uSnap) {
 
-                                            String name =
-                                                    uSnap.child("firstname").getValue(String.class)
-                                                            + " " +
-                                                            uSnap.child("lastname").getValue(String.class);
+                                            String first = uSnap.child("firstname").getValue(String.class);
+                                            String last  = uSnap.child("lastname").getValue(String.class);
+
+                                            String name = ((first == null ? "" : first) + " " +
+                                                    (last == null ? "" : last)).trim();
 
                                             boolean submitted = subSnap.hasChild(uid);
 
                                             String fileUrl = submitted
-                                                    ? subSnap.child(uid).child("fileUrl")
-                                                    .getValue(String.class)
+                                                    ? subSnap.child(uid).child("fileUrl").getValue(String.class)
                                                     : null;
 
                                             list.add(new TAssignStudentStatusModel(
                                                     uid, name, submitted, fileUrl
                                             ));
 
-                                            adapter.notifyDataSetChanged();
+                                            // 👉 Update counts only after all students loaded
+                                            if (list.size() == totalStudents) {
+
+                                                int submittedCount = 0;
+                                                for (TAssignStudentStatusModel m : list)
+                                                    if (m.isSubmitted()) submittedCount++;
+
+                                                // ✅ Correct counts
+                                                tvSubmitted.setText("Submitted: " + submittedCount);
+                                                tvUnsubmitted.setText(
+                                                        "Pending: " + (totalStudents - submittedCount));
+
+                                                adapter.notifyDataSetChanged();
+                                            }
                                         }
 
-                                        @Override
-                                        public void onCancelled(DatabaseError e) {
-                                        }
+                                        @Override public void onCancelled(DatabaseError e) {}
                                     });
                         }
                     }
 
-                    @Override
-                    public void onCancelled(DatabaseError e) {
-                    }
+                    @Override public void onCancelled(DatabaseError e) {}
                 });
             }
 
-            @Override
-            public void onCancelled(DatabaseError error) {
-            }
+            @Override public void onCancelled(DatabaseError error) {}
         });
     }
 }

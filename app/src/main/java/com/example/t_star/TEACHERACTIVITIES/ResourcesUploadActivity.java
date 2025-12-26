@@ -16,6 +16,7 @@ import com.cloudinary.android.MediaManager;
 import com.cloudinary.android.callback.ErrorInfo;
 import com.cloudinary.android.callback.UploadCallback;
 import com.example.t_star.R;
+import com.google.android.material.appbar.MaterialToolbar;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -59,6 +60,10 @@ public class ResourcesUploadActivity extends AppCompatActivity {
 
         btnViewAttachment.setOnClickListener(v -> openFilePicker());
         btnSave.setOnClickListener(v -> uploadResource());
+        MaterialToolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        toolbar.setNavigationOnClickListener(v -> finish());
+
     }
 
     private void uploadResource() {
@@ -80,8 +85,8 @@ public class ResourcesUploadActivity extends AppCompatActivity {
 
         MediaManager.get()
                 .upload(selectedFileUri)
-                .option("resource_type", "auto")
                 .unsigned("t_star")
+                .option("resource_type", "auto")
                 .option("folder", "app_uploads")
                 .callback(new UploadCallback() {
 
@@ -126,9 +131,9 @@ public class ResourcesUploadActivity extends AppCompatActivity {
     private void saveToFirebase(String fileUrl) {
 
         DatabaseReference ref = FirebaseDatabase.getInstance()
-                .getReference("Classes")
+                .getReference("StudyMaterial")
                 .child(classId)
-                .child("StudyMaterial")
+                .child("Resources")
                 .push();
 
         String uploadDate = new SimpleDateFormat(
@@ -156,12 +161,23 @@ public class ResourcesUploadActivity extends AppCompatActivity {
     private void openFilePicker() {
         Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
         intent.setType("*/*");
-        intent.putExtra(Intent.EXTRA_MIME_TYPES,
-                new String[]{"image/*", "application/pdf"});
+        intent.putExtra(Intent.EXTRA_MIME_TYPES, new String[]{
+                "application/pdf",
+                "application/msword",
+                "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+                "application/vnd.ms-powerpoint",
+                "application/vnd.openxmlformats-officedocument.presentationml.presentation",
+                "application/vnd.ms-excel",
+                "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+                "image/*",
+                "video/*",
+                "text/*",
+                "application/zip"
+        });
         startActivityForResult(intent, PICK_FILE);
-    }
 
-    @Override
+    }
+        @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 

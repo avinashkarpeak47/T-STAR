@@ -15,8 +15,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.t_star.R;
-import com.example.t_star.STUDENTACTIVITIES.Adaptar.StudyMaterialAdapter;
-import com.example.t_star.STUDENTACTIVITIES.Models.StudyMaterialModel;
 import com.example.t_star.TEACHERACTIVITIES.Resources.Adapter;
 import com.example.t_star.TEACHERACTIVITIES.Resources.Model;
 import com.google.android.material.appbar.MaterialToolbar;
@@ -69,9 +67,9 @@ public class TResourcesActivity extends AppCompatActivity {
     private void loadStudyMaterial() {
 
         FirebaseDatabase.getInstance()
-                .getReference("Classes")
+                .getReference("StudyMaterial")
                 .child(classId)
-                .child("StudyMaterial")
+                .child("Resources")
                 .addValueEventListener(new ValueEventListener() {
 
                     @Override

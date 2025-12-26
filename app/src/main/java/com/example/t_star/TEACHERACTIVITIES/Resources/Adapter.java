@@ -90,9 +90,9 @@ public class Adapter extends RecyclerView.Adapter<Adapter.VH> {
         }
 
         FirebaseDatabase.getInstance()
-                .getReference("Classes")
+                .getReference("StudyMaterial")
                 .child(classId)
-                .child("StudyMaterial")
+                .child("Resources")
                 .child(model.getMaterialId())
                 .removeValue()
                 .addOnSuccessListener(a ->

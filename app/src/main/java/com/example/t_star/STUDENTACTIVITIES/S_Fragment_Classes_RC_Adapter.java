@@ -8,8 +8,6 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import com.example.t_star.R;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.List;
 
@@ -55,8 +53,8 @@ public class S_Fragment_Classes_RC_Adapter extends RecyclerView.Adapter<S_Fragme
 
         if ("pending".equals(model.getStatus())) {
 
-            holder.tvStatus.setText("Pending");
-            holder.tvStatus.setBackgroundResource(R.drawable.bg_status_pending);
+            holder.tvStatus.setText("  Pending  ");
+            holder.tvStatus.setBackgroundResource(R.drawable.bg_status_pendingg);
             holder.tvStatus.setVisibility(View.VISIBLE);
 
             holder.itemView.setAlpha(0.6f);
@@ -66,7 +64,7 @@ public class S_Fragment_Classes_RC_Adapter extends RecyclerView.Adapter<S_Fragme
         else if ("approved".equals(model.getStatus())) {
 
             if (!model.isSeenApproved()) {
-                holder.tvStatus.setText("Approved");
+                holder.tvStatus.setText("  Approved  ");
                 holder.tvStatus.setBackgroundResource(R.drawable.bg_status_approved);
                 holder.tvStatus.setVisibility(View.VISIBLE);
             }

@@ -115,7 +115,6 @@ public class TSTAR_Login_Activity extends AppCompatActivity {
                     if (user != null) {
                         // Redirect based on role stored in database
                         User_Authentication_Helper.loadRoleAndRedirect(user.getUid(), TSTAR_Login_Activity.this);
-                        finish();
                     } else {
                         Toast.makeText(this, "Login failed", Toast.LENGTH_SHORT).show();
                     }

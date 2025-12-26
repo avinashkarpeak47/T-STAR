@@ -114,7 +114,7 @@ public class S_Class_Dashboard_Assignment extends AppCompatActivity {
                             String assignmentId = aSnap.getKey();
                             String title = aSnap.child("title")
                                     .getValue(String.class);
-                            String subject = aSnap.child("subject")
+                            String subject = aSnap.child("description")
                                     .getValue(String.class);
 
                             long dueDateMillis = aSnap.child("dueDateMillis")

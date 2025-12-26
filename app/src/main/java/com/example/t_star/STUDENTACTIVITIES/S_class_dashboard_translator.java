@@ -53,15 +53,7 @@ public class S_class_dashboard_translator extends AppCompatActivity {
         MaterialToolbar toolbar = findViewById(R.id.toolbarTranslator);
         setSupportActionBar(toolbar);
 
-        toolbar.setNavigationOnClickListener(v -> {
-            startActivity(
-                    new Intent(
-                            S_class_dashboard_translator.this,
-                            S_Class_Dashboard_Activity.class
-                    )
-            );
-            finish();
-        });
+        toolbar.setNavigationOnClickListener(v -> {finish();});
     }
 
     /* ---------------- INIT VIEWS ---------------- */

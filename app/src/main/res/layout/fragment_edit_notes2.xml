@@ -14,6 +14,7 @@
         <EditText
             android:id="@+id/noteTitle"
             android:hint="Title"
+           android:textColorHint="@color/black"
             android:textSize="18sp"
             android:textStyle="bold"
             android:layout_width="match_parent"
@@ -22,6 +23,7 @@
         <EditText
             android:id="@+id/noteContent"
             android:hint="Write your note..."
+            android:textColorHint="@color/black"
             android:minLines="6"
             android:gravity="top"
             android:layout_width="match_parent"
@@ -30,6 +32,8 @@
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/saveBtn"
             android:text="Save"
+            android:textStyle="bold"
+            android:layout_marginTop="4dp"
             android:background="@drawable/s_btn_bg_shape"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
@@ -37,7 +41,8 @@
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/deleteBtn"
             android:text="Delete"
-            android:layout_marginTop="30dp"
+            android:textStyle="bold"
+            android:layout_marginTop="26dp"
             android:background="@drawable/s_btn_bg_shape"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>

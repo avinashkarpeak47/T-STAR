@@ -100,7 +100,8 @@
             app:tabGravity="fill"
             android:background="@color/white"
             app:tabTextColor="@color/Lavender"
-            app:tabIndicatorAnimationMode="elastic"/>
+            app:tabSelectedTextColor="@color/black"
+            app:tabIndicatorColor="@color/Lavender" />
     </com.google.android.material.appbar.AppBarLayout>
 
     <!-- Attendance List -->

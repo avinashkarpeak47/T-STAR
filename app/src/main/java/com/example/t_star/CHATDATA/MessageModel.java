@@ -1,0 +1,28 @@
+package com.example.t_star.CHATDATA;
+
+public class MessageModel {
+    private String senderId;
+    private String text;
+    private long timestamp;
+    private boolean delivered;
+    private boolean seen;
+
+    // 🔥 REQUIRED for Firebase
+    public MessageModel() {}
+
+    public MessageModel(String senderId, String text) {
+        this.senderId = senderId;
+        this.text = text;
+        this.delivered = false;
+        this.seen = false;
+    }
+
+    public String getSenderId() { return senderId; }
+    public String getText() { return text; }
+    public long getTimestamp() { return timestamp; }
+    public boolean isDelivered() { return delivered; }
+    public boolean isSeen() { return seen; }
+
+    public void setDelivered(boolean delivered) { this.delivered = delivered; }
+    public void setSeen(boolean seen) { this.seen = seen; }
+}

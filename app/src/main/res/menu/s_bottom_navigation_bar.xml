@@ -12,10 +12,7 @@
         android:title="Ai Assistant" />
 
 
-    <item
-        android:id="@+id/nav_s_offline_download"
-        android:icon="@drawable/s_offline_download"
-        android:title="Offline Download" />
+
 
     <item
         android:id="@+id/nav_s_profile"

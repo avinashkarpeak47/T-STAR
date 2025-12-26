@@ -1,15 +1,15 @@
 package com.example.t_star.TEACHERACTIVITIES.STUDENTS;
 
 import android.content.Context;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
+import android.text.TextUtils;
+import android.view.*;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.example.t_star.R;
 
 import java.util.ArrayList;
@@ -46,10 +46,22 @@ public class TStudentAdapter extends RecyclerView.Adapter<TStudentAdapter.VH> {
     @Override
     public void onBindViewHolder(@NonNull VH h, int pos) {
         TStudentModel m = filtered.get(pos);
+
         h.tvName.setText(m.getStudentName());
         h.tvEmail.setText("Email : " + m.getStudentEmail());
         h.tvID.setText("ID : " + m.getStudentId());
-        h.img.setImageResource(m.getImageRes());
+
+        // ✅ PROFILE IMAGE
+        if (!TextUtils.isEmpty(m.getProfileImageUrl())) {
+            Glide.with(context)
+                    .load(m.getProfileImageUrl())
+                    .placeholder(R.drawable.taklogo)
+                    .error(R.drawable.taklogo)
+                    .circleCrop()
+                    .into(h.img);
+        } else {
+            h.img.setImageResource(R.drawable.taklogo);
+        }
     }
 
     @Override
@@ -64,8 +76,8 @@ public class TStudentAdapter extends RecyclerView.Adapter<TStudentAdapter.VH> {
         } else {
             q = q.toLowerCase();
             for (TStudentModel s : original) {
-                if (s.getStudentName().toLowerCase().contains(q) ||
-                        s.getStudentEmail().toLowerCase().contains(q)) {
+                if (s.getStudentName().toLowerCase().contains(q)
+                        || s.getStudentEmail().toLowerCase().contains(q)) {
                     filtered.add(s);
                 }
             }

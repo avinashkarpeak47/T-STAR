@@ -1,5 +1,7 @@
 package com.example.t_star.TEACHERACTIVITIES;
 
+import static com.example.t_star.REAL_TIME_DATABASE.PUT_ON_DATABASE.HelperClasses.ChatHelper.addStudentToClassChat;
+
 import android.os.Bundle;
 import android.widget.SearchView;
 import android.widget.Toast;
@@ -117,45 +119,70 @@ public class TStudentsActivity extends AppCompatActivity {
     }
 
     // ================= STUDENTS =================
+    private ValueEventListener studentsListener;
+
     private void loadStudents() {
+        DatabaseReference studentsRef =
+                FirebaseDatabase.getInstance()
+                        .getReference("Classes")
+                        .child(classId)
+                        .child("students");
 
-        studentList.clear();
-        studentAdapter.updateList(studentList);
+        if (studentsListener != null) {
+            studentsRef.removeEventListener(studentsListener);
+        }
 
-        Classes_helper.getClassStudents(classId, uids -> {
+        studentsListener = new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
 
-            if (uids == null || uids.isEmpty()) {
-                studentAdapter.updateList(studentList);
-                return;
+                studentList.clear();
+
+                if (!snapshot.exists()) {
+                    studentAdapter.updateList(studentList);
+                    return;
+                }
+
+                for (DataSnapshot ds : snapshot.getChildren()) {
+                    String uid = ds.getKey();
+                    if (uid == null) continue;
+
+                    FirebaseDatabase.getInstance()
+                            .getReference("Users")
+                            .child(uid)
+                            .get()
+                            .addOnSuccessListener(u -> {
+
+                                String fname = u.child("firstname").getValue(String.class);
+                                String lname = u.child("lastname").getValue(String.class);
+                                String email = u.child("email").getValue(String.class);
+                                String profileUrl = u.child("profileImageUrl").getValue(String.class);
+
+                                studentList.add(
+                                        new TStudentModel(
+                                                (fname != null ? fname : "") + " " +
+                                                        (lname != null ? lname : ""),
+                                                email != null ? email : "",
+                                                uid,
+                                                profileUrl
+                                        )
+                                );
+
+                                studentAdapter.updateList(studentList);
+                            });
+                }
             }
 
-            final int total = uids.size();
-            final int[] loaded = {0};
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {}
+        };
 
-            for (String uid : uids) {
-                Classes_helper.Users_Helper.getUserDetails(uid, user -> {
-                    if (user != null) {
-                        studentList.add(
-                                new TStudentModel(
-                                        user.firstname + " " + user.lastname,
-                                        user.email,
-                                        uid,
-                                        R.drawable.taklogo
-                                )
-                        );
-                    }
-                    loaded[0]++;
-                    if (loaded[0] == total) {
-                        studentAdapter.updateList(studentList);
-                    }
-                });
-            }
-        });
+        studentsRef.addValueEventListener(studentsListener);
     }
+
 
     // ================= PENDING =================
     private void loadPendingRequests() {
-
         requestUidList.clear();
         requestAdapter.notifyDataSetChanged();
 
@@ -164,30 +191,60 @@ public class TStudentsActivity extends AppCompatActivity {
                 .child(classId)
                 .child("joinRequests")
                 .addListenerForSingleValueEvent(new ValueEventListener() {
-
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        for (DataSnapshot ds : snapshot.getChildren()) {
 
+                        if (!snapshot.exists()) {
+                            requestAdapter.notifyDataSetChanged();
+                            return;
+                        }
+
+                        for (DataSnapshot ds : snapshot.getChildren()) {
                             String uid = ds.getKey();
+                            if (uid == null) continue;
+
                             requestUidList.add(uid);
 
-                            Classes_helper.Users_Helper.getUserDetails(uid, user -> {
-                                if (user != null) {
-                                    requestAdapter.updateStudentData(
-                                            uid,
-                                            user.firstname + " " + user.lastname,
-                                            user.email
-                                    );
-                                }
-                            });
+                            // 🔥 FETCH USER DATA FROM Users TABLE
+                            FirebaseDatabase.getInstance()
+                                    .getReference("Users")
+                                    .child(uid)
+                                    .addListenerForSingleValueEvent(new ValueEventListener() {
+                                        @Override
+                                        public void onDataChange(@NonNull DataSnapshot u) {
+
+                                            String fname = u.child("firstname").getValue(String.class);
+                                            String lname = u.child("lastname").getValue(String.class);
+                                            String email = u.child("email").getValue(String.class);
+                                            String profileUrl =
+                                                    u.child("profileImageUrl").getValue(String.class);
+
+                                            String fullName =
+                                                    (fname != null ? fname : "") + " " +
+                                                            (lname != null ? lname : "");
+
+                                            requestAdapter.updateStudentData(
+                                                    uid,
+                                                    fullName.trim().isEmpty() ? "Student" : fullName,
+                                                    email != null ? email : "",
+                                                    profileUrl
+                                            );
+                                        }
+
+                                        @Override
+                                        public void onCancelled(@NonNull DatabaseError error) {}
+                                    });
                         }
+
                         requestAdapter.notifyDataSetChanged();
                     }
 
-                    @Override public void onCancelled(@NonNull DatabaseError error) {}
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {}
                 });
     }
+
+
 
     // ================= ACCEPT =================
     private void acceptStudent(String uid) {
@@ -210,11 +267,16 @@ public class TStudentsActivity extends AppCompatActivity {
 
                 studentClass.child("className")
                         .setValue(s.child("className").getValue(String.class));
+
                 studentClass.child("teacherId")
                         .setValue(s.child("teacherId").getValue(String.class));
 
                 classRef.child("joinRequests").child(uid).removeValue();
+
                 Classes_helper.updateStudentCount(classId);
+
+                // ✅ ADD STUDENT TO CHAT TABLE
+                addStudentToClassChat(classId, uid);
 
                 Toast.makeText(
                         TStudentsActivity.this,
@@ -224,6 +286,7 @@ public class TStudentsActivity extends AppCompatActivity {
 
                 loadPendingRequests();
             }
+
 
             @Override public void onCancelled(@NonNull DatabaseError error) {}
         });

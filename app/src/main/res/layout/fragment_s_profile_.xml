@@ -36,7 +36,7 @@
             <View
                 android:id="@+id/header_bg"
                 android:layout_width="match_parent"
-                android:layout_height="224dp"
+                android:layout_height="226dp"
                 android:background="@drawable/s_classes_top_background"
                 />
 
@@ -84,7 +84,7 @@
                 android:orientation="vertical"
                 android:paddingStart="12dp"
                 android:paddingEnd="12dp"
-                android:layout_marginTop="22dp">
+                android:layout_marginTop="24dp">
 
 
 
@@ -123,7 +123,8 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="6dp"
-                                android:hint="Full Name"
+                                android:hint="Name"
+                                app:hintTextColor="@color/black"
                                 app:boxCornerRadiusBottomEnd="20sp"
                                 app:boxCornerRadiusBottomStart="20sp"
                                 app:boxCornerRadiusTopEnd="20sp"
@@ -151,6 +152,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="12dp"
                                 android:hint="Email"
+                                app:hintTextColor="@color/black"
                                 app:boxCornerRadiusBottomEnd="20sp"
                                 app:boxCornerRadiusBottomStart="20sp"
                                 app:boxCornerRadiusTopEnd="20sp"
@@ -177,6 +179,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="12dp"
                                 android:hint="Mobile Number"
+                                app:hintTextColor="@color/black"
                                 app:boxCornerRadiusBottomEnd="20sp"
                                 app:boxCornerRadiusBottomStart="20sp"
                                 app:boxCornerRadiusTopEnd="20sp"
@@ -217,7 +220,7 @@
                         android:id="@+id/cardAccount"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="18dp"
+                        android:layout_marginTop="22dp"
                         android:backgroundTint="@color/white_smoke"
                         app:cardCornerRadius="16dp"
                         app:cardElevation="6dp"

@@ -1,4 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
+<androidx.drawerlayout.widget.DrawerLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/s_drawerLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true">
+
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -13,7 +21,7 @@
     <View
         android:id="@+id/header_bg"
         android:layout_width="0dp"
-        android:layout_height="240dp"
+        android:layout_height="230dp"
         android:background="@drawable/s_classes_top_background"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -26,7 +34,7 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:gravity="center_vertical"
-        android:layout_marginTop="70dp"
+        android:layout_marginTop="56dp"
         android:padding="20dp"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -43,7 +51,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Good Morning,"
-                android:textSize="16sp"
+                android:textSize="18sp"
+                android:textStyle="bold"
                 android:textColor="@color/black"/>
 
             <TextView
@@ -51,15 +60,17 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Student Name"
-                android:textColor="@color/black"
-                android:textSize="18sp"
-                android:textStyle="bold"/>
+                android:textColor="#494949"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:layout_marginTop="2dp"
+                android:layout_marginLeft="14dp"/>
         </LinearLayout>
 
         <ImageView
             android:id="@+id/ivUserProfile"
-            android:layout_width="70dp"
-            android:layout_height="70dp"
+            android:layout_width="84dp"
+            android:layout_height="84dp"
             android:scaleType="centerCrop"
             android:src="@drawable/s_profile"/>
     </LinearLayout>
@@ -69,7 +80,7 @@
         android:id="@+id/btnEnrollNewClass"
         android:layout_width="200dp"
         android:layout_height="45dp"
-        android:layout_marginTop="100dp"
+        android:layout_marginTop="94dp"
         android:background="@drawable/s_btn_bg_shape"
         android:text="Enroll in New Class"
         android:textColor="@color/black"
@@ -84,7 +95,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="18dp"
-        android:padding="15dp"
+        android:padding="6dp"
+        android:layout_marginLeft="6dp"
         android:text="My Classes"
         android:textColor="@color/black"
         android:textSize="18dp"
@@ -97,8 +109,8 @@
         android:id="@+id/recyclerViewClasses"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginTop="7dp"
         android:padding="18dp"
+        android:layout_marginTop="1dp"
         app:layout_constraintTop_toBottomOf="@id/tvMyClassesTitle"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -119,7 +131,7 @@
         app:layout_constraintTop_toBottomOf="@id/tvMyClassesTitle"
         app:layout_constraintStart_toStartOf="parent"/>
 
-    <!-- ProgressBar -->
+    <!-- ProgressBar
     <ProgressBar
         android:id="@+id/progressBarClasses"
         android:layout_width="50dp"
@@ -128,6 +140,18 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        app:layout_constraintEnd_toEndOf="parent"/>-->
 
 </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    <!-- 🔹 Drawer Navigation -->
+    <com.google.android.material.navigation.NavigationView
+        android:id="@+id/s_navigationView"
+        android:layout_width="300dp"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        app:headerLayout="@layout/s_drawer_header"
+        app:menu="@menu/drawer_menu"/>
+
+</androidx.drawerlayout.widget.DrawerLayout>

@@ -96,9 +96,9 @@ public class NotesListFragment extends Fragment {
     void syncFromFirebase() {
 
         FirebaseDatabase.getInstance()
-                .getReference("Classes")
+                .getReference("Notes")
                 .child(classId)
-                .child("Notes")
+                .child("TeacherNotes")
                 .get()
                 .addOnSuccessListener(snap -> {
 

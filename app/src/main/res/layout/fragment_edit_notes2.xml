@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".STUDENTACTIVITIES.S_EditNotesFragment">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:padding="12dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <EditText
+            android:id="@+id/noteTitle"
+            android:hint="Title"
+           android:textColorHint="@color/black"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"/>
+
+        <EditText
+            android:id="@+id/noteContent"
+            android:hint="Write your note..."
+            android:textColorHint="@color/black"
+            android:minLines="6"
+            android:gravity="top"
+            android:layout_width="match_parent"
+            android:layout_height="500dp"/>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/saveBtn"
+            android:text="Save"
+            android:textStyle="bold"
+            android:layout_marginTop="4dp"
+            android:background="@drawable/s_btn_bg_shape"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/deleteBtn"
+            android:text="Delete"
+            android:textStyle="bold"
+            android:layout_marginTop="26dp"
+            android:background="@drawable/s_btn_bg_shape"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+    </LinearLayout>
+
+
+</FrameLayout>

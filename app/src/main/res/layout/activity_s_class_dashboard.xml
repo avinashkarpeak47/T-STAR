@@ -231,6 +231,9 @@
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
 
+
+
+
                 <!-- Study Material -->
                 <androidx.cardview.widget.CardView
                     android:layout_width="0dp"
@@ -250,7 +253,7 @@
                         android:background="@drawable/s_edittext_border">
 
                         <ImageView
-                            android:layout_width="48dp"
+                            android:layout_width="47dp"
                             android:layout_height="48dp"
                             android:src="@drawable/s_studymaterial" />
 
@@ -264,15 +267,16 @@
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
 
-                <!-- Timetable -->
+
+                <!-- Assignment -->
                 <androidx.cardview.widget.CardView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_margin="8dp"
                     app:cardElevation="6dp"
-                    app:cardCornerRadius="20dp"
+                    app:cardCornerRadius="21dp"
                     android:layout_columnWeight="1"
-                    android:id="@+id/class_dashboard_translator">
+                    android:id="@+id/class_dashboard_assignment">
 
                     <LinearLayout
                         android:orientation="vertical"
@@ -283,12 +287,12 @@
                         android:background="@drawable/s_edittext_border">
 
                         <ImageView
-                            android:layout_width="48dp"
-                            android:layout_height="48dp"
-                            android:src="@drawable/s_translator" />
+                            android:layout_width="46.5dp"
+                            android:layout_height="46.5dp"
+                            android:src="@drawable/s_assignment_check" />
 
                         <TextView
-                            android:text="Translator"
+                            android:text="Assignments"
                             android:layout_marginTop="6dp"
                             android:textSize="14sp"
                             android:layout_width="wrap_content"
@@ -297,71 +301,7 @@
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
 
-                <!-- Notes -->
-                <androidx.cardview.widget.CardView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="8dp"
-                    app:cardElevation="6dp"
-                    app:cardCornerRadius="20dp"
-                    android:layout_columnWeight="1"
-                    android:id="@+id/class_dashboard_notes">
 
-                    <LinearLayout
-                        android:orientation="vertical"
-                        android:padding="12dp"
-                        android:gravity="center"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:background="@drawable/s_edittext_border">
-
-                        <ImageView
-                            android:layout_width="48dp"
-                            android:layout_height="48dp"
-                            android:src="@drawable/s_notes" />
-
-                        <TextView
-                            android:text="Notes"
-                            android:layout_marginTop="6dp"
-                            android:textSize="14sp"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:textColor="@color/black"/>
-                    </LinearLayout>
-                </androidx.cardview.widget.CardView>
-
-                <!-- Quiz -->
-                <androidx.cardview.widget.CardView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="8dp"
-                    app:cardElevation="6dp"
-                    app:cardCornerRadius="20dp"
-                    android:layout_columnWeight="1"
-                    android:id="@+id/class_dashboard_quiz">
-
-                    <LinearLayout
-                        android:orientation="vertical"
-                        android:padding="12dp"
-                        android:gravity="center"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:background="@drawable/s_edittext_border">
-
-                        <ImageView
-                            android:layout_width="48dp"
-                            android:layout_height="48dp"
-                            android:src="@drawable/s_quiz" />
-
-                        <TextView
-                            android:text="Quiz"
-                            android:layout_marginTop="6dp"
-                            android:textSize="14sp"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:textColor="@color/black"/>
-                    </LinearLayout>
-                </androidx.cardview.widget.CardView>
 
 
 
@@ -398,6 +338,120 @@
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
 
+
+                <!-- Quiz -->
+                <androidx.cardview.widget.CardView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="8dp"
+                    app:cardElevation="6dp"
+                    app:cardCornerRadius="20dp"
+                    android:layout_columnWeight="1"
+                    android:id="@+id/class_dashboard_quiz">
+
+                    <LinearLayout
+                        android:orientation="vertical"
+                        android:padding="12dp"
+                        android:gravity="center"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/s_edittext_border">
+
+                        <ImageView
+                            android:layout_width="48dp"
+                            android:layout_height="48dp"
+                            android:src="@drawable/s_quiz" />
+
+                        <TextView
+                            android:text="Quiz"
+                            android:layout_marginTop="6dp"
+                            android:textSize="14sp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/black"/>
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
+
+
+
+                <!-- Notes -->
+                <androidx.cardview.widget.CardView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="8dp"
+                    app:cardElevation="6dp"
+                    app:cardCornerRadius="20dp"
+                    android:layout_columnWeight="1"
+                    android:id="@+id/class_dashboard_notes">
+
+                    <LinearLayout
+                        android:orientation="vertical"
+                        android:padding="12dp"
+                        android:gravity="center"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/s_edittext_border">
+
+                        <ImageView
+                            android:layout_width="47dp"
+                            android:layout_height="47dp"
+                            android:src="@drawable/s_notes" />
+
+                        <TextView
+                            android:text="Notes"
+                            android:layout_marginTop="6dp"
+                            android:textSize="14sp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/black"/>
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
+
+
+
+
+
+                <!-- Translator -->
+                <androidx.cardview.widget.CardView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="8dp"
+                    app:cardElevation="6dp"
+                    app:cardCornerRadius="20dp"
+                    android:layout_columnWeight="1"
+                    android:id="@+id/class_dashboard_translator">
+
+                    <LinearLayout
+                        android:orientation="vertical"
+                        android:padding="12dp"
+                        android:gravity="center"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/s_edittext_border">
+
+                        <ImageView
+                            android:layout_width="48dp"
+                            android:layout_height="48dp"
+                            android:src="@drawable/s_translator" />
+
+                        <TextView
+                            android:text="Translator"
+                            android:layout_marginTop="6dp"
+                            android:textSize="14sp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/black"/>
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
+
+
+
+
+
+
+
+
+
                 <!-- Events
                 <androidx.cardview.widget.CardView
                     android:layout_width="0dp"
@@ -431,38 +485,7 @@
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>-->
 
-                <!-- Assignment -->
-                <androidx.cardview.widget.CardView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="8dp"
-                    app:cardElevation="6dp"
-                    app:cardCornerRadius="21dp"
-                    android:layout_columnWeight="1"
-                    android:id="@+id/class_dashboard_assignment">
 
-                    <LinearLayout
-                        android:orientation="vertical"
-                        android:padding="12dp"
-                        android:gravity="center"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:background="@drawable/s_edittext_border">
-
-                        <ImageView
-                            android:layout_width="48dp"
-                            android:layout_height="48dp"
-                            android:src="@drawable/s_assignment_check" />
-
-                        <TextView
-                            android:text="Assignments"
-                            android:layout_marginTop="6dp"
-                            android:textSize="14sp"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:textColor="@color/black"/>
-                    </LinearLayout>
-                </androidx.cardview.widget.CardView>
 
                 <!-- Announcement -->
                 <androidx.cardview.widget.CardView
@@ -483,8 +506,8 @@
                         android:background="@drawable/s_edittext_border">
 
                         <ImageView
-                            android:layout_width="48dp"
-                            android:layout_height="48dp"
+                            android:layout_width="46.5dp"
+                            android:layout_height="46.5dp"
                             android:src="@drawable/s_notification" />
 
                         <TextView

@@ -89,12 +89,11 @@ public class TClassesFragment extends Fragment {
 
            if (id == R.id.nav_editprofile) {
 
-                requireActivity()
-                        .getSupportFragmentManager()
-                        .beginTransaction()
-                        .replace(R.id.fragmentContainer, new TProfileFragment())
-                        .addToBackStack(null)
-                        .commit();
+               // Tell BottomNavigation to switch to Profile tab
+               com.google.android.material.bottomnavigation.BottomNavigationView bottomNav =
+                       requireActivity().findViewById(R.id.bottomNav);
+
+               bottomNav.setSelectedItemId(R.id.nav_tprofile);
             }
 
 

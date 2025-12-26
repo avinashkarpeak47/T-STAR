@@ -136,7 +136,9 @@
                         android:textSize="16sp"
                         android:textColor="@color/black"
                         android:textColorHint="@color/light_greay"
-                        android:layout_marginBottom="20dp"/>
+                        android:layout_marginBottom="20dp"
+                        android:textIsSelectable="true"
+                        android:longClickable="true"/>
 
                     <!-- Progress -->
                     <ProgressBar

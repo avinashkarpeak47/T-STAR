@@ -1,6 +1,7 @@
 package com.example.t_star.STUDENTACTIVITIES.SFragment;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.*;
 import android.widget.*;
@@ -9,6 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.widget.AppCompatButton;
+import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -22,6 +24,14 @@ import com.example.t_star.STUDENTACTIVITIES.S_Class_Dashboard_Activity;
 import com.example.t_star.STUDENTACTIVITIES.S_Enroll_in_Class;
 import com.example.t_star.STUDENTACTIVITIES.S_Fragment_Classes_RC_Adapter;
 import com.example.t_star.STUDENTACTIVITIES.S_Fragment_Classes_RC_Model;
+import com.example.t_star.STUDENTACTIVITIES.Drawer_Activites.S_About_Activity;
+import com.example.t_star.STUDENTACTIVITIES.Drawer_Activites.S_Settings_Activity;
+import com.example.t_star.STUDENTACTIVITIES.Drawer_Activites.S_PrivacyPolicy_Activity;
+import com.example.t_star.STUDENTACTIVITIES.Drawer_Activites.S_Feedback_Activity;
+import com.example.t_star.STUDENTACTIVITIES.Drawer_Activites.S_Help_FAQ_Activity;
+import com.example.t_star.STUDENTACTIVITIES.Drawer_Activites.S_About_Activity;
+import com.example.t_star.TEACHERACTIVITIES.TMainFragment.TProfileFragment;
+import com.example.t_star.TSTAR_Entry_Activity;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.*;
@@ -278,22 +288,121 @@ public class S_Classes_Fragment extends Fragment {
     }
 
     // ---------- Drawer Menu ----------
+    // ---------- Drawer Menu ----------
     private void setupDrawerMenuActions() {
 
         navigationView.setNavigationItemSelectedListener(item -> {
 
             int id = item.getItemId();
 
-            if(id == R.id.nav_editprofile) {
-                Toast.makeText(getContext(),"Profile Coming Soon",Toast.LENGTH_SHORT).show();
-            }
-            else if(id == R.id.nav_logout){
-                FirebaseAuth.getInstance().signOut();
-                Toast.makeText(getContext(),"Logged out",Toast.LENGTH_SHORT).show();
+            // ---------- PROFILE ----------
+            if (id == R.id.nav_editprofile) {
+
+                // Tell BottomNavigation to switch to Profile tab
+                com.google.android.material.bottomnavigation.BottomNavigationView bottomNav =
+                        requireActivity().findViewById(R.id.s_bottom_nav);
+
+                bottomNav.setSelectedItemId(R.id.nav_s_profile);
             }
 
-            drawerLayout.closeDrawers();
+            // ---------- SETTINGS ----------
+            else if (id == R.id.nav_setting) {
+
+                startActivity(
+                        new Intent(getActivity(), S_Settings_Activity.class)
+                );
+
+            }
+
+
+
+            // ---------- HELP / FAQ ----------
+            else if (id == R.id.nav_help) {
+
+                startActivity(
+                        new Intent(getActivity(), S_Help_FAQ_Activity.class)
+                );
+
+            }
+
+            // ---------- CONTACT US ----------
+            else if (id == R.id.nav_contactus) {
+
+                Intent emailIntent = new Intent(Intent.ACTION_SENDTO);
+                emailIntent.setData(Uri.parse("mailto:support.tstar@gmail.com"));
+                emailIntent.putExtra(Intent.EXTRA_SUBJECT, "T-STAR Support");
+
+                startActivity(Intent.createChooser(emailIntent, "Contact Support"));
+
+            }
+
+
+
+
+            // ---------- SHARE APP ----------
+            else if (id == R.id.nav_share) {
+
+                Intent shareIntent = new Intent(Intent.ACTION_SEND);
+                shareIntent.setType("text/plain");
+                shareIntent.putExtra(
+                        Intent.EXTRA_TEXT,
+                        "Try T-STAR – Smart Learning App for Students!"
+                );
+
+                startActivity(
+                        Intent.createChooser(shareIntent, "Share via")
+                );
+
+            }
+
+            // ---------- ABOUT US ----------
+            else if (id == R.id.nav_aboutus) {
+
+                startActivity(
+                        new Intent(getActivity(), S_About_Activity.class)
+                );
+
+            }
+
+            // ---------- PRIVACY POLICY ----------
+            else if (id == R.id.nav_privacy) {
+
+                startActivity(
+                        new Intent(getActivity(), S_PrivacyPolicy_Activity.class)
+                );
+
+            }
+
+            // ---------- LOGOUT ----------
+            else if (id == R.id.nav_logout) {
+
+                showLogoutDialog();
+            }
+
+            drawerLayout.closeDrawer(GravityCompat.START);
             return true;
+
         });
     }
+
+
+    private void showLogoutDialog() {
+
+        new androidx.appcompat.app.AlertDialog.Builder(requireContext())
+                .setTitle("Logout")
+                .setMessage("Are you sure you want to logout?")
+                .setCancelable(false)
+                .setPositiveButton("Yes", (dialog, which) -> {
+
+                    FirebaseAuth.getInstance().signOut();
+
+                    Intent i = new Intent(getActivity(), TSTAR_Entry_Activity.class);
+                    i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                    startActivity(i);
+                    requireActivity().finish();
+                })
+                .setNegativeButton("Cancel", (dialog, which) -> dialog.dismiss())
+                .show();
+    }
+
 }

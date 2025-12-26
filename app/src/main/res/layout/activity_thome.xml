@@ -303,7 +303,8 @@
                                                     android:background="@drawable/chat_indicator_bg"
                                                     android:textSize="15sp"
                                                     android:gravity="center"
-                                                    android:visibility="visible"/>
+                                                    android:visibility="gone"
+                                                    />
                                         </LinearLayout>
                                 </androidx.cardview.widget.CardView>
 

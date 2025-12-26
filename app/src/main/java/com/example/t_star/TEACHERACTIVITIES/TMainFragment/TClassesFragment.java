@@ -2,6 +2,7 @@ package com.example.t_star.TEACHERACTIVITIES.TMainFragment;
 
 import android.app.AlertDialog;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -25,7 +26,6 @@ import com.example.t_star.R;
 import com.example.t_star.REAL_TIME_DATABASE.PUT_ON_DATABASE.HelperClasses.Classes_helper;
 import com.example.t_star.TEACHERACTIVITIES.CLASSES.TClassesAdapter;
 import com.example.t_star.TEACHERACTIVITIES.CLASSES.TClassesModel;
-import com.example.t_star.TEACHERACTIVITIES.Drawer.TFeedbakActivity;
 import com.example.t_star.TEACHERACTIVITIES.TCreateClassActivity;
 import com.example.t_star.TEACHERACTIVITIES.THomeActivity;
 import com.example.t_star.TSTAR_Entry_Activity;
@@ -97,14 +97,35 @@ public class TClassesFragment extends Fragment {
                         .addToBackStack(null)
                         .commit();
             }
-            if (id == R.id.nav_feedback) {
-                startActivity(new Intent(getActivity(), TFeedbakActivity.class));
+            else if (id == R.id.nav_contactus) {
+
+                Intent emailIntent = new Intent(Intent.ACTION_SENDTO);
+                emailIntent.setData(Uri.parse("mailto:cpeproject2025@gmail.com"));
+                emailIntent.putExtra(Intent.EXTRA_SUBJECT, "T-STAR Support");
+
+                startActivity(Intent.createChooser(emailIntent, "Contact Support"));
+
             }
+
+            // ---------- SHARE APP ----------
+            else if (id == R.id.nav_share) {
+
+
+               Intent shareIntent = new Intent(Intent.ACTION_SEND);
+               shareIntent.setType("text/plain");
+               shareIntent.putExtra(
+                       Intent.EXTRA_TEXT,
+                       "Try T-STAR – Smart Learning App for Students!\n\n" +
+                               "Download: https://play.google.com/store/apps/details?id="
+                               + requireContext().getPackageName()
+               );
+
+               startActivity(Intent.createChooser(shareIntent, "Share via"));
+           }
 
            else if (id == R.id.nav_logout) {
                showLogoutDialog();
            }
-
             drawerLayout.closeDrawer(GravityCompat.START);
             return true;
         });

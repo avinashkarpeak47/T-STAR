@@ -1,14 +1,11 @@
 package com.example.t_star.STUDENTACTIVITIES;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
 import com.example.t_star.R;
-import com.example.t_star.STUDENTACTIVITIES.Models.StudentClassModel;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.*;
 

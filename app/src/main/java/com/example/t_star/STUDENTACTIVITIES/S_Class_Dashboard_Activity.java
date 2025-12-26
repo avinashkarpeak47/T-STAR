@@ -8,6 +8,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
+import androidx.appcompat.widget.SearchView;
 
 import com.example.t_star.R;
 import com.google.android.material.appbar.MaterialToolbar;
@@ -21,7 +22,9 @@ public class S_Class_Dashboard_Activity extends AppCompatActivity {
 
     // Declare all card views
     CardView cardAttendance, cardStudy, cardTranslator, cardNotes, cardQuiz,
-            cardChat, cardEvents, cardAssignment, cardNotification;
+            cardChat, cardAssignment, cardNotification;
+
+SearchView searchDashboard;
 
     private String classId;
 
@@ -48,7 +51,6 @@ public class S_Class_Dashboard_Activity extends AppCompatActivity {
         cardNotes = findViewById(R.id.class_dashboard_notes);
         cardQuiz = findViewById(R.id.class_dashboard_quiz);
         cardChat = findViewById(R.id.class_dashboard_chat);
-        cardEvents = findViewById(R.id.class_dashboard_events);
         cardAssignment = findViewById(R.id.class_dashboard_assignment);
         cardNotification = findViewById(R.id.class_dashboard_notification);
 
@@ -57,6 +59,8 @@ public class S_Class_Dashboard_Activity extends AppCompatActivity {
         tv_Subject = findViewById(R.id.tvSubject);
         tv_TeacherName = findViewById(R.id.tvTeacher);
 
+        searchDashboard = findViewById(R.id.searchDashboard);
+
         // Click Listeners with classId propagation
         cardAttendance.setOnClickListener(v -> openFeature(S_Class_Dashboard_Attendance.class));
         cardStudy.setOnClickListener(v -> openFeature(S_class_dashboard_studymaterial.class));
@@ -64,9 +68,23 @@ public class S_Class_Dashboard_Activity extends AppCompatActivity {
         cardNotes.setOnClickListener(v -> openFeature(S_class_dashboard_notes.class));
         cardQuiz.setOnClickListener(v -> openFeature(S_class_dashboard_quiz.class));
         cardChat.setOnClickListener(v -> openFeature(S_class_dashboard_chat.class));
-        cardEvents.setOnClickListener(v -> openFeature(S_class_dashboard_events.class));
         cardAssignment.setOnClickListener(v -> openFeature(S_Class_Dashboard_Assignment.class));
         cardNotification.setOnClickListener(v -> openFeature(S_class_dashboard_notifications.class));
+
+        searchDashboard.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                filterCards(query);
+                return true;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                filterCards(newText);
+                return true;
+
+            }
+        });
 
 
         //Back going Arrow
@@ -82,6 +100,36 @@ public class S_Class_Dashboard_Activity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    private void filterCards(String query) {
+
+        query = query.toLowerCase();
+
+        cardAttendance.setVisibility(
+                query.isEmpty() || "attendance".contains(query) ? CardView.VISIBLE : CardView.GONE);
+
+        cardStudy.setVisibility(
+                query.isEmpty() || "study material".contains(query) ? CardView.VISIBLE : CardView.GONE);
+
+        cardTranslator.setVisibility(
+                query.isEmpty() || "translator".contains(query) ? CardView.VISIBLE : CardView.GONE);
+
+        cardNotes.setVisibility(
+                query.isEmpty() || "notes".contains(query) ? CardView.VISIBLE : CardView.GONE);
+
+        cardQuiz.setVisibility(
+                query.isEmpty() || "quiz".contains(query) ? CardView.VISIBLE : CardView.GONE);
+
+        cardChat.setVisibility(
+                query.isEmpty() || "chat".contains(query) ? CardView.VISIBLE : CardView.GONE);
+
+        cardAssignment.setVisibility(
+                query.isEmpty() || "assignment".contains(query) ? CardView.VISIBLE : CardView.GONE);
+
+        cardNotification.setVisibility(
+                query.isEmpty() || "notification".contains(query) ? CardView.VISIBLE : CardView.GONE);
+    }
+
+
     private void loadClassHeader() {
 
         DatabaseReference ref = FirebaseDatabase.getInstance()
@@ -95,7 +143,7 @@ public class S_Class_Dashboard_Activity extends AppCompatActivity {
                 if (!snapshot.exists()) return;
 
                 String className = snapshot.child("className").getValue(String.class);
-                String subject = snapshot.child("subjectName").getValue(String.class);
+                String subject = snapshot.child("subject").getValue(String.class);
                 String teacherId = snapshot.child("teacherId").getValue(String.class);
 
 

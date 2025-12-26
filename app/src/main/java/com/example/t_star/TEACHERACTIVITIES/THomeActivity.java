@@ -159,7 +159,7 @@ public class THomeActivity extends AppCompatActivity {
         open(cardCreateAssignment, TAsssignmentActivity.class);
         open(cardAttendance,      TAttendanceActivity.class);
         open(cardNotes,           TNoteActivity.class);
-        open(cardChat,            TChatActivity.class);
+        open(cardChat,            TChatsActivity.class);
         open(cardStudents,        TStudentsActivity.class);
         open(cardResources,       TResourcesActivity.class);
         open(cardNotifications,   TNotificationActivity.class);

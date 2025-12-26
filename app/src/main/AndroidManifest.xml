@@ -122,7 +122,10 @@
         <!-- android:name=".STUDENTACTIVITIES.S_HomePagee" -->
         <!-- android:exported="false" /> -->
         <activity
-            android:name=".TEACHERACTIVITIES.TChatActivity"
+            android:name=".TEACHERACTIVITIES.TChatsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".TEACHERACTIVITIES.TChatRoomActivity"
             android:exported="false" />
         <activity
             android:name=".TEACHERACTIVITIES.TNotificationActivity"

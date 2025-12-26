@@ -1,5 +1,7 @@
 package com.example.t_star.STUDENTACTIVITIES.SFragment;
 
+import static android.content.Intent.getIntent;
+
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -34,13 +36,17 @@ public class S_Profile_Fragment extends Fragment {
     private EditText etFullName, etEmail, etMobile;
     private Button btnEditProfile;
 
-    private LinearLayout rowSettings, rowChangePassword, rowLogout, rowDeleteAccount;
+     TextView tvHeaderStudentId;
+
+    private LinearLayout  rowChangePassword, rowLogout, rowDeleteAccount;
 
     private FirebaseUser currentUser;
     private String uid;
 
     private Uri selectedImageUri;
     private boolean inEditMode = false;
+
+
 
     private String profileImageUrl = "";   // ⭐ Cloudinary URL holder
 
@@ -59,10 +65,11 @@ public class S_Profile_Fragment extends Fragment {
         etFullName = view.findViewById(R.id.etFullName);
         etEmail = view.findViewById(R.id.etEmail);
         etMobile = view.findViewById(R.id.etMobile);
-       // etRollNo = view.findViewById(R.id.etRollNo);
+        // etRollNo = view.findViewById(R.id.etRollNo);
         btnEditProfile = view.findViewById(R.id.btnEditProfile);
 
-        rowSettings = view.findViewById(R.id.rowSettings);
+        tvHeaderStudentId = view.findViewById(R.id.tvHeaderStudentId);
+
         rowChangePassword = view.findViewById(R.id.rowChangePassword);
         rowLogout = view.findViewById(R.id.rowLogout);
         rowDeleteAccount = view.findViewById(R.id.rowDeleteAccount);
@@ -73,6 +80,8 @@ public class S_Profile_Fragment extends Fragment {
         if (currentUser == null) return view;
 
         uid = currentUser.getUid();
+
+
 
         setupAccountActions();
         loadUserData();
@@ -111,7 +120,9 @@ public class S_Profile_Fragment extends Fragment {
             @Override
             public void onSuccess(Updated_User_Model user) {
 
-                profileImageUrl = user.profileImageUrl;   // ⭐ store URL
+                profileImageUrl = user.profileImageUrl;// ⭐ store URL
+
+                tvHeaderStudentId.setText("Student ID: " + uid.substring(0, 28));
 
                 if (profileImageUrl != null && !profileImageUrl.isEmpty()) {
                     Glide.with(requireContext())
@@ -142,7 +153,7 @@ public class S_Profile_Fragment extends Fragment {
     // ---------------- ENABLE / DISABLE EDITING ----------------
     private void setEditingEnabled(boolean enabled) {
         etFullName.setEnabled(enabled);
-       // etRollNo.setEnabled(enabled);
+        // etRollNo.setEnabled(enabled);
 
         etEmail.setEnabled(false);
         etMobile.setEnabled(false);
@@ -254,7 +265,7 @@ public class S_Profile_Fragment extends Fragment {
         Map<String, Object> map = new HashMap<>();
         map.put("firstname", parts[0]);
         map.put("lastname", parts[1]);
-       // map.put("rollno", roll);
+        // map.put("rollno", roll);
 
         User_Data_Fetcher.updateUserFields(uid, map,
                 new User_Data_Fetcher.SimpleCallback() {
@@ -338,7 +349,9 @@ public class S_Profile_Fragment extends Fragment {
                     })
                     .setNegativeButton("Cancel", null)
                     .show();
+
         });
+
 
     }
 }

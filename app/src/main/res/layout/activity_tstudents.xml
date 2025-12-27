@@ -16,9 +16,9 @@
     <com.google.android.material.appbar.MaterialToolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
-        android:layout_height="52dp"
+        android:layout_height="?attr/actionBarSize"
         android:background="@drawable/header_gradient"
-        app:navigationIcon="@drawable/arrow_back"
+        app:navigationIcon="@drawable/s_arrowback"
         app:title="Students"
         app:titleTextColor="@color/white"
         tools:ignore="MissingConstraints"

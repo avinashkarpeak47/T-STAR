@@ -22,6 +22,9 @@ public class TCreateNewAssignActivity extends AppCompatActivity {
     AppCompatButton btnSave;
     String classId;
 
+    long dueDateMillis = 0;
+    private boolean isSaving = false;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,10 +46,19 @@ public class TCreateNewAssignActivity extends AppCompatActivity {
     }
 
     private void pickDate() {
+
         Calendar c = Calendar.getInstance();
+
         new DatePickerDialog(
                 this,
-                (view, y, m, d) -> etDueDate.setText(d+"-"+(m+1)+"-"+y),
+                (view, y, m, d) -> {
+
+                    Calendar cal = Calendar.getInstance();
+                    cal.set(y, m, d, 23, 59, 59);
+
+                    dueDateMillis = cal.getTimeInMillis();
+                    etDueDate.setText(d + "-" + (m + 1) + "-" + y);
+                },
                 c.get(Calendar.YEAR),
                 c.get(Calendar.MONTH),
                 c.get(Calendar.DAY_OF_MONTH)
@@ -55,22 +67,27 @@ public class TCreateNewAssignActivity extends AppCompatActivity {
 
     private void saveAssignment() {
 
+        if (isSaving) return;
+        isSaving = true;
+        btnSave.setEnabled(false);
+
         String title = etTitle.getText().toString().trim();
         String desc = etDescription.getText().toString().trim();
         String due = etDueDate.getText().toString().trim();
 
-        if (title.isEmpty()) { etTitle.setError("Required"); return; }
-        if (desc.isEmpty()) { etDescription.setError("Required"); return; }
-        if (due.isEmpty()) { etDueDate.setError("Required"); return; }
+        if (title.isEmpty()) { etTitle.setError("Required"); reset(); return; }
+        if (desc.isEmpty()) { etDescription.setError("Required"); reset(); return; }
+        if (due.isEmpty())  { etDueDate.setError("Required"); reset(); return; }
 
         DatabaseReference ref = FirebaseDatabase.getInstance()
                 .getReference("Assignments")
                 .child(classId);
 
-        String id = ref.push().getKey();
+        String id = ref.push().getKey();   // created only ONCE
 
         FirebaseDatabase.getInstance().getReference("Classes")
-                .child(classId).child("studentsCount")
+                .child(classId)
+                .child("studentsCount")
                 .get()
                 .addOnSuccessListener(s -> {
 
@@ -82,9 +99,24 @@ public class TCreateNewAssignActivity extends AppCompatActivity {
 
                     ref.child(id).setValue(m)
                             .addOnSuccessListener(a -> {
-                                Toast.makeText(this,"Assignment Created",Toast.LENGTH_SHORT).show();
+
+                                ref.child(id)
+                                        .child("dueDateMillis")
+                                        .setValue(dueDateMillis);
+
+                                Toast.makeText(this,
+                                        "Assignment Created",
+                                        Toast.LENGTH_SHORT).show();
+
                                 finish();
-                            });
-                });
+                            })
+                            .addOnFailureListener(e -> reset());
+                })
+                .addOnFailureListener(e -> reset());
+    }
+
+    private void reset() {
+        isSaving = false;
+        btnSave.setEnabled(true);
     }
 }

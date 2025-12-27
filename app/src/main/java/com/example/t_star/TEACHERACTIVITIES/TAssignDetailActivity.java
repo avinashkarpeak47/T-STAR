@@ -1,7 +1,9 @@
 package com.example.t_star.TEACHERACTIVITIES;
 
+import android.app.DatePickerDialog;
 import android.os.Bundle;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -10,9 +12,15 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.t_star.R;
 import com.example.t_star.TEACHERACTIVITIES.ASSIGNMENTS.STUSTATUS.TAssignStudentStatusAdapter;
 import com.example.t_star.TEACHERACTIVITIES.ASSIGNMENTS.STUSTATUS.TAssignStudentStatusModel;
+import com.google.android.material.appbar.MaterialToolbar;
 import com.google.firebase.database.*;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Collections;
+import java.util.Date;
+import java.util.Locale;
 
 public class TAssignDetailActivity extends AppCompatActivity {
 
@@ -24,6 +32,7 @@ public class TAssignDetailActivity extends AppCompatActivity {
     TAssignStudentStatusAdapter adapter;
 
     String classId, assignmentId;
+    long dueDateMillis = 0;
 
     @Override
     protected void onCreate(Bundle b) {
@@ -40,9 +49,29 @@ public class TAssignDetailActivity extends AppCompatActivity {
         tvSubmitted = findViewById(R.id.tvSubmitted);
         tvUnsubmitted = findViewById(R.id.tvUnsubmitted);
 
+        MaterialToolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        toolbar.setNavigationOnClickListener(v -> finish());
+
         tvTitleDetail.setText(getIntent().getStringExtra("title"));
         tvDescDetail.setText(getIntent().getStringExtra("description"));
-        tvDueDateDetail.setText("Due: " + getIntent().getStringExtra("dueDate"));
+
+        String dueText = getIntent().getStringExtra("dueDate");
+        dueDateMillis = getIntent().getLongExtra("dueDateMillis", 0);
+
+        if (dueDateMillis > 0) {
+            SimpleDateFormat sdf =
+                    new SimpleDateFormat("dd MMM yyyy, hh:mm a", Locale.getDefault());
+            tvDueDateDetail.setText("Due: " + sdf.format(new Date(dueDateMillis)));
+        } else {
+            tvDueDateDetail.setText("Due: " + dueText);
+        }
+
+        // make clickable (even if expired)
+        tvDueDateDetail.setEnabled(true);
+        tvDueDateDetail.setFocusable(false);
+        tvDueDateDetail.setClickable(true);
+        tvDueDateDetail.setOnClickListener(v -> showExtendPicker());
 
         int total = getIntent().getIntExtra("totalStudents", 0);
         int submitted = getIntent().getIntExtra("submittedCount", 0);
@@ -56,8 +85,56 @@ public class TAssignDetailActivity extends AppCompatActivity {
         adapter = new TAssignStudentStatusAdapter(list);
         rvStudentStatus.setAdapter(adapter);
 
-
         loadStatus();
+    }
+
+    private void showExtendPicker() {
+
+        Calendar c = Calendar.getInstance();
+
+        new DatePickerDialog(
+                this,
+                (view, y, m, d) -> {
+
+                    Calendar cal = Calendar.getInstance();
+                    cal.set(y, m, d, 23, 59, 59);
+
+                    long newMillis = cal.getTimeInMillis();
+
+                    if (newMillis < System.currentTimeMillis()) {
+                        Toast.makeText(this,
+                                "Cannot select past date",
+                                Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+
+                    String newText = d + "-" + (m + 1) + "-" + y;
+
+                    updateDueDate(newMillis, newText);
+
+                },
+                c.get(Calendar.YEAR),
+                c.get(Calendar.MONTH),
+                c.get(Calendar.DAY_OF_MONTH)
+        ).show();
+    }
+
+    private void updateDueDate(long newMillis, String newText) {
+
+        DatabaseReference ref = FirebaseDatabase.getInstance()
+                .getReference("Assignments")
+                .child(classId)
+                .child(assignmentId);
+
+        ref.child("dueDateMillis").setValue(newMillis);
+        ref.child("dueDate").setValue(newText);
+
+        tvDueDateDetail.setText("Due: " + newText);
+        dueDateMillis = newMillis;
+
+        Toast.makeText(this,
+                "Due date extended",
+                Toast.LENGTH_SHORT).show();
     }
 
     private void loadStatus() {
@@ -75,7 +152,6 @@ public class TAssignDetailActivity extends AppCompatActivity {
                 .child(classId)
                 .child(assignmentId);
 
-        // realtime submissions listener
         subRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot subSnap) {
@@ -86,7 +162,6 @@ public class TAssignDetailActivity extends AppCompatActivity {
 
                         list.clear();
 
-                        // ✅ Total students from DB (correct)
                         int totalStudents = (int) studentSnap.getChildrenCount();
                         tvTotalStudents.setText("Total: " + totalStudents);
 
@@ -95,44 +170,62 @@ public class TAssignDetailActivity extends AppCompatActivity {
                             String uid = s.getKey();
 
                             userRef.child(uid)
-                                    .addListenerForSingleValueEvent(new ValueEventListener() {
-                                        @Override
-                                        public void onDataChange(DataSnapshot uSnap) {
+                                    .addListenerForSingleValueEvent(
+                                            new ValueEventListener() {
+                                                @Override
+                                                public void onDataChange(DataSnapshot uSnap) {
 
-                                            String first = uSnap.child("firstname").getValue(String.class);
-                                            String last  = uSnap.child("lastname").getValue(String.class);
+                                                    String first =
+                                                            uSnap.child("firstname")
+                                                                    .getValue(String.class);
 
-                                            String name = ((first == null ? "" : first) + " " +
-                                                    (last == null ? "" : last)).trim();
+                                                    String last =
+                                                            uSnap.child("lastname")
+                                                                    .getValue(String.class);
 
-                                            boolean submitted = subSnap.hasChild(uid);
+                                                    String name =
+                                                            ((first == null ? "" : first)
+                                                                    + " " +
+                                                                    (last == null ? "" : last))
+                                                                    .trim();
 
-                                            String fileUrl = submitted
-                                                    ? subSnap.child(uid).child("fileUrl").getValue(String.class)
-                                                    : null;
+                                                    boolean submitted =
+                                                            subSnap.hasChild(uid);
 
-                                            list.add(new TAssignStudentStatusModel(
-                                                    uid, name, submitted, fileUrl
-                                            ));
+                                                    String fileUrl = submitted
+                                                            ? subSnap.child(uid)
+                                                            .child("fileUrl")
+                                                            .getValue(String.class)
+                                                            : null;
 
-                                            // 👉 Update counts only after all students loaded
-                                            if (list.size() == totalStudents) {
+                                                    list.add(new TAssignStudentStatusModel(
+                                                            uid, name, submitted, fileUrl
+                                                    ));
 
-                                                int submittedCount = 0;
-                                                for (TAssignStudentStatusModel m : list)
-                                                    if (m.isSubmitted()) submittedCount++;
+                                                    if (list.size() == totalStudents) {
 
-                                                // ✅ Correct counts
-                                                tvSubmitted.setText("Submitted: " + submittedCount);
-                                                tvUnsubmitted.setText(
-                                                        "Pending: " + (totalStudents - submittedCount));
+                                                        int submittedCount = 0;
+                                                        for (TAssignStudentStatusModel m : list)
+                                                            if (m.isSubmitted())
+                                                                submittedCount++;
 
-                                                adapter.notifyDataSetChanged();
-                                            }
-                                        }
+                                                        tvSubmitted.setText("Submitted: " + submittedCount);
+                                                        tvUnsubmitted.setText("Pending: " + (totalStudents - submittedCount));
 
-                                        @Override public void onCancelled(DatabaseError e) {}
-                                    });
+                                                        // 👉 Sort list: Submitted first, Pending later
+                                                        Collections.sort(list, (a, b) -> {
+                                                            if (a.isSubmitted() == b.isSubmitted())
+                                                                return 0;
+                                                            return a.isSubmitted() ? -1 : 1;
+                                                        });
+
+                                                        adapter.notifyDataSetChanged();
+                                                    }
+
+                                                }
+
+                                                @Override public void onCancelled(DatabaseError e) {}
+                                            });
                         }
                     }
 

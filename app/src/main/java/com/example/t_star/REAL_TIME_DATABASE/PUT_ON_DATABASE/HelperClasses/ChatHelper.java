@@ -59,7 +59,32 @@ public class ChatHelper {
 
         root().child(classId).child(studentUid).updateChildren(map);
     }
+    // ===== UNREAD COUNTS =====
+    public static void incrementUnreadForTeacher(String classId, String studentUid) {
+        root().child(classId).child(studentUid)
+                .child("unread").child("teacher")
+                .setValue(ServerValue.increment(1));
+    }
 
+    public static void incrementUnreadForStudent(String classId, String studentUid) {
+        root().child(classId).child(studentUid)
+                .child("unread").child("student")
+                .setValue(ServerValue.increment(1));
+    }
+
+    public static void resetTeacherUnread(String classId, String studentUid) {
+        root().child(classId).child(studentUid)
+                .child("unread").child("teacher")
+                .setValue(0);
+    }
+
+    public static void resetStudentUnread(String classId, String studentUid) {
+        root().child(classId).child(studentUid)
+                .child("unread").child("student")
+                .setValue(0);
+    }
+
+    /*
     // ================= UNREAD COUNT =================
     public static void incrementUnreadCount(
             @NonNull String classId,
@@ -81,7 +106,7 @@ public class ChatHelper {
                 .setValue(0);
     }
 
-
+*/
     // ================= MESSAGE STATUS =================
     public static void markDelivered(String classId, String studentUid, String msgId) {
         DatabaseReference ref = root().child(classId).child(studentUid);

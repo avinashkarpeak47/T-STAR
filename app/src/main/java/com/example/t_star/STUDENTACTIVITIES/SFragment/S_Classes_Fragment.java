@@ -41,6 +41,8 @@ import java.util.Calendar;
 
 public class S_Classes_Fragment extends Fragment {
 
+    //Comment
+
     // UI
     DrawerLayout drawerLayout;
     NavigationView navigationView;

@@ -2,6 +2,7 @@ package com.example.t_star.STUDENTACTIVITIES;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -12,6 +13,7 @@ import androidx.appcompat.widget.SearchView;
 
 import com.example.t_star.R;
 import com.google.android.material.appbar.MaterialToolbar;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -23,12 +25,13 @@ public class S_Class_Dashboard_Activity extends AppCompatActivity {
     // Declare all card views
     CardView cardAttendance, cardStudy, cardTranslator, cardNotes, cardQuiz,
             cardChat, cardAssignment, cardNotification;
-
-SearchView searchDashboard;
+    SearchView searchDashboard;
 
     private String classId;
+    private String myUserId;
 
-    TextView tv_ClassId , tv_ClassName , tv_Subject , tv_TeacherName;
+
+    TextView tv_ClassId , tv_ClassName , tv_Subject , tv_TeacherName ,tv_MsgIndicator;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +40,7 @@ SearchView searchDashboard;
 
         // Receive classId
         classId = getIntent().getStringExtra("classId");
+        myUserId = FirebaseAuth.getInstance().getUid();
 
         if (classId == null || classId.isEmpty()) {
             Toast.makeText(this, "Class not found", Toast.LENGTH_SHORT).show();
@@ -58,6 +62,7 @@ SearchView searchDashboard;
         tv_ClassName = findViewById(R.id.tvClassName);
         tv_Subject = findViewById(R.id.tvSubject);
         tv_TeacherName = findViewById(R.id.tvTeacher);
+        tv_MsgIndicator = findViewById(R.id.tvMsgNo);
 
         searchDashboard = findViewById(R.id.searchDashboard);
 
@@ -70,6 +75,8 @@ SearchView searchDashboard;
         cardChat.setOnClickListener(v -> openFeature(S_class_dashboard_chat.class));
         cardAssignment.setOnClickListener(v -> openFeature(S_Class_Dashboard_Assignment.class));
         cardNotification.setOnClickListener(v -> openFeature(S_class_dashboard_notifications.class));
+
+        listenUnreadIndicator();
 
         searchDashboard.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
@@ -90,7 +97,6 @@ SearchView searchDashboard;
         //Back going Arrow
         MaterialToolbar toolbar = findViewById(R.id.topToolbar);
         toolbar.setNavigationOnClickListener(v -> finish());
-
         loadClassHeader();
     }
 
@@ -179,6 +185,45 @@ SearchView searchDashboard;
                     public void onCancelled(@NonNull DatabaseError error) {}
                 });
     }
+    private void listenUnreadIndicator() {
+
+        DatabaseReference unreadRef = FirebaseDatabase.getInstance()
+                .getReference("Chats")
+                .child(classId)
+                .child(myUserId)
+                .child("unread")
+                .child("student");
+
+        unreadRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+
+                Integer count = snapshot.getValue(Integer.class);
+
+                if (count != null && count > 0) {
+                    tv_MsgIndicator.setVisibility(View.VISIBLE);
+
+                   /* // 🔥 SET NUMBER
+                    if (count > 99) {
+                        tv_MsgIndicator.setText("99+");   // WhatsApp style
+                    } else {
+                        tv_MsgIndicator.setText(String.valueOf(count));
+                    }
+                    */
+
+                } else {
+                    tv_MsgIndicator.setVisibility(View.GONE);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                tv_MsgIndicator.setVisibility(View.GONE);
+            }
+        });
+    }
+
+
 
 
 

@@ -17,6 +17,7 @@ import androidx.cardview.widget.CardView;
 import com.example.t_star.R;
 import com.example.t_star.TQuizActivity;
 import com.google.android.material.appbar.MaterialToolbar;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.*;
 
 import androidx.gridlayout.widget.GridLayout;
@@ -26,9 +27,9 @@ import java.util.*;
 public class THomeActivity extends AppCompatActivity {
 
     String classId, className;
-
+    private String myUserId;
     MaterialToolbar toolbar;
-    TextView tvClassID, tvClassName, tvSubject, tvTeacher;
+    TextView tvClassID, tvClassName, tvSubject, tvTeacher, tvMsgIndicator;
 
     SearchView searchView;
     GridLayout gridLayout;
@@ -43,9 +44,11 @@ public class THomeActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_thome);
+        myUserId = FirebaseAuth.getInstance().getUid();
 
         classId   = getIntent().getStringExtra("classId");
         className = getIntent().getStringExtra("className");
+
 
         if (className == null) className = "Class";
 
@@ -60,6 +63,7 @@ public class THomeActivity extends AppCompatActivity {
         setupSearch();
         fetchClassDetails();
         setupClicks();
+        listenTeacherUnreadMessages();
     }
 
     private void initViews() {
@@ -72,6 +76,8 @@ public class THomeActivity extends AppCompatActivity {
         tvClassName = findViewById(R.id.tvClassName);
         tvSubject   = findViewById(R.id.tvSubject);
         tvTeacher   = findViewById(R.id.tvTeacher);
+        tvMsgIndicator = findViewById(R.id.tvMsgNo);
+
 
         cardCreateAssignment = findViewById(R.id.cardCreateAssignment);
         cardAttendance       = findViewById(R.id.cardAttendance);
@@ -153,6 +159,50 @@ public class THomeActivity extends AppCompatActivity {
                     }
                 });
     }
+    private void listenTeacherUnreadMessages() {
+        DatabaseReference chatRef =
+                FirebaseDatabase.getInstance()
+                        .getReference("Chats")
+                        .child(classId);
+
+        chatRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+
+                boolean hasUnread = false;
+                int totalUnread = 0;
+
+                for (DataSnapshot studentSnap : snapshot.getChildren()) {
+
+                    Integer uc =
+                            studentSnap.child("unread")
+                                    .child("teacher")
+                                    .getValue(Integer.class);
+
+                    if (uc != null && uc > 0) {
+                        hasUnread = true;
+                        totalUnread += uc;
+                    }
+                }
+
+                if (hasUnread) {
+                    tvMsgIndicator.setVisibility(View.VISIBLE);
+
+                    // 👉 if you want NUMBER
+                    // tvMsgIndicator.setText(String.valueOf(totalUnread));
+
+                } else {
+                    tvMsgIndicator.setVisibility(View.GONE);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                tvMsgIndicator.setVisibility(View.GONE);
+            }
+        });
+    }
+
 
     private void setupClicks() {
 

@@ -81,7 +81,7 @@ public class TChatsActivity extends AppCompatActivity {
                     m.setLastSeen(Boolean.TRUE.equals(d.child("lastSeen").getValue(Boolean.class)));
 
                     Long ts = d.child("lastTimestamp").getValue(Long.class);
-                    Integer uc = d.child("unreadCount").getValue(Integer.class);
+                    Integer uc = d.child("unread").child("teacher").getValue(Integer.class);
 
                     m.setLastTimestamp(ts != null ? ts : 0);
                     m.setUnreadCount(uc != null ? uc : 0);

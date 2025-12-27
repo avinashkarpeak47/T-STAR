@@ -291,6 +291,20 @@
                                                     android:textSize="15sp"
                                                     android:textColor="@color/black"
                                                     android:layout_marginTop="8dp"/>
+                                                <!-- New Indicator Badge -->
+                                                <TextView
+                                                    android:id="@+id/tvMsgNo"
+                                                    android:layout_width="5dp"
+                                                    android:layout_height="5dp"
+                                                    android:layout_marginTop="-10dp"
+                                                    android:layout_marginLeft="-60dp"
+                                                    android:text="  "
+                                                    android:textColor="@color/white"
+                                                    android:background="@drawable/chat_indicator_bg"
+                                                    android:textSize="15sp"
+                                                    android:gravity="center"
+                                                    android:visibility="gone"
+                                                    />
                                         </LinearLayout>
                                 </androidx.cardview.widget.CardView>
 

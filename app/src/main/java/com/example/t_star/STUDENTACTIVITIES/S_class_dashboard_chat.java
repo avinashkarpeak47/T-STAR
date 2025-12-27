@@ -70,17 +70,19 @@ public class S_class_dashboard_chat extends AppCompatActivity {
         send.setOnClickListener(v -> send());
     }
 
-    @Override protected void onResume() {
+    @Override
+    protected void onResume() {
         super.onResume();
         isOpen = true;
-
-
+        ChatHelper.resetStudentUnread(classId, myUid);
     }
+
 
     @Override protected void onPause() {
         super.onPause();
         isOpen = false;
-//        ChatHelper.resetUnreadCount(classId, myUid); // ✅
+        ChatHelper.resetStudentUnread(classId, myUid);
+
     }
 
     private void loadTeacher() {
@@ -149,7 +151,9 @@ public class S_class_dashboard_chat extends AppCompatActivity {
         msgRef.child(id).child("timestamp").setValue(ServerValue.TIMESTAMP);
 
         ChatHelper.updateLastMessage(classId, myUid, text, myUid);
-        ChatHelper.incrementUnreadCount(classId, myUid);
+        // teacher unread +1
+        ChatHelper.incrementUnreadForTeacher(classId, myUid);
+      //  ChatHelper.incrementUnreadCount(classId, myUid);
 
 
         et.setText("");

@@ -136,8 +136,15 @@ public class TChatListAdapter extends RecyclerView.Adapter<TChatListAdapter.VH> 
 
         // ---------------- UNREAD BADGE ----------------
         if (m.getUnreadCount() > 0) {
+
             h.tvMsgNo.setVisibility(View.VISIBLE);
-            h.tvMsgNo.setText(String.valueOf(m.getUnreadCount()));
+            if(m.getUnreadCount() < 100){
+                h.tvMsgNo.setText(String.valueOf(m.getUnreadCount()));
+
+            }else{
+                h.tvMsgNo.setText("99+");
+            }
+
         } else {
             h.tvMsgNo.setVisibility(View.GONE);
         }

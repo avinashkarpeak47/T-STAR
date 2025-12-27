@@ -71,14 +71,16 @@ public class TChatRoomActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         isChatOpen = true;
-
+        ChatHelper.resetTeacherUnread(classId, studentUid);
     }
+
 
     @Override
     protected void onPause() {
         super.onPause();
         isChatOpen = false;
-        ChatHelper.resetUnreadCount(classId, studentUid);
+        ChatHelper.resetTeacherUnread(classId, studentUid);
+       // ChatHelper.resetUnreadCount(classId, studentUid);
     }
 
     private void loadStudentInfo() {
@@ -127,6 +129,8 @@ public class TChatRoomActivity extends AppCompatActivity {
         msgRef.child(id).child("timestamp").setValue(ServerValue.TIMESTAMP);
 
         ChatHelper.updateLastMessage(classId, studentUid, text, myUid);
+        // student unread +1
+        ChatHelper.incrementUnreadForStudent(classId, studentUid);
         et.setText("");
     }
 

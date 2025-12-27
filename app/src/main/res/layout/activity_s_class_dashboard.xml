@@ -335,6 +335,20 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textColor="@color/black"/>
+                        <!-- New Indicator Badge -->
+                        <TextView
+                            android:id="@+id/tvMsgNo"
+                            android:layout_width="5dp"
+                            android:layout_height="5dp"
+                            android:layout_marginTop="-10dp"
+                            android:layout_marginLeft="-22dp"
+                            android:text="  "
+                            android:textColor="@color/white"
+                            android:background="@drawable/chat_indicator_bg"
+                            android:textSize="15sp"
+                            android:gravity="center"
+                            android:visibility="gone"/>
+
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
 
@@ -404,6 +418,8 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textColor="@color/black"/>
+
+
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
 

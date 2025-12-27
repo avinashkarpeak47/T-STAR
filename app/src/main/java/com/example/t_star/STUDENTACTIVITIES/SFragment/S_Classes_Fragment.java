@@ -1,5 +1,6 @@
 package com.example.t_star.STUDENTACTIVITIES.SFragment;
 
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -24,13 +25,6 @@ import com.example.t_star.STUDENTACTIVITIES.S_Class_Dashboard_Activity;
 import com.example.t_star.STUDENTACTIVITIES.S_Enroll_in_Class;
 import com.example.t_star.STUDENTACTIVITIES.S_Fragment_Classes_RC_Adapter;
 import com.example.t_star.STUDENTACTIVITIES.S_Fragment_Classes_RC_Model;
-import com.example.t_star.STUDENTACTIVITIES.Drawer_Activites.S_About_Activity;
-import com.example.t_star.STUDENTACTIVITIES.Drawer_Activites.S_Settings_Activity;
-import com.example.t_star.STUDENTACTIVITIES.Drawer_Activites.S_PrivacyPolicy_Activity;
-import com.example.t_star.STUDENTACTIVITIES.Drawer_Activites.S_Feedback_Activity;
-import com.example.t_star.STUDENTACTIVITIES.Drawer_Activites.S_Help_FAQ_Activity;
-import com.example.t_star.STUDENTACTIVITIES.Drawer_Activites.S_About_Activity;
-import com.example.t_star.TEACHERACTIVITIES.TMainFragment.TProfileFragment;
 import com.example.t_star.TSTAR_Entry_Activity;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
@@ -38,8 +32,11 @@ import com.google.firebase.database.*;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.HashMap;
 
 public class S_Classes_Fragment extends Fragment {
+
+    //Comment
 
     // UI
     DrawerLayout drawerLayout;
@@ -288,14 +285,13 @@ public class S_Classes_Fragment extends Fragment {
     }
 
     // ---------- Drawer Menu ----------
-    // ---------- Drawer Menu ----------
     private void setupDrawerMenuActions() {
 
+        // ================= DRAWER MENU =================
         navigationView.setNavigationItemSelectedListener(item -> {
 
             int id = item.getItemId();
 
-            // ---------- PROFILE ----------
             if (id == R.id.nav_editprofile) {
 
                 // Tell BottomNavigation to switch to Profile tab
@@ -303,88 +299,77 @@ public class S_Classes_Fragment extends Fragment {
                         requireActivity().findViewById(R.id.s_bottom_nav);
 
                 bottomNav.setSelectedItemId(R.id.nav_s_profile);
+            } else if (id == R.id.nav_setting) {
+
+                Intent intent = new Intent(android.provider.Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
+                intent.setData(Uri.parse("package:" + requireContext().getPackageName()));
+                startActivity(intent);
+            } else if (id == R.id.nav_contactus) {
+
+                View dialogView = LayoutInflater.from(requireContext())
+                        .inflate(R.layout.dialog_contact_support, null);
+
+                EditText etSubject = dialogView.findViewById(R.id.etSubject);
+                EditText etMessage = dialogView.findViewById(R.id.etMessage);
+
+                new AlertDialog.Builder(requireContext())
+                        .setTitle("Contact Support")
+                        .setView(dialogView)
+                        .setPositiveButton("Send", (d, w) -> {
+
+
+                            String subject = etSubject.getText().toString().trim();
+                            String message = etMessage.getText().toString().trim();
+
+                            // 1️⃣ Save to Firebase
+                            saveContactMessageToFirebase(subject, message);
+// 2️⃣ Open Gmail with same values (fixed email)
+                            Intent emailIntent = new Intent(Intent.ACTION_SEND);
+                            emailIntent.setType("message/rfc822");
+
+                            emailIntent.putExtra(Intent.EXTRA_EMAIL,
+                                    new String[]{"cpeproject2025@gmail.com"});   // Fixed To email
+                            emailIntent.putExtra(Intent.EXTRA_SUBJECT, subject); // Dialog subject
+                            emailIntent.putExtra(Intent.EXTRA_TEXT, message);    // Dialog message
+
+// Force Gmail only
+                            emailIntent.setPackage("com.google.android.gm");
+
+                            try {
+                                startActivity(emailIntent);
+                            } catch (Exception e) {
+                                // Fallback if Gmail not installed
+                                startActivity(Intent.createChooser(emailIntent, "Send via Email"));
+                            }
+
+
+                        })
+                        .setNegativeButton("Cancel", null)
+                        .show();
             }
-
-            // ---------- SETTINGS ----------
-            else if (id == R.id.nav_setting) {
-
-                startActivity(
-                        new Intent(getActivity(), S_Settings_Activity.class)
-                );
-
-            }
-
-
-
-            // ---------- HELP / FAQ ----------
-            else if (id == R.id.nav_help) {
-
-                startActivity(
-                        new Intent(getActivity(), S_Help_FAQ_Activity.class)
-                );
-
-            }
-
-            // ---------- CONTACT US ----------
-            else if (id == R.id.nav_contactus) {
-
-                Intent emailIntent = new Intent(Intent.ACTION_SENDTO);
-                emailIntent.setData(Uri.parse("mailto:support.tstar@gmail.com"));
-                emailIntent.putExtra(Intent.EXTRA_SUBJECT, "T-STAR Support");
-
-                startActivity(Intent.createChooser(emailIntent, "Contact Support"));
-
-            }
-
-
 
 
             // ---------- SHARE APP ----------
             else if (id == R.id.nav_share) {
 
+
                 Intent shareIntent = new Intent(Intent.ACTION_SEND);
                 shareIntent.setType("text/plain");
                 shareIntent.putExtra(
                         Intent.EXTRA_TEXT,
-                        "Try T-STAR – Smart Learning App for Students!"
+                        "Hey! I'm using T-STAR – a smart app for students with AI assistant, classes, and learning tools.\n\n" +
+                                "Download: https://play.google.com/store/apps/details?id="
+                                + requireContext().getPackageName()
                 );
 
-                startActivity(
-                        Intent.createChooser(shareIntent, "Share via")
-                );
-
-            }
-
-            // ---------- ABOUT US ----------
-            else if (id == R.id.nav_aboutus) {
-
-                startActivity(
-                        new Intent(getActivity(), S_About_Activity.class)
-                );
-
-            }
-
-            // ---------- PRIVACY POLICY ----------
-            else if (id == R.id.nav_privacy) {
-
-                startActivity(
-                        new Intent(getActivity(), S_PrivacyPolicy_Activity.class)
-                );
-
-            }
-
-            // ---------- LOGOUT ----------
-            else if (id == R.id.nav_logout) {
-
+                startActivity(Intent.createChooser(shareIntent, "Share via"));
+            } else if (id == R.id.nav_logout) {
                 showLogoutDialog();
             }
-
             drawerLayout.closeDrawer(GravityCompat.START);
             return true;
-
         });
     }
-
 
     private void showLogoutDialog() {
 
@@ -404,5 +389,28 @@ public class S_Classes_Fragment extends Fragment {
                 .setNegativeButton("Cancel", (dialog, which) -> dialog.dismiss())
                 .show();
     }
+
+    private void saveContactMessageToFirebase( String subject, String message) {
+
+        String uid = FirebaseAuth.getInstance().getUid();
+        if (uid == null) return;
+
+        DatabaseReference ref = FirebaseDatabase.getInstance()
+                .getReference("ContactUs/Feedback")
+                .push();
+
+        String id = ref.getKey();
+
+        HashMap<String, Object> map = new HashMap<>();
+        map.put("id", id);
+        map.put("userId", uid);
+        map.put("role", "Teacher");
+        map.put("subject", subject);
+        map.put("message", message);
+        map.put("timestamp", System.currentTimeMillis());
+
+        ref.setValue(map);
+    }
+
 
 }

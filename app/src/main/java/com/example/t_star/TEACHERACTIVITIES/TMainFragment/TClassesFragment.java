@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -36,6 +37,7 @@ import com.google.firebase.database.*;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.HashMap;
 
 public class TClassesFragment extends Fragment {
 
@@ -96,17 +98,60 @@ public class TClassesFragment extends Fragment {
 
                bottomNav.setSelectedItemId(R.id.nav_tprofile);
             }
-            else if (id == R.id.nav_contactus) {
 
-                Intent emailIntent = new Intent(Intent.ACTION_SENDTO);
-                emailIntent.setData(Uri.parse("mailto:cpeproject2025@gmail.com"));
-                emailIntent.putExtra(Intent.EXTRA_SUBJECT, "T-STAR Support");
+           else if (id == R.id.nav_setting) {
 
-                startActivity(Intent.createChooser(emailIntent, "Contact Support"));
+               Intent intent = new Intent(android.provider.Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
+               intent.setData(Uri.parse("package:" + requireContext().getPackageName()));
+               startActivity(intent);
+           }
+           else if (id == R.id.nav_contactus) {
 
-            }
+               View dialogView = LayoutInflater.from(requireContext())
+                       .inflate(R.layout.dialog_contact_support, null);
 
-            // ---------- SHARE APP ----------
+               EditText etSubject = dialogView.findViewById(R.id.etSubject);
+               EditText etMessage = dialogView.findViewById(R.id.etMessage);
+
+               new AlertDialog.Builder(requireContext())
+                       .setTitle("Contact Support")
+                       .setView(dialogView)
+                       .setPositiveButton("Send", (d, w) -> {
+
+
+                           String subject = etSubject.getText().toString().trim();
+                           String message = etMessage.getText().toString().trim();
+
+                           // 1️⃣ Save to Firebase
+                           saveContactMessageToFirebase(subject, message);
+// 2️⃣ Open Gmail with same values (fixed email)
+                           Intent emailIntent = new Intent(Intent.ACTION_SEND);
+                           emailIntent.setType("message/rfc822");
+
+                           emailIntent.putExtra(Intent.EXTRA_EMAIL,
+                                   new String[]{"cpeproject2025@gmail.com"});   // Fixed To email
+                           emailIntent.putExtra(Intent.EXTRA_SUBJECT, subject); // Dialog subject
+                           emailIntent.putExtra(Intent.EXTRA_TEXT, message);    // Dialog message
+
+// Force Gmail only
+                           emailIntent.setPackage("com.google.android.gm");
+
+                           try {
+                               startActivity(emailIntent);
+                           } catch (Exception e) {
+                               // Fallback if Gmail not installed
+                               startActivity(Intent.createChooser(emailIntent, "Send via Email"));
+                           }
+
+
+
+                       })
+                       .setNegativeButton("Cancel", null)
+                       .show();
+           }
+
+
+           // ---------- SHARE APP ----------
             else if (id == R.id.nav_share) {
 
 
@@ -114,7 +159,7 @@ public class TClassesFragment extends Fragment {
                shareIntent.setType("text/plain");
                shareIntent.putExtra(
                        Intent.EXTRA_TEXT,
-                       "Try T-STAR – Smart Learning App for Students!\n\n" +
+                       "Hey! I'm using T-STAR – a smart app for students with AI assistant, classes, and learning tools.\n\n" +
                                "Download: https://play.google.com/store/apps/details?id="
                                + requireContext().getPackageName()
                );
@@ -422,5 +467,27 @@ public class TClassesFragment extends Fragment {
                 .setNegativeButton("Cancel", (dialog, which) -> dialog.dismiss())
                 .show();
     }
+    private void saveContactMessageToFirebase( String subject, String message) {
+
+        String uid = FirebaseAuth.getInstance().getUid();
+        if (uid == null) return;
+
+        DatabaseReference ref = FirebaseDatabase.getInstance()
+                .getReference("ContactUs/Feedback")
+                .push();
+
+        String id = ref.getKey();
+
+        HashMap<String, Object> map = new HashMap<>();
+        map.put("id", id);
+        map.put("userId", uid);
+        map.put("role", "Teacher");
+        map.put("subject", subject);
+        map.put("message", message);
+        map.put("timestamp", System.currentTimeMillis());
+
+        ref.setValue(map);
+    }
+
 
 }

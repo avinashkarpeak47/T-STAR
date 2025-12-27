@@ -112,6 +112,11 @@ public class AssignmentAdapter
             intent.putExtra("assignmentId",
                     clicked.getAssignmentId());
 
+            intent.putExtra("assignmentTitle",clicked.getTitle());
+            intent.putExtra("assignmentDescription",clicked.getSubject());
+
+
+
             context.startActivity(intent);
         });
     }

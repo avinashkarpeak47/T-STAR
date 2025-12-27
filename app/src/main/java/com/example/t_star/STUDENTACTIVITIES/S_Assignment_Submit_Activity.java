@@ -35,6 +35,9 @@ public class S_Assignment_Submit_Activity extends AppCompatActivity {
     private static final int RC_PICK_FILE = 2001;
 
     private TextView txtStatus, txtSubmittedFile, txtDueDate, txtLateBadge;
+
+    private TextView tvTitle, tvDescription;
+    private String assignmentTitle, assignmentDescription;
     private ImageView imgFileType;
     private Button btnChooseFile, btnSubmit, btnViewSubmission;
 
@@ -66,6 +69,15 @@ public class S_Assignment_Submit_Activity extends AppCompatActivity {
             finish();
             return;
         }
+
+        assignmentTitle = getIntent().getStringExtra("assignmentTitle");
+        assignmentDescription = getIntent().getStringExtra("assignmentDescription");
+
+        if (assignmentTitle != null)
+            tvTitle.setText(assignmentTitle);
+
+        if (assignmentDescription != null)
+            tvDescription.setText(assignmentDescription);
 
         assignmentRef = FirebaseDatabase.getInstance()
                 .getReference("Assignments")
@@ -206,6 +218,7 @@ public class S_Assignment_Submit_Activity extends AppCompatActivity {
             return;
         }
 
+        Toast.makeText(this, "Submitting Assignment, please wait...", Toast.LENGTH_LONG).show();
         btnSubmit.setEnabled(false);
         uploadToCloudinary();
     }
@@ -382,5 +395,7 @@ public class S_Assignment_Submit_Activity extends AppCompatActivity {
         btnChooseFile = findViewById(R.id.btnChooseFile);
         btnSubmit = findViewById(R.id.btnSubmitAssignment);
         btnViewSubmission = findViewById(R.id.btnViewSubmission);
+        tvTitle = findViewById(R.id.tvTitle);
+        tvDescription = findViewById(R.id.Description);
     }
 }

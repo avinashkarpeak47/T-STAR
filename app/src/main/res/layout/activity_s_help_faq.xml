@@ -53,7 +53,8 @@
                     android:padding="16dp">
 
                     <TextView
-                        android:text="What is T-STAR?"
+                        android:text=" What is the main objective of T-STAR?
+"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textSize="16sp"
@@ -61,7 +62,8 @@
                         android:textColor="#000"/>
 
                     <TextView
-                        android:text="T-STAR (Teacher–Student Resources) is an educational application that provides access to classes, learning materials, and AI-based academic support for students."
+                        android:text="The main objective of T-STAR is to create a unified digital platform that strengthens interaction between teachers and students by providing structured classes, learning resources, and academic support in one place.
+"
                         android:textSize="14sp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -87,7 +89,8 @@
                     android:padding="16dp">
 
                     <TextView
-                        android:text="What is T-STAR?"
+                        android:text="How is T-STAR different from regular learning applications?
+"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textSize="16sp"
@@ -95,7 +98,8 @@
                         android:textColor="#000"/>
 
                     <TextView
-                        android:text="T-STAR (Teacher–Student Resources) is an educational application that provides access to classes, learning materials, and AI-based academic support for students."
+                        android:text="T-STAR is different from regular learning applications because it focuses on teacher-led classes, verified academic content, class-based workflows, and role-based access instead of only self-learning content.
+"
                         android:textSize="14sp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -121,7 +125,8 @@
                     android:padding="16dp">
 
                     <TextView
-                        android:text="What is T-STAR?"
+                        android:text="What role does AI play in T-STAR?
+"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textSize="16sp"
@@ -129,7 +134,8 @@
                         android:textColor="#000"/>
 
                     <TextView
-                        android:text="T-STAR (Teacher–Student Resources) is an educational application that provides access to classes, learning materials, and AI-based academic support for students."
+                        android:text="AI in T-STAR assists students by helping them understand concepts, clarify doubts, and receive guided academic support related to their studies.
+"
                         android:textSize="14sp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -156,7 +162,8 @@
                     android:padding="16dp">
 
                     <TextView
-                        android:text="What is T-STAR?"
+                        android:text="How are teachers and students separated in T-STAR?
+"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textSize="16sp"
@@ -164,7 +171,8 @@
                         android:textColor="#000"/>
 
                     <TextView
-                        android:text="T-STAR (Teacher–Student Resources) is an educational application that provides access to classes, learning materials, and AI-based academic support for students."
+                        android:text="T-STAR uses role-based access control where teachers and students are redirected to different dashboards with specific permissions and features after login.
+"
                         android:textSize="14sp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -188,7 +196,8 @@
                     android:padding="16dp">
 
                     <TextView
-                        android:text="What is T-STAR?"
+                        android:text="How are classes managed in T-STAR?
+"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textSize="16sp"
@@ -196,7 +205,8 @@
                         android:textColor="#000"/>
 
                     <TextView
-                        android:text="T-STAR (Teacher–Student Resources) is an educational application that provides access to classes, learning materials, and AI-based academic support for students."
+                        android:text="Teachers create and manage classes, while students join classes using a class ID. Once approved, students can access class materials, assignments, and discussions.
+"
                         android:textSize="14sp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -220,7 +230,8 @@
                     android:padding="16dp">
 
                     <TextView
-                        android:text="What is T-STAR?"
+                        android:text="Does T-STAR support assignments and academic evaluation?
+"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textSize="16sp"
@@ -228,7 +239,8 @@
                         android:textColor="#000"/>
 
                     <TextView
-                        android:text="T-STAR (Teacher–Student Resources) is an educational application that provides access to classes, learning materials, and AI-based academic support for students."
+                        android:text=" T-STAR supports assignment sharing, submission by students, and academic progress tracking within each class.
+"
                         android:textSize="14sp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -252,7 +264,7 @@
                     android:padding="16dp">
 
                     <TextView
-                        android:text="What is T-STAR?"
+                        android:text="Is T-STAR suitable for colleges and educational institutions?"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textSize="16sp"
@@ -260,7 +272,8 @@
                         android:textColor="#000"/>
 
                     <TextView
-                        android:text="T-STAR (Teacher–Student Resources) is an educational application that provides access to classes, learning materials, and AI-based academic support for students."
+                        android:text="T-STAR is designed to support schools, colleges, and institutions by providing a structured, scalable, and organized digital learning environment.
+"
                         android:textSize="14sp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -284,7 +297,8 @@
                     android:padding="16dp">
 
                     <TextView
-                        android:text="What is T-STAR?"
+                        android:text="How does T-STAR ensure data security and privacy?
+"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textSize="16sp"
@@ -292,7 +306,7 @@
                         android:textColor="#000"/>
 
                     <TextView
-                        android:text="T-STAR (Teacher–Student Resources) is an educational application that provides access to classes, learning materials, and AI-based academic support for students."
+                        android:text="T-STAR ensures data security through secure authentication, role-based access, and controlled data storage to protect user information."
                         android:textSize="14sp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"

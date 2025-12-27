@@ -27,10 +27,7 @@
             android:title="Contact Us / Feedback"
             android:icon="@drawable/tcall_logo" />
 
-        <item
-            android:id="@+id/nav_aboutus"
-            android:title="About Us"
-            android:icon="@drawable/tfeedback" />
+
 
 
 

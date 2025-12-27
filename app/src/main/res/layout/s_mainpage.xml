@@ -24,6 +24,8 @@
         app:menu="@menu/s_bottom_navigation_bar"
         app:itemIconTint="@color/white"
         app:itemTextColor="@color/white"
+        app:labelVisibilityMode="selected"
+        app:itemActiveIndicatorStyle="@null"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>

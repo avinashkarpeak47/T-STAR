@@ -8,6 +8,7 @@ import android.widget.Toast;
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SearchView;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
@@ -30,6 +31,7 @@ public class TResourcesActivity extends AppCompatActivity {
     RecyclerView rvStudyMaterial;
     ArrayList<Model> materialList = new ArrayList<>();
     Adapter adapter;
+    SearchView searchView;
     String classId;
 
     @Override
@@ -53,6 +55,8 @@ public class TResourcesActivity extends AppCompatActivity {
 
         adapter = new Adapter(this, materialList, classId);
         rvStudyMaterial.setAdapter(adapter);
+        searchView = findViewById(R.id.searchStudyMaterial);
+        setupSearch();
 
 
         loadStudyMaterial();
@@ -64,6 +68,22 @@ public class TResourcesActivity extends AppCompatActivity {
         });
     }
 
+    private void setupSearch() {
+
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                adapter.filter(query);
+                return true;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                adapter.filter(newText);
+                return true;
+            }
+        });
+    }
     private void loadStudyMaterial() {
 
         FirebaseDatabase.getInstance()
@@ -87,8 +107,12 @@ public class TResourcesActivity extends AppCompatActivity {
                             }
                         }
 
+                        // ❌ OLD (remove)
+                        // adapter.notifyDataSetChanged();
 
-                        adapter.notifyDataSetChanged();
+                        // ✅ NEW — proper refresh + keep search
+                        adapter.setData(materialList);
+                        adapter.filter(searchView.getQuery().toString());
                     }
 
                     @Override
@@ -101,4 +125,5 @@ public class TResourcesActivity extends AppCompatActivity {
                     }
                 });
     }
+
 }

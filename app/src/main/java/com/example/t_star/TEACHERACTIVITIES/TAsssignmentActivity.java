@@ -3,9 +3,8 @@ package com.example.t_star.TEACHERACTIVITIES;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.ImageButton;
-import android.widget.Toast;
-
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SearchView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -23,7 +22,9 @@ public class TAsssignmentActivity extends AppCompatActivity {
     RecyclerView rvAssignments;
     TAssignmentAdapter adapter;
     List<TAssignmentModel> list = new ArrayList<>();
+
     String classId, className;
+    SearchView searchView;
     DatabaseReference ref;
 
     @Override
@@ -40,7 +41,7 @@ public class TAsssignmentActivity extends AppCompatActivity {
 
         MaterialToolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        toolbar.setTitle("Assignments • " + className);
+        toolbar.setTitle("Assignments" );
         toolbar.setNavigationOnClickListener(v -> finish());
 
         ImageButton btnCreate = findViewById(R.id.btnCreate);
@@ -53,7 +54,7 @@ public class TAsssignmentActivity extends AppCompatActivity {
         rvAssignments = findViewById(R.id.rvAssignments);
         rvAssignments.setLayoutManager(new LinearLayoutManager(this));
 
-        adapter = new TAssignmentAdapter(list, model -> {
+        adapter = new TAssignmentAdapter(model -> {
             Intent i = new Intent(this, TAssignDetailActivity.class);
             i.putExtra("classId", classId);
             i.putExtra("assignmentId", model.getId());
@@ -62,15 +63,33 @@ public class TAsssignmentActivity extends AppCompatActivity {
             i.putExtra("dueDate", model.getDueDate());
             i.putExtra("totalStudents", model.getTotalStudents());
             i.putExtra("submittedCount", model.getSubmittedCount());
-
-            // 🔹 NEW — pass dueDateMillis if available
             i.putExtra("dueDateMillis", model.getDueDateMillis());
-
             startActivity(i);
         });
 
         rvAssignments.setAdapter(adapter);
+
+        searchView = findViewById(R.id.searchViewGrid);
+        setupSearch();
+
         loadAssignments();
+    }
+
+    private void setupSearch() {
+
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                adapter.filter(query);
+                return true;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                adapter.filter(newText);
+                return true;
+            }
+        });
     }
 
     private void loadAssignments() {
@@ -79,20 +98,16 @@ public class TAsssignmentActivity extends AppCompatActivity {
             @Override
             public void onDataChange(DataSnapshot snap) {
 
-                list.clear();   // 🔹 reset clean list
+                list.clear();
 
                 for (DataSnapshot ds : snap.getChildren()) {
 
                     TAssignmentModel m = ds.getValue(TAssignmentModel.class);
                     if (m == null) continue;
 
-                    // 🔹 Read dueDateMillis safely
                     Long dueMillis = ds.child("dueDateMillis").getValue(Long.class);
                     m.setDueDateMillis(dueMillis == null ? 0L : dueMillis);
 
-                    // ===========================
-                    // 🔹 FETCH SUBMISSION COUNT
-                    // ===========================
                     DatabaseReference subRef = FirebaseDatabase.getInstance()
                             .getReference("Assignments_Submissions")
                             .child(classId)
@@ -102,38 +117,37 @@ public class TAsssignmentActivity extends AppCompatActivity {
                         @Override
                         public void onDataChange(DataSnapshot subSnap) {
 
-                            int submitted = (int) subSnap.getChildrenCount();
-                            m.setSubmittedCount(submitted);
+                            m.setSubmittedCount((int) subSnap.getChildrenCount());
 
-                            // ===========================
-                            // 🔥 ADD / REPLACE (NO DUPLICATE)
-                            // ===========================
+                            // add / update list item
                             boolean updated = false;
 
                             for (int i = 0; i < list.size(); i++) {
                                 if (list.get(i).getId().equals(m.getId())) {
-                                    list.set(i, m);   // replace old instance
+                                    list.set(i, m);
                                     updated = true;
                                     break;
                                 }
                             }
 
                             if (!updated)
-                                list.add(m);  // add first time only
+                                list.add(m);
 
-                            adapter.notifyDataSetChanged();
+                            // 🔹 update adapter safely
+                            adapter.setData(list);
+
+                            // keep active search
+                            adapter.filter(searchView.getQuery().toString());
                         }
 
                         @Override
-                        public void onCancelled(DatabaseError e) {
-                        }
+                        public void onCancelled(DatabaseError error) {}
                     });
                 }
             }
 
             @Override
-            public void onCancelled(DatabaseError e) {
-            }
+            public void onCancelled(DatabaseError error) {}
         });
     }
 }

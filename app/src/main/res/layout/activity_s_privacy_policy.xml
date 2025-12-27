@@ -1,10 +1,232 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".STUDENTACTIVITIES.Drawer_Activites.S_PrivacyPolicy_Activity">
+    android:fitsSystemWindows="true"
+    android:background="@color/white">
+
+    <com.google.android.material.appbar.MaterialToolbar
+        android:id="@+id/toolbar"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@color/Lavender"
+        app:title="Privacy Policy"
+        app:titleTextColor="@color/white"
+        app:navigationIcon="@drawable/s_arrowback"
+        app:navigationIconTint="@color/white"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <ScrollView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:fillViewport="true"
+        app:layout_constraintTop_toBottomOf="@id/toolbar"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="14dp">
+
+            <!-- FAQ CARD -->
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                app:cardCornerRadius="16dp"
+                app:cardElevation="6dp"
+                app:strokeWidth="1dp"
+                app:strokeColor="#000">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/white"
+                    android:orientation="vertical"
+                    android:padding="16dp">
+
+                    <!-- CHANGE QUESTION TEXT HERE -->
+                    <TextView
+                        android:text="1.Information We Collect"
+                        android:textStyle="bold"
+                        android:textSize="16sp"
+                        android:textColor="#000"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+
+                    <!-- CHANGE ANSWER TEXT HERE -->
+                    <TextView
+                        android:text="We collect the following personal information when you use t_star:\nBasic Profile Information : Your full name and profile photo (if provided)\nContact Details : Email address (required for account creation and communication).\nAcademic Information: Study materials, notes, and progress data you choose to input. \nTechnical Data: Device information, IP address, and usage statistics."
+                        android:textSize="14sp"
+                        android:textColor="#555"
+                        android:layout_marginTop="6dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+
+                </LinearLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+
+
+            <!-- FAQ CARD -->
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                app:cardCornerRadius="16dp"
+                app:cardElevation="6dp"
+                app:strokeWidth="1dp"
+                app:strokeColor="#000">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/white"
+                    android:orientation="vertical"
+                    android:padding="16dp">
+
+                    <!-- CHANGE QUESTION TEXT HERE -->
+                    <TextView
+                        android:text="2.How to use Your Information "
+                        android:textStyle="bold"
+                        android:textSize="16sp"
+                        android:textColor="#000"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+
+                    <!-- CHANGE ANSWER TEXT HERE -->
+                    <TextView
+                        android:text="We use the collected data for the following purposes:\n\nTo create and maintain your user account \nTo provide personalized study and recommendations.\nTo communicate important service updates and notifications.\nTo improve our app's functionality and user experience.\nTo ensure the security and integrity of our platform"
+                        android:textSize="14sp"
+                        android:textColor="#555"
+                        android:layout_marginTop="6dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+
+                </LinearLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+            <!-- FAQ CARD -->
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                app:cardCornerRadius="16dp"
+                app:cardElevation="6dp"
+                app:strokeWidth="1dp"
+                app:strokeColor="#000">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/white"
+                    android:orientation="vertical"
+                    android:padding="16dp">
+
+                    <!-- CHANGE QUESTION TEXT HERE -->
+                    <TextView
+                        android:text="3.Your Rights and Choices"
+                        android:textStyle="bold"
+                        android:textSize="16sp"
+                        android:textColor="#000"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+
+                    <!-- CHANGE ANSWER TEXT HERE -->
+                    <TextView
+                        android:text="You have the right to:\n\nAccess, update, or delete your personal information.\nDownload your study data.\nDeactivate or delete your account.\nOpt-out of non-essential communications.\nThese options are available in your account settings or by contacting us."
+                        android:textSize="14sp"
+                        android:textColor="#555"
+                        android:layout_marginTop="6dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+
+                </LinearLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                app:cardCornerRadius="16dp"
+                app:cardElevation="6dp"
+                app:strokeWidth="1dp"
+                app:strokeColor="#000">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/white"
+                    android:orientation="vertical"
+                    android:padding="16dp">
+
+                    <!-- CHANGE QUESTION TEXT HERE -->
+                    <TextView
+                        android:text="4.Children's Privacy"
+                        android:textStyle="bold"
+                        android:textSize="16sp"
+                        android:textColor="#000"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+
+                    <!-- CHANGE ANSWER TEXT HERE -->
+                    <TextView
+                        android:text="t_star is not intended for children under 13. We do not knowingly collect personal information from children under this age. If we become aware of such collection, we will take steps to delete the information."
+                        android:textSize="14sp"
+                        android:textColor="#555"
+                        android:layout_marginTop="6dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+
+                </LinearLayout>
+
+            </com.google.android.material.card.MaterialCardView>   <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            app:cardCornerRadius="16dp"
+            app:cardElevation="6dp"
+            app:strokeWidth="1dp"
+            app:strokeColor="#000">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <!-- CHANGE QUESTION TEXT HERE -->
+                <TextView
+                    android:text="5.Changes to this Policy"
+                    android:textStyle="bold"
+                    android:textSize="16sp"
+                    android:textColor="#000"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+                <!-- CHANGE ANSWER TEXT HERE -->
+                <TextView
+                    android:text="We may update this policy periodically. We will notify you of significant changes through the app or via email. Your continued use of MyStudyTracker after changes constitutes acceptance of the updated policy."
+                    android:textSize="14sp"
+                    android:textColor="#555"
+                    android:layout_marginTop="6dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+            </LinearLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+        </LinearLayout>
+    </ScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

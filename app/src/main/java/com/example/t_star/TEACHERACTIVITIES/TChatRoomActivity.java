@@ -13,6 +13,7 @@ import com.bumptech.glide.Glide;
 import com.example.t_star.CHATDATA.*;
 import com.example.t_star.R;
 import com.example.t_star.REAL_TIME_DATABASE.PUT_ON_DATABASE.HelperClasses.ChatHelper;
+import com.google.android.material.appbar.MaterialToolbar;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.*;
 import java.util.*;
@@ -50,6 +51,9 @@ public class TChatRoomActivity extends AppCompatActivity {
         layoutEmpty = findViewById(R.id.layoutEmpty);
         ivProfilePic = findViewById(R.id.imgProfile);
 
+        MaterialToolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        toolbar.setNavigationOnClickListener(v -> finish());
 
         rv.setLayoutManager(new LinearLayoutManager(this));
         adapter = new MessageAdapter(this, list, myUid);

@@ -5,7 +5,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.EditText;
 
 import androidx.annotation.NonNull;
@@ -41,6 +40,26 @@ public class EditNotesFragment extends Fragment {
         save = v.findViewById(R.id.saveBtn);
         delete = v.findViewById(R.id.deleteBtn);
 
+
+        title.setVerticalScrollBarEnabled(true);
+        content.setVerticalScrollBarEnabled(true);
+
+        title.setMovementMethod(new android.text.method.ScrollingMovementMethod());
+        content.setMovementMethod(new android.text.method.ScrollingMovementMethod());
+
+        content.setOnTouchListener((view, e) -> {
+            v.getParent().requestDisallowInterceptTouchEvent(true);
+            return false;
+        });
+
+        title.setOnTouchListener((view, e) -> {
+            v.getParent().requestDisallowInterceptTouchEvent(true);
+            return false;
+        });
+
+
+
+
         if (getArguments() != null)
             classId = getArguments().getString("classId", "");
 
@@ -64,6 +83,7 @@ public class EditNotesFragment extends Fragment {
                 content.setText(note.content);
             }
         }
+
 
         save.setOnClickListener(v1 -> saveNote());
         delete.setOnClickListener(v2 -> deleteNote());

@@ -35,6 +35,22 @@ public class S_EditNotesFragment extends Fragment {
         save = v.findViewById(R.id.saveBtn);
         delete = v.findViewById(R.id.deleteBtn);
 
+        title.setVerticalScrollBarEnabled(true);
+        content.setVerticalScrollBarEnabled(true);
+
+        title.setMovementMethod(new android.text.method.ScrollingMovementMethod());
+        content.setMovementMethod(new android.text.method.ScrollingMovementMethod());
+
+        content.setOnTouchListener((view, e) -> {
+            v.getParent().requestDisallowInterceptTouchEvent(true);
+            return false;
+        });
+
+        title.setOnTouchListener((view, e) -> {
+            v.getParent().requestDisallowInterceptTouchEvent(true);
+            return false;
+        });
+
         if (getArguments() != null)
             classId = getArguments().getString("classId", "");
 

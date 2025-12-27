@@ -23,15 +23,53 @@ import java.util.ArrayList;
 
 public class Adapter extends RecyclerView.Adapter<Adapter.VH> {
 
-    private Context context;
-    private ArrayList<Model> list;
-    private String classId;   // ✅ must
+    private final Context context;
+    private final String classId;
 
-    // ✅ CORRECT CONSTRUCTOR
+    private final ArrayList<Model> fullList = new ArrayList<>();     // master list
+    private final ArrayList<Model> filteredList = new ArrayList<>(); // visible list
+
     public Adapter(Context context, ArrayList<Model> list, String classId) {
         this.context = context;
-        this.list = list;
         this.classId = classId;
+
+        fullList.addAll(list);
+        filteredList.addAll(list);
+    }
+
+    // 👉 Firebase new data update
+    public void setData(ArrayList<Model> newList) {
+
+        fullList.clear();
+        fullList.addAll(newList);
+
+        filteredList.clear();
+        filteredList.addAll(newList);
+
+        notifyDataSetChanged();
+    }
+
+    // 👉 Search filter
+    public void filter(String query) {
+
+        filteredList.clear();
+
+        if (query == null || query.trim().isEmpty()) {
+            filteredList.addAll(fullList);   // reset full list
+        } else {
+            query = query.toLowerCase();
+
+            for (Model m : fullList) {
+                String t = m.getTitle() == null ? "" : m.getTitle().toLowerCase();
+                String d = m.getDescription() == null ? "" : m.getDescription().toLowerCase();
+
+                if (t.contains(query) || d.contains(query)) {
+                    filteredList.add(m);
+                }
+            }
+        }
+
+        notifyDataSetChanged();
     }
 
     @NonNull
@@ -45,49 +83,44 @@ public class Adapter extends RecyclerView.Adapter<Adapter.VH> {
     @Override
     public void onBindViewHolder(@NonNull VH h, int position) {
 
-        Model model = list.get(position);
+        Model model = filteredList.get(position);
 
         h.tvTitle.setText(model.getTitle());
         h.tvDesc.setText(model.getDescription());
         h.tvDate.setText(model.getDate());
 
         String url = model.getFileUrl();
-        if (url == null) return;
+        if (url != null) {
+            String lower = url.toLowerCase();
 
-        String lower = url.toLowerCase();
-
-        if (lower.endsWith(".pdf")) {
-            h.imgFileType.setImageResource(R.drawable.ic_pdf);
-        } else if (lower.matches(".*\\.(jpg|jpeg|png|gif|webp)")) {
-            h.imgFileType.setImageResource(R.drawable.ic_image);
-        } else {
-            h.imgFileType.setImageResource(R.drawable.ic_file_generic);
+            if (lower.endsWith(".pdf")) h.imgFileType.setImageResource(R.drawable.ic_pdf);
+            else if (lower.matches(".*\\.(jpg|jpeg|png|gif|webp)"))
+                h.imgFileType.setImageResource(R.drawable.ic_image);
+            else h.imgFileType.setImageResource(R.drawable.ic_file_generic);
         }
 
-        // open file
         h.itemView.setOnClickListener(v -> openFile(context, model.getFileUrl()));
 
-        // delete on long click
         h.itemView.setOnLongClickListener(v -> {
-
             new androidx.appcompat.app.AlertDialog.Builder(context)
                     .setTitle("Delete material?")
                     .setMessage("This will remove the file for all students.")
                     .setPositiveButton("Delete", (d, w) -> deleteMaterial(model))
                     .setNegativeButton("Cancel", null)
                     .show();
-
             return true;
         });
     }
 
-    // ✅ SAFE DELETE
+    @Override
+    public int getItemCount() {
+        return filteredList.size();
+    }
+
+    // ================= DELETE =================
     private void deleteMaterial(Model model) {
 
-        if (model.getMaterialId() == null || classId == null) {
-            Toast.makeText(context, "Invalid delete request", Toast.LENGTH_SHORT).show();
-            return;
-        }
+        if (model.getMaterialId() == null) return;
 
         FirebaseDatabase.getInstance()
                 .getReference("StudyMaterial")
@@ -96,18 +129,9 @@ public class Adapter extends RecyclerView.Adapter<Adapter.VH> {
                 .child(model.getMaterialId())
                 .removeValue()
                 .addOnSuccessListener(a ->
-                        Toast.makeText(context,
-                                "Material deleted",
-                                Toast.LENGTH_SHORT).show())
+                        Toast.makeText(context, "Material deleted", Toast.LENGTH_SHORT).show())
                 .addOnFailureListener(e ->
-                        Toast.makeText(context,
-                                "Delete failed",
-                                Toast.LENGTH_SHORT).show());
-    }
-
-    @Override
-    public int getItemCount() {
-        return list.size();
+                        Toast.makeText(context, "Delete failed", Toast.LENGTH_SHORT).show());
     }
 
     // ================= VIEW HOLDER =================
@@ -116,7 +140,7 @@ public class Adapter extends RecyclerView.Adapter<Adapter.VH> {
         ImageView imgFileType;
         TextView tvTitle, tvDesc, tvDate;
 
-        public VH(@NonNull View itemView) {
+        VH(@NonNull View itemView) {
             super(itemView);
             imgFileType = itemView.findViewById(R.id.imgFileType);
             tvTitle = itemView.findViewById(R.id.txtTitle);
@@ -125,21 +149,20 @@ public class Adapter extends RecyclerView.Adapter<Adapter.VH> {
         }
     }
 
-    // ================= FILE OPEN LOGIC =================
-    // ================= DOWNLOAD + OPEN =================
+    // ============== DOWNLOAD + OPEN FILE ==============
     private void openFile(Context context, String url) {
+        if (url == null) return;
 
         try {
-            // Try direct open first
             Intent i = new Intent(Intent.ACTION_VIEW);
             i.setDataAndType(Uri.parse(url), "*/*");
             i.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
             context.startActivity(i);
 
-        } catch(Exception ex) {
+        } catch (Exception ex) {
 
-            DownloadManager dm =
-                    (DownloadManager) context.getSystemService(Context.DOWNLOAD_SERVICE);
+            DownloadManager dm = (DownloadManager)
+                    context.getSystemService(Context.DOWNLOAD_SERVICE);
 
             DownloadManager.Request req =
                     new DownloadManager.Request(Uri.parse(url));
@@ -151,7 +174,7 @@ public class Adapter extends RecyclerView.Adapter<Adapter.VH> {
             req.setDestinationInExternalFilesDir(
                     context,
                     Environment.DIRECTORY_DOWNLOADS,
-                    "study_material.pdf"
+                    "study_material"
             );
 
             dm.enqueue(req);
@@ -160,16 +183,5 @@ public class Adapter extends RecyclerView.Adapter<Adapter.VH> {
                     "Downloading... Open from notification",
                     Toast.LENGTH_LONG).show();
         }
-    }
-
-    private String getMimeType(String url) {
-        String extension = MimeTypeMap.getFileExtensionFromUrl(url);
-        if (extension != null) {
-            String mime = MimeTypeMap.getSingleton()
-                    .getMimeTypeFromExtension(extension.toLowerCase());
-            if (mime != null) return mime;
-        }
-        if (url.endsWith(".pdf")) return "application/pdf";
-        return "*/*";
     }
 }

@@ -6,6 +6,7 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
 import com.example.t_star.R;
+import com.google.android.material.appbar.MaterialToolbar;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.*;
 
@@ -26,7 +27,17 @@ public class S_Enroll_in_Class extends AppCompatActivity {
 
         btnSubmitEnroll.setOnClickListener(v -> enrollClass());
 
+        setupToolbar();
 
+
+    }
+
+
+    private void setupToolbar() {
+        MaterialToolbar toolbar = findViewById(R.id.topAppBar);
+        setSupportActionBar(toolbar);
+
+        toolbar.setNavigationOnClickListener(v -> {finish();});
     }
 
     //Rutuja Created Method

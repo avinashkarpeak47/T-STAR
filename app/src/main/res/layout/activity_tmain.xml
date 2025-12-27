@@ -17,7 +17,7 @@
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomNav"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="70dp"
         android:background="@drawable/header_gradient"
         app:labelVisibilityMode="selected"
         app:menu="@menu/tmain_bottom_nav_file"

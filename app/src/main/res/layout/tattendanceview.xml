@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:padding="12dp"
+    android:background="#FFFFFF"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <!-- Roll No -->
+    <TextView
+        android:id="@+id/tvRoll"
+        android:text="1"
+        android:textSize="14sp"
+        android:textColor="@color/black"
+        android:gravity="center"
+        android:layout_width="40dp"
+        android:layout_height="wrap_content"/>
+
+    <!-- Student Name -->
+    <TextView
+        android:id="@+id/tvName"
+        android:text="Amit Sharma"
+        android:textSize="14sp"
+        android:textColor="@color/black"
+        android:layout_marginStart="8dp"
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:layout_height="wrap_content"/>
+
+    <!-- Attendance Toggle -->
+    <ToggleButton
+        android:id="@+id/toggleAttendance"
+        android:textOn="Present"
+        android:textOff="Absent"
+        android:checked="true"
+        android:textColor="#FFFFFF"
+        android:background="@drawable/toogle_bg"
+        android:layout_width="100dp"
+        android:layout_height="40dp"/>
+
+    <!-- Percentage -->
+    <TextView
+        android:id="@+id/tvPercentage"
+        android:text="92%"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        android:textColor="#2E3A59"
+        android:gravity="center"
+        android:layout_marginStart="12dp"
+        android:layout_width="50dp"
+        android:layout_height="wrap_content"/>
+
+</LinearLayout>

@@ -5,11 +5,13 @@ import android.net.Uri;
 
 import androidx.annotation.NonNull;
 
+import com.cloudinary.android.MediaManager;
+import com.cloudinary.android.callback.ErrorInfo;
 import com.example.t_star.REAL_TIME_DATABASE.PUT_ON_DATABASE.ModelClasses.Updated_User_Model;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.*;
-import com.google.firebase.storage.*;
+
 
 import java.util.HashMap;
 import java.util.Map;
@@ -23,7 +25,7 @@ import java.util.Map;
 public class User_Data_Fetcher {
 
     private static final DatabaseReference USERS_REF = FirebaseDatabase.getInstance().getReference("Users");
-    private static final StorageReference STORAGE_ROOT = FirebaseStorage.getInstance().getReference();
+
 
     // Callback for fetching full user model
     public interface UserDataCallback {
@@ -100,25 +102,35 @@ public class User_Data_Fetcher {
     /**
      * Upload profile image to Storage at "profile_images/{uid}.jpg" and return download URL via callback.
      */
-    public static void uploadProfileImage(String uid, Uri imageUri, UploadCallback cb) {
-        if (uid == null || uid.isEmpty()) {
-            cb.onFailure(new IllegalArgumentException("UID null/empty"));
-            return;
-        }
-        if (imageUri == null) {
-            cb.onFailure(new IllegalArgumentException("imageUri null"));
-            return;
-        }
+    public static void uploadProfileImage(
+            String uid,
+            Uri imageUri,
+            UploadCallback callback) {
 
-        StorageReference targetRef = STORAGE_ROOT.child("profile_images").child(uid + ".jpg");
+        MediaManager.get().upload(imageUri)
+                .unsigned("t_star")
+                .option("folder", "app uploads")
+                .callback(new com.cloudinary.android.callback.UploadCallback() {
 
-        targetRef.putFile(imageUri)
-                .addOnSuccessListener(taskSnapshot ->
-                        targetRef.getDownloadUrl()
-                                .addOnSuccessListener(uri -> cb.onSuccess(uri.toString()))
-                                .addOnFailureListener(cb::onFailure)
-                )
-                .addOnFailureListener(cb::onFailure);
+                    @Override
+                    public void onSuccess(String requestId, Map resultData) {
+                        String imageUrl =
+                                resultData.get("secure_url").toString();
+                        callback.onSuccess(imageUrl);
+                    }
+
+                    @Override
+                    public void onError(String requestId, ErrorInfo error) {
+                        callback.onFailure(
+                                new Exception(error.getDescription()));
+                    }
+
+                    @Override public void onStart(String requestId) {}
+                    @Override public void onProgress(String r, long b, long t) {}
+                    @Override public void onReschedule(String r, ErrorInfo e) {}
+                })
+                .dispatch();
+
     }
 }
 

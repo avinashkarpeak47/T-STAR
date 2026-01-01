@@ -1,11 +1,15 @@
-<?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
+<androidx.drawerlayout.widget.DrawerLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/drawerLayout"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/white"
-    android:fitsSystemWindows="true">
+    android:layout_height="match_parent">
+
+    <!-- ===== MAIN FRAGMENT CONTENT ===== -->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white">
 
     <!--Drawer Menu-->
     <com.google.android.material.appbar.MaterialToolbar
@@ -27,7 +31,7 @@
     <View
         android:id="@+id/header_bg"
         android:layout_width="0dp"
-        android:layout_height="200dp"
+        android:layout_height="224dp"
         android:background="@drawable/s_classes_top_background"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -50,7 +54,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:layout_marginLeft="25dp"
+            android:layout_marginLeft="28dp"
             android:orientation="vertical">
 
             <TextView
@@ -66,7 +70,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Teacher Name"
-                android:layout_marginLeft="15dp"
+
+                android:layout_marginLeft="18dp"
                 android:textColor="@color/black"
                 android:textSize="18sp"
                 android:textStyle="bold" />
@@ -85,7 +90,7 @@
         android:id="@+id/btnEnrollNewClass"
         android:layout_width="200dp"
         android:layout_height="45dp"
-        android:layout_marginTop="80dp"
+        android:layout_marginTop="100dp"
         android:text="Create Class"
         android:textStyle="bold"
         android:background="@drawable/s_btn_bg_shape"
@@ -129,8 +134,19 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
+    <!-- ===== DRAWER MENU ===== -->
+    <com.google.android.material.navigation.NavigationView
+        android:id="@+id/navigationView"
+        android:layout_width="300dp"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        android:background="@android:color/white"
+        app:headerLayout="@layout/tdrawer_header"
+        app:menu="@menu/drawer_menu"
+        app:itemTextColor="@color/black"/>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.drawerlayout.widget.DrawerLayout>
 
 

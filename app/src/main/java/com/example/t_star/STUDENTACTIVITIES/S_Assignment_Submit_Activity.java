@@ -1,9 +1,10 @@
 package com.example.t_star.STUDENTACTIVITIES;
 
-import android.content.ActivityNotFoundException;
 import android.content.Intent;
+import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
+import android.provider.OpenableColumns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -17,25 +18,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.t_star.R;
 import com.example.t_star.STUDENTACTIVITIES.Models.Assignment;
 import com.example.t_star.utils.FileUtils;
-import com.google.android.gms.auth.api.signin.*;
-import com.google.android.gms.common.api.Scope;
+import com.example.t_star.utils.CloudinaryConfig;
 import com.google.android.material.appbar.MaterialToolbar;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.*;
 
-import com.google.api.client.extensions.android.http.AndroidHttp;
-import com.google.api.client.googleapis.extensions.android.gms.auth.GoogleAccountCredential;
-import com.google.api.client.json.gson.GsonFactory;
-import com.google.api.services.drive.Drive;
-import com.google.api.services.drive.model.File;
-import com.google.api.services.drive.model.Permission;
-import com.google.api.client.http.FileContent;
-
-import java.io.FileOutputStream;
 import java.io.InputStream;
-import java.io.OutputStream;
 import java.text.SimpleDateFormat;
-import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Locale;
@@ -43,24 +32,22 @@ import java.util.Map;
 
 public class S_Assignment_Submit_Activity extends AppCompatActivity {
 
-    private static final int RC_SIGN_IN = 1001;
     private static final int RC_PICK_FILE = 2001;
 
-    private TextView  txtStatus, txtSubmittedFile, txtDueDate, txtLateBadge;
+    private TextView txtStatus, txtSubmittedFile, txtDueDate, txtLateBadge;
+
+    private TextView tvTitle, tvDescription;
+    private String assignmentTitle, assignmentDescription;
     private ImageView imgFileType;
     private Button btnChooseFile, btnSubmit, btnViewSubmission;
 
     private Uri selectedFileUri;
     private String selectedFileName;
+    private String submittedFileUrl;
 
     private String classId, assignmentId, studentId;
-    private String submittedDriveUrl;
-
     private long dueDateMillis;
     private boolean allowResubmission;
-
-    private GoogleSignInClient googleSignInClient;
-    private GoogleSignInAccount driveAccount;
 
     private DatabaseReference assignmentRef;
     private DatabaseReference submissionRef;
@@ -71,10 +58,7 @@ public class S_Assignment_Submit_Activity extends AppCompatActivity {
         setContentView(R.layout.activity_s_assignment_submit);
 
         setupToolbar();
-
         initViews();
-
-
 
         classId = getIntent().getStringExtra("classId");
         assignmentId = getIntent().getStringExtra("assignmentId");
@@ -86,6 +70,15 @@ public class S_Assignment_Submit_Activity extends AppCompatActivity {
             return;
         }
 
+        assignmentTitle = getIntent().getStringExtra("assignmentTitle");
+        assignmentDescription = getIntent().getStringExtra("assignmentDescription");
+
+        if (assignmentTitle != null)
+            tvTitle.setText(assignmentTitle);
+
+        if (assignmentDescription != null)
+            tvDescription.setText(assignmentDescription);
+
         assignmentRef = FirebaseDatabase.getInstance()
                 .getReference("Assignments")
                 .child(classId)
@@ -93,121 +86,75 @@ public class S_Assignment_Submit_Activity extends AppCompatActivity {
 
         submissionRef = FirebaseDatabase.getInstance()
                 .getReference("Assignments_Submissions")
+                .child(classId)
                 .child(assignmentId)
                 .child(studentId);
 
-        GoogleSignInOptions gso =
-                new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                        .requestEmail()
-                        .requestScopes(new Scope("https://www.googleapis.com/auth/drive.file"))
-                        .build();
-
-        googleSignInClient = GoogleSignIn.getClient(this, gso);
-
         btnChooseFile.setOnClickListener(v -> openFilePicker());
         btnSubmit.setOnClickListener(v -> submitAssignment());
-        btnViewSubmission.setOnClickListener(v -> openSubmittedFile());
+
+        btnViewSubmission.setOnClickListener(v -> {
+            if (submittedFileUrl != null) {
+                openSubmittedFile(submittedFileUrl, txtSubmittedFile.getText().toString());
+
+            }
+        });
 
         loadAssignmentInfo();
         loadSubmissionState();
-
-
-
     }
 
-    private void setupToolbar() {
-        MaterialToolbar toolbar = findViewById(R.id.topAppBar);
-        setSupportActionBar(toolbar);
-
-        // Enable back arrow
-        if (getSupportActionBar() != null) {
-            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-            getSupportActionBar().setDisplayShowHomeEnabled(true);
-        }
-
-        // Back navigation action
-        toolbar.setNavigationOnClickListener(v->finish());
-    }
-
-
-    private void initViews() {
-
-        txtStatus = findViewById(R.id.txtStatus);
-        txtSubmittedFile = findViewById(R.id.txtFileName);
-        txtDueDate = findViewById(R.id.txtDueDate);
-        txtLateBadge = findViewById(R.id.txtLateBadge);
-        imgFileType = findViewById(R.id.imgFileType);
-
-        btnChooseFile = findViewById(R.id.btnChooseFile);
-        btnSubmit = findViewById(R.id.btnSubmitAssignment);
-        btnViewSubmission = findViewById(R.id.btnViewSubmission);
-    }
-
-    /* ---------------- LOAD ASSIGNMENT ---------------- */
+    /* ---------------- ASSIGNMENT INFO ---------------- */
 
     private void loadAssignmentInfo() {
-        assignmentRef.addListenerForSingleValueEvent(
-                new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot snap) {
-                        dueDateMillis =
-                                snap.child("dueDateMillis").getValue(Long.class) != null
-                                        ? snap.child("dueDateMillis").getValue(Long.class)
-                                        : 0;
+        assignmentRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snap) {
+                dueDateMillis = snap.child("dueDateMillis").getValue(Long.class) != null
+                        ? snap.child("dueDateMillis").getValue(Long.class) : 0;
 
-                        allowResubmission =
-                                snap.child("allowResubmission").getValue(Boolean.class) != null
-                                        && snap.child("allowResubmission").getValue(Boolean.class);
+                allowResubmission = snap.child("allowResubmission").getValue(Boolean.class) != null
+                        && snap.child("allowResubmission").getValue(Boolean.class);
 
-                        showDueDate();
-                    }
+                showDueDate();
+            }
 
-                    @Override public void onCancelled(@NonNull DatabaseError error) {}
-                });
-    }
-
-    /* ---------------- LOAD SUBMISSION ---------------- */
-
-    private void loadSubmissionState() {
-        submissionRef.addValueEventListener(
-                new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot snap) {
-                        if (snap.exists()) {
-                            showSubmittedUI(snap);
-                        } else {
-                            showNotSubmittedUI();
-                        }
-                    }
-
-                    @Override public void onCancelled(@NonNull DatabaseError error) {}
-                });
+            @Override public void onCancelled(@NonNull DatabaseError error) {}
+        });
     }
 
     private void showDueDate() {
         if (dueDateMillis > 0) {
-            SimpleDateFormat sdf =
-                    new SimpleDateFormat("dd MMM yyyy, hh:mm a", Locale.getDefault());
+            SimpleDateFormat sdf = new SimpleDateFormat("dd MMM yyyy, hh:mm a", Locale.getDefault());
             txtDueDate.setText("Due Date: " + sdf.format(new Date(dueDateMillis)));
         } else {
             txtDueDate.setText("Due Date: Not specified");
         }
     }
 
+    /* ---------------- SUBMISSION STATE ---------------- */
+
+    private void loadSubmissionState() {
+        submissionRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snap) {
+                if (snap.exists()) showSubmittedUI(snap);
+                else showNotSubmittedUI();
+            }
+
+            @Override public void onCancelled(@NonNull DatabaseError error) {}
+        });
+    }
+
     private void showSubmittedUI(DataSnapshot snap) {
-
         String fileName = snap.child("fileName").getValue(String.class);
+        submittedFileUrl = snap.child("fileUrl").getValue(String.class);
         long submittedAt = snap.child("submittedAt").getValue(Long.class) != null
-                ? snap.child("submittedAt").getValue(Long.class)
-                : 0;
-
-        submittedDriveUrl = snap.child("driveFileUrl").getValue(String.class);
+                ? snap.child("submittedAt").getValue(Long.class) : 0;
 
         txtStatus.setText("Submitted");
         txtSubmittedFile.setText(fileName);
         setFileIcon(fileName);
-
-
 
         txtLateBadge.setVisibility(
                 dueDateMillis > 0 && submittedAt > dueDateMillis
@@ -220,52 +167,28 @@ public class S_Assignment_Submit_Activity extends AppCompatActivity {
     }
 
     private void showNotSubmittedUI() {
+        boolean isPastDue = dueDateMillis > 0 && System.currentTimeMillis() > dueDateMillis;
 
-        boolean isPastDue =
-                dueDateMillis > 0 &&
-                        System.currentTimeMillis() > dueDateMillis;
+        txtStatus.setText(isPastDue ? "Submission Closed" : "Not Submitted");
+        txtSubmittedFile.setText("No file selected");
+        imgFileType.setImageResource(R.drawable.ic_file_generic);
 
-        if (isPastDue && !allowResubmission) {
-
-            txtStatus.setText("Submission Closed");
-            txtSubmittedFile.setText("Due date crossed");
-            imgFileType.setImageResource(R.drawable.ic_file_generic);
-
-            btnChooseFile.setEnabled(false);
-            btnSubmit.setEnabled(false);
-            btnViewSubmission.setVisibility(View.GONE);
-
-            txtLateBadge.setVisibility(View.GONE);
-
-        } else {
-
-            txtStatus.setText("Not Submitted");
-            txtSubmittedFile.setText("No file selected");
-            imgFileType.setImageResource(R.drawable.ic_file_generic);
-
-            btnChooseFile.setEnabled(true);
-            btnSubmit.setVisibility(View.VISIBLE);
-            btnSubmit.setEnabled(true);
-            btnViewSubmission.setVisibility(View.GONE);
-
-            txtLateBadge.setVisibility(View.GONE);
-        }
+        btnChooseFile.setEnabled(!isPastDue || allowResubmission);
+        btnSubmit.setEnabled(!isPastDue || allowResubmission);
+        btnViewSubmission.setVisibility(View.GONE);
+        txtLateBadge.setVisibility(View.GONE);
     }
 
-
-    /* ---------------- FILE PICKER ---------------- */
+    /* ---------------- FILE PICK ---------------- */
 
     private void openFilePicker() {
         Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
         intent.addCategory(Intent.CATEGORY_OPENABLE);
         intent.setType("*/*");
+        intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
 
-       // startActivityForResult(intent, RC_PICK_FILE);
-
-        intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION | Intent.FLAG_GRANT_PERSISTABLE_URI_PERMISSION);
-        startActivityForResult(intent,RC_PICK_FILE);
-
-
+        intent.addFlags(Intent.FLAG_GRANT_PERSISTABLE_URI_PERMISSION);
+        startActivityForResult(intent, RC_PICK_FILE);
     }
 
     @Override
@@ -275,17 +198,15 @@ public class S_Assignment_Submit_Activity extends AppCompatActivity {
         if (requestCode == RC_PICK_FILE && resultCode == RESULT_OK && data != null) {
             selectedFileUri = data.getData();
 
-            getContentResolver().takePersistableUriPermission(selectedFileUri,Intent.FLAG_GRANT_READ_URI_PERMISSION);
-
+            try{
+                getContentResolver().takePersistableUriPermission(selectedFileUri,Intent.FLAG_GRANT_READ_URI_PERMISSION);
+            }catch(SecurityException e)
+            {
+                e.printStackTrace();
+            }
             selectedFileName = FileUtils.getFileName(this, selectedFileUri);
             txtSubmittedFile.setText(selectedFileName);
             setFileIcon(selectedFileName);
-        }
-
-        if (requestCode == RC_SIGN_IN && data != null) {
-            driveAccount =
-                    GoogleSignIn.getSignedInAccountFromIntent(data).getResult();
-            uploadToDrive();
         }
     }
 
@@ -297,114 +218,154 @@ public class S_Assignment_Submit_Activity extends AppCompatActivity {
             return;
         }
 
-        GoogleSignInAccount account =
-                GoogleSignIn.getLastSignedInAccount(this);
-
-        if (account != null) {
-            driveAccount = account;
-            uploadToDrive();
-        } else {
-            startActivityForResult(
-                    googleSignInClient.getSignInIntent(),
-                    RC_SIGN_IN
-            );
-        }
+        Toast.makeText(this, "Submitting Assignment, please wait...", Toast.LENGTH_LONG).show();
+        btnSubmit.setEnabled(false);
+        uploadToCloudinary();
     }
 
-    /* ---------------- DRIVE UPLOAD ---------------- */
 
-    private void uploadToDrive() {
+    /*private void uploadToCloudinary() {
+        new Thread(() -> {
+            try {
+                InputStream inputStream = getContentResolver().openInputStream(selectedFileUri);
 
-        GoogleAccountCredential credential =
-                GoogleAccountCredential.usingOAuth2(
-                        this,
-                        Collections.singleton("https://www.googleapis.com/auth/drive.file"));
+                Map<String , Object>options = new HashMap<>();
+                options.put("resources_type","auto");
+                options.put("folder","assignment");
 
-        credential.setSelectedAccount(driveAccount.getAccount());
+                Map uploadResult = CloudinaryConfig.getInstance()
+                        .uploader()
+                        .upload(inputStream, options);
 
-        Drive drive = new Drive.Builder(
-                AndroidHttp.newCompatibleTransport(),
-                GsonFactory.getDefaultInstance(),
-                credential)
-                .setApplicationName("T-STAR")
-                .build();
+                String fileUrl = uploadResult.get("secure_url").toString();
+                runOnUiThread(() -> saveSubmission(fileUrl));
+
+            } catch (Exception e) {
+                e.printStackTrace();
+                runOnUiThread(() -> {
+                    btnSubmit.setEnabled(true);
+                    Toast.makeText(this, "Upload failed: "+e.getMessage(), Toast.LENGTH_SHORT).show();
+                });
+            }
+        }).start();
+    }*/
+
+    private void uploadToCloudinary() {
 
         new Thread(() -> {
             try {
-                java.io.File local = getFileFromUri(selectedFileUri);
+                InputStream inputStream =
+                        getContentResolver().openInputStream(selectedFileUri);
 
-                File meta = new File();
-                meta.setName(selectedFileName);
+                String originalFileName = getFileName(selectedFileUri);
 
-                FileContent content =
-                        new FileContent(getContentResolver().getType(selectedFileUri), local);
+                Map<String, Object> options = new HashMap<>();
+                options.put("resources_type", "raw"); // 🔥 VERY IMPORTANT
+                options.put("folder", "assignments");
+                options.put("public_id",originalFileName);
+                options.put("use_filename",true);
+                options.put("unique_filename",false);
+                options.put("overwrite",true);
 
-                File uploaded =
-                        drive.files().create(meta, content).setFields("id").execute();
+                Map uploadResult = CloudinaryConfig.getInstance()
+                        .uploader()
+                        .upload(inputStream, options);
 
-                Permission p =
-                        new Permission().setType("anyone").setRole("reader");
-                drive.permissions().create(uploaded.getId(), p).execute();
+                String fileUrl = uploadResult.get("secure_url").toString();
 
-                String link =
-                        "https://drive.google.com/file/d/" + uploaded.getId() + "/view";
-
-                runOnUiThread(() ->
-                        saveSubmission(uploaded.getId(), link)
-                );
+                runOnUiThread(() -> saveSubmission(fileUrl));
 
             } catch (Exception e) {
-                runOnUiThread(() ->
-                        Toast.makeText(this, "Upload failed", Toast.LENGTH_SHORT).show()
-                );
+                runOnUiThread(() -> {
+                    btnSubmit.setEnabled(true);
+                    Toast.makeText(
+                            this,
+                            "Upload failed: " + e.getMessage(),
+                            Toast.LENGTH_LONG
+                    ).show();
+                });
             }
+
         }).start();
     }
 
-    private java.io.File getFileFromUri(Uri uri) throws Exception {
-        InputStream in = getContentResolver().openInputStream(uri);
-        java.io.File temp =
-                java.io.File.createTempFile("assign_", selectedFileName, getCacheDir());
+    private String getFileName(Uri uri) {
+        String result = "assignment_file";
+        Cursor cursor = getContentResolver()
+                .query(uri, null, null, null, null);
 
-        OutputStream out = new FileOutputStream(temp);
-        byte[] buf = new byte[1024];
-        int r;
-        while ((r = in.read(buf)) != -1) out.write(buf, 0, r);
-
-        in.close();
-        out.close();
-        return temp;
+        if (cursor != null) {
+            int nameIndex = cursor.getColumnIndex(OpenableColumns.DISPLAY_NAME);
+            if (cursor.moveToFirst()) {
+                result = cursor.getString(nameIndex);
+            }
+            cursor.close();
+        }
+        return result;
     }
-
-    /* ---------------- SAVE ---------------- */
-
-    private void saveSubmission(String driveId, String link) {
-
+    private void saveSubmission(String fileUrl) {
         Map<String, Object> map = new HashMap<>();
         map.put("fileName", selectedFileName);
-        map.put("driveFileId", driveId);
-        map.put("driveFileUrl", link);
+        map.put("fileUrl", fileUrl);
         map.put("submittedAt", System.currentTimeMillis());
         map.put("status", Assignment.STATUS_SUBMITTED);
         map.put("marksObtained", 0);
 
         submissionRef.setValue(map)
-                .addOnSuccessListener(v ->
-                        Toast.makeText(this,
-                                "Assignment submitted successfully",
-                                Toast.LENGTH_SHORT).show()
-                );
+                .addOnSuccessListener(v -> {
+
+                    Toast.makeText(this, "Assignment submitted", Toast.LENGTH_SHORT).show();
+
+                    // 🔹 Update local state immediately
+                    submittedFileUrl = fileUrl;
+
+                    // 🔹 Update UI immediately (NO refresh needed)
+                    txtStatus.setText("Submitted");
+                    btnSubmit.setVisibility(View.GONE);
+                    btnViewSubmission.setVisibility(View.VISIBLE);
+                    btnChooseFile.setEnabled(allowResubmission);
+
+                    // 🔹 Late badge check
+                    if (dueDateMillis > 0 && System.currentTimeMillis() > dueDateMillis) {
+                        txtLateBadge.setVisibility(View.VISIBLE);
+                    } else {
+                        txtLateBadge.setVisibility(View.GONE);
+                    }
+                })
+                .addOnFailureListener(e -> {
+                    btnSubmit.setEnabled(true);
+                    Toast.makeText(this, "Submission failed", Toast.LENGTH_SHORT).show();
+
+                });
     }
 
-    /* ---------------- VIEW ---------------- */
+    /*private void openSubmittedFile() {
+        if (submittedFileUrl != null)
+            startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(submittedFileUrl)));
+    }*/
 
-    private void openSubmittedFile() {
-        if (submittedDriveUrl == null) return;
+    private void openSubmittedFile(String fileUrl, String fileName) {
+
+        Uri uri = Uri.parse(fileUrl);
+
+        String mimeType = FileUtils.getMimeType(fileName);
+
+        Intent intent = new Intent(Intent.ACTION_VIEW);
+        intent.setDataAndType(uri, mimeType);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+
+        Intent chooser = Intent.createChooser(intent, "Open assignment using");
 
         try {
-            startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(submittedDriveUrl)));
-        } catch (ActivityNotFoundException e) {
-            Toast.makeText(this, "No app found", Toast.LENGTH_SHORT).show();
+            startActivity(chooser);
+        } catch (Exception e) {
+            Toast.makeText(
+                    this,
+                    "No application found to open this file type",
+                    Toast.LENGTH_LONG
+            ).show();
+
         }
     }
 
@@ -417,6 +378,24 @@ public class S_Assignment_Submit_Activity extends AppCompatActivity {
         else if (name.endsWith(".doc") || name.endsWith(".docx"))
             imgFileType.setImageResource(R.drawable.ic_doc);
         else imgFileType.setImageResource(R.drawable.ic_file_generic);
+    }
 
+    private void setupToolbar() {
+        MaterialToolbar toolbar = findViewById(R.id.topAppBar);
+        setSupportActionBar(toolbar);
+        toolbar.setNavigationOnClickListener(v -> finish());
+    }
+
+    private void initViews() {
+        txtStatus = findViewById(R.id.txtStatus);
+        txtSubmittedFile = findViewById(R.id.txtFileName);
+        txtDueDate = findViewById(R.id.txtDueDate);
+        txtLateBadge = findViewById(R.id.txtLateBadge);
+        imgFileType = findViewById(R.id.imgFileType);
+        btnChooseFile = findViewById(R.id.btnChooseFile);
+        btnSubmit = findViewById(R.id.btnSubmitAssignment);
+        btnViewSubmission = findViewById(R.id.btnViewSubmission);
+        tvTitle = findViewById(R.id.tvTitle);
+        tvDescription = findViewById(R.id.Description);
     }
 }

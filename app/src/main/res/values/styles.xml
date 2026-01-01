@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="Theme.TSTAR.Light" parent="Theme.Material3.Light.NoActionBar">
+        <item name="android:windowLightStatusBar">true</item>
+        <item name="android:forceDarkAllowed">false</item>
+
+
+        <!-- Primary branding -->
+        <item name="colorPrimary">@color/Lavender</item>
+        <item name="colorPrimaryVariant">@color/Dark_Lavender</item>
+        <item name="colorOnPrimary">@color/white</item>
+
+        <!-- Status bar -->
+        <item name="android:statusBarColor">@color/Dark_Lavender</item>
+
+        <!-- Status bar icons = light (white icons) -->
+        <item name="android:windowLightStatusBar">false</item>
+
+    </style>
+</resources>

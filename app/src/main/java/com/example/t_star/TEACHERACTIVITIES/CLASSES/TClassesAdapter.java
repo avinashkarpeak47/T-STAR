@@ -16,25 +16,41 @@ import java.util.List;
 
 public class TClassesAdapter extends RecyclerView.Adapter<TClassesAdapter.ClassVH> {
 
+    // ================= CLICK =================
     public interface OnClassClick {
         void onClassSelect(TClassesModel model, int position);
     }
 
-    private final Context context;
-    private final List<TClassesModel> list;
-    private final OnClassClick listener;
-
-    public TClassesAdapter(Context context, List<TClassesModel> list, OnClassClick listener) {
-        this.context = context;
-        this.list = (list != null) ? list : new ArrayList<>();
-        this.listener = listener;
+    // ================= LONG CLICK =================
+    public interface OnClassLongClick {
+        void onLongClick(TClassesModel model, int position);
     }
 
+    private final Context context;
+    private final List<TClassesModel> list;
+    private final OnClassClick clickListener;
+    private final OnClassLongClick longClickListener;
+
+    // ================= CONSTRUCTOR =================
+    public TClassesAdapter(Context context,
+                           ArrayList<TClassesModel> list,
+                           OnClassClick clickListener,
+                           OnClassLongClick longClickListener) {
+
+        this.context = context;
+        this.list = list;
+        this.clickListener = clickListener;
+        this.longClickListener = longClickListener;
+    }
+
+    // ================= VIEW HOLDER =================
     @NonNull
     @Override
     public ClassVH onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+
         View v = LayoutInflater.from(context)
                 .inflate(R.layout.tclassesview, parent, false);
+
         return new ClassVH(v);
     }
 
@@ -47,10 +63,19 @@ public class TClassesAdapter extends RecyclerView.Adapter<TClassesAdapter.ClassV
         holder.tvClassId.setText("Class ID: " + model.getClassId());
         holder.tvTotal.setText("Students: " + model.getStudentsCount());
 
+        // ---------- CLICK ----------
         holder.itemView.setOnClickListener(v -> {
-            if (listener != null) {
-                listener.onClassSelect(model, position);
+            if (clickListener != null) {
+                clickListener.onClassSelect(model, position);
             }
+        });
+
+        // ---------- LONG CLICK (DELETE) ----------
+        holder.itemView.setOnLongClickListener(v -> {
+            if (longClickListener != null) {
+                longClickListener.onLongClick(model, position);
+            }
+            return true;
         });
     }
 
@@ -59,12 +84,14 @@ public class TClassesAdapter extends RecyclerView.Adapter<TClassesAdapter.ClassV
         return list.size();
     }
 
+    // ================= UPDATE LIST =================
     public void updateList(List<TClassesModel> newList) {
         list.clear();
         if (newList != null) list.addAll(newList);
         notifyDataSetChanged();
     }
 
+    // ================= VH =================
     static class ClassVH extends RecyclerView.ViewHolder {
 
         TextView tvClassName, tvClassId, tvTotal;

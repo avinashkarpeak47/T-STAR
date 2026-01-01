@@ -21,16 +21,99 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
 
+
+    <!-- CLASS DETAILS CARD -->
+    <androidx.cardview.widget.CardView
+        android:id="@+id/assignment_detail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardElevation="8dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        app:cardCornerRadius="20dp"
+        android:layout_marginTop="28dp"
+        app:layout_constraintTop_toBottomOf="@id/topAppBar"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp"
+            android:background="@drawable/s_edittext_border">
+
+            <!-- Each Row (LABEL — VALUE) -->
+            <!-- Row 1 -->
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:layout_marginBottom="10dp">
+
+                <TextView
+                    android:text="Title: "
+                    android:textStyle="bold"
+                    android:textColor="@color/black"
+                    android:textSize="16sp"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"/>
+
+                <TextView
+                    android:id="@+id/tvTitle"
+                    android:text=""
+                    android:textColor="@color/dark_greay"
+                    android:textSize="16sp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+            </LinearLayout>
+
+            <!-- Row 2 -->
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:layout_marginBottom="10dp">
+
+                <TextView
+                    android:text="Description: :"
+                    android:textStyle="bold"
+                    android:textSize="16sp"
+                    android:textColor="@color/black"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"/>
+
+                <TextView
+                    android:id="@+id/Description"
+                    android:text=""
+                    android:textColor="@color/dark_greay"
+                    android:textSize="16sp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+            </LinearLayout>
+
+
+
+
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+
+
     <androidx.cardview.widget.CardView
         android:id="@+id/cardSubmission"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="80dp"
+        android:layout_marginTop="60dp"
         android:layout_marginRight="22dp"
         android:layout_marginLeft="22dp"
         app:cardCornerRadius="20dp"
         app:cardElevation="14dp"
-        app:layout_constraintTop_toBottomOf="@id/topAppBar"
+        app:layout_constraintTop_toBottomOf="@id/assignment_detail"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
 
@@ -46,7 +129,8 @@
                 android:orientation="horizontal"
                 android:gravity="center_vertical"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -55,7 +139,7 @@
                     android:text="Not Submitted"
                     android:textStyle="bold"
                     android:textSize="18sp"
-                    android:textColor="#D32F2F"
+                    android:textColor="#E62020"
                     android:textAllCaps="true" />
 
                 <TextView
@@ -75,16 +159,16 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/txtDueDate"
                 android:text="Due Date: "
-                android:textSize="14sp"
+                android:textSize="15sp"
                 android:textColor="@color/black"
-                android:layout_marginTop="6dp"/>
+                android:layout_marginTop="10dp"/>
 
 
 
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1.5dp"
-                android:background="#A2A2A2"
+                android:background="#B4B4B4"
                 android:layout_marginVertical="12dp"/>
 
             <!-- File info -->
@@ -93,7 +177,7 @@
                 android:gravity="center_vertical"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="6dp">
+                android:layout_marginTop="8dp">
 
                 <ImageView
                     android:id="@+id/imgFileType"
@@ -118,8 +202,8 @@
                 android:id="@+id/btnChooseFile"
                 android:text="Choose File"
                 android:textColor="@color/white"
-                android:backgroundTint="@color/maroon"
-                android:layout_marginTop="30dp"
+                android:backgroundTint="#3BA2F8"
+                android:layout_marginTop="34dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
 
@@ -130,17 +214,19 @@
                 android:backgroundTint="@color/green"
                 android:layout_marginTop="18dp"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="15dp"/>
 
             <Button
                 android:id="@+id/btnViewSubmission"
                 android:text="View Submitted File"
                 android:textColor="@color/white"
-                android:backgroundTint="@color/orange"
+                android:backgroundTint="#D93662"
                 android:visibility="gone"
                 android:layout_marginTop="18dp"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="15dp"/>
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 

@@ -2,7 +2,9 @@ package com.example.t_star.TEACHERACTIVITIES.TMainFragment;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.Intent;
+import android.graphics.Rect;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.*;
@@ -17,6 +19,7 @@ import com.example.t_star.R;
 import com.example.t_star.REAL_TIME_DATABASE.GET_FROM_DATABASE.User_Data_Fetcher;
 import com.example.t_star.REAL_TIME_DATABASE.PUT_ON_DATABASE.ModelClasses.Updated_User_Model;
 import com.example.t_star.REAL_TIME_DATABASE.Validation.User_Input_Validator;
+import com.example.t_star.TEACHERACTIVITIES.TMainActivity;
 import com.example.t_star.TSTAR_Login_Activity;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -34,14 +37,15 @@ public class TProfileFragment extends Fragment {
     private TextView tvHeaderTeacherId;
     private Button btnEditProfile;
 
-    private LinearLayout rowChangePassword, rowSettings, rowLogout, rowDeleteAccount;
+    private String profileImageUrl;
+    private LinearLayout rowChangePassword, rowLogout, rowDeleteAccount;
 
     private FirebaseUser currentUser;
     private String uid;
     private Uri selectedImageUri;
     private boolean inEditMode = false;
 
-    public TProfileFragment() { }
+    public TProfileFragment() {}
 
     @Nullable
     @Override
@@ -51,7 +55,6 @@ public class TProfileFragment extends Fragment {
 
         View view = inflater.inflate(R.layout.fragment_t_profile, container, false);
 
-        // ---------------- BIND VIEWS ----------------
         ivProfilePic = view.findViewById(R.id.ivProfilePic);
         etFullName = view.findViewById(R.id.etFullName);
         etEmail = view.findViewById(R.id.etEmail);
@@ -60,18 +63,13 @@ public class TProfileFragment extends Fragment {
         tvHeaderTeacherId = view.findViewById(R.id.tvHeaderStudentId);
 
         rowChangePassword = view.findViewById(R.id.rowChangePassword);
-        rowSettings = view.findViewById(R.id.rowSettings);
         rowLogout = view.findViewById(R.id.rowLogout);
         rowDeleteAccount = view.findViewById(R.id.rowDeleteAccount);
 
-        // Disable edit initially
         setEditingEnabled(false);
 
         currentUser = FirebaseAuth.getInstance().getCurrentUser();
-        if (currentUser == null) {
-            Toast.makeText(getContext(), "No authenticated user", Toast.LENGTH_SHORT).show();
-            return view;
-        }
+        if (currentUser == null) return view;
         uid = currentUser.getUid();
 
         setupAccountActions();
@@ -89,17 +87,61 @@ public class TProfileFragment extends Fragment {
             }
         });
 
+        ivProfilePic.setOnLongClickListener(v -> {
+            if (profileImageUrl != null && !profileImageUrl.isEmpty()) {
+                showFullImageDialog(profileImageUrl);
+            } else {
+                Toast.makeText(getContext(),
+                        "Profile image not available",
+                        Toast.LENGTH_SHORT).show();
+            }
+            return true;
+        });
+
+
+        // ----------- KEYBOARD → HIDE BOTTOM NAV (NO LOGIC CHANGE) -----------
+        View root = view;
+        root.getViewTreeObserver().addOnGlobalLayoutListener(() -> {
+
+            if (getActivity() == null) return;
+
+            Rect r = new Rect();
+            root.getWindowVisibleDisplayFrame(r);
+
+            int screenHeight = root.getRootView().getHeight();
+            int keypadHeight = screenHeight - r.bottom;
+
+            boolean keyboardVisible = keypadHeight > screenHeight * 0.15;
+
+            if (TMainActivity.bottomNav != null) {
+                TMainActivity.bottomNav.setVisibility(
+                        keyboardVisible ? View.GONE : View.VISIBLE
+                );
+            }
+        });
+
         return view;
     }
 
-    // ---------------- ENABLE / DISABLE ----------------
+    private void showFullImageDialog(String imageUrl) {
+        Dialog dialog = new Dialog(requireContext(),
+                android.R.style.Theme_Black_NoTitleBar_Fullscreen);
+        dialog.setContentView(R.layout.dialog_full_image);
+
+        ImageView ivFull = dialog.findViewById(R.id.ivFullImage);
+
+        Glide.with(requireContext()).load(imageUrl).into(ivFull);
+        ivFull.setOnClickListener(v -> dialog.dismiss());
+
+        dialog.show();
+    }
+
     private void setEditingEnabled(boolean enabled) {
         etFullName.setEnabled(enabled);
         etEmail.setEnabled(false);
         etMobile.setEnabled(false);
     }
 
-    // ---------------- LOAD TEACHER DATA ----------------
     private void loadTeacherData() {
 
         User_Data_Fetcher.getUserData(uid, new User_Data_Fetcher.UserDataCallback() {
@@ -112,10 +154,13 @@ public class TProfileFragment extends Fragment {
 
                 tvHeaderTeacherId.setText("Teacher ID: " + uid.substring(0, 28));
 
-                if (user.profileImageUrl != null && !user.profileImageUrl.isEmpty()) {
+                profileImageUrl = user.profileImageUrl;
+
+                if (profileImageUrl != null && !profileImageUrl.isEmpty()) {
                     Glide.with(requireContext())
-                            .load(user.profileImageUrl)
+                            .load(profileImageUrl)
                             .placeholder(R.drawable.baseline_person_24)
+                            .circleCrop()
                             .into(ivProfilePic);
                 } else {
                     ivProfilePic.setImageResource(R.drawable.baseline_person_24);
@@ -131,15 +176,18 @@ public class TProfileFragment extends Fragment {
         });
     }
 
-    // ---------------- IMAGE PICKER ----------------
     private void openImagePicker() {
         Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
         intent.setType("image/*");
-        startActivityForResult(Intent.createChooser(intent, "Select Image"), PICK_IMAGE_REQUEST);
+        startActivityForResult(
+                Intent.createChooser(intent, "Select Image"),
+                PICK_IMAGE_REQUEST
+        );
     }
 
     @Override
-    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+    public void onActivityResult(int requestCode, int resultCode,
+                                 @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
         if (requestCode == PICK_IMAGE_REQUEST &&
@@ -191,7 +239,6 @@ public class TProfileFragment extends Fragment {
                 });
     }
 
-    // ---------------- SAVE PROFILE ----------------
     private void attemptSaveProfile() {
 
         String fullName = etFullName.getText().toString().trim();
@@ -229,55 +276,64 @@ public class TProfileFragment extends Fragment {
                 });
     }
 
-    // ---------------- ACCOUNT ACTIONS ----------------
     private void setupAccountActions() {
 
-        rowChangePassword.setOnClickListener(v -> {
-            new AlertDialog.Builder(requireContext())
-                    .setTitle("Reset Password")
-                    .setMessage("Send reset link to registered email?")
-                    .setPositiveButton("Send", (d, w) -> {
-                        FirebaseAuth.getInstance()
-                                .sendPasswordResetEmail(currentUser.getEmail())
-                                .addOnSuccessListener(a ->
-                                        Toast.makeText(getContext(),
-                                                "Reset email sent",
-                                                Toast.LENGTH_LONG).show());
-                    })
-                    .setNegativeButton("Cancel", null)
-                    .show();
-        });
+        rowChangePassword.setOnClickListener(v ->
+                new AlertDialog.Builder(requireContext())
+                        .setTitle("Reset Password")
+                        .setMessage("Send reset link to registered email?")
+                        .setPositiveButton("Send", (d, w) ->
+                                FirebaseAuth.getInstance()
+                                        .sendPasswordResetEmail(currentUser.getEmail())
+                                        .addOnSuccessListener(a ->
+                                                Toast.makeText(getContext(),
+                                                        "Reset email sent",
+                                                        Toast.LENGTH_LONG).show()))
+                        .setNegativeButton("Cancel", null)
+                        .show());
 
-        rowLogout.setOnClickListener(v -> {
-            FirebaseAuth.getInstance().signOut();
-            Intent i = new Intent(requireContext(), TSTAR_Login_Activity.class);
-            i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-            startActivity(i);
-            requireActivity().finish();
-        });
+        rowLogout.setOnClickListener(v ->
+                new AlertDialog.Builder(requireContext())
+                        .setTitle("Logout")
+                        .setMessage("Are you really sure you want to logout?")
+                        .setCancelable(false)
+                        .setPositiveButton("Yes", (dialog, which) -> {
 
-        rowDeleteAccount.setOnClickListener(v -> {
-            new AlertDialog.Builder(requireContext())
-                    .setTitle("Delete Account")
-                    .setMessage("This action is permanent. Continue?")
-                    .setPositiveButton("Delete", (d, w) -> {
-                        FirebaseDatabase.getInstance()
-                                .getReference("Users")
-                                .child(uid)
-                                .removeValue();
+                            FirebaseAuth.getInstance().signOut();
 
-                        currentUser.delete();
-                        Toast.makeText(getContext(),
-                                "Account deleted",
-                                Toast.LENGTH_LONG).show();
+                            Intent i = new Intent(requireContext(),
+                                    TSTAR_Login_Activity.class);
+                            i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK |
+                                    Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                            startActivity(i);
+                            requireActivity().finish();
+                        })
+                        .setNegativeButton("No", (dialog, which) -> dialog.dismiss())
+                        .show());
 
-                        Intent i = new Intent(requireContext(), TSTAR_Login_Activity.class);
-                        i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                        startActivity(i);
-                        requireActivity().finish();
-                    })
-                    .setNegativeButton("Cancel", null)
-                    .show();
-        });
+        rowDeleteAccount.setOnClickListener(v ->
+                new AlertDialog.Builder(requireContext())
+                        .setTitle("Delete Account")
+                        .setMessage("This action is permanent. Continue?")
+                        .setPositiveButton("Delete", (d, w) -> {
+                            FirebaseDatabase.getInstance()
+                                    .getReference("Users")
+                                    .child(uid)
+                                    .removeValue();
+
+                            currentUser.delete();
+                            Toast.makeText(getContext(),
+                                    "Account deleted",
+                                    Toast.LENGTH_LONG).show();
+
+                            Intent i = new Intent(requireContext(),
+                                    TSTAR_Login_Activity.class);
+                            i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK |
+                                    Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                            startActivity(i);
+                            requireActivity().finish();
+                        })
+                        .setNegativeButton("Cancel", null)
+                        .show());
     }
 }

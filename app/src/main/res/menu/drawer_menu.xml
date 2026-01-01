@@ -13,9 +13,9 @@
             android:icon="@drawable/tsetting" />
 
         <item
-            android:id="@+id/nav_download"
-            android:title="Download"
-            android:icon="@drawable/tdownload" />
+            android:id="@+id/nav_help"
+            android:title="Help FAQ"
+            android:icon="@drawable/menu_help" />
 
         <item
             android:id="@+id/nav_share"
@@ -24,18 +24,16 @@
 
         <item
             android:id="@+id/nav_contactus"
-            android:title="Contact Us"
-            android:icon="@drawable/tcall_logo" />
+            android:title="Contact Us / Feedback"
+            android:icon="@drawable/menu_mail" />
+
+
+
 
         <item
-            android:id="@+id/nav_aboutus"
-            android:title="About Us"
-            android:icon="@drawable/tfeedback" />
-
-        <item
-            android:id="@+id/nav_feedback"
-            android:title="Feedback"
-            android:icon="@drawable/tsend" />
+            android:id="@+id/nav_privacy"
+            android:title="Privacy Policy"
+            android:icon="@drawable/menu_privacy" />
 
 
     </group>
@@ -46,3 +44,9 @@
         android:icon="@drawable/tlogout" />
 
 </menu>
+
+
+
+
+
+

@@ -1,66 +1,71 @@
-<androidx.constraintlayout.widget.ConstraintLayout android:layout_width="match_parent"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:fitsSystemWindows="true">
+
+    <!-- Chat Messages -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/chatRecycler"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:padding="8dp"/>
+
+    <!-- Input Area -->
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        app:cardCornerRadius="24dp"
+        app:cardElevation="6dp"
+        android:backgroundTint="@color/light_lavender_for_cards">
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="8dp"
+            android:gravity="center_vertical">
 
 
 
 
-            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                android:orientation="vertical"
+            <!-- MULTI-LINE INPUT -->
+            <EditText
+                android:id="@+id/etMessage"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="#F5F5F5">
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:hint="Ask AI..."
+                android:minHeight="40dp"
+                android:maxHeight="120dp"
+                android:background="@null"
+                android:padding="10dp"
+                android:inputType="textMultiLine"
+                android:gravity="top"
+                android:maxLines="5"
+                android:scrollbars="vertical"/>
 
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/chatRecycler"
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_weight="1"
-                    android:padding="8dp"/>
 
-                <com.google.android.material.card.MaterialCardView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="8dp"
-                    app:cardCornerRadius="24dp"
-                    app:cardElevation="6dp">
 
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:padding="8dp"
-                        android:gravity="center_vertical">
+            <!-- SEND BUTTON -->
+            <ImageButton
+                android:id="@+id/btnSend"
+                android:layout_width="44dp"
+                android:layout_height="44dp"
+                android:layout_gravity="bottom|left"
+                android:src="@android:drawable/ic_menu_send"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:contentDescription="Send"/>
 
-                        <!-- MULTI-LINE INPUT -->
-                        <EditText
-                            android:id="@+id/etMessage"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:hint="Ask AI..."
-                            android:minHeight="40dp"
-                            android:maxHeight="120dp"
-                            android:background="@null"
-                            android:padding="10dp"
-                            android:inputType="textMultiLine"
-                            android:gravity="top"
-                            android:maxLines="5"
-                            android:scrollbars="vertical"/>
+        </LinearLayout>
+        </ScrollView>
+    </com.google.android.material.card.MaterialCardView>
 
-                        <!-- SEND BUTTON -->
-                        <ImageButton
-                            android:id="@+id/btnSend"
-                            android:layout_width="44dp"
-                            android:layout_height="44dp"
-                            android:src="@android:drawable/ic_menu_send"
-                            android:background="?attr/selectableItemBackgroundBorderless"
-                            android:contentDescription="Send"/>
 
-                    </LinearLayout>
-                </com.google.android.material.card.MaterialCardView>
-
-            </LinearLayout>
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>

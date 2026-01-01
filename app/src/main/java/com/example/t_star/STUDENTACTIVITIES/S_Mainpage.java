@@ -8,8 +8,6 @@ import androidx.fragment.app.Fragment;
 
 import com.example.t_star.R;
 import com.example.t_star.STUDENTACTIVITIES.SFragment.S_Ai_Assistance_Fragment;
-import com.example.t_star.STUDENTACTIVITIES.SFragment.S_Offline_Download_Fragment;
-import com.example.t_star.STUDENTACTIVITIES.SFragment.S_Event_Fragment;
 import com.example.t_star.STUDENTACTIVITIES.SFragment.S_Profile_Fragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -38,11 +36,7 @@ public class S_Mainpage extends AppCompatActivity {
                 selected = new com.example.t_star.STUDENTACTIVITIES.SFragment.S_Classes_Fragment();
             } else if (item.getItemId() == R.id.nav_s_ai_assistant) {
                 selected = new S_Ai_Assistance_Fragment();
-            } else if (item.getItemId() == R.id.nav_s_event) {
-                selected = new S_Event_Fragment();
-            } else if (item.getItemId() == R.id.nav_s_offline_download) {
-                selected = new S_Offline_Download_Fragment();
-            } else if (item.getItemId() == R.id.nav_s_profile) {
+            }   else if (item.getItemId() == R.id.nav_s_profile) {
                 selected = new S_Profile_Fragment();
             }
 

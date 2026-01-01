@@ -9,6 +9,8 @@ import com.example.t_star.TEACHERACTIVITIES.CLASSES.TClassesModel;
 import com.google.firebase.database.*;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Classes_helper {
 
@@ -162,6 +164,69 @@ public class Classes_helper {
             void onUserLoaded(User_Authentication_Model user);
         }
     }
+
+    // ------------------------------------------------------------
+// DELETE CLASS
+// ------------------------------------------------------------
+    public static void deleteClass(String classId, DatabaseCallback cb) {
+
+        FirebaseDatabase.getInstance()
+                .getReference("Classes")
+                .child(classId)
+                .removeValue()
+                .addOnSuccessListener(a -> cb.onSuccess())
+                .addOnFailureListener(cb::onFailure);
+    }
+
+    public static void deleteClassEverywhere(String classId, DatabaseCallback cb) {
+
+        DatabaseReference rootRef = FirebaseDatabase.getInstance().getReference();
+
+        Map<String, Object> updates = new HashMap<>();
+
+        // 🔥 MAIN CLASS
+        updates.put("Classes/" + classId, null);
+
+        // 🔥 ATTENDANCE
+        updates.put("Attendance/" + classId, null);
+
+        // 🔥 ASSIGNMENTS
+        updates.put("Assignments/" + classId, null);
+
+        // 🔥 CLASS → STUDENTS
+        updates.put("ClassStudents/" + classId, null);
+
+        // 🔥 OPTIONAL: STUDENT → CLASSES (important)
+        rootRef.child("StudentClasses").addListenerForSingleValueEvent(
+                new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+
+                        for (DataSnapshot studentSnap : snapshot.getChildren()) {
+                            if (studentSnap.hasChild(classId)) {
+                                updates.put(
+                                        "StudentClasses/"
+                                                + studentSnap.getKey()
+                                                + "/" + classId,
+                                        null
+                                );
+                            }
+                        }
+
+                        // 🚀 SINGLE ATOMIC DELETE
+                        rootRef.updateChildren(updates)
+                                .addOnSuccessListener(a -> cb.onSuccess())
+                                .addOnFailureListener(cb::onFailure);
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+                        cb.onFailure(error.toException());
+                    }
+                }
+        );
+    }
+
 
     // ------------------------------------------------------------
     // CALLBACK INTERFACES

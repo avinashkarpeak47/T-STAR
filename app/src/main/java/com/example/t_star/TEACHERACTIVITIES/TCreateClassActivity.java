@@ -44,14 +44,28 @@ public class TCreateClassActivity extends AppCompatActivity {
         txtCheck.setVisibility(TextView.GONE);
         btnSend.setEnabled(false);
 
-        // 🔹 Check Class ID availability
+        // 🔹 Class ID TextWatcher with validation
         edtClassId.addTextChangedListener(new TextWatcher() {
             @Override public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
             @Override public void afterTextChanged(Editable s) {}
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                checkClassIdAvailability(s.toString().trim());
+
+                String classId = s.toString().trim();
+
+                // 🔴 Format validation first
+                if (!isValidClassId(classId)) {
+                    txtCheck.setText("Format: 2 CAPITAL letters + 4 digits (AB1234)");
+                    txtCheck.setTextColor(getColor(R.color.red));
+                    txtCheck.setVisibility(TextView.VISIBLE);
+                    btnSend.setEnabled(false);
+                    isIdAvailable = false;
+                    return;
+                }
+
+                // ✅ Format OK → check availability
+                checkClassIdAvailability(classId);
             }
         });
 
@@ -59,17 +73,9 @@ public class TCreateClassActivity extends AppCompatActivity {
     }
 
     // --------------------------------------------------
-    // CHECK CLASS ID
+    // CHECK CLASS ID AVAILABILITY
     // --------------------------------------------------
     private void checkClassIdAvailability(String classId) {
-
-        if (classId.isEmpty()) {
-            txtCheck.setText("Enter Class ID");
-            txtCheck.setTextColor(getColor(R.color.red));
-            txtCheck.setVisibility(TextView.VISIBLE);
-            btnSend.setEnabled(false);
-            return;
-        }
 
         FirebaseDatabase.getInstance()
                 .getReference("Classes")
@@ -108,6 +114,14 @@ public class TCreateClassActivity extends AppCompatActivity {
             return;
         }
 
+        // 🔴 Extra safety check
+        if (!isValidClassId(classId)) {
+            Toast.makeText(this,
+                    "Class ID must be 2 CAPITAL letters",
+                    Toast.LENGTH_SHORT).show();
+            return;
+        }
+
         if (!isIdAvailable) {
             Toast.makeText(this, "Class ID not available!", Toast.LENGTH_SHORT).show();
             return;
@@ -118,27 +132,37 @@ public class TCreateClassActivity extends AppCompatActivity {
             return;
         }
 
-        // 🔥 Model updated usage
+        // 🔥 Create model
         TClassesModel model = new TClassesModel();
         model.setClassName(className);
         model.setClassId(classId);
         model.setTeacherId(teacherId);
-        model.setSubject(subject);      // ✅ SUBJECT
+        model.setSubject(subject);
         model.setStudentsCount(0);
 
         Classes_helper.createClass(model, new Classes_helper.DatabaseCallback() {
             @Override
             public void onSuccess() {
                 Toast.makeText(TCreateClassActivity.this,
-                        "Class Created Successfully!", Toast.LENGTH_SHORT).show();
+                        "Class Created Successfully!",
+                        Toast.LENGTH_SHORT).show();
                 finish();
             }
 
             @Override
             public void onFailure(Exception e) {
                 Toast.makeText(TCreateClassActivity.this,
-                        "Error: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                        "Error: " + e.getMessage(),
+                        Toast.LENGTH_SHORT).show();
             }
         });
+    }
+
+    // --------------------------------------------------
+    // CLASS ID FORMAT VALIDATION
+    // --------------------------------------------------
+    private boolean isValidClassId(String classId) {
+        // Exactly 2 CAPITAL letters + 4 digits
+        return classId.matches("^[A-Z]{2}[0-9]{4}$");
     }
 }

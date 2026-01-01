@@ -64,6 +64,8 @@ dependencies {
     annotationProcessor("androidx.room:room-compiler:2.6.1")
     implementation ("androidx.room:room-runtime:2.6.1")
 
+    // Photo View 
+    implementation ("com.github.chrisbanes:PhotoView:2.3.0")
 
     implementation ("com.google.firebase:firebase-firestore:24.11.1")
     implementation ("com.google.firebase:firebase-analytics:22.0.2")

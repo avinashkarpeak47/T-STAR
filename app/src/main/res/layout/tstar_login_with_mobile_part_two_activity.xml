@@ -1,42 +1,51 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:tools="http://schemas.android.com/tools"
+    android:fillViewport="true"
     android:fitsSystemWindows="true"
-    tools:context=".TSTAR_Login_With_Mobile_Part_Two"
-    android:background="@color/white">
+    android:background="@drawable/finalist_loginpage_bg"
+    tools:context=".TSTAR_Login_With_Mobile_Part_Two">
 
-    <LinearLayout
-        android:id="@+id/entry_page_ll_id1"
+    <!-- ScrollView MUST have one child -->
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:background="@drawable/finalist_loginpage_bg">
-
+        android:layout_height="wrap_content">
 
         <!-- Title -->
+
+        <!-- OTP Container -->
+
         <TextView
+            android:id="@+id/tvTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Login to\nyour account"
+            android:textColor="@color/white"
             android:textSize="30sp"
             android:textStyle="bold"
-            android:textColor="@color/white"
-            android:layout_marginTop="68dp"
-            android:layout_marginLeft="31dp"/>
-
-
+            app:layout_constraintBottom_toTopOf="@+id/llOtpContainer"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.157"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.273" />
 
         <LinearLayout
-            android:layout_width="match_parent"
+            android:id="@+id/llOtpContainer"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:padding="24dp"
-            android:layout_marginTop="180dp">
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.674">
 
-            <!-- Email Field -->
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -48,45 +57,33 @@
                 android:id="@+id/et_otp"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
-                android:background="@drawable/s_edittext_border"
-                android:paddingStart="14dp"
-                android:hint="Enter OTP"
-                android:textColor="@color/black"
-                android:textColorHint="#8A8A8A"
                 android:layout_marginTop="10dp"
+                android:background="@drawable/s_edittext_border"
+                android:hint="Enter OTP"
                 android:inputType="number"
-                android:maxLength="6"/>
+                android:maxLength="6"
+                android:paddingStart="14dp"
+                android:textColor="@color/black"
+                android:textColorHint="#8A8A8A" />
 
-
-
-
-            <!-- Login Button -->
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/btn_login_verify_otp"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
+                android:layout_marginTop="26dp"
+                android:background="@drawable/s_btn_bg_shape"
                 android:text="Verify OTP"
                 android:textAllCaps="false"
-                android:textSize="17dp"
-                android:textStyle="bold"
                 android:textColor="@color/black"
-                android:background="@drawable/s_btn_bg_shape"
-                android:layout_marginTop="26dp"/>
-
-
+                android:textSize="17dp"
+                android:textStyle="bold" />
 
         </LinearLayout>
 
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
+</ScrollView>
 
-
-
-
-    </LinearLayout>
-
-
-
-</androidx.constraintlayout.widget.ConstraintLayout>
 
 
     <!-- <LinearLayout

@@ -47,6 +47,12 @@
         android:theme="@style/Theme.TSTAR.Light"
         tools:targetApi="31">
         <activity
+            android:name=".TEACHERACTIVITIES.ImageViewerActivity"
+            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"
+            android:screenOrientation="portrait"/>
+
+
+        <activity
             android:name=".STUDENTACTIVITIES.Drawer_Activites.S_PrivacyPolicy_Activity"
             android:exported="false" />
         <activity
@@ -153,19 +159,23 @@
             android:exported="false" />
         <activity
             android:name=".TSTAR_Signup_Activity"
-            android:exported="false" />
+            android:exported="false"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustPan" />
         <activity
             android:name=".TSTAR_Entry_Activity"
             android:exported="false" />
         <activity
             android:name=".TSTAR_Login_Activity"
-            android:exported="false" />
+            android:exported="false"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustPan" />
         <activity
             android:name=".TSTAR_Login_With_Mobile_Part_Two"
-            android:exported="false" />
+            android:exported="false"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustPan" />
         <activity
             android:name=".TSTAR_Login_With_Mobile_Part_One"
-            android:exported="false" /> <!-- <activity -->
+            android:exported="false"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustPan" /><!-- <activity -->
         <!-- android:name=".STUDENTACTIVITIES.SHome_Page" -->
         <!-- android:exported="false" /> -->
         <activity

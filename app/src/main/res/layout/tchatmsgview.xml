@@ -45,7 +45,45 @@
             android:maxWidth="330dp"
             android:text="Received message"
             android:textColor="@color/black"
-            android:textSize="15sp" />
+            android:textSize="15sp"
+            android:visibility="visible"/>
+        <!-- Pdf view -->
+        <LinearLayout
+            android:id="@+id/layoutPdfReceived"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:padding="6dp"
+            android:visibility="gone">
+
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/ic_pdf"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/tvPdfNameRecv"
+                android:layout_marginStart="8dp"
+                android:text="file.pdf"
+                android:textSize="14sp"
+                android:textColor="@color/black"/>
+        </LinearLayout>
+        <!-- IMAGE GRID -->
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvImageGridRecv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            android:layout_marginTop="4dp"/>
+        <ImageView
+            android:id="@+id/imgReceiveImg"
+            android:layout_width="300dp"
+            android:layout_height="400dp"
+            android:src="@drawable/taklogo"
+            android:visibility="gone"/>
 
         <TextView
             android:id="@+id/tvRecvTime"
@@ -56,6 +94,9 @@
             android:text="10:45 AM"
             android:textColor="#777777"
             android:textSize="11sp" />
+
+
+
 
     </LinearLayout>
 
@@ -78,7 +119,47 @@
             android:maxWidth="330dp"
             android:text="Sent message"
             android:textColor="@color/black"
-            android:textSize="15sp" />
+            android:textSize="15sp"
+            android:visibility="visible"/>
+        <!-- Pdf view -->
+        <LinearLayout
+            android:id="@+id/layoutPdfSend"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:padding="6dp"
+            android:visibility="gone">
+
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/ic_pdf"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/tvPdfNameSend"
+                android:layout_marginStart="8dp"
+                android:text="file.pdf"
+                android:textSize="14sp"
+                android:textColor="@color/black"/>
+        </LinearLayout>
+        <!-- IMAGE GRID -->
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvImageGridSent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            android:layout_marginTop="4dp"/>
+
+        <ImageView
+            android:id="@+id/imgSendImg"
+            android:layout_width="300dp"
+            android:layout_height="400dp"
+            android:src="@drawable/taklogo"
+            android:visibility="gone"/>
+
 
         <LinearLayout
             android:layout_width="wrap_content"

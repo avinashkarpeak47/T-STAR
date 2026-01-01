@@ -31,7 +31,6 @@ public class ChatHelper {
         Map<String, Object> init = new HashMap<>();
         init.put("lastMessage", "");
         init.put("lastTimestamp", 0);
-        init.put("unreadCount", 0);
         init.put("lastSenderId", "");
         init.put("lastDelivered", false);
         init.put("lastSeen", false);

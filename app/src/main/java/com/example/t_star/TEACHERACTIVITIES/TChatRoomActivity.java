@@ -120,23 +120,22 @@ public class TChatRoomActivity extends AppCompatActivity {
                 .get()
                 .addOnSuccessListener(u -> {
 
-                    String fname = u.child("firstname").getValue(String.class);
-                    String lname = u.child("lastname").getValue(String.class);
-                    String email = u.child("email").getValue(String.class);
+                    if (isFinishing() || isDestroyed()) return;
 
                     tvUsername.setText(
-                            (fname != null ? fname : "") + " " +
-                                    (lname != null ? lname : "")
+                            u.child("firstname").getValue(String.class) + " " +
+                                    u.child("lastname").getValue(String.class)
                     );
-                    tvEmailid.setText(email != null ? email : "");
 
-                    // -------- PROFILE IMAGE --------
-                    String profileImageUrl =
-                            u.child("profileImageUrl").getValue(String.class);
+                    tvEmailid.setText(
+                            u.child("email").getValue(String.class)
+                    );
 
-                    if (!TextUtils.isEmpty(profileImageUrl)) {
-                        Glide.with(TChatRoomActivity.this)
-                                .load(profileImageUrl)
+                    String img = u.child("profileImageUrl").getValue(String.class);
+
+                    if (!TextUtils.isEmpty(img)) {
+                        Glide.with(getApplicationContext())
+                                .load(img)
                                 .placeholder(R.drawable.taklogo)
                                 .error(R.drawable.taklogo)
                                 .circleCrop()
@@ -146,6 +145,7 @@ public class TChatRoomActivity extends AppCompatActivity {
                     }
                 });
     }
+
 
     private void sendMessage() {
         String text = et.getText().toString().trim();
@@ -167,8 +167,9 @@ public class TChatRoomActivity extends AppCompatActivity {
         msgRef.addValueEventListener(new ValueEventListener() {
             @Override public void onDataChange(@NonNull DataSnapshot snap) {
                 list.clear();
-
-                if (!snap.exists()) {
+                
+                // 🔥 Proper empty check
+                if (!snap.hasChildren()) {
                     layoutEmpty.setVisibility(View.VISIBLE);
                     rv.setVisibility(View.GONE);
                     return;
@@ -177,14 +178,17 @@ public class TChatRoomActivity extends AppCompatActivity {
                 layoutEmpty.setVisibility(View.GONE);
                 rv.setVisibility(View.VISIBLE);
 
+
+
                 for (DataSnapshot d : snap.getChildren()) {
                     MessageModel m = d.getValue(MessageModel.class);
                     if (m == null) continue;
 
                     list.add(m);
 
-                    // 🔥 ONLY incoming (student → teacher)
-                    if (!m.getSenderId().equals(myUid)) {
+                    // 🔥 SAFE sender check (NO CRASH)
+                    if (!myUid.equals(m.getSenderId())) {
+
                         if (!m.isDelivered()) {
                             ChatHelper.markDelivered(classId, studentUid, d.getKey());
                         }
@@ -233,6 +237,8 @@ public class TChatRoomActivity extends AppCompatActivity {
         }
     }
     private void uploadChatImagesAndSend() {
+
+        if (selectedImages.isEmpty()) return;
 
         progressUpload.setVisibility(View.VISIBLE);
         send.setEnabled(false);
@@ -286,6 +292,8 @@ public class TChatRoomActivity extends AppCompatActivity {
                 classId, studentUid, "📷 Photo", myUid
         );
 
+        // student unread +1
+        ChatHelper.incrementUnreadForStudent(classId, studentUid);
         resetUploadUI();
     }
 

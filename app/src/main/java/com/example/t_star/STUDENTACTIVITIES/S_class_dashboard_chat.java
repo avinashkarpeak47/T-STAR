@@ -91,7 +91,6 @@ public class S_class_dashboard_chat extends AppCompatActivity {
 
         loadTeacher();
         listen();
-
         send.setOnClickListener(v -> send());
         imgAttach.setOnClickListener(v -> openImagePicker());
 
@@ -191,7 +190,8 @@ public class S_class_dashboard_chat extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot s) {
                 list.clear();
 
-                if (!s.exists()) {
+                // 🔥 Proper empty check
+                if (!s.hasChildren()) {
                     empty.setVisibility(View.VISIBLE);
                     rv.setVisibility(View.GONE);
                     return;
@@ -199,6 +199,7 @@ public class S_class_dashboard_chat extends AppCompatActivity {
 
                 empty.setVisibility(View.GONE);
                 rv.setVisibility(View.VISIBLE);
+
 
                 for (DataSnapshot d : s.getChildren()) {
                     MessageModel m = d.getValue(MessageModel.class);
@@ -247,12 +248,20 @@ public class S_class_dashboard_chat extends AppCompatActivity {
                 selectedImages.add(data.getData());
             }
 
+            /* SHOW PREVIEW */
+            previewAdapter = new ChatImagePreviewAdapter(this, selectedImages);
+            rvPreviewImages.setAdapter(previewAdapter);
+            layoutImagePreview.setVisibility(View.VISIBLE);
+
             uploadChatImagesAndSend();
         }
     }
     private void uploadChatImagesAndSend() {
 
         if (selectedImages.isEmpty()) return;
+
+        progressUpload.setVisibility(View.VISIBLE);
+        send.setEnabled(false);
 
         List<String> uploadedUrls = new ArrayList<>();
         final int total = selectedImages.size();
@@ -280,11 +289,20 @@ public class S_class_dashboard_chat extends AppCompatActivity {
                                     "Image upload failed",
                                     Toast.LENGTH_SHORT
                             ).show();
+                            resetUploadUI();
                         }
                     }
             );
         }
     }
+
+    private void resetUploadUI() {
+        progressUpload.setVisibility(View.GONE);
+        layoutImagePreview.setVisibility(View.GONE);
+        selectedImages.clear();
+        send.setEnabled(true);
+    }
+
     private void sendImageMessage(List<String> imageUrls) {
 
         String msgId = msgRef.push().getKey();
@@ -305,11 +323,8 @@ public class S_class_dashboard_chat extends AppCompatActivity {
 
         // unread increment
         ChatHelper.incrementUnreadForTeacher(classId, myUid);
-
+        resetUploadUI();
         selectedImages.clear();
     }
-
-
-
 
 }

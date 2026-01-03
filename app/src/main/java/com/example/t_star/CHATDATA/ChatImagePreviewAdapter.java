@@ -1,6 +1,7 @@
 package com.example.t_star.CHATDATA;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.net.Uri;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,8 +29,9 @@ public class ChatImagePreviewAdapter
     @Override
     public VH onCreateViewHolder(@NonNull ViewGroup p, int v) {
         ImageView img = new ImageView(context);
-        img.setLayoutParams(new ViewGroup.LayoutParams(800, 800));
-        img.setScaleType(ImageView.ScaleType.CENTER_CROP);
+        img.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
+        img.setScaleType(ImageView.ScaleType.FIT_CENTER);
+        img.setBackgroundColor(Color.BLACK);
         return new VH(img);
     }
 

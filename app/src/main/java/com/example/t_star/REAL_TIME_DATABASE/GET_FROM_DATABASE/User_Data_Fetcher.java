@@ -132,5 +132,35 @@ public class User_Data_Fetcher {
                 .dispatch();
 
     }
+    public static void uploadChatImage(
+            String uid,
+            Uri imageUri,
+            UploadCallback callback) {
+
+        MediaManager.get().upload(imageUri)
+                .unsigned("t_star")
+                .option("folder", "chat data")
+                .callback(new com.cloudinary.android.callback.UploadCallback() {
+
+                    @Override
+                    public void onSuccess(String requestId, Map resultData) {
+                        String imageUrl =
+                                resultData.get("secure_url").toString();
+                        callback.onSuccess(imageUrl);
+                    }
+
+                    @Override
+                    public void onError(String requestId, ErrorInfo error) {
+                        callback.onFailure(
+                                new Exception(error.getDescription()));
+                    }
+
+                    @Override public void onStart(String requestId) {}
+                    @Override public void onProgress(String r, long b, long t) {}
+                    @Override public void onReschedule(String r, ErrorInfo e) {}
+                })
+                .dispatch();
+
+    }
 }
 

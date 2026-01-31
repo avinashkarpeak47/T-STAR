@@ -13,7 +13,7 @@
         android:layout_width="0dp"
         android:layout_height="55dp"
         android:background="@drawable/header_gradient"
-        app:navigationIcon="@drawable/arrow_back"
+        app:navigationIcon="@drawable/s_arrowback"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
@@ -90,7 +90,7 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:orientation="vertical"
-        android:visibility="visible"
+        android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="@id/rvMessages"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -111,6 +111,31 @@
             android:textSize="14sp" />
     </LinearLayout>
 
+    <!-- IMAGE PREVIEW STRIP -->
+    <LinearLayout
+        android:id="@+id/layoutImagePreview"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:weightSum="100"
+        android:background="@color/black"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:padding="1dp"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="@id/rvMessages"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/rvMessages"
+        tools:ignore="MissingConstraints">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvPreviewImages"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            />
+
+    </LinearLayout>
     <!-- ================= INPUT BAR ================= -->
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/chatInputLayout"
@@ -123,10 +148,10 @@
         app:layout_constraintEnd_toStartOf="@id/btnSend">
 
         <ImageView
-            android:id="@+id/btnAttach"
+            android:id="@+id/imgAttach"
             android:layout_width="32dp"
             android:layout_height="32dp"
-            android:src="@drawable/t_attachment"
+            android:src="@drawable/ic_image"
             app:tint="@color/maroon_variant"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintBottom_toBottomOf="parent" />
@@ -141,7 +166,7 @@
             android:textColor="@color/black"
             android:textColorHint="@color/light_greay"
             android:textSize="14sp"
-            app:layout_constraintStart_toEndOf="@id/btnAttach"
+            app:layout_constraintStart_toEndOf="@id/imgAttach"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent" />
@@ -160,6 +185,19 @@
 
         app:layout_constraintEnd_toEndOf="parent"
         app:tint="@color/maroon_variant" />
+
+    <ProgressBar
+        android:id="@+id/progressUpload"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="@+id/rvMessages"
+        app:layout_constraintEnd_toEndOf="parent"
+
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar"
+
+        tools:ignore="MissingConstraints" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 

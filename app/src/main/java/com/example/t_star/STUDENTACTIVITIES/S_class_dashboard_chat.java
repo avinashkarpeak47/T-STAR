@@ -1,10 +1,14 @@
 package com.example.t_star.STUDENTACTIVITIES;
 
+import android.annotation.SuppressLint;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.*;
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.*;
 
@@ -12,6 +16,7 @@ import com.bumptech.glide.Glide;
 import com.example.t_star.CHATDATA.*;
 import com.example.t_star.MyApp;
 import com.example.t_star.R;
+import com.example.t_star.REAL_TIME_DATABASE.GET_FROM_DATABASE.User_Data_Fetcher;
 import com.example.t_star.REAL_TIME_DATABASE.PUT_ON_DATABASE.HelperClasses.ChatHelper;
 import com.google.android.material.appbar.MaterialToolbar;
 import com.google.firebase.auth.FirebaseAuth;
@@ -22,7 +27,7 @@ public class S_class_dashboard_chat extends AppCompatActivity {
 
     RecyclerView rv;
     EditText et;
-    ImageView send, ivProfilePic;
+    ImageView send, ivProfilePic,imgAttach;
     TextView tvName, tvEmail;
     LinearLayout empty;
     List<MessageModel> list = new ArrayList<>();
@@ -30,8 +35,19 @@ public class S_class_dashboard_chat extends AppCompatActivity {
 
     String classId, myUid , profileImageUrl;
     DatabaseReference msgRef;
+
+    LinearLayout layoutImagePreview;
+    RecyclerView rvPreviewImages;
+    ProgressBar progressUpload;
+    ChatImagePreviewAdapter previewAdapter;
+
+
     boolean isOpen = false;
 
+    private static final int PICK_IMAGES = 101;
+    private final List<Uri> selectedImages = new ArrayList<>();
+
+    @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle b) {
         super.onCreate(b);
@@ -52,6 +68,15 @@ public class S_class_dashboard_chat extends AppCompatActivity {
         tvEmail = findViewById(R.id.tvEmailID);
         empty = findViewById(R.id.layoutEmpty);
         ivProfilePic = findViewById(R.id.imgProfile);
+        imgAttach = findViewById(R.id.imgAttach);
+
+        layoutImagePreview = findViewById(R.id.layoutImagePreview);
+        rvPreviewImages = findViewById(R.id.rvPreviewImages);
+        progressUpload = findViewById(R.id.progressUpload);
+
+        rvPreviewImages.setLayoutManager(
+                new LinearLayoutManager(this, RecyclerView.HORIZONTAL, false)
+        );
 
 
         rv.setLayoutManager(new LinearLayoutManager(this));
@@ -66,8 +91,9 @@ public class S_class_dashboard_chat extends AppCompatActivity {
 
         loadTeacher();
         listen();
-
         send.setOnClickListener(v -> send());
+        imgAttach.setOnClickListener(v -> openImagePicker());
+
     }
 
     @Override
@@ -127,7 +153,7 @@ public class S_class_dashboard_chat extends AppCompatActivity {
                                         u.child("profileImageUrl").getValue(String.class);
 
                                 if (!TextUtils.isEmpty(profileImageUrl)) {
-                                    Glide.with(S_class_dashboard_chat.this)
+                                    Glide.with(getApplicationContext())
                                             .load(profileImageUrl)
                                             .placeholder(R.drawable.taklogo)
                                             .error(R.drawable.taklogo)
@@ -164,7 +190,8 @@ public class S_class_dashboard_chat extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot s) {
                 list.clear();
 
-                if (!s.exists()) {
+                // 🔥 Proper empty check
+                if (!s.hasChildren()) {
                     empty.setVisibility(View.VISIBLE);
                     rv.setVisibility(View.GONE);
                     return;
@@ -172,6 +199,7 @@ public class S_class_dashboard_chat extends AppCompatActivity {
 
                 empty.setVisibility(View.GONE);
                 rv.setVisibility(View.VISIBLE);
+
 
                 for (DataSnapshot d : s.getChildren()) {
                     MessageModel m = d.getValue(MessageModel.class);
@@ -195,4 +223,108 @@ public class S_class_dashboard_chat extends AppCompatActivity {
             public void onCancelled(@NonNull DatabaseError e) {}
         });
     }
+
+    private void openImagePicker() {
+        Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
+        intent.setType("image/*");
+        intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
+        startActivityForResult(intent, PICK_IMAGES);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == PICK_IMAGES && resultCode == RESULT_OK && data != null) {
+            selectedImages.clear();
+
+            if (data.getClipData() != null) {
+                int count = data.getClipData().getItemCount();
+                for (int i = 0; i < count; i++) {
+                    Uri uri = data.getClipData().getItemAt(i).getUri();
+                    selectedImages.add(uri);
+                }
+            } else if (data.getData() != null) {
+                selectedImages.add(data.getData());
+            }
+
+            /* SHOW PREVIEW */
+            previewAdapter = new ChatImagePreviewAdapter(this, selectedImages);
+            rvPreviewImages.setAdapter(previewAdapter);
+            layoutImagePreview.setVisibility(View.VISIBLE);
+
+            uploadChatImagesAndSend();
+        }
+    }
+    private void uploadChatImagesAndSend() {
+
+        if (selectedImages.isEmpty()) return;
+
+        progressUpload.setVisibility(View.VISIBLE);
+        send.setEnabled(false);
+
+        List<String> uploadedUrls = new ArrayList<>();
+        final int total = selectedImages.size();
+
+        for (Uri uri : selectedImages) {
+
+            User_Data_Fetcher.uploadChatImage(
+                    myUid,
+                    uri,
+                    new User_Data_Fetcher.UploadCallback() {
+
+                        @Override
+                        public void onSuccess(String downloadUrl) {
+                            uploadedUrls.add(downloadUrl);
+
+                            if (uploadedUrls.size() == total) {
+                                sendImageMessage(uploadedUrls);
+                            }
+                        }
+
+                        @Override
+                        public void onFailure(Exception e) {
+                            Toast.makeText(
+                                    S_class_dashboard_chat.this,
+                                    "Image upload failed",
+                                    Toast.LENGTH_SHORT
+                            ).show();
+                            resetUploadUI();
+                        }
+                    }
+            );
+        }
+    }
+
+    private void resetUploadUI() {
+        progressUpload.setVisibility(View.GONE);
+        layoutImagePreview.setVisibility(View.GONE);
+        selectedImages.clear();
+        send.setEnabled(true);
+    }
+
+    private void sendImageMessage(List<String> imageUrls) {
+
+        String msgId = msgRef.push().getKey();
+        if (msgId == null) return;
+
+        MessageModel m = new MessageModel(myUid, imageUrls);
+
+        msgRef.child(msgId).setValue(m);
+        msgRef.child(msgId).child("timestamp").setValue(ServerValue.TIMESTAMP);
+
+        // 🔥 chat list preview
+        ChatHelper.updateLastMessage(
+                classId,
+                myUid,
+                "📷 Photo",
+                myUid
+        );
+
+        // unread increment
+        ChatHelper.incrementUnreadForTeacher(classId, myUid);
+        resetUploadUI();
+        selectedImages.clear();
+    }
+
 }

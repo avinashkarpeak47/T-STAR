@@ -25,8 +25,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.example.t_star.R;
 import com.example.t_star.REAL_TIME_DATABASE.PUT_ON_DATABASE.HelperClasses.Classes_helper;
-import com.example.t_star.STUDENTACTIVITIES.Drawer_Activites.S_About_Activity;
-import com.example.t_star.STUDENTACTIVITIES.Drawer_Activites.S_Help_FAQ_Activity;
 import com.example.t_star.STUDENTACTIVITIES.Drawer_Activites.S_PrivacyPolicy_Activity;
 import com.example.t_star.TEACHERACTIVITIES.CLASSES.TClassesAdapter;
 import com.example.t_star.TEACHERACTIVITIES.CLASSES.TClassesModel;
@@ -108,6 +106,10 @@ public class TClassesFragment extends Fragment {
                intent.setData(Uri.parse("package:" + requireContext().getPackageName()));
                startActivity(intent);
            }
+
+                  else if (id == R.id.nav_privacy) {
+                   startActivity(new Intent(getActivity(), S_PrivacyPolicy_Activity.class));
+           }
            else if (id == R.id.nav_contactus) {
 
                View dialogView = LayoutInflater.from(requireContext())
@@ -168,16 +170,6 @@ public class TClassesFragment extends Fragment {
                );
 
                startActivity(Intent.createChooser(shareIntent, "Share via"));
-           }
-           else if (id == R.id.nav_privacy) {
-
-               startActivity(new Intent(getActivity(), S_PrivacyPolicy_Activity.class));
-
-           }else if (id == R.id.nav_help) {
-
-               Intent intent= new Intent(getActivity(), S_Help_FAQ_Activity.class);
-               startActivity(intent);
-
            }
 
            else if (id == R.id.nav_logout) {

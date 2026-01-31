@@ -2,12 +2,20 @@ package com.example.t_star;
 
 
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.text.method.HideReturnsTransformationMethod;
+import android.text.method.PasswordTransformationMethod;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.*;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 
 import java.util.Locale;
 
@@ -42,6 +50,8 @@ public class TSTAR_Signup_Activity extends AppCompatActivity {
     RadioButton rbStudent, rbTeacher;
     Button btnRegister;
     TextView tvGoToLOginPage;
+    private FirebaseAuth mAuth;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,6 +85,10 @@ public class TSTAR_Signup_Activity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        setPasswordToggle(etPassword);
+        mAuth = FirebaseAuth.getInstance();
+
     }
 
     /**
@@ -127,7 +141,196 @@ public class TSTAR_Signup_Activity extends AppCompatActivity {
         otpIntent.putExtra("mobile", mobile);
         otpIntent.putExtra("role", role);
 
+       // startActivity(otpIntent);
+        startEmailVerificationFlow(
+                firstname,
+                lastname,
+                email,
+                password,
+                mobile,
+                role
+        );
+
+
+    }
+    private void startEmailVerificationFlow(
+            String firstname,
+            String lastname,
+            String email,
+            String password,
+            String mobile,
+            String role
+    ) {
+
+        mAuth.createUserWithEmailAndPassword(email, password)
+                .addOnCompleteListener(task -> {
+
+                    if (!task.isSuccessful()) {
+                        Toast.makeText(
+                                this,
+                                "Signup failed: " + task.getException().getMessage(),
+                                Toast.LENGTH_LONG
+                        ).show();
+                        return;
+                    }
+
+                    FirebaseUser user = mAuth.getCurrentUser();
+                    if (user == null) return;
+
+                    user.sendEmailVerification()
+                            .addOnSuccessListener(unused ->
+                                    showEmailVerificationDialog(
+                                            firstname,
+                                            lastname,
+                                            email,
+                                            password,
+                                            mobile,
+                                            role
+                                    )
+                            )
+                            .addOnFailureListener(e ->
+                                    Toast.makeText(
+                                            this,
+                                            "Failed to send verification email.",
+                                            Toast.LENGTH_LONG
+                                    ).show()
+                            );
+                });
+    }
+    private void showEmailVerificationDialog(
+            String firstname,
+            String lastname,
+            String email,
+            String password,
+            String mobile,
+            String role
+    ) {
+
+        new androidx.appcompat.app.AlertDialog.Builder(this)
+                .setTitle("Verify Your Email")
+                .setMessage(
+                        "A verification link has been sent to your email address.\n\n" +
+                                "Please verify your email and then tap CONTINUE."
+                )
+                .setCancelable(false)
+                .setPositiveButton("CONTINUE", (dialog, which) -> {
+
+                    FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+                    if (user == null) return;
+
+                    user.reload().addOnCompleteListener(task -> {
+
+                        if (user.isEmailVerified()) {
+                            startOtpActivity(
+                                    firstname,
+                                    lastname,
+                                    email,
+                                    password,
+                                    mobile,
+                                    role
+                            );
+                        } else {
+                            Toast.makeText(
+                                    this,
+                                    "Email not verified yet. Please check your inbox.",
+                                    Toast.LENGTH_LONG
+                            ).show();
+                        }
+                    });
+                })
+                .setNegativeButton("RESEND", (d, w) -> {
+                    FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+                    if (user != null) {
+                        user.sendEmailVerification();
+                        Toast.makeText(
+                                this,
+                                "Verification email resent.",
+                                Toast.LENGTH_SHORT
+                        ).show();
+                    }
+                })
+                .show();
+    }
+
+    private void startOtpActivity(
+            String firstname,
+            String lastname,
+            String email,
+            String password,
+            String mobile,
+            String role
+    ) {
+
+        Intent otpIntent = new Intent(
+                TSTAR_Signup_Activity.this,
+                TSTAR_Login_With_Mobile_Part_One.class
+        );
+
+        otpIntent.putExtra("flow", "signup");
+        otpIntent.putExtra("firstname", firstname);
+        otpIntent.putExtra("lastname", lastname);
+        otpIntent.putExtra("email", email);
+        otpIntent.putExtra("password", password);
+        otpIntent.putExtra("mobile", mobile);
+        otpIntent.putExtra("role", role);
+
         startActivity(otpIntent);
+    }
+
+
+
+
+    private void setPasswordToggle(EditText passwordField) {
+
+        Drawable eyeOpen = ContextCompat.getDrawable(this, R.drawable.baseline_visibility_24);
+        Drawable eyeClosed = ContextCompat.getDrawable(this, R.drawable.baseline_visibility_off_24);
+
+        // Set drawable bounds
+        if (eyeOpen != null)
+            eyeOpen.setBounds(0, 0, eyeOpen.getIntrinsicWidth(), eyeOpen.getIntrinsicHeight());
+
+        if (eyeClosed != null)
+            eyeClosed.setBounds(0, 0, eyeClosed.getIntrinsicWidth(), eyeClosed.getIntrinsicHeight());
+
+        // Initial state: password hidden
+        passwordField.setTransformationMethod(PasswordTransformationMethod.getInstance());
+        passwordField.setCompoundDrawables(null, null, eyeClosed, null);
+
+        passwordField.setOnTouchListener((v, event) -> {
+            if (event.getAction() == MotionEvent.ACTION_UP) {
+
+                Drawable endDrawable = passwordField.getCompoundDrawables()[2];
+                if (endDrawable == null) return false;
+
+                int drawableWidth = endDrawable.getBounds().width();
+
+                if (event.getX() >= (passwordField.getWidth()
+                        - passwordField.getPaddingRight()
+                        - drawableWidth)) {
+
+                    boolean isVisible =
+                            !(passwordField.getTransformationMethod()
+                                    instanceof PasswordTransformationMethod);
+
+                    if (isVisible) {
+                        // Hide password
+                        passwordField.setTransformationMethod(
+                                PasswordTransformationMethod.getInstance());
+                        passwordField.setCompoundDrawables(null, null, eyeClosed, null);
+                    } else {
+                        // Show password
+                        passwordField.setTransformationMethod(
+                                HideReturnsTransformationMethod.getInstance());
+                        passwordField.setCompoundDrawables(null, null, eyeOpen, null);
+                    }
+
+                    // Keep cursor at end
+                    passwordField.setSelection(passwordField.getText().length());
+                    return true;
+                }
+            }
+            return false;
+        });
     }
 }
 

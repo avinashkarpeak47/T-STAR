@@ -8,8 +8,12 @@
     <string name="next">Next</string>
     <string name="previous">Previous</string>
 
+    <string name="hf_api_key">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</string>
+
+
     <string name="open_drawer">Open drawer</string>
     <string name="close_drawer">Close drawer</string>
+
 
 
 </resources>

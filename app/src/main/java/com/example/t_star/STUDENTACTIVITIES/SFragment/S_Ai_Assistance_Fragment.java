@@ -1,66 +1,145 @@
+
 package com.example.t_star.STUDENTACTIVITIES.SFragment;
-
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
+import android.widget.ImageButton;
+
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.t_star.R;
+import com.example.t_star.STUDENTACTIVITIES.AIService;
+import com.example.t_star.STUDENTACTIVITIES.Adaptar.ChatAdapter;
+import com.example.t_star.STUDENTACTIVITIES.ChatMessage;
+import com.example.t_star.STUDENTACTIVITIES.RetrofitClient;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link S_Ai_Assistance_Fragment#newInstance} factory method to
- * create an instance of this fragment.
- */
+import java.util.ArrayList;
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
 public class S_Ai_Assistance_Fragment extends Fragment {
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
+    RecyclerView recyclerView;
+    EditText etMessage;
+    ImageButton btnSend;
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-
-    public S_Ai_Assistance_Fragment() {
-        // Required empty public constructor
-    }
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment S_Assignment_Fragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static S_Ai_Assistance_Fragment newInstance(String param1, String param2) {
-        S_Ai_Assistance_Fragment fragment = new S_Ai_Assistance_Fragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
-    }
+    List<ChatMessage> chatList = new ArrayList<>();
+    ChatAdapter adapter;
+    AIService api;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_s__ai_assistant_, container, false);
+
+        View view = inflater.inflate(R.layout.fragment_s__ai_assistant_, container, false);
+
+        recyclerView = view.findViewById(R.id.chatRecycler);
+        etMessage = view.findViewById(R.id.etMessage);
+        btnSend = view.findViewById(R.id.btnSend);
+
+        adapter = new ChatAdapter(chatList);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        recyclerView.setAdapter(adapter);
+
+        api = RetrofitClient.getClient().create(AIService.class);
+
+        btnSend.setOnClickListener(v -> sendMessage());
+
+        return view;
+    }
+
+    private void sendMessage() {
+
+        String msg = etMessage.getText().toString().trim();
+        if (msg.isEmpty()) return;
+
+        chatList.add(new ChatMessage(msg, true));
+        adapter.notifyItemInserted(chatList.size() - 1);
+        recyclerView.scrollToPosition(chatList.size() - 1);
+        etMessage.setText("");
+
+        JsonObject body = new JsonObject();
+
+
+        // REQUIRED
+        body.addProperty("model", "openai/gpt-3.5-turbo");
+
+        // REQUIRED
+        JsonArray messages = new JsonArray();
+
+        // USER MESSAGE
+        JsonObject user = new JsonObject();
+        user.addProperty("role", "user");
+        user.addProperty("content", msg);
+
+        // ADD MESSAGE
+        messages.add(user);
+
+        // ATTACH
+        body.add("messages", messages);
+
+
+
+       /* JsonArray messages = new JsonArray();
+
+        JsonObject userMsg = new JsonObject();
+        userMsg.addProperty("role", "user");
+        userMsg.addProperty("content", msg);
+
+        messages.add(userMsg);
+
+        body.add("messages", messages);*/
+
+        String auth = "Bearer " + getString(R.string.hf_api_key);
+
+        api.askAI(auth, body).enqueue(new Callback<JsonObject>() {
+            @Override
+            public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
+
+                if (!response.isSuccessful() || response.body() == null) {
+                    addBot("AI error: " + response.code());
+                    return;
+                }
+
+                JsonObject message = response.body()
+                        .getAsJsonArray("choices")
+                        .get(0)
+                        .getAsJsonObject()
+                        .getAsJsonObject("message");
+
+                String reply = message.get("content").getAsString().trim();
+
+                if (reply.isEmpty()) {
+                    addBot("AI returned empty response.");
+                    return;
+                }
+
+                addBot(reply);
+            }
+
+            @Override
+            public void onFailure(Call<JsonObject> call, Throwable t) {
+                addBot("Network error.");
+            }
+        });
+
+
+    }
+
+    private void addBot(String text) {
+        chatList.add(new ChatMessage(text, false));
+        adapter.notifyItemInserted(chatList.size() - 1);
+        recyclerView.scrollToPosition(chatList.size() - 1);
     }
 }

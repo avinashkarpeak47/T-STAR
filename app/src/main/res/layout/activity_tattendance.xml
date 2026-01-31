@@ -28,7 +28,7 @@
     <TextView
         android:id="@+id/tvclass"
         android:text="Class: "
-        android:padding="12dp"
+        android:padding="10dp"
         android:textStyle="bold"
         android:layout_margin="8dp"
         android:textSize="16dp"
@@ -38,9 +38,9 @@
     <TextView
         android:id="@+id/tvsubject"
        android:text="Subject: "
-        android:padding="12dp"
+        android:padding="10dp"
         android:textStyle="bold"
-        android:layout_margin="8dp"
+        android:layout_margin="4dp"
         android:textSize="16dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
@@ -49,12 +49,13 @@
     <TextView
         android:id="@+id/tvdate"
         android:text="Date:"
-        android:layout_margin="8dp"
-        android:padding="12dp"
+        android:layout_margin="4dp"
+        android:padding="10dp"
         android:textStyle="bold"
         android:textSize="16dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
+
     <!-- HOLIDAY -->
     <CheckBox
         android:id="@+id/cbHoliday"

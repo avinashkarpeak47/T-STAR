@@ -17,7 +17,7 @@
         app:title="Upload Material"
         app:titleTextColor="@color/white"
         android:background="@drawable/header_gradient"
-        app:navigationIcon="@drawable/arrow_back"
+        app:navigationIcon="@drawable/s_arrowback"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>

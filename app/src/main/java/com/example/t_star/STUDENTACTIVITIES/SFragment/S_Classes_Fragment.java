@@ -21,14 +21,12 @@ import com.bumptech.glide.Glide;
 import com.example.t_star.R;
 import com.example.t_star.REAL_TIME_DATABASE.GET_FROM_DATABASE.User_Data_Fetcher;
 import com.example.t_star.REAL_TIME_DATABASE.PUT_ON_DATABASE.ModelClasses.Updated_User_Model;
-import com.example.t_star.STUDENTACTIVITIES.Drawer_Activites.S_About_Activity;
-import com.example.t_star.STUDENTACTIVITIES.Drawer_Activites.S_Help_FAQ_Activity;
-import com.example.t_star.STUDENTACTIVITIES.Drawer_Activites.S_PrivacyPolicy_Activity;
 import com.example.t_star.STUDENTACTIVITIES.S_Class_Dashboard_Activity;
 import com.example.t_star.STUDENTACTIVITIES.S_Enroll_in_Class;
 import com.example.t_star.STUDENTACTIVITIES.S_Fragment_Classes_RC_Adapter;
 import com.example.t_star.STUDENTACTIVITIES.S_Fragment_Classes_RC_Model;
 import com.example.t_star.TSTAR_Entry_Activity;
+import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.*;
@@ -75,6 +73,12 @@ public class S_Classes_Fragment extends Fragment {
         // Drawer
         drawerLayout = view.findViewById(R.id.s_drawerLayout);
         navigationView = view.findViewById(R.id.s_navigationView);
+        MaterialToolbar toolbar = view.findViewById(R.id.toolbar);
+
+        toolbar.setNavigationOnClickListener(v ->
+                drawerLayout.openDrawer(GravityCompat.START)
+        );
+
 
         View header = navigationView.getHeaderView(0);
         drawerImgProfile = header.findViewById(R.id.imgProfile);
@@ -110,6 +114,8 @@ public class S_Classes_Fragment extends Fragment {
                     startActivity(i);
                 }
         );
+
+
 
         recyclerView.setAdapter(adapter);
 
@@ -368,15 +374,6 @@ public class S_Classes_Fragment extends Fragment {
                 startActivity(Intent.createChooser(shareIntent, "Share via"));
             } else if (id == R.id.nav_logout) {
                 showLogoutDialog();
-            } else if (id == R.id.nav_privacy) {
-
-                startActivity(new Intent(getActivity(), S_PrivacyPolicy_Activity.class));
-
-            }else if (id == R.id.nav_help) {
-
-                Intent intent= new Intent(getActivity(), S_Help_FAQ_Activity.class);
-                startActivity(intent);
-
             }
             drawerLayout.closeDrawer(GravityCompat.START);
             return true;
@@ -416,7 +413,7 @@ public class S_Classes_Fragment extends Fragment {
         HashMap<String, Object> map = new HashMap<>();
         map.put("id", id);
         map.put("userId", uid);
-        map.put("role", "Teacher");
+        map.put("role", "Student");
         map.put("subject", subject);
         map.put("message", message);
         map.put("timestamp", System.currentTimeMillis());

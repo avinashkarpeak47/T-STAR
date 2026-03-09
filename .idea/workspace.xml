@@ -350,11 +350,6 @@
           <theme>@style/Theme.TSTAR</theme>
         </config>
       </layout>
-      <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/teventview.xml">
-        <config>
-          <theme>@style/Theme.TSTAR</theme>
-        </config>
-      </layout>
       <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/tstar_entry_activity.xml">
         <config>
           <theme>@style/Theme.TSTAR</theme>
@@ -421,7 +416,31 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="68f55fa5-e357-4619-9e9e-b24458d6d83c" name="Changes" comment="Bottom Navigation Bar Height Adjusted" />
+    <list default="true" id="68f55fa5-e357-4619-9e9e-b24458d6d83c" name="Changes" comment="Bottom Navigation Bar Height Adjusted">
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/example/t_star/Notification/FcmSender.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/example/t_star/Notification/MyFirebaseService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/example/t_star/Notification/NotificationAdapter.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/example/t_star/Notification/NotificationModel.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/example/t_star/TEACHERACTIVITIES/CreateNotificationActivity.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_create_notification.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/layout/notification_item.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/app/build.gradle.kts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/t_star/STUDENTACTIVITIES/SFragment/S_Classes_Fragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/t_star/STUDENTACTIVITIES/SFragment/S_Classes_Fragment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/t_star/STUDENTACTIVITIES/S_class_dashboard_notifications.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/t_star/STUDENTACTIVITIES/S_class_dashboard_notifications.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/t_star/TEACHERACTIVITIES/TCreateClassActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/t_star/TEACHERACTIVITIES/TCreateClassActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/t_star/TEACHERACTIVITIES/TMainFragment/TClassesFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/t_star/TEACHERACTIVITIES/TMainFragment/TClassesFragment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/t_star/TEACHERACTIVITIES/TNotificationActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/t_star/TEACHERACTIVITIES/TNotificationActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_s_class_dashboard_notifications.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_s_class_dashboard_notifications.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_s_help_faq.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_s_help_faq.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_tchat_room.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_tchat_room.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_tchats.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_tchats.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_tnotification.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_tnotification.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gradle/libs.versions.toml" beforeDir="false" afterPath="$PROJECT_DIR$/gradle/libs.versions.toml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/local.properties" beforeDir="false" afterPath="$PROJECT_DIR$/local.properties" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -430,7 +449,7 @@
   <component name="ClangdSettings">
     <option name="formatViaClangd" value="false" />
   </component>
-  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[]" />
+  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[DeviceId(pluginId=LocalEmulator, isTemplate=false, identifier=path=C:\Users\Hp\.android\avd\Pixel_7_Pro.avd)]" />
   <component name="ExternalProjectsData">
     <projectState path="$PROJECT_DIR$">
       <ProjectState />
@@ -997,7 +1016,15 @@
       <option name="project" value="LOCAL" />
       <updated>1766830787167</updated>
     </task>
-    <option name="localTasksCounter" value="45" />
+    <task id="LOCAL-00045" summary="Bottom Navigation Bar Height Adjusted">
+      <option name="closed" value="true" />
+      <created>1769859130393</created>
+      <option name="number" value="00045" />
+      <option name="presentableId" value="LOCAL-00045" />
+      <option name="project" value="LOCAL" />
+      <updated>1769859130393</updated>
+    </task>
+    <option name="localTasksCounter" value="46" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -1067,12 +1094,12 @@
       <map>
         <entry key="com.example.t_star">
           <value>
-            <CheckInfo lastCheckTimestamp="1766748549324" />
+            <CheckInfo lastCheckTimestamp="1773048617147" />
           </value>
         </entry>
         <entry key="com.example.t_star.test">
           <value>
-            <CheckInfo lastCheckTimestamp="1766748549324" />
+            <CheckInfo lastCheckTimestamp="1773048617146" />
           </value>
         </entry>
       </map>

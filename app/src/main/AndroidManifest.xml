@@ -47,11 +47,15 @@
         android:theme="@style/Theme.TSTAR.Light"
         tools:targetApi="31">
         <activity
+            android:name=".TEACHERACTIVITIES.TNotificationActivity"
+            android:exported="false" />
+        <activity
+            android:name=".TEACHERACTIVITIES.CreateNotificationActivity"
+            android:exported="false" />
+        <activity
             android:name=".TEACHERACTIVITIES.ImageViewerActivity"
-            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"
-            android:screenOrientation="portrait"/>
-
-
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" />
         <activity
             android:name=".STUDENTACTIVITIES.Drawer_Activites.S_PrivacyPolicy_Activity"
             android:exported="false" />
@@ -89,9 +93,7 @@
         <activity
             android:name=".STUDENTACTIVITIES.S_Class_Dashboard_Assignment"
             android:exported="false" />
-        <activity
-            android:name=".STUDENTACTIVITIES.S_class_dashboard_events"
-            android:exported="false" />
+
         <activity
             android:name=".STUDENTACTIVITIES.S_class_dashboard_chat"
             android:exported="false" />
@@ -125,9 +127,7 @@
         <activity
             android:name=".TEACHERACTIVITIES.TStudentsActivity"
             android:exported="false" />
-        <activity
-            android:name=".TEACHERACTIVITIES.TCreateNewEventActivity"
-            android:exported="false" />
+
         <activity
             android:name=".TEACHERACTIVITIES.TNoteActivity"
             android:exported="false" />
@@ -141,9 +141,6 @@
             android:exported="false" />
         <activity
             android:name=".TEACHERACTIVITIES.TChatRoomActivity"
-            android:exported="false" />
-        <activity
-            android:name=".TEACHERACTIVITIES.TNotificationActivity"
             android:exported="false" />
         <activity
             android:name=".TEACHERACTIVITIES.TAttendanceActivity"
@@ -175,7 +172,7 @@
         <activity
             android:name=".TSTAR_Login_With_Mobile_Part_One"
             android:exported="false"
-            android:windowSoftInputMode="stateAlwaysHidden|adjustPan" /><!-- <activity -->
+            android:windowSoftInputMode="stateAlwaysHidden|adjustPan" /> <!-- <activity -->
         <!-- android:name=".STUDENTACTIVITIES.SHome_Page" -->
         <!-- android:exported="false" /> -->
         <activity
@@ -184,6 +181,15 @@
         <!-- android:name=".Splash_Screen" -->
         <!-- android:exported="false" /> -->
         <!-- android:exported="false" /> -->
+
+        <service
+            android:name=".Notification.MyFirebaseService"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
+
         <activity
             android:name=".TSTAR_Splash_Screen"
             android:exported="true">

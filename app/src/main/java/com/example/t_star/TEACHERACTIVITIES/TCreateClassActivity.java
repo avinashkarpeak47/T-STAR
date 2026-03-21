@@ -30,13 +30,14 @@ public class TCreateClassActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tcreate_class);
 
+        // Toolbar
         MaterialToolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         toolbar.setNavigationOnClickListener(v -> finish());
 
-        // 🔹 Bind views
+        // Bind views
         edtClassName = findViewById(R.id.showClassName);
-        edtSubject   = findViewById(R.id.showTeacherName); // SUBJECT
+        edtSubject   = findViewById(R.id.showTeacherName);
         edtClassId   = findViewById(R.id.edtClassId);
         btnSend      = findViewById(R.id.btnSend);
         txtCheck     = findViewById(R.id.txtCheck);
@@ -44,7 +45,9 @@ public class TCreateClassActivity extends AppCompatActivity {
         txtCheck.setVisibility(TextView.GONE);
         btnSend.setEnabled(false);
 
-        // 🔹 Class ID TextWatcher with validation
+        // --------------------------------------------------
+        // CLASS ID TEXT WATCHER
+        // --------------------------------------------------
         edtClassId.addTextChangedListener(new TextWatcher() {
             @Override public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
             @Override public void afterTextChanged(Editable s) {}
@@ -52,11 +55,29 @@ public class TCreateClassActivity extends AppCompatActivity {
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
 
-                String classId = s.toString().trim();
+                // Auto uppercase
+                String input = s.toString();
+                String classId = input.toUpperCase();
 
-                // 🔴 Format validation first
+                if (!input.equals(classId)) {
+                    edtClassId.setText(classId);
+                    edtClassId.setSelection(classId.length());
+                    return;
+                }
+
+                // Empty
+                if (classId.isEmpty()) {
+                    txtCheck.setVisibility(TextView.GONE);
+                    btnSend.setEnabled(false);
+                    isIdAvailable = false;
+                    return;
+                }
+
+                // 🔴 FORMAT VALIDATION (4 letters + 2 digits)
                 if (!isValidClassId(classId)) {
-                    txtCheck.setText("Format: 2 CAPITAL letters + 4 digits (AB1234)");
+                    txtCheck.setText(
+                            "ID must have EXACTLY 4 digits & 2 letters"
+                    );
                     txtCheck.setTextColor(getColor(R.color.red));
                     txtCheck.setVisibility(TextView.VISIBLE);
                     btnSend.setEnabled(false);
@@ -64,7 +85,7 @@ public class TCreateClassActivity extends AppCompatActivity {
                     return;
                 }
 
-                // ✅ Format OK → check availability
+                // ✅ Format correct → Firebase availability check
                 checkClassIdAvailability(classId);
             }
         });
@@ -95,6 +116,13 @@ public class TCreateClassActivity extends AppCompatActivity {
                         btnSend.setEnabled(true);
                     }
                     txtCheck.setVisibility(TextView.VISIBLE);
+                })
+                .addOnFailureListener(e -> {
+                    txtCheck.setText("❌ Error checking ID");
+                    txtCheck.setTextColor(getColor(R.color.red));
+                    txtCheck.setVisibility(TextView.VISIBLE);
+                    btnSend.setEnabled(false);
+                    isIdAvailable = false;
                 });
     }
 
@@ -114,10 +142,15 @@ public class TCreateClassActivity extends AppCompatActivity {
             return;
         }
 
-        // 🔴 Extra safety check
+        if (className.isEmpty() || subject.isEmpty() || classId.isEmpty()) {
+            Toast.makeText(this, "Please fill all fields", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        // 🔴 FINAL SAFETY CHECK
         if (!isValidClassId(classId)) {
             Toast.makeText(this,
-                    "Class ID must be 2 CAPITAL letters",
+                    "Class ID must have exactly 4 digits & 2 letters",
                     Toast.LENGTH_SHORT).show();
             return;
         }
@@ -127,12 +160,7 @@ public class TCreateClassActivity extends AppCompatActivity {
             return;
         }
 
-        if (className.isEmpty() || subject.isEmpty()) {
-            Toast.makeText(this, "Please fill all fields", Toast.LENGTH_SHORT).show();
-            return;
-        }
-
-        // 🔥 Create model
+        // Create model
         TClassesModel model = new TClassesModel();
         model.setClassName(className);
         model.setClassId(classId);
@@ -159,10 +187,26 @@ public class TCreateClassActivity extends AppCompatActivity {
     }
 
     // --------------------------------------------------
-    // CLASS ID FORMAT VALIDATION
+    // EXACT VALIDATION METHOD
     // --------------------------------------------------
     private boolean isValidClassId(String classId) {
-        // Exactly 2 CAPITAL letters + 4 digits
-        return classId.matches("^[A-Z]{2}[0-9]{4}$");
+
+        // Only A-Z and 0-9, exactly 6 chars
+        if (!classId.matches("^[A-Z0-9]{6}$"))
+            return false;
+
+        int letterCount = 0;
+        int digitCount = 0;
+
+        for (char c : classId.toCharArray()) {
+            if (Character.isLetter(c)) {
+                letterCount++;
+            } else if (Character.isDigit(c)) {
+                digitCount++;
+            }
+        }
+
+        // EXACT: 4 letters + 2 digits
+        return letterCount == 2 && digitCount == 4;
     }
 }

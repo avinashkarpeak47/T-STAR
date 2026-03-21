@@ -11,7 +11,7 @@
     <com.google.android.material.appbar.MaterialToolbar
         android:id="@+id/toolbar"
         android:layout_width="0dp"
-        android:layout_height="55dp"
+        android:layout_height="?attr/actionBarSize"
         android:background="@drawable/header_gradient"
         app:navigationIcon="@drawable/s_arrowback"
         app:layout_constraintTop_toTopOf="parent"

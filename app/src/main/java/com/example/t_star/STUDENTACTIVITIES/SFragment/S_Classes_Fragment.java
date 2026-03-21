@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.*;
 import android.widget.*;
 
@@ -21,6 +22,8 @@ import com.bumptech.glide.Glide;
 import com.example.t_star.R;
 import com.example.t_star.REAL_TIME_DATABASE.GET_FROM_DATABASE.User_Data_Fetcher;
 import com.example.t_star.REAL_TIME_DATABASE.PUT_ON_DATABASE.ModelClasses.Updated_User_Model;
+import com.example.t_star.STUDENTACTIVITIES.Drawer_Activites.S_Help_FAQ_Activity;
+import com.example.t_star.STUDENTACTIVITIES.Drawer_Activites.S_PrivacyPolicy_Activity;
 import com.example.t_star.STUDENTACTIVITIES.S_Class_Dashboard_Activity;
 import com.example.t_star.STUDENTACTIVITIES.S_Enroll_in_Class;
 import com.example.t_star.STUDENTACTIVITIES.S_Fragment_Classes_RC_Adapter;
@@ -30,6 +33,7 @@ import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.*;
+import com.google.firebase.messaging.FirebaseMessaging;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -95,6 +99,10 @@ public class S_Classes_Fragment extends Fragment {
         btnEnrollClass = view.findViewById(R.id.btnEnrollNewClass);
         tvEmptyState = view.findViewById(R.id.tvEmptyState);
 
+        uid = FirebaseAuth.getInstance().getUid();
+
+        saveStudentFcmToken(uid);   // 🔥 येथे कॉल करायचा
+
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
         adapter = new S_Fragment_Classes_RC_Adapter(
@@ -112,6 +120,8 @@ public class S_Classes_Fragment extends Fragment {
                     Intent i = new Intent(getContext(), S_Class_Dashboard_Activity.class);
                     i.putExtra("classId", model.getClassId());
                     startActivity(i);
+                    subscribeToClassTopic(model.getClassId());
+
                 }
         );
 
@@ -131,6 +141,22 @@ public class S_Classes_Fragment extends Fragment {
 
         return view;
     }
+
+    private void saveStudentFcmToken(String studentId) {
+
+        if (studentId == null) return;
+
+        FirebaseMessaging.getInstance().getToken()
+                .addOnSuccessListener(token -> {
+
+                    DatabaseReference ref = FirebaseDatabase.getInstance()
+                            .getReference("Students")
+                            .child(studentId);
+
+                    ref.child("fcmToken").setValue(token);
+                });
+    }
+
 
     // ---------- Greeting ----------
     private void setGreetingMessage() {
@@ -313,7 +339,14 @@ public class S_Classes_Fragment extends Fragment {
                 Intent intent = new Intent(android.provider.Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
                 intent.setData(Uri.parse("package:" + requireContext().getPackageName()));
                 startActivity(intent);
-            } else if (id == R.id.nav_contactus) {
+            }
+                  else if (id == R.id.nav_privacy) {
+                    startActivity(new Intent(getActivity(), S_PrivacyPolicy_Activity.class));
+            }
+                else if (id == R.id.nav_help) {
+                startActivity(new Intent(getActivity(), S_Help_FAQ_Activity.class));
+            }
+                    else if (id == R.id.nav_contactus) {
 
                 View dialogView = LayoutInflater.from(requireContext())
                         .inflate(R.layout.dialog_contact_support, null);
@@ -420,6 +453,21 @@ public class S_Classes_Fragment extends Fragment {
 
         ref.setValue(map);
     }
+    private void subscribeToClassTopic(String classId) {
+        if (classId == null) return;
+
+        String topic = "class_" + classId;
+
+        FirebaseMessaging.getInstance()
+                .subscribeToTopic(topic)
+                .addOnSuccessListener(unused ->
+                        Log.d("FCM_TOPIC", "Subscribed to " + topic)
+                )
+                .addOnFailureListener(e ->
+                        Log.e("FCM_TOPIC", "Subscribe failed", e)
+                );
+    }
+
 
 
 }

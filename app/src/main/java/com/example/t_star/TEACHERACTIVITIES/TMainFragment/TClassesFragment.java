@@ -25,6 +25,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.example.t_star.R;
 import com.example.t_star.REAL_TIME_DATABASE.PUT_ON_DATABASE.HelperClasses.Classes_helper;
+import com.example.t_star.STUDENTACTIVITIES.Drawer_Activites.S_Help_FAQ_Activity;
 import com.example.t_star.STUDENTACTIVITIES.Drawer_Activites.S_PrivacyPolicy_Activity;
 import com.example.t_star.TEACHERACTIVITIES.CLASSES.TClassesAdapter;
 import com.example.t_star.TEACHERACTIVITIES.CLASSES.TClassesModel;
@@ -109,6 +110,10 @@ public class TClassesFragment extends Fragment {
 
                   else if (id == R.id.nav_privacy) {
                    startActivity(new Intent(getActivity(), S_PrivacyPolicy_Activity.class));
+           }
+
+           else if (id == R.id.nav_help) {
+               startActivity(new Intent(getActivity(), S_Help_FAQ_Activity.class));
            }
            else if (id == R.id.nav_contactus) {
 

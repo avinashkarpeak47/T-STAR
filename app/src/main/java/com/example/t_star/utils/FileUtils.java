@@ -14,7 +14,7 @@ public class FileUtils {
 
         String result = null;
 
-        // 1. Preferred method: ContentResolver (SAFE)
+        // 1. Preferred method: ContentResolver (SAFE)..
         if ("content".equalsIgnoreCase(uri.getScheme())) {
             Cursor cursor = null;
             try {

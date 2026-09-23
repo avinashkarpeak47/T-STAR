@@ -376,7 +376,7 @@
                                         </LinearLayout>
                                 </androidx.cardview.widget.CardView>
 
-                                <!-- Quiz -->
+                                <!-- Quiz
                                 <androidx.cardview.widget.CardView
                                     android:id="@+id/cardQuiz"
                                     android:layout_width="0dp"
@@ -409,6 +409,7 @@
                                                     android:layout_marginTop="8dp"/>
                                         </LinearLayout>
                                 </androidx.cardview.widget.CardView>
+                                -->
 
                                 <!-- Notification-->
                                 <androidx.cardview.widget.CardView

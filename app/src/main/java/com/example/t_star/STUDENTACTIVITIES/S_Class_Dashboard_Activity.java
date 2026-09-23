@@ -23,7 +23,7 @@ import com.google.firebase.database.ValueEventListener;
 public class S_Class_Dashboard_Activity extends AppCompatActivity {
 
     // Declare all card views
-    CardView cardAttendance, cardStudy, cardTranslator, cardNotes, cardQuiz,
+    CardView cardAttendance, cardStudy, cardTranslator, cardNotes,
             cardChat, cardAssignment, cardNotification;
     SearchView searchDashboard;
 
@@ -53,7 +53,7 @@ public class S_Class_Dashboard_Activity extends AppCompatActivity {
         cardStudy = findViewById(R.id.class_dashboard_studymaterial);
         cardTranslator = findViewById(R.id.class_dashboard_translator);
         cardNotes = findViewById(R.id.class_dashboard_notes);
-        cardQuiz = findViewById(R.id.class_dashboard_quiz);
+        //cardQuiz = findViewById(R.id.class_dashboard_quiz);
         cardChat = findViewById(R.id.class_dashboard_chat);
         cardAssignment = findViewById(R.id.class_dashboard_assignment);
         cardNotification = findViewById(R.id.class_dashboard_notification);
@@ -71,7 +71,7 @@ public class S_Class_Dashboard_Activity extends AppCompatActivity {
         cardStudy.setOnClickListener(v -> openFeature(S_class_dashboard_studymaterial.class));
         cardTranslator.setOnClickListener(v -> openFeature(S_class_dashboard_translator.class));
         cardNotes.setOnClickListener(v -> openFeature(S_class_dashboard_notes.class));
-        cardQuiz.setOnClickListener(v -> openFeature(S_class_dashboard_quiz.class));
+      //  cardQuiz.setOnClickListener(v -> openFeature(S_class_dashboard_quiz.class));
         cardChat.setOnClickListener(v -> openFeature(S_class_dashboard_chat.class));
         cardAssignment.setOnClickListener(v -> openFeature(S_Class_Dashboard_Assignment.class));
         cardNotification.setOnClickListener(v -> openFeature(S_class_dashboard_notifications.class));
@@ -122,8 +122,8 @@ public class S_Class_Dashboard_Activity extends AppCompatActivity {
         cardNotes.setVisibility(
                 query.isEmpty() || "notes".contains(query) ? CardView.VISIBLE : CardView.GONE);
 
-        cardQuiz.setVisibility(
-                query.isEmpty() || "quiz".contains(query) ? CardView.VISIBLE : CardView.GONE);
+       // cardQuiz.setVisibility(
+       //         query.isEmpty() || "quiz".contains(query) ? CardView.VISIBLE : CardView.GONE);
 
         cardChat.setVisibility(
                 query.isEmpty() || "chat".contains(query) ? CardView.VISIBLE : CardView.GONE);

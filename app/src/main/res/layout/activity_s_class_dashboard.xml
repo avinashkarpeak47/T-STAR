@@ -353,7 +353,7 @@
                 </androidx.cardview.widget.CardView>
 
 
-                <!-- Quiz -->
+                <!-- Quiz
                 <androidx.cardview.widget.CardView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -385,6 +385,7 @@
                             android:textColor="@color/black"/>
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
+                -->
 
 
 
@@ -503,6 +504,19 @@
 
 
 
+
+
+            </GridLayout>
+            <!-- GRID DASHBOARD -->
+            <GridLayout
+                android:id="@+id/gridDashboard2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:columnCount="1"
+                android:layout_marginTop="6dp"
+                android:alignmentMode="alignMargins"
+                android:rowOrderPreserved="false">
+
                 <!-- Announcement -->
                 <androidx.cardview.widget.CardView
                     android:layout_width="0dp"
@@ -535,6 +549,7 @@
                             android:textColor="@color/black"/>
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
+
 
             </GridLayout>
         </LinearLayout>
